@@ -81,7 +81,12 @@ CMake is one of the most popular open-source cross-platform build toolset, and i
 
 A review if the different kind of memory, and the best practices for writing efficient programs.
 
-[Memory](https://www.notion.so/juliendelezenne/Memory-6c8b73d5c1e042d78bbe01ac5e6e750b){:target="_blank"}
+[🗄 Memory](https://www.notion.so/juliendelezenne/Memory-6c8b73d5c1e042d78bbe01ac5e6e750b){:target="_blank"}
+
+
+A review of different allocation strategies and their use in a game engine.
+
+[⛓ Memory Allocators](https://www.notion.so/juliendelezenne/Allocators-efa67ff35a314cb48e36a13f038a419e){:target="_blank"}
 
 # 🎮 Game Runtime
 
