@@ -87,7 +87,7 @@ C++ does not support Bit Flags as a fundamental type. There are different method
 
 [🚩 Bit Flags](https://www.notion.so/juliendelezenne/Bit-Flags-b6f54688b0684f539bf11149fd8c4cd9){:target="_blank"}
 
-There are different methods to handle error handling in C++.
+There are different methods to handle errors in C++.
 
 [⚠️ Error Handling](https://www.notion.so/juliendelezenne/Errors-5ae5a4ffe58049359821c5534a93cf26){:target="_blank"}
 
