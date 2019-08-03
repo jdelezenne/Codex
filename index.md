@@ -99,7 +99,7 @@ An overview of the fundamental container types and their usage.
 
 📦[Collections](https://www.notion.so/juliendelezenne/Collections-e53f4fbd8fd3472f9f94a9c40d19d45e){:target="_blank"}
 
-## C++{#cpp}
+## C++ {#cpp}
 
 Fundamental information C++ and best practices.
 
@@ -114,7 +114,7 @@ There are different methods to handle errors in C++.
 
 ⚠️[Error Handling](https://www.notion.so/juliendelezenne/Errors-5ae5a4ffe58049359821c5534a93cf26){:target="_blank"}
 
-## C#{#csharp}
+## C# {#csharp}
 
 Fundamental information on C# and best practices.
 
