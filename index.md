@@ -6,9 +6,9 @@ For a given topic, multiple strategies will be covered with their advantages and
 
 The advantage of building a wiki instead of a blog is that the information can be better organized, and improved over time.
 
-[💬 Glossary](Glossary.html)
+[💬 Glossary](Glossary.html){:target="_blank"}
 
-[ℹ️ Terminology](Terminology.html)
+[ℹ️ Terminology](Terminology.html){:target="_blank"}
 
 
-[💻 Hardware](https://www.notion.so/juliendelezenne/59bfc5a17de646c2b2f197c64f6940f1?v=e90d3f94cfb1492da03c904896d33f11)
+[💻 Hardware](https://www.notion.so/juliendelezenne/59bfc5a17de646c2b2f197c64f6940f1?v=e90d3f94cfb1492da03c904896d33f11){:target="_blank"}
