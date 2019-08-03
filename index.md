@@ -62,11 +62,21 @@ There are different methods to handle error handling in C++.
 
 [⚠️ Error Handling](https://www.notion.so/juliendelezenne/Errors-5ae5a4ffe58049359821c5534a93cf26){:target="_blank"}
 
+# Software Development
+
+A review of build systems and build tools.
+
+[🔨 Build Systems](https://www.notion.so/juliendelezenne/Build-System-d66da054a959417096d99d4bf9922afd){:target="_blank"}
+
+CMake is one of the most popular open-source cross-platform build toolset, and it can be used for game development with a minimal set up.
+
+[CMake](https://www.notion.so/juliendelezenne/CMake-681851c9506b4e23a22418f97e20cc1a){:target="_blank"}
+
 # 🎮 Game Runtime
 
 # 🎨 Game Editor
 
 A review of popular version control systems, and how they can be integrated into a game pipeline.
 
-[Version Control](https://www.notion.so/juliendelezenne/Version-Control-be7595ca455d412fbac8c67a7f1698da){:target="_blank"}
+[🏷 Version Control](https://www.notion.so/juliendelezenne/Version-Control-be7595ca455d412fbac8c67a7f1698da){:target="_blank"}
 
