@@ -9,3 +9,6 @@ The advantage of building a wiki instead of a blog is that the information can b
 [💬 Glossary](Glossary.html)
 
 [ℹ️ Terminology](Terminology.html)
+
+
+[💻 Hardware](https://www.notion.so/juliendelezenne/59bfc5a17de646c2b2f197c64f6940f1?v=e90d3f94cfb1492da03c904896d33f11)
