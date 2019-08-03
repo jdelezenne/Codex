@@ -6,18 +6,20 @@ For a given topic, multiple strategies will be covered with their advantages and
 
 The advantage of building a wiki instead of a blog is that the information can be better organized, and improved over time.
 
-- [📖 References](#-references)
-- [History](#-history)
-- [💻 Hardware](#-hardware)
+- 📖[References](#-references)
+- 🏰[History](#-history)
+- 💻[Hardware](#-hardware)
+- 🖥[Software](#-software)
   - [System](#system)
-  - [Program](#program)
   - [Data](#data)
-  - [C++](#c++)
-  - [C#](#c#)
-- [Software](#software)
-- [🎮 Game Runtime](#-game-runtime)
-- [🎨 Game Editor](#-game-editor)
-- [🎓 Tutorials](#-tutorials)
+  - [C++](#cpp)
+  - [C#](#csharp)
+  - 🧱[Build](#build)
+- 🖥[Software](#-software)
+- 🧮[Mathematics](#-mathematics)
+- 🎮[Game Runtime](#-game-runtime)
+- 🎨[Game Editor](#-game-editor)
+- 🎓[Tutorials](#-tutorials)
 
 # 📖 References
 
@@ -25,7 +27,7 @@ The advantage of building a wiki instead of a blog is that the information can b
 
 [ℹ️ Terminology](Terminology.html){:target="_blank"}
 
-# History
+# 🏰 History
 
 A retrospective on the different versions of DirectX.
 
@@ -53,9 +55,9 @@ The debug programs compiled for an Intel x86 architecture, some fundamental know
 
 [Intel x86](https://www.notion.so/juliendelezenne/Intel-x86-2401eae3086343d5a9381998ebe9419d){:target="_blank"}
 
-# System
+# 🖥 Software
 
-## Program
+## System
 
 The code translation process that includes the compilation and linking of source code to a binary executable.
 
@@ -70,6 +72,16 @@ The storage of a program's executable on different plaforms.
 A program uses a portion of heap memory known as the stack.
 
 [📚 Stack](https://www.notion.so/juliendelezenne/Stack-eddf0c34dc934379ab05627709fff38f){:target="_blank"}
+
+
+A review if the different kind of memory, and the best practices for writing efficient programs.
+
+🗄[Memory](https://www.notion.so/juliendelezenne/Memory-6c8b73d5c1e042d78bbe01ac5e6e750b){:target="_blank"}
+
+
+A review of different allocation strategies and their use in a game engine.
+
+⛓[Memory Allocators](https://www.notion.so/juliendelezenne/Allocators-efa67ff35a314cb48e36a13f038a419e){:target="_blank"}
 
 
 An overview of multithreading and platform-dependent functionalities.
@@ -87,7 +99,7 @@ An overview of the fundamental container types and their usage.
 
 📦[Collections](https://www.notion.so/juliendelezenne/Collections-e53f4fbd8fd3472f9f94a9c40d19d45e){:target="_blank"}
 
-## C++
+## C++{#cpp}
 
 Fundamental information C++ and best practices.
 
@@ -102,7 +114,7 @@ There are different methods to handle errors in C++.
 
 ⚠️[Error Handling](https://www.notion.so/juliendelezenne/Errors-5ae5a4ffe58049359821c5534a93cf26){:target="_blank"}
 
-## C#
+## C#{#csharp}
 
 Fundamental information on C# and best practices.
 
@@ -113,7 +125,7 @@ Information on the internals of .NET.
 
 👾[.NET Internals](https://www.notion.so/juliendelezenne/NET-Internals-6616e2341a31419f9bc686d7b7bd0ba9){:target="_blank"}
 
-# Software
+## 🧱 Build
 
 A review of build systems and build tools.
 
@@ -124,16 +136,7 @@ CMake is one of the most popular open-source cross-platform build toolset, and i
 
 [CMake](https://www.notion.so/juliendelezenne/CMake-681851c9506b4e23a22418f97e20cc1a){:target="_blank"}
 
-
-A review if the different kind of memory, and the best practices for writing efficient programs.
-
-🗄[Memory](https://www.notion.so/juliendelezenne/Memory-6c8b73d5c1e042d78bbe01ac5e6e750b){:target="_blank"}
-
-
-A review of different allocation strategies and their use in a game engine.
-
-⛓[Memory Allocators](https://www.notion.so/juliendelezenne/Allocators-efa67ff35a314cb48e36a13f038a419e){:target="_blank"}
-
+# 🧮 Mathematics
 
 The principles of trigonometry that are necessary for graphics programming.
 
