@@ -77,6 +77,12 @@ There are different methods to handle error handling in C++.
 
 [⚠️ Error Handling](https://www.notion.so/juliendelezenne/Errors-5ae5a4ffe58049359821c5534a93cf26){:target="_blank"}
 
+## C#
+
+Information on the internals of .NET.
+
+[👾 .NET Internals](){:target="_blank"}
+
 # Software
 
 A review of build systems and build tools.
@@ -98,7 +104,21 @@ A review of different allocation strategies and their use in a game engine.
 
 [⛓ Memory Allocators](https://www.notion.so/juliendelezenne/Allocators-efa67ff35a314cb48e36a13f038a419e){:target="_blank"}
 
+
+The principles of trigonometry that are necessary for graphics programming.
+
+[📐 Trigonometry](https://www.notion.so/juliendelezenne/Trigonometry-911029bf6ea64c9baf2925474d65dcd1){:target="_blank"}
+
 # 🎮 Game Runtime
+
+A review of SIMD on different platforms, and best practices on their usage.
+
+[SIMD](https://www.notion.so/juliendelezenne/SIMD-4e4aca2cf1a94c93ac3b2d1beca4cc57){:target="_blank"}
+
+
+Best practices on implementing loading and saving in a game engine.
+
+[Storage](https://www.notion.so/juliendelezenne/Storage-3d27f6623a6946efa078299f4b17fe40){:target="_blank"}
 
 # 🎨 Game Editor
 
