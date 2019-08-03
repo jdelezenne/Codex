@@ -38,9 +38,11 @@ The storage of a program's executable on different plaforms.
 
 [▶️ Executable](https://www.notion.so/juliendelezenne/Executable-5c6143da707145ddb89b15dc24e29d61){:target="_blank"}
 
+
 A program uses a portion of heap memory known as the stack.
 
 [📚 Stack](https://www.notion.so/juliendelezenne/Stack-eddf0c34dc934379ab05627709fff38f){:target="_blank"}
+
 
 An overview of multithreading and platform-dependent functionalities.
 
@@ -51,6 +53,10 @@ An overview of multithreading and platform-dependent functionalities.
 Every programming language provides fundamental data types.
 
 [🔢 Numeric Types](https://www.notion.so/juliendelezenne/Numeric-Types-d562f84c7ea645d690e6bbf2bf361923){:target="_blank"}
+
+A review if the different kind of memory, and the best practices for writing efficient programs.
+
+(https://www.notion.so/juliendelezenne/Memory-6c8b73d5c1e042d78bbe01ac5e6e750b){:target="_blank"}
 
 ## C++
 
