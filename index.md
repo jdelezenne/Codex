@@ -14,7 +14,7 @@ The advantage of building a wiki instead of a blog is that the information can b
 
 # 💻 Hardware
 
-Overview of the architecture of a computer system and its fundamental components.
+An overview of the architecture of a computer system and its fundamental components.
 
 [💻 Computer](https://www.notion.so/juliendelezenne/Computer-70c2c3fbbc29446782e02b8e0e6be940){:target="_blank"}
 
@@ -25,3 +25,15 @@ A review of the CPU's cache memory, and best practices.
 The debug programs compiled for an Intel x86 architecture, some fundamental knowledge of the processor and its instructions is necessary.
 
 [Intel x86](https://www.notion.so/juliendelezenne/Intel-x86-2401eae3086343d5a9381998ebe9419d){:target="_blank"}
+
+# System
+
+## Program
+
+The code translation process that includes the compilation and linking of source code to a binary executable.
+
+[🔤 Code Translation](https://www.notion.so/juliendelezenne/Code-Translation-cb66ee3bb4be4240bbff99ddb5057a54){:target="_blank"}
+
+The storage of a program's executable on different plaforms.
+
+[▶️ Executable](https://www.notion.so/juliendelezenne/Executable-5c6143da707145ddb89b15dc24e29d61){:target="_blank"}
