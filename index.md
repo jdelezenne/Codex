@@ -51,7 +51,7 @@ A review of the CPU's cache memory, and best practices.
 🚅[Cache Memory](https://www.notion.so/juliendelezenne/Cache-Memory-718834f4e1ce43549eecdf397833cac1){:target="_blank"}
 
 
-The debug programs compiled for an Intel x86 architecture, some fundamental knowledge of the processor and its instructions is necessary.
+To debug programs compiled for an Intel x86 architecture, some fundamental knowledge of the processor and its instructions is necessary.
 
 [Intel x86](https://www.notion.so/juliendelezenne/Intel-x86-2401eae3086343d5a9381998ebe9419d){:target="_blank"}
 
