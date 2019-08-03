@@ -6,15 +6,15 @@ For a given topic, multiple strategies will be covered with their advantages and
 
 The advantage of building a wiki instead of a blog is that the information can be better organized, and improved over time.
 
-- [📖 References](#references)
-- [💻 Hardware](#hardware)
+- [📖 References](#-references)
+- [💻 Hardware](#-hardware)
   - [System](#system)
   - [Program](#program)
   - [Data](#data)
   - [C++](#c++)
-- [Software Development](#software-development)
-- [🎮 Game Runtime](#game-runtime)
-- [🎨 Game Editor](#game-editor)
+- [Software](#software)
+- [🎮 Game Runtime](#-game-runtime)
+- [🎨 Game Editor](#-game-editor)
 
 # 📖 References
 
@@ -77,7 +77,7 @@ There are different methods to handle error handling in C++.
 
 [⚠️ Error Handling](https://www.notion.so/juliendelezenne/Errors-5ae5a4ffe58049359821c5534a93cf26){:target="_blank"}
 
-# Software Development
+# Software
 
 A review of build systems and build tools.
 
