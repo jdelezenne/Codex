@@ -166,7 +166,13 @@ A review of SIMD on different platforms, and best practices on their usage.
 
 Different strategies to implement a reflection system in C++.
 
-[Reflection](https://www.notion.so/juliendelezenne/Reflection-01c7a4c0143a4881afadaec6fbef5fc6){:target="_blank"}
+🔖[Reflection](https://www.notion.so/juliendelezenne/Reflection-01c7a4c0143a4881afadaec6fbef5fc6){:target="_blank"}
+
+
+Different strategies to serialize and deserialize data in C++.
+
+💾[Serialization](https://www.notion.so/juliendelezenne/Serialization-54ffe6fffac0497aa30bfc99ab447bf8){:target="_blank"}
+
 
 Best practices on implementing loading and saving in a game engine.
 
