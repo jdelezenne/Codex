@@ -144,8 +144,18 @@ The principles of trigonometry that are necessary for graphics programming.
 
 # 🎮 Game Runtime
 
+An overview of the recommended project configurations for a game engine.
 
 🛠[Project Configuration](https://www.notion.so/juliendelezenne/Project-Configuration-e7446f013e894d08bfbe3e334ac7fe96){:target="_blank"}
+
+Strategies to provide a platform abstraction for the low-level functionality of the engine.
+
+[Cross-Platform](https://www.notion.so/juliendelezenne/Cross-Platform-a3fbb4db74454f1493fb1f8a13fc4bf3){:target="_blank"}
+
+
+Overview of platform-independant and platform-spefic features for the low-level functionality of the engine.
+
+[Platforms](https://www.notion.so/juliendelezenne/Platforms-52958043b11647faa3f5aaf33a322c6c){:target="_blank"}
 
 
 A review of SIMD on different platforms, and best practices on their usage.
