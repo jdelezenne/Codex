@@ -7,6 +7,7 @@ For a given topic, multiple strategies will be covered with their advantages and
 The advantage of building a wiki instead of a blog is that the information can be better organized, and improved over time.
 
 - [📖 References](#-references)
+- [History](#-history)
 - [💻 Hardware](#-hardware)
   - [System](#system)
   - [Program](#program)
@@ -15,12 +16,25 @@ The advantage of building a wiki instead of a blog is that the information can b
 - [Software](#software)
 - [🎮 Game Runtime](#-game-runtime)
 - [🎨 Game Editor](#-game-editor)
+- [🎓 Tutorials](#-tutorials)
 
 # 📖 References
 
 [💬 Glossary](Glossary.html){:target="_blank"}
 
 [ℹ️ Terminology](Terminology.html){:target="_blank"}
+
+# History
+
+A retrospective on the different versions of DirectX.
+
+[DirectX](https://www.notion.so/juliendelezenne/DirectX-bbf599dbca4e47b38325b3955a547644){:target="_blank"}
+
+
+A review of the different implementations of SIMD.
+
+[SIMD](https://www.notion.so/juliendelezenne/SIMD-88ba6e0a48414cf7aa499d99f4b0dd1f){:target="_blank"}
+
 
 # 💻 Hardware
 
@@ -126,3 +140,8 @@ A review of popular version control systems, and how they can be integrated into
 
 [🏷 Version Control](https://www.notion.so/juliendelezenne/Version-Control-be7595ca455d412fbac8c67a7f1698da){:target="_blank"}
 
+# 🎓 Tutorials
+
+Overview and tutorials on the Windows platforms and the APIs that are required in a game engine.
+
+[Windows]https://www.notion.so/juliendelezenne/Windows-850f22698c5d46079f5b42c2ef1298f1){:target="_blank"}
