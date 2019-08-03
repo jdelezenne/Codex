@@ -88,6 +88,11 @@ An overview of multithreading and platform-dependent functionalities.
 
 🔀[Multithreading](https://www.notion.so/juliendelezenne/Multithreading-6081d956dabc43ad95c57aa9eaced001){:target="_blank"}
 
+
+A review of best practices that are mostly platform-independent.
+
+👑[Best Practices](https://www.notion.so/juliendelezenne/Best-Practices-88d916f234f5446ead5ceafca9a4aadd){:target="_blank"}
+
 ## Data
 
 Every programming language provides fundamental data types.
@@ -101,7 +106,7 @@ An overview of the fundamental container types and their usage.
 
 ## C++ {#cpp}
 
-Fundamental information C++ and best practices.
+Fundamental information on C++ and best practices.
 
 🌀[C++](https://www.notion.so/juliendelezenne/C-2d458c79f87e4488ba7693fbdf87c1d7){:target="_blank"}
 
