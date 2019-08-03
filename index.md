@@ -18,9 +18,11 @@ An overview of the architecture of a computer system and its fundamental compone
 
 [💻 Computer](https://www.notion.so/juliendelezenne/Computer-70c2c3fbbc29446782e02b8e0e6be940){:target="_blank"}
 
+
 A review of the CPU's cache memory, and best practices.
 
 [🚅 Cache Memory](https://www.notion.so/juliendelezenne/Cache-Memory-718834f4e1ce43549eecdf397833cac1){:target="_blank"}
+
 
 The debug programs compiled for an Intel x86 architecture, some fundamental knowledge of the processor and its instructions is necessary.
 
@@ -33,6 +35,7 @@ The debug programs compiled for an Intel x86 architecture, some fundamental know
 The code translation process that includes the compilation and linking of source code to a binary executable.
 
 [🔤 Code Translation](https://www.notion.so/juliendelezenne/Code-Translation-cb66ee3bb4be4240bbff99ddb5057a54){:target="_blank"}
+
 
 The storage of a program's executable on different plaforms.
 
@@ -54,10 +57,6 @@ Every programming language provides fundamental data types.
 
 [🔢 Numeric Types](https://www.notion.so/juliendelezenne/Numeric-Types-d562f84c7ea645d690e6bbf2bf361923){:target="_blank"}
 
-A review if the different kind of memory, and the best practices for writing efficient programs.
-
-(https://www.notion.so/juliendelezenne/Memory-6c8b73d5c1e042d78bbe01ac5e6e750b){:target="_blank"}
-
 ## C++
 
 C++ does not support Bit Flags as a fundamental type. There are different methods to implement this functionality.
@@ -74,9 +73,15 @@ A review of build systems and build tools.
 
 [🔨 Build Systems](https://www.notion.so/juliendelezenne/Build-System-d66da054a959417096d99d4bf9922afd){:target="_blank"}
 
+
 CMake is one of the most popular open-source cross-platform build toolset, and it can be used for game development with a minimal set up.
 
 [CMake](https://www.notion.so/juliendelezenne/CMake-681851c9506b4e23a22418f97e20cc1a){:target="_blank"}
+
+
+A review if the different kind of memory, and the best practices for writing efficient programs.
+
+[Memory](https://www.notion.so/juliendelezenne/Memory-6c8b73d5c1e042d78bbe01ac5e6e750b){:target="_blank"}
 
 # 🎮 Game Runtime
 
