@@ -1,0 +1,565 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Glossary</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f8e2aeab-f4f2-4d14-a2f9-cca6a48621eb" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">💬</span></div><h1 class="page-title">Glossary</h1></header><div class="page-body"><table class="collection-content"><thead><tr><th>Word</th><th>Definition</th><th>Category</th></tr></thead><tbody><tr id="a5797cc4-c8c3-4fa6-b2ec-07abd17bfde9"><td class="cell-title"><a href="https://www.notion.so/allocator-a5797cc4c8c34fa6b2ec07abd17bfde9">allocator</a></td><td class="cell-KUA|">An allocator is a data structure that encapsulates memory management and performs memory allocations and deallocations.</td><td class="cell-5v(&quot;"><span class="selected-value">Programming</span></td></tr><tr id="3189b849-6dd9-4695-a6c9-5254ff9ff583"><td class="cell-title"><a href="https://www.notion.so/batching-3189b8496dd94695a6c95254ff9ff583">batching</a></td><td class="cell-KUA|">A technique where many draw calls are combined into fewer draw calls.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="caa97308-69ec-4151-a349-3322d152782a"><td class="cell-title"><a href="https://www.notion.so/big-endian-architecture-caa9730869ec4151a3493322d152782a">big-endian architecture</a></td><td class="cell-KUA|">Architecture used by the PowerPC CPU. In a big-endian system, the most-significant portion of the value is stored in the lowest memory storage address.</td><td class="cell-5v(&quot;"><span class="selected-value">System</span></td></tr><tr id="b3e1c027-9c4f-40dd-b23e-806943c42053"><td class="cell-title"><a href="https://www.notion.so/binary-b3e1c0279c4f40ddb23e806943c42053">binary</a></td><td class="cell-KUA|">A binary file is a file stored in binary format. It is computer-readable but not human-readable.</td><td class="cell-5v(&quot;"><span class="selected-value">System</span></td></tr><tr id="bc1153f5-d814-4c20-ac88-3eec97cbe79f"><td class="cell-title"><a href="https://www.notion.so/control-bc1153f5d8144c20ac883eec97cbe79f">control</a></td><td class="cell-KUA|">In UI, any object that users can interact with.</td><td class="cell-5v(&quot;"><span class="selected-value">UI</span></td></tr><tr id="cf7d0763-1f3f-447e-9f4a-bbb94afbd49d"><td class="cell-title"><a href="https://www.notion.so/culling-cf7d07631f3f447e9f4abbb94afbd49d">culling</a></td><td class="cell-KUA|">Back-face culling determines whether a polygon of a graphical object is visible.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="fe9737ae-af34-4601-bfbc-39a55a9cba85"><td class="cell-title"><a href="https://www.notion.so/dependency-injection-fe9737aeaf344601bfbc39a55a9cba85">dependency injection</a></td><td class="cell-KUA|">A technique where one object supplies the dependencies of another object.</td><td class="cell-5v(&quot;"><span class="selected-value">Programming</span></td></tr><tr id="d76f5536-d561-4e9c-adb8-0f9561b278b0"><td class="cell-title"><a href="https://www.notion.so/depth-buffer-z-buffer-d76f5536d5614e9cadb80f9561b278b0">depth buffer (z-buffer)</a></td><td class="cell-KUA|">Memory buffer that contains the depth (distance from the camera) information for a given frame on the video display.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="175bd2cc-9a35-4df0-8444-0297fd3c2e96"><td class="cell-title"><a href="https://www.notion.so/Direct3D-175bd2cc9a354df084440297fd3c2e96">Direct3D</a></td><td class="cell-KUA|">Microsoft Direct3D is a 3D graphic API for Windows and Xbox systems.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="7122c406-527d-4ba2-9c98-18823263c01d"><td class="cell-title"><a href="https://www.notion.so/DirectX-7122c406527d4ba29c9818823263c01d">DirectX</a></td><td class="cell-KUA|">Microsoft DirectX is a set of APIs for accessing hardware features related to game and multimedia applications.</td><td class="cell-5v(&quot;"><span class="selected-value">System</span></td></tr><tr id="90c678fd-5a0e-4a72-bf09-d57a40ea5a5b"><td class="cell-title"><a href="https://www.notion.so/draw-call-90c678fd5a0e4a72bf09d57a40ea5a5b">draw call</a></td><td class="cell-KUA|">Submission of geometry to the GPU for rendering.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="135d92ed-5334-4fe5-a2b4-18061829f78c"><td class="cell-title"><a href="https://www.notion.so/dynamic-allocation-135d92ed53344fe5a2b418061829f78c">dynamic allocation</a></td><td class="cell-KUA|">A dynamic allocation of memory occurs at run-time.</td><td class="cell-5v(&quot;"><span class="selected-value">System</span></td></tr><tr id="ab96451e-c676-41b6-8c61-7cfb981ccc66"><td class="cell-title"><a href="https://www.notion.so/endianness-ab96451ec67641b68c617cfb981ccc66">endianness</a></td><td class="cell-KUA|">Endian order (or byte order) refers to the way that larger-than-byte data types are stored in memory (little-endian or big-endian).</td><td class="cell-5v(&quot;"><span class="selected-value">System</span></td></tr><tr id="fe7639c8-59bd-46da-94fa-30635085c08c"><td class="cell-title"><a href="https://www.notion.so/fill-rate-fe7639c859bd46da94fa30635085c08c">fill rate</a></td><td class="cell-KUA|">The number of pixels that a graphic card can render and write to video memory per second.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="0a1debf3-2f6f-4d1a-aaef-941c01f1c54d"><td class="cell-title"><a href="https://www.notion.so/frame-buffer-0a1debf32f6f4d1aaaef941c01f1c54d">frame buffer</a></td><td class="cell-KUA|">Memory buffer that contains the color data for a given frame on the video display.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="f3e377de-7101-4aff-b0a2-bdff44f26061"><td class="cell-title"><a href="https://www.notion.so/geometry-instancing-f3e377de71014affb0a2bdff44f26061">geometry instancing</a></td><td class="cell-KUA|">A technique to render multiple copies of the same mesh in a single draw call.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="14650cc7-22aa-4083-858c-b2802c356b66"><td class="cell-title"><a href="https://www.notion.so/heightmap-14650cc722aa4083858cb2802c356b66">heightmap</a></td><td class="cell-KUA|">A heightmap is a texture where pixels have a specific meaning instead of representing color. One common usage of heightmap is to store surface elevation data.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="da6011c7-f282-48fd-96c0-8be4e752a1d8"><td class="cell-title"><a href="https://www.notion.so/intrinsic-function-da6011c7f28248fd96c08be4e752a1d8">intrinsic function</a></td><td class="cell-KUA|">An compiler-optimized function often mapped to a CPU operation. Often used for vectorization and parallelization.</td><td class="cell-5v(&quot;"><span class="selected-value">System</span></td></tr><tr id="fed62050-d7e4-47db-b947-b159b1967fde"><td class="cell-title"><a href="https://www.notion.so/introspection-fed62050d7e447dbb947b159b1967fde">introspection</a></td><td class="cell-KUA|">The ability of a program to examine the type of an object at run-time.</td><td class="cell-5v(&quot;"><span class="selected-value">Programming</span></td></tr><tr id="e30d1df6-a96c-4d74-bedd-c66f797b668b"><td class="cell-title"><a href="https://www.notion.so/keyframe-e30d1df6a96c4d74beddc66f797b668b">keyframe</a></td><td class="cell-KUA|">A frame on a timeline where an object&#x27;s state can be explicitly set.</td><td class="cell-5v(&quot;"><span class="selected-value">Animation</span></td></tr><tr id="09197bab-d3c5-4837-a1ce-995883c8a9cd"><td class="cell-title"><a href="https://www.notion.so/layer-09197babd3c54837a1ce995883c8a9cd">layer</a></td><td class="cell-KUA|">In 2D, ordered elements that can be grouped, stacked, and rearranged.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="91c0ade9-9ffa-44d5-8ff6-c5a658a996fe"><td class="cell-title"><a href="https://www.notion.so/letterboxing-91c0ade99ffa44d58ff6c5a658a996fe">letterboxing</a></td><td class="cell-KUA|">A technique where black bars are placed at the top and bottom of a screen image.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="60ecc8c9-70bc-4dab-adc1-d8843ff12140"><td class="cell-title"><a href="https://www.notion.so/little-endian-architecture-60ecc8c970bc4dabadc1d8843ff12140">little-endian architecture</a></td><td class="cell-KUA|">Architecture used by the x86 CPU. In a little-endian system, the least-significant portion of the value is stored in the lowest memory storage address.</td><td class="cell-5v(&quot;"><span class="selected-value">System</span></td></tr><tr id="34a4b161-03c8-4fca-a43a-a359d8092f56"><td class="cell-title"><a href="https://www.notion.so/Metal-34a4b16103c84fcaa43aa359d8092f56">Metal</a></td><td class="cell-KUA|">A low-level, low-overhead 3D graphic and computing API developed by Apple for macOS and iOS.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="2e8edb2d-4f6e-4b16-a2cf-2779bebf27a7"><td class="cell-title"><a href="https://www.notion.so/normalized-2e8edb2d4f6e4b16a2cf2779bebf27a7">normalized</a></td><td class="cell-KUA|">In mathematics, a normalized vector is multiplied by a constant factor.</td><td class="cell-5v(&quot;"><span class="selected-value">Mathematics</span></td></tr><tr id="0e5e1c88-4226-422b-bc49-0108edfe74ae"><td class="cell-title"><a href="https://www.notion.so/OpenGL-0e5e1c884226422bbc490108edfe74ae">OpenGL</a></td><td class="cell-KUA|">Open Graphics Library is a cross-language, cross-platform API for rendering 3D graphics.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="b1b946e9-7af8-48b4-b895-23b88c655984"><td class="cell-title"><a href="https://www.notion.so/orthogonal-b1b946e97af848b4b89523b88c655984">orthogonal</a></td><td class="cell-KUA|">In mathematics, orthogonal vectors are mutually perpendicular.</td><td class="cell-5v(&quot;"><span class="selected-value">Mathematics</span></td></tr><tr id="7e4876e2-3c5f-4a0c-aa92-81b2d5b95f96"><td class="cell-title"><a href="https://www.notion.so/orthonormal-7e4876e23c5f4a0caa9281b2d5b95f96">orthonormal</a></td><td class="cell-KUA|">In mathematics, both orthogonal and normalized.</td><td class="cell-5v(&quot;"><span class="selected-value">Mathematics</span></td></tr><tr id="37357499-f7fe-4b86-b4fe-1a76a125a7b2"><td class="cell-title"><a href="https://www.notion.so/path-tracing-37357499f7fe4b86b4fe1a76a125a7b2">path tracing</a></td><td class="cell-KUA|">A rendering algorithm similar to ray tracing that uses random sampling to incrementally compute a final image.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="d96d5f41-2b46-4f57-9131-8448804df5f7"><td class="cell-title"><a href="https://www.notion.so/pipeline-d96d5f412b464f5791318448804df5f7">pipeline</a></td><td class="cell-KUA|">A series of processes or functional blocks that describe data flow.</td><td class="cell-5v(&quot;"><span class="selected-value">Programming</span></td></tr><tr id="9241b5ba-a9a7-4bf9-866d-077536d06ed9"><td class="cell-title"><a href="https://www.notion.so/pivot-point-9241b5baa9a74bf9866d077536d06ed9">pivot point</a></td><td class="cell-KUA|">In 2D, the point around which an object is transformed.</td><td class="cell-5v(&quot;"><span class="selected-value">Mathematics</span></td></tr><tr id="8a94aa7c-706a-40e3-be92-d4a79ea4bfa2"><td class="cell-title"><a href="https://www.notion.so/quadtree-8a94aa7c706a40e3be92d4a79ea4bfa2">quadtree</a></td><td class="cell-KUA|">A special type of tree data structure used in spatial partitioning. It recursively divides a space into four quads of the same size.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="2aa4d60f-f013-4012-a187-4f33531f7803"><td class="cell-title"><a href="https://www.notion.so/ray-tracing-2aa4d60ff0134012a1874f33531f7803">ray tracing</a></td><td class="cell-KUA|">A rendering algorithm in which rays are cast from a virtual camera and traced through a simulated scene.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="69437823-61ab-4ebb-be93-e19c0d18d637"><td class="cell-title"><a href="https://www.notion.so/reflection-6943782361ab4ebbbe93e19c0d18d637">reflection</a></td><td class="cell-KUA|">The ability of a program to perform introspect at run-time, and modify its data structures.</td><td class="cell-5v(&quot;"><span class="selected-value">Programming</span></td></tr><tr id="11c94136-6e9c-4535-b839-0b975767dbdc"><td class="cell-title"><a href="https://www.notion.so/render-frame-11c941366e9c4535b8390b975767dbdc">render frame</a></td><td class="cell-KUA|">An individual frame rendered by a program.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="3d25ea39-cf96-4785-8881-a86fe1082522"><td class="cell-title"><a href="https://www.notion.so/render-pass-3d25ea39cf9647858881a86fe1082522">render pass</a></td><td class="cell-KUA|">A phase of rendering in which rendering commands are recorded.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="7225414c-c1c8-4be8-a683-63759108ab45"><td class="cell-title"><a href="https://www.notion.so/serialization-7225414cc1c84be8a68363759108ab45">serialization</a></td><td class="cell-KUA|">The ability of a program to load and save its data structures to memory or to an external storage.</td><td class="cell-5v(&quot;"><span class="selected-value">Programming</span></td></tr><tr id="fe935cd8-1629-4acb-ae14-80b7b44174ea"><td class="cell-title"><a href="https://www.notion.so/static-allocation-fe935cd816294acbae1480b7b44174ea">static allocation</a></td><td class="cell-KUA|">A static allocation of memory is determined at compile time. The memory is allocated before the program starts.</td><td class="cell-5v(&quot;"><span class="selected-value">System</span></td></tr><tr id="a42668b2-6505-4fdd-aa2e-8f6af8d7715e"><td class="cell-title"><a href="https://www.notion.so/stencil-buffer-a42668b265054fddaa2e8f6af8d7715e">stencil buffer</a></td><td class="cell-KUA|">Memory buffer that can store per-pixel information. Its use is application-specific.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="a162946a-3a85-47c2-b645-889a167442c1"><td class="cell-title"><a href="https://www.notion.so/text-a162946a3a8547c2b645889a167442c1">text</a></td><td class="cell-KUA|">A text file is a file stored in text format. It is a structured as a sequence of lines of text.</td><td class="cell-5v(&quot;"><span class="selected-value">System</span></td></tr><tr id="27093b55-b7ca-44d8-b339-9c6953b1067e"><td class="cell-title"><a href="https://www.notion.so/thread-group-27093b55b7ca44d8b3399c6953b1067e">thread group</a></td><td class="cell-KUA|">A logical collection of executing threads grouped together and treatable as a single entity.</td><td class="cell-5v(&quot;"><span class="selected-value">System</span></td></tr><tr id="cffbaee0-0a27-41eb-b7cf-7b6c567e284d"><td class="cell-title"><a href="https://www.notion.so/tiling-cffbaee00a2741ebb7cf7b6c567e284d">tiling</a></td><td class="cell-KUA|">Process by which scene rendering is performed multiple times on subsections of the final render target dimensions.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="f60420b0-9ce5-4b71-ba4d-5240a07ac5de"><td class="cell-title"><a href="https://www.notion.so/title-safe-area-f60420b09ce54b71ba4d5240a07ac5de">title safe area</a></td><td class="cell-KUA|">The inner rectangle within a percentage of the X and Y screen resolution where critical visuals are displayed.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="5689a9ae-3586-4247-8b0d-2f579dc53209"><td class="cell-title"><a href="https://www.notion.so/variadic-macro-5689a9ae358642478b0d2f579dc53209">variadic macro</a></td><td class="cell-KUA|">In C++, a macro function that accepts a varying number of arguments.</td><td class="cell-5v(&quot;"><span class="selected-value">Programming</span></td></tr><tr id="e81562f2-d1f8-495b-a09f-694fa4f3d9f2"><td class="cell-title"><a href="https://www.notion.so/vectorization-e81562f2d1f8495ba09f694fa4f3d9f2">vectorization</a></td><td class="cell-KUA|">Process one operation on multiple pairs of operands at once. Often used for high-performance vector math.</td><td class="cell-5v(&quot;"><span class="selected-value">System</span></td></tr><tr id="ab74c0db-0d99-4836-8e35-8560a6576967"><td class="cell-title"><a href="https://www.notion.so/viewport-ab74c0db0d9948368e358560a6576967">viewport</a></td><td class="cell-KUA|">A 2D rectangle into which a 3D scene is projected. The viewport limits the visible area of a scene.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="8b2453ff-50ba-4d49-8a4d-79edc6d3e3de"><td class="cell-title"><a href="https://www.notion.so/Vulkan-8b2453ff50ba4d498a4d79edc6d3e3de">Vulkan</a></td><td class="cell-KUA|">A low-level, low-overhead cross-platform 3D graphic and computing API developed by the Khronos Group.</td><td class="cell-5v(&quot;"><span class="selected-value">Graphics</span></td></tr><tr id="fda00855-7a21-455c-af04-2e3f929d7142"><td class="cell-title"><a href="https://www.notion.so/world-streaming-fda008557a21455caf042e3f929d7142">world streaming</a></td><td class="cell-KUA|">World streaming refers to the the process of loading sections of the world into memory while the player moves throughout the world.</td><td class="cell-5v(&quot;"><span class="selected-value">Game</span></td></tr><tr id="8e0244db-d791-40f6-b241-aaa854a9a21c"><td class="cell-title"><a href="https://www.notion.so/CMake-8e0244dbd79140f6b241aaa854a9a21c">CMake</a></td><td class="cell-KUA|">A cross-platform, open-source application for managing the build process.</td><td class="cell-5v(&quot;"><span class="selected-value">Programming</span></td></tr></tbody></table></div></article></body></html>

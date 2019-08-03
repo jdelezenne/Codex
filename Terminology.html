@@ -1,0 +1,574 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Terminology</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="59ad0680-a863-4990-9519-41ffb20be6b4" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">ℹ️</span></div><h1 class="page-title">Terminology</h1></header><div class="page-body"><table class="collection-content"><thead><tr><th>Name</th><th>Meaning</th><th>Category</th><th>Description</th></tr></thead><tbody><tr id="1d844fd5-d375-4e05-b813-271ab16cba29"><td class="cell-title"><a href="https://www.notion.so/ALU-1d844fd5d3754e05b813271ab16cba29">ALU</a></td><td class="cell-}Kvj">Arithmetic Logic Unit</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="3f30b61a-7a71-456f-bc4d-013112ee1dea"><td class="cell-title"><a href="https://www.notion.so/ARM-3f30b61a7a71456fbc4d013112ee1dea">ARM</a></td><td class="cell-}Kvj">Advanced RISC Machine</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="692dec48-1e28-45ab-a0f4-2066e73a5a56"><td class="cell-title"><a href="https://www.notion.so/AVX-692dec481e2845aba0f42066e73a5a56">AVX</a></td><td class="cell-}Kvj">Advanced Vector Extensions</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="3236267f-993b-46e8-ba95-9444c03b5a26"><td class="cell-title"><a href="https://www.notion.so/CISC-3236267f993b46e8ba959444c03b5a26">CISC</a></td><td class="cell-}Kvj">Complex Instruction Set Computer</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="fddd80e0-9467-4825-a7aa-740380507ca6"><td class="cell-title"><a href="https://www.notion.so/CPU-fddd80e094674825a7aa740380507ca6">CPU</a></td><td class="cell-}Kvj">Central Processing Unit</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="ecab7876-7f06-49fc-958b-f932b9545fa1"><td class="cell-title"><a href="https://www.notion.so/D-cache-ecab78767f0649fc958bf932b9545fa1">D-cache</a></td><td class="cell-}Kvj">Data Cache</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="37eaff2e-ed74-4b8c-8653-ad09d0bea525"><td class="cell-title"><a href="https://www.notion.so/DDR-37eaff2eed744b8c8653ad09d0bea525">DDR</a></td><td class="cell-}Kvj">Double Data Rate</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="4dc5db4a-c708-49f4-a1f1-4b4c920735e9"><td class="cell-title"><a href="https://www.notion.so/DMA-4dc5db4ac70849f4a1f14b4c920735e9">DMA</a></td><td class="cell-}Kvj">Direct Memory Access</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF">A technique that allows hardware components to transfer system memory without any intervention from the CPU.</td></tr><tr id="eb5ac64f-5490-43a0-95b5-af975b03061b"><td class="cell-title"><a href="https://www.notion.so/DRAM-eb5ac64f549043a095b5af975b03061b">DRAM</a></td><td class="cell-}Kvj">Dynamic Random-Access Memory</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="879a8916-dbff-46bd-991a-c4171472b9dc"><td class="cell-title"><a href="https://www.notion.so/FLOPS-879a8916dbff46bd991ac4171472b9dc">FLOPS</a></td><td class="cell-}Kvj">FLoating point Operations Per Second</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="db173458-2b27-406f-934b-0ae341719c0e"><td class="cell-title"><a href="https://www.notion.so/FPU-db1734582b27406f934b0ae341719c0e">FPU</a></td><td class="cell-}Kvj">Floating-point Processing Unit</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="364c4f42-2dd6-421b-a538-4d3c0c63fe56"><td class="cell-title"><a href="https://www.notion.so/GPU-364c4f422dd6421ba5384d3c0c63fe56">GPU</a></td><td class="cell-}Kvj">Graphics Processing Unit</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="54081d5e-0567-41a8-8150-a327d51a3c17"><td class="cell-title"><a href="https://www.notion.so/I-cache-54081d5e056741a88150a327d51a3c17">I-cache</a></td><td class="cell-}Kvj">Instruction Cache</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="e18dc75e-477a-4a58-9fcd-c688cb112756"><td class="cell-title"><a href="https://www.notion.so/I-O-e18dc75e477a4a589fcdc688cb112756">I/O</a></td><td class="cell-}Kvj">Input/Output</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="a5393b0f-d639-4508-894a-e653b057ddb8"><td class="cell-title"><a href="https://www.notion.so/IPC-a5393b0fd6394508894ae653b057ddb8">IPC</a></td><td class="cell-}Kvj">Instructions Per Cycle</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="02f5c731-95b4-425d-9c64-2818b102bba8"><td class="cell-title"><a href="https://www.notion.so/IPS-02f5c73195b4425d9c642818b102bba8">IPS</a></td><td class="cell-}Kvj">Instructions Per Second</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="5bd5609a-04e7-4ebb-b79a-6e20fde93052"><td class="cell-title"><a href="https://www.notion.so/ISA-5bd5609a04e74ebbb79a6e20fde93052">ISA</a></td><td class="cell-}Kvj">Instruction Set Architecture</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="a9a7348c-d869-4bdd-9be6-865bf05d1338"><td class="cell-title"><a href="https://www.notion.so/MIPS-a9a7348cd8694bdd9be6865bf05d1338">MIPS</a></td><td class="cell-}Kvj">Millions of Instructions Per Second</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="5ce70982-de17-483d-b065-03cb3d6d2fa0"><td class="cell-title"><a href="https://www.notion.so/MIPS-W-5ce70982de17483db06503cb3d6d2fa0">MIPS/W</a></td><td class="cell-}Kvj">Millions of Instructions Per Second per Watt</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="5f9741e5-2159-4ad4-ba84-dc3fa3c59db1"><td class="cell-title"><a href="https://www.notion.so/NUMA-5f9741e521594ad4ba84dc3fa3c59db1">NUMA</a></td><td class="cell-}Kvj">Non-Uniform Memory Access</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF">A memory architecture used in parallel computers.
+Memory access time depends on the memory location relative to the processor.</td></tr><tr id="670d95a9-2812-4384-a9a8-9ed6dc4ee64c"><td class="cell-title"><a href="https://www.notion.so/RAM-670d95a928124384a9a89ed6dc4ee64c">RAM</a></td><td class="cell-}Kvj">Random-Access Memory</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="cfb38096-546c-4aff-94ff-e447e5817d4d"><td class="cell-title"><a href="https://www.notion.so/RISC-cfb38096546c4aff94ffe447e5817d4d">RISC</a></td><td class="cell-}Kvj">Reduced Instruction Set Computer</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="abea0fca-b918-4572-b244-75c1bcf3061c"><td class="cell-title"><a href="https://www.notion.so/ROM-abea0fcab9184572b24475c1bcf3061c">ROM</a></td><td class="cell-}Kvj">Read Only Memory</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="6520e571-6925-4788-b3ae-81dfbf444992"><td class="cell-title"><a href="https://www.notion.so/SDRAM-6520e57169254788b3ae81dfbf444992">SDRAM</a></td><td class="cell-}Kvj">Synchronous Dynamic Random-Access Memory</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="37a73dbb-71da-43ad-bdf4-a3fb5ed3c87c"><td class="cell-title"><a href="https://www.notion.so/SIMD-37a73dbb71da43adbdf4a3fb5ed3c87c">SIMD</a></td><td class="cell-}Kvj">Single Instruction Multiple Data</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="66621e2a-f39c-487e-9b58-878ca3a61316"><td class="cell-title"><a href="https://www.notion.so/SPU-66621e2af39c487e9b58878ca3a61316">SPU</a></td><td class="cell-}Kvj">Synergistic Processing Unit</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF">128-bit RISC processor specialized for SIMD operations.
+7 of these coprocessors are part of the Cell architecture of the PS3.</td></tr><tr id="1622499c-93c5-45f3-b996-5076e9765d6d"><td class="cell-title"><a href="https://www.notion.so/SRAM-1622499c93c545f3b9965076e9765d6d">SRAM</a></td><td class="cell-}Kvj">Static Random-Access Memory</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="ba41dbc3-7423-473b-86f5-234cefb0fcc2"><td class="cell-title"><a href="https://www.notion.so/SSE-ba41dbc37423473b86f5234cefb0fcc2">SSE</a></td><td class="cell-}Kvj">Streaming SIMD Extensions</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="249b2b20-cec7-4f23-b515-5ff85591b70b"><td class="cell-title"><a href="https://www.notion.so/UMA-249b2b20cec74f23b5155ff85591b70b">UMA</a></td><td class="cell-}Kvj">Uniform Memory Access</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF">A shared memory architecture used in parallel computers.
+All the processors share the physical memory uniformly.
+A common model is to share the system memory and video memory.</td></tr><tr id="295e46ce-6d70-489c-a9d6-144ba3851600"><td class="cell-title"><a href="https://www.notion.so/VGA-295e46ce6d70489ca9d6144ba3851600">VGA</a></td><td class="cell-}Kvj">Video Graphics Array</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF"></td></tr><tr id="2f19409f-e941-4491-a58f-648c0f1b7f1d"><td class="cell-title"><a href="https://www.notion.so/VRAM-2f19409fe9414491a58f648c0f1b7f1d">VRAM</a></td><td class="cell-}Kvj">Video RAM</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF">Variant of dynamic RAM in graphics adapters.</td></tr><tr id="cb243ab1-80bb-4da1-88b9-f47e0b0aced4"><td class="cell-title"><a href="https://www.notion.so/VU-cb243ab180bb4da188b9f47e0b0aced4">VU</a></td><td class="cell-}Kvj">Vector Unit</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF">128-bit RISC processors specialized for SIMD operations.
+2 of these are part of the Emotion Engine architecture of the PS2.</td></tr><tr id="90072c68-0a4f-49bc-831a-b179e85fe89a"><td class="cell-title"><a href="https://www.notion.so/ASM-90072c680a4f49bc831ab179e85fe89a">ASM</a></td><td class="cell-}Kvj">Assembly</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF"></td></tr><tr id="abbe8c9d-3f78-477d-a034-9bdf0deafa3a"><td class="cell-title"><a href="https://www.notion.so/BCL-abbe8c9d3f78477da0349bdf0deafa3a">BCL</a></td><td class="cell-}Kvj">Base Class Library</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF">Core library of .NET</td></tr><tr id="ef753e8c-9a33-4301-a3ed-88300fac8328"><td class="cell-title"><a href="https://www.notion.so/CIL-ef753e8c9a334301a3ed88300fac8328">CIL</a></td><td class="cell-}Kvj">Common Intermediate Language</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF">CPU-independent set of instructions that can be efficiently converted to the native code.
+Formerly called Microsoft Intermediate Language (MSIL).</td></tr><tr id="ce68a5a1-2dd3-417b-953c-9a15b2a785b4"><td class="cell-title"><a href="https://www.notion.so/CLI-ce68a5a12dd3417b953c9a15b2a785b4">CLI</a></td><td class="cell-}Kvj">Common Language Infrastructure</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF"></td></tr><tr id="af08c910-6f24-4738-9287-982113c3397d"><td class="cell-title"><a href="https://www.notion.so/CLR-af08c9106f2447389287982113c3397d">CLR</a></td><td class="cell-}Kvj">Common Language Runtime</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF">.NET runtime</td></tr><tr id="e68ccf55-c518-4f66-9adf-37ed15dab529"><td class="cell-title"><a href="https://www.notion.so/DB-e68ccf55c5184f669adf37ed15dab529">DB</a></td><td class="cell-}Kvj">DataBase</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF"></td></tr><tr id="ea95a346-6229-4618-a9ca-36cff0916237"><td class="cell-title"><a href="https://www.notion.so/DLL-ea95a34662294618a9ca36cff0916237">DLL</a></td><td class="cell-}Kvj">Dynamic-Link Library</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF">Shared library in Microsoft Windows.</td></tr><tr id="88430f34-f484-469a-93e1-36486692b33d"><td class="cell-title"><a href="https://www.notion.so/DSP-88430f34f484469a93e136486692b33d">DSP</a></td><td class="cell-}Kvj">Digital Signal Processor</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF"></td></tr><tr id="91d84db3-564e-44d9-b546-397b44d45b84"><td class="cell-title"><a href="https://www.notion.so/FIFO-91d84db3564e44d9b546397b44d45b84">FIFO</a></td><td class="cell-}Kvj">First In, First Out</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF"></td></tr><tr id="af671721-6e90-4440-b5a2-020a6285521e"><td class="cell-title"><a href="https://www.notion.so/GC-af6717216e904440b5a2020a6285521e">GC</a></td><td class="cell-}Kvj">Garbage Collector</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF"></td></tr><tr id="a33cce58-eaf5-4fff-85c0-66b9cac39083"><td class="cell-title"><a href="https://www.notion.so/GPGPU-a33cce58eaf54fff85c066b9cac39083">GPGPU</a></td><td class="cell-}Kvj">General-Purpose computing on Graphics Processing Units</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF">Using a GPU to perform general-purpose computing.</td></tr><tr id="b1f5b049-8d29-4bda-bff3-f7da7bcfa2ad"><td class="cell-title"><a href="https://www.notion.so/GUID-b1f5b0498d294bdabff3f7da7bcfa2ad">GUID</a></td><td class="cell-}Kvj">Globally Unique Identifiers</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF"></td></tr><tr id="6ff6c614-0852-43c5-930d-e0dcd47c0e5c"><td class="cell-title"><a href="https://www.notion.so/JIT-6ff6c614085243c5930de0dcd47c0e5c">JIT</a></td><td class="cell-}Kvj">Just-In-Time</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF"></td></tr><tr id="4fb81f18-13e9-4dbb-b231-3cc0d2e58285"><td class="cell-title"><a href="https://www.notion.so/JSON-4fb81f1813e94dbbb2313cc0d2e58285">JSON</a></td><td class="cell-}Kvj">JavaScript Object Notation</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF"></td></tr><tr id="df60af2c-e6e5-443e-a0ac-0877a6555da7"><td class="cell-title"><a href="https://www.notion.so/LIFO-df60af2ce6e5443ea0ac0877a6555da7">LIFO</a></td><td class="cell-}Kvj">Last In, First Out</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF"></td></tr><tr id="c672411c-8b37-45a4-9af9-bcf1163226e0"><td class="cell-title"><a href="https://www.notion.so/LRU-c672411c8b3745a49af9bcf1163226e0">LRU</a></td><td class="cell-}Kvj">Least Recently Used</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF"></td></tr><tr id="bdd02e02-bc4d-4303-a118-ca9ea12966d9"><td class="cell-title"><a href="https://www.notion.so/MRU-bdd02e02bc4d4303a118ca9ea12966d9">MRU</a></td><td class="cell-}Kvj">Most Recently Used</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF"></td></tr><tr id="6bb2f9c9-47b7-441a-a34e-c7780cd411ec"><td class="cell-title"><a href="https://www.notion.so/NaN-6bb2f9c947b7441aa34ec7780cd411ec">NaN</a></td><td class="cell-}Kvj">Not A Number</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF"></td></tr><tr id="b18ae53a-4142-458c-846e-e01bde43d685"><td class="cell-title"><a href="https://www.notion.so/NPN-b18ae53a4142458c846ee01bde43d685">NPN</a></td><td class="cell-}Kvj">Node Package Manager</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF">Command-line program to manage node.js libraries.</td></tr><tr id="37aba5d5-fc96-4ed3-98e2-933ecb380391"><td class="cell-title"><a href="https://www.notion.so/RAII-37aba5d5fc964ed398e2933ecb380391">RAII</a></td><td class="cell-}Kvj">Resource Acquisition Is Initialization</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF"></td></tr><tr id="dbdab88b-2534-4dda-b18b-2786c77f75d7"><td class="cell-title"><a href="https://www.notion.so/RLE-dbdab88b25344ddab18b2786c77f75d7">RLE</a></td><td class="cell-}Kvj">Run-Length Encoding</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF">Lossless data compression which runs on sequences in which the same value occurs many consecutive times.
+The sequence is encoded to store only a single value and its count.</td></tr><tr id="70f3f1de-083a-4a23-87d0-ca66154eea88"><td class="cell-title"><a href="https://www.notion.so/RTTI-70f3f1de083a4a2387d0ca66154eea88">RTTI</a></td><td class="cell-}Kvj">Run-Time Type Information</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF"></td></tr><tr id="c2b0ce00-01b2-4fbb-9524-8cd9b96c1c48"><td class="cell-title"><a href="https://www.notion.so/SQL-c2b0ce0001b24fbb95248cd9b96c1c48">SQL</a></td><td class="cell-}Kvj">Structured Query Language</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF"></td></tr><tr id="b60b9592-8631-4f53-8084-1ea30e1c8700"><td class="cell-title"><a href="https://www.notion.so/UML-b60b959286314f5380841ea30e1c8700">UML</a></td><td class="cell-}Kvj">Unified Modeling Language</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF"></td></tr><tr id="e3e70ba2-18ff-47a7-ae6d-c5cd69a0f05d"><td class="cell-title"><a href="https://www.notion.so/UUID-e3e70ba218ff47a7ae6dc5cd69a0f05d">UUID</a></td><td class="cell-}Kvj">Universally Unique Identifiers</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF"></td></tr><tr id="5aa4f5a8-f087-41cc-b35a-79d7204ab30f"><td class="cell-title"><a href="https://www.notion.so/XML-5aa4f5a8f08741ccb35a79d7204ab30f">XML</a></td><td class="cell-}Kvj">eXtensible Markup Language</td><td class="cell-MXnh"><span class="selected-value">Software</span></td><td class="cell-NLaF"></td></tr><tr id="e12a5c5e-70b3-45f4-9d77-d99eff6cfd59"><td class="cell-title"><a href="https://www.notion.so/FSM-e12a5c5e70b345f49d77d99eff6cfd59">FSM</a></td><td class="cell-}Kvj">Finite State Machine</td><td class="cell-MXnh"><span class="selected-value">AI</span></td><td class="cell-NLaF"></td></tr><tr id="66bc736e-d7ac-4a42-935c-f5b4ab7fadf5"><td class="cell-title"><a href="https://www.notion.so/GOAP-66bc736ed7ac4a42935cf5b4ab7fadf5">GOAP</a></td><td class="cell-}Kvj">Goal-Oriented Action Planner</td><td class="cell-MXnh"><span class="selected-value">AI</span></td><td class="cell-NLaF">A system for AI agents that allows them to plan a sequence of actions to satisfy a particular goal.</td></tr><tr id="4af159cd-a7b7-4576-a031-06efa42fd671"><td class="cell-title"><a href="https://www.notion.so/CDLOD-4af159cda7b74576a03106efa42fd671">CDLOD</a></td><td class="cell-}Kvj">Continuous Distance-Dependent Level Of Detail</td><td class="cell-MXnh"><span class="selected-value">Graphics</span></td><td class="cell-NLaF">A technique for rendering heightmap terrains on the GPU.</td></tr><tr id="631e8681-8b8c-41bd-ad24-21242eac114a"><td class="cell-title"><a href="https://www.notion.so/FBX-631e86818b8c41bdad2421242eac114a">FBX</a></td><td class="cell-}Kvj">FilmBoX</td><td class="cell-MXnh"><span class="selected-value">Graphics</span></td><td class="cell-NLaF">A proprietary file format owned by Autodesk for 3D assets.</td></tr><tr id="1e543c85-c219-4714-865f-e79f0e6d750c"><td class="cell-title"><a href="https://www.notion.so/glTF-1e543c85c2194714865fe79f0e6d750c">glTF</a></td><td class="cell-}Kvj">GL Transmission Format</td><td class="cell-MXnh"><span class="selected-value">Graphics</span></td><td class="cell-NLaF">A file format for 3D scenes and models using JSON.</td></tr><tr id="ae6a173a-5f27-4b97-973e-a860b6146f85"><td class="cell-title"><a href="https://www.notion.so/HUD-ae6a173a5f274b97973ea860b6146f85">HUD</a></td><td class="cell-}Kvj">Head-Up Display</td><td class="cell-MXnh"><span class="selected-value">Graphics</span></td><td class="cell-NLaF">A display area that presents data as part of a game&#x27;s user interface.</td></tr><tr id="1bfd2f5d-c5c5-4831-a9c8-12d7c4bb7e76"><td class="cell-title"><a href="https://www.notion.so/LOD-1bfd2f5dc5c54831a9c812d7c4bb7e76">LOD</a></td><td class="cell-}Kvj">Level Of Detail</td><td class="cell-MXnh"><span class="selected-value">Graphics</span></td><td class="cell-NLaF">A technique for simplifying a mesh by removing vertices and detail.</td></tr><tr id="176903a0-2cd6-4cf2-b2f7-878cf2c7764f"><td class="cell-title"><a href="https://www.notion.so/OOO-176903a02cd64cf2b2f7878cf2c7764f">OOO</a></td><td class="cell-}Kvj">Out Of Order</td><td class="cell-MXnh"><span class="selected-value">Hardware</span></td><td class="cell-NLaF">Modern CPUs support out of order execution.
+It allows the processor to execute instructions in a different order than their original order in a program.
+The processor can avoid being idle while waiting for the preceding instruction to complete.</td></tr></tbody></table></div></article></body></html>
