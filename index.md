@@ -37,3 +37,36 @@ The code translation process that includes the compilation and linking of source
 The storage of a program's executable on different plaforms.
 
 [▶️ Executable](https://www.notion.so/juliendelezenne/Executable-5c6143da707145ddb89b15dc24e29d61){:target="_blank"}
+
+A program uses a portion of heap memory known as the stack.
+
+[📚 Stack](https://www.notion.so/juliendelezenne/Stack-eddf0c34dc934379ab05627709fff38f){:target="_blank"}
+
+An overview of multithreading and platform-dependent functionalities.
+
+[🔀 Multithreading](https://www.notion.so/juliendelezenne/Multithreading-6081d956dabc43ad95c57aa9eaced001){:target="_blank"}
+
+## Data
+
+Every programming language provides fundamental data types.
+
+[🔢 Numeric Types](https://www.notion.so/juliendelezenne/Numeric-Types-d562f84c7ea645d690e6bbf2bf361923){:target="_blank"}
+
+## C++
+
+C++ does not support Bit Flags as a fundamental type. There are different methods to implement this functionality.
+
+[🚩 Bit Flags](https://www.notion.so/juliendelezenne/Bit-Flags-b6f54688b0684f539bf11149fd8c4cd9){:target="_blank"}
+
+There are different methods to handle error handling in C++.
+
+[⚠️ Error Handling](https://www.notion.so/juliendelezenne/Errors-5ae5a4ffe58049359821c5534a93cf26){:target="_blank"}
+
+# 🎮 Game Runtime
+
+# 🎨 Game Editor
+
+A review of popular version control systems, and how they can be integrated into a game pipeline.
+
+[Version Control](https://www.notion.so/juliendelezenne/Version-Control-be7595ca455d412fbac8c67a7f1698da){:target="_blank"}
+
