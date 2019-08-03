@@ -145,3 +145,8 @@ A review of popular version control systems, and how they can be integrated into
 Overview and tutorials on the Windows platforms and the APIs that are required in a game engine.
 
 [Windows](https://www.notion.so/juliendelezenne/Windows-850f22698c5d46079f5b42c2ef1298f1){:target="_blank"}
+
+
+Tutorials on HLSL.
+
+[HLSL](https://www.notion.so/juliendelezenne/HLSL-8cf24e8312464ccd90dd10a21b07d200){:target="_blank"}
