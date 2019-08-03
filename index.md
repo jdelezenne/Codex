@@ -110,6 +110,7 @@ C++ does not support Bit Flags as a fundamental type. There are different method
 
 🚩[Bit Flags](https://www.notion.so/juliendelezenne/Bit-Flags-b6f54688b0684f539bf11149fd8c4cd9){:target="_blank"}
 
+
 There are different methods to handle errors in C++.
 
 ⚠️[Error Handling](https://www.notion.so/juliendelezenne/Errors-5ae5a4ffe58049359821c5534a93cf26){:target="_blank"}
@@ -162,6 +163,10 @@ A review of SIMD on different platforms, and best practices on their usage.
 
 [SIMD](https://www.notion.so/juliendelezenne/SIMD-4e4aca2cf1a94c93ac3b2d1beca4cc57){:target="_blank"}
 
+
+Different strategies to implement a reflection system in C++.
+
+[Reflection](https://www.notion.so/juliendelezenne/Reflection-01c7a4c0143a4881afadaec6fbef5fc6){:target="_blank"}
 
 Best practices on implementing loading and saving in a game engine.
 
