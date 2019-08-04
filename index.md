@@ -43,17 +43,17 @@ A review of the different implementations of SIMD.
 
 An overview of the architecture of a computer system and its fundamental components.
 
-💻[Computer](https://www.notion.so/juliendelezenne/Computer-70c2c3fbbc29446782e02b8e0e6be940){:target="_blank"}
+💻[Computer](Computer.html){:target="_blank"}
 
 
 A review of the CPU's cache memory, and best practices.
 
-🚅[Cache Memory](https://www.notion.so/juliendelezenne/Cache-Memory-718834f4e1ce43549eecdf397833cac1){:target="_blank"}
+🚅[Cache Memory](Cache Memory.html){:target="_blank"}
 
 
 To debug programs compiled for an Intel x86 architecture, some fundamental knowledge of the processor and its instructions is necessary.
 
-[Intel x86](https://www.notion.so/juliendelezenne/Intel-x86-2401eae3086343d5a9381998ebe9419d){:target="_blank"}
+[Intel x86](Intel x86.html){:target="_blank"}
 
 # 🖥 Software
 
