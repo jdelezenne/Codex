@@ -6,20 +6,19 @@ For a given topic, multiple strategies will be covered with their advantages and
 
 The advantage of building a wiki instead of a blog is that the information can be better organized, and improved over time.
 
-- 📖[References](#-references)
-- 🏰[History](#-history)
-- 💻[Hardware](#-hardware)
-- 🖥[Software](#-software)
-  - [System](#system)
-  - [Data](#data)
-  - [C++](#cpp)
-  - [C#](#csharp)
-  - 🧱[Build](#build)
-- 🖥[Software](#-software)
-- 🧮[Mathematics](#-mathematics)
-- 🎮[Game Runtime](#-game-runtime)
-- 🎨[Game Editor](#-game-editor)
-- 🎓[Tutorials](#-tutorials)
+-📖[References](#-references)
+-🏰[History](#-history)
+-💻[Hardware](#-hardware)
+-🖥[Software](#-software)
+  -⚙️[System](#system)
+  -🌀[C++](#cpp)
+  -🌀[C#](#csharp)
+  -🧱[Build](#build)
+-🖥[Core](#-core)
+-🧮[Mathematics](#-mathematics)
+-🎮[Game Runtime](#-game-runtime)
+-🎨[Game Editor](#-game-editor)
+-🎓[Tutorials](#-tutorials)
 
 # 📖 References
 
@@ -61,9 +60,9 @@ To debug programs compiled for an Intel x86 architecture, some fundamental knowl
 
 Every programming language provides fundamental data types.
 
-🔢[Numeric Types](software/Numeric Types.html){:target="_blank"}
+🔢[Numeric Types](Software/Numeric Types.html){:target="_blank"}
 
-🔟[Endianness](software/Endianness.html){:target="_blank"}
+🔟[Endianness](Software/Endianness.html){:target="_blank"}
 
 
 The code translation process that includes the compilation and linking of source code to a binary executable.
@@ -94,20 +93,20 @@ There are different methods to handle errors in C++.
 
 C++ and best practices.
 
-🌀[C++ Best Practices](Software/C++ Best Practices.html){:target="_blank"}
+🌀[C++ Best Practices](Software/CPP Best Practices.html){:target="_blank"}
 
 ## C# {#csharp}
 
 Fundamental information on C# and best practices.
 
-🌀[C#](Software/C#.html){:target="_blank"}
+🌀[C#](Software/CS.html){:target="_blank"}
 
-🌀[C# Best Practices](Software/C# Best Practices.html){:target="_blank"}
+🌀[C# Best Practices](Software/CS Best Practices.html){:target="_blank"}
 
 
 Information on the internals of .NET.
 
-👾[.NET Internals](Software/.NET Internals.html){:target="_blank"}
+👾[.NET Internals](Software/NET Internals.html){:target="_blank"}
 
 
 A review of best practices that are mostly platform-independent.
@@ -134,7 +133,7 @@ CMake is one of the most popular open-source cross-platform build toolset, and i
 
 A review of SIMD on different platforms, and best practices on their usage.
 
-[SIMD](Core/SIMD.html){:target="_blank"}
+🔢[SIMD](Core/SIMD.html){:target="_blank"}
 
 
 A review if the different kind of memory, and the best practices for writing efficient programs.
@@ -144,7 +143,7 @@ A review if the different kind of memory, and the best practices for writing eff
 
 A review of different allocation strategies and their use in a game engine.
 
-⛓[Memory Allocators](Software/Memory Allocators.html){:target="_blank"}
+⛓[Memory Allocators](Core/Memory Allocators.html){:target="_blank"}
 
 
 An overview of the fundamental container types and their usage.
@@ -161,12 +160,6 @@ Different strategies to serialize and deserialize data in C++.
 
 💾[Serialization](Core/Serialization.html){:target="_blank"}
 
-
-Best practices on implementing loading and saving in a game engine.
-
-🗂[Storage](Core/Storage.html){:target="_blank"}
-
-
 # 🧮 Mathematics
 
 The principles of trigonometry that are necessary for graphics programming.
@@ -181,13 +174,17 @@ An overview of the recommended project configurations for a game engine.
 
 Strategies to provide a platform abstraction for the low-level functionality of the engine.
 
-[Cross-Platform](Runtime/Cross-Platform.html){:target="_blank"}
+[Cross-Platform](Runtime/Cross Platform.html){:target="_blank"}
 
 
 Overview of platform-independant and platform-spefic features for the low-level functionality of the engine.
 
 [Platforms](Runtime/Platforms.html){:target="_blank"}
 
+
+Best practices on implementing loading and saving in a game engine.
+
+🗂[Storage](Runtime/Storage.html){:target="_blank"}
 
 # 🎨 Game Editor
 
