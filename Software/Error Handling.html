@@ -1,0 +1,713 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Error Handling</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5ae5a4ff-e580-4935-9821-c5534a93cf26" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">⚠️</span></div><h1 class="page-title">Error Handling</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th>Category</th><td><span class="selected-value">Core</span></td></tr></tbody></table></header><div class="page-body"><h1 id="86a009bb-37ae-47b5-8406-64b335129670" class="">Overview</h1><p id="b238e50a-e85b-490e-82df-a96a6a29c281" class="">There are several methods to handle errors in a program.</p><h1 id="bbf0d105-f6ac-44c0-8093-9f06c4a931be" class="">Assertions</h1><p id="34f07a00-ca63-4035-8e60-e8b59c4b562d" class="">An assertion indicates a <em>programming error</em>.</p><p id="c8ada2db-af60-4bff-9212-1f6791258d5c" class="">It means that the error should only occur during the development of the application and never occur in final builds.</p><p id="f82c23eb-ec3f-4063-be1a-52b72e3d6126" class="">Assertions are conditional statements that are ignored when they return <em>true</em>, but raise an error when they return <em>false</em>.</p><p id="1986e524-af8e-4f9b-a0c6-e7982370bdae" class="">In C++, there are two types of asserts: static asserts and run-time asserts.</p><h2 id="ea39eb1a-bbf8-40e9-962e-96be2c2a5a5e" class="">Static Assertions</h2><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e4759392-2547-4890-b46e-48d6d7e8984a"><div style="font-size:1.5em"><span class="icon">🗓</span></div><div style="width:100%">Static assertions were introduced in C++11.</div></figure><p id="74843ff5-6087-4623-a6c6-678647bb5856" class="">Static assertions are checked by the compiler, and if they fail, the compilation is stopped.</p><p id="58533801-ee84-4216-aa41-5787c464c3c5" class="">Static assertions should always be preferred to run-time assertions whenever possible.</p><ul id="77b7fdd7-efeb-4b20-91cc-6ec67e978f26" class="bulleted-list"><li>They prevent an invalid program to compile, and force the programmer to fix the error to be able to compile.</li></ul><ul id="379f1a57-2843-4ba6-bffb-2711385c3f9c" class="bulleted-list"><li>They allow errors to be detected and fixed as early as possible.</li></ul><h3 id="8be967eb-fdf7-43ae-a655-8fd921a73592" class="">Usage</h3><ul id="a11cc2dd-fbd3-4b92-98b2-b09bacc43d70" class="bulleted-list"><li>Ensure that a type has a specific size or is aligned on a specific boundary.</li></ul><pre id="51f3b5d6-77fc-43b7-bdb4-0d94c0851826" class="code"><code>struct VertexConstants
+{
+    Matrix WorldViewProjectionMatrix;
+    Matrix WorldViewMatrix;
+    Matrix ViewMatrix;
+    Matrix ProjectionMatrix;
+
+    Vector WorldLightDirection;
+    Vector ModelLightDirection;
+    Vector AmbientColor;
+    Vector DiffuseColor;
+};
+
+static_assert((sizeof(VertexConstants) % 16) == 0, &quot;Context buffer must be 16 byte aligned&quot;);</code></pre><ul id="e9588864-ab6b-4f4f-b2d8-d778c3d7064a" class="bulleted-list"><li>Validate template parameters using type traits.</li></ul><pre id="35f38790-d71a-4655-8550-204a0e2b0e48" class="code"><code>template &lt;typename T, int Size&gt;
+class Vector
+{ 
+    static_assert(Size &gt; 0, &quot;Vector size must be positive&quot;);
+    static_assert(Size &lt;= 4, &quot;Vector size must be in the [1 4] range&quot;);
+  
+    T _values[Size]; 
+}; 
+
+Vector&lt;float, 3&gt; vector1; // OK
+Vector&lt;float, -3&gt; vector2; // Fail
+Vector&lt;double, 6&gt; vector3; // Fail</code></pre><figure id="2ba1fc73-657a-43e8-914f-391560db28f1" class="image"><a href="Error Handling/Untitled.png"><img style="width:1874px" src="Error Handling/Untitled.png"/></a></figure><h2 id="2de59425-346a-4b45-abf5-512443eb4245" class="">Run-time Assertions</h2><p id="951280ad-aae1-4b44-af77-902574851e36" class="">Run-time assertions are used when static asserts are not applicable.</p><p id="304c6071-102b-4c31-bb92-d5a0cbc123b2" class="">An assertion that returns <em>true</em> is ignored, but an assertion that returns <em>false</em> causes a debug break. A debug break outputs an error, and invoke a debugger when it is possible.</p><p id="e8a54f70-8d5b-4e06-8f22-71f9759e018d" class="">Assertions are programming assumptions.</p><p id="d2ad842a-96bb-49dd-899d-77afe3996dbb" class="">They should only be enabled in development builds.</p><p id="80d2894f-af1a-43b7-a3e8-55abde96c984" class="">The <code>assert</code> function is defined in the <code>cassert</code> header file.</p><p id="f7800d5c-ddcc-4857-b0ea-0422204964d6" class="">It is actually a macro that is stripped out of non-debug builds.</p><p id="4a909ea5-3998-4fc2-a6f2-38909c9f828a" class="">For example, in this example a static assert cannot be used because the <code>index</code> parameter is dynamic.</p><pre id="e33a9dd8-21f7-47fc-ad40-1cf749aa8cc0" class="code"><code>T GetAt(int32_t index)
+{
+    assert(index &gt;= 0 &amp;&amp; &quot;Index must be positive&quot;);
+    assert(index &lt; Size &amp;&amp; &quot;Index must be in the [1 4] range&quot;);
+
+    return _values[index];
+}</code></pre><p id="cc09f9ff-6c55-4b41-9830-38198b47853c" class="">Try to use more specific types to catch programming assumptions at compile time when possible.</p><p id="f85d1239-7c2b-494e-9ef2-c0ea2b678f30" class="">In this example, a more specific type for the <code>index</code> parameter (<code>uint32_t</code>) allows the first assert to be removed from the function. </p><pre id="4a71639c-5ed7-410d-9681-afd5e4f5a20b" class="code"><code>T GetAt(uint32_t index)
+{
+    assert(index &lt; Size &amp;&amp; &quot;Index must be in the [1 4] range&quot;);
+
+    return _values[index];
+}</code></pre><p id="8e14194e-61ce-4df4-bf57-a486522d20d4" class="">The <code>assert</code> function from the standard library does not allow a message to be associated with the assertion (which explains the &amp;&amp; operator between the condition and the message in the previous example).</p><p id="85c79589-d22d-442f-a90f-84ffc2392572" class="">You can define a custom macro function that:</p><ul id="27b53085-134c-4c11-a1d1-c0ff062ad49c" class="bulleted-list"><li>Is enabled in development builds (covers debug builds and non final release builds).</li></ul><ul id="888717d1-f2cd-4d94-83e4-b198260f52e4" class="bulleted-list"><li>Provides a custom reporting mechanism.</li></ul><pre id="3316db88-53da-4698-98b1-ab08b5d9da04" class="code"><code>#if defined(DEVELOPMENT)
+#define MyAssert(expression, message) \
+    if (expression) {}
+    else \
+    { \
+				ReportAssert(#expression, __FILE__, __LINE__); \
+				__debugbreak(); \
+    }
+#else
+#define MyAssert(expression, message)
+#endif</code></pre><ul id="92107f47-f662-4b46-a8b9-56a8456ea888" class="bulleted-list"><li>In non-development builds, the assertion is resolved to nothing, which strips out the assert statement from machine code.</li></ul><ul id="6611b53f-cd7c-42aa-ac57-6993310c08fb" class="bulleted-list"><li>If the expression returns <em>true</em>, nothing happens.</li></ul><ul id="61324e02-099f-40f2-9d20-ac116318ab24" class="bulleted-list"><li>If the expression returns <em>false:</em><ul id="a23a911e-c0f9-4888-9065-eefd5820e8ec" class="bulleted-list"><li>A custom ReportAssert function is invoked with 3 parameters:<ul id="86354f7d-8f49-4e61-9925-e648671a6f5f" class="bulleted-list"><li>The string representation of the expression using the <code>#</code> character.</li></ul><ul id="bd6c9e0a-2b45-46d3-bc0f-fdfc977f70a8" class="bulleted-list"><li>The file name of the source code in which the assert function is invoked.</li></ul><ul id="59259b12-88bb-4d8d-a2ed-988ce62ae8e3" class="bulleted-list"><li>The line number in the source code where the assert function is invoked.</li></ul></li></ul><ul id="728b7939-397a-43cb-8245-d154f083ee93" class="bulleted-list"><li>The <code>__debugbreak</code> intrinsic function is platform-dependent and causes a breakpoint in the code.</li></ul></li></ul><h1 id="64ba74bc-2569-40d0-8625-5164667e1ae0" class="">Error Codes</h1><p id="d9b25176-c911-4c74-ae5d-48cd3ec49cc5" class="">To handle application errors, we can use error codes.</p><p id="13ac61db-a104-4770-910d-87f98e0041bc" class="">A common approach is to return an error code in functions than can fail and always check for this error code when calling the functions.</p><p id="adaabfa4-5a71-4b8a-928f-cf0101616bd9" class="">For example, the COM library use this approach. The <code>HRESULT</code> type is a common error code returned by many functions.</p><p id="8c4c1dc3-7cbd-4e0d-827d-99bd7809368b" class="">You can define a global list of possible errors for the application.</p><pre id="d2f45979-f21c-435c-b9e8-d2a3cbc4ece8" class="code"><code>enum class Errors
+{
+    OK,
+    OutOfMemory,
+    IndexOutOfRange,
+    InvalidOperation,
+    ...
+};</code></pre><p id="306f6fc9-58ed-46db-b0ad-d448311a69f9" class="">Or you can define separate error types for distinct domains.</p><div id="8bb027a6-a2be-422a-8fb7-048fc98bd644" class="column-list"><div id="c94f6cfb-18c0-4259-aa9d-598127abd1c6" style="width:50%" class="column"><pre id="e2a7ebef-3ea2-4077-979a-b838ab8e9df3" class="code"><code>enum class SystemErrors
+{
+    OK,
+    OutOfMemory,
+    IndexOutOfRange,
+    InvalidOperation,
+    ...
+};</code></pre></div><div id="b7acb2f5-926f-4510-913d-537e63e6a320" style="width:50%" class="column"><pre id="bbe48d43-3fc6-4716-9d08-9b1e1319bb0d" class="code"><code>enum class IOErrors
+{
+    OK,
+    FileNotFound,
+    EndOfStream,
+    ...
+};</code></pre></div></div><p id="93b164b4-2aba-41aa-94b5-fcc02b09e6e1" class="">Functions that are expected to return a result, return it through an out parameter.</p><pre id="1e6b9ff0-ec0e-44d9-9255-c181e783065e" class="code"><code>Errors GetAt(uint32_t index, T* item)
+{
+    if (index &gt;= Size)
+    {
+		    *item = nullptr;
+		    return Errors::IndexOutOfRange;
+		}
+
+    item = _values[index];
+    return Errors::OK;
+}</code></pre><p id="bbf42346-5618-4c20-bb45-09cbfd2995cc" class="">An alternative way to implement errors codes, is to define a <code>Result</code> type that act as a pair of an expected value and an error code.</p><pre id="d78633aa-e362-4a2f-acfd-581ace104775" class="code"><code>template &lt;typename T&gt;
+struct Result
+{
+    T Value;
+    Errors Error = Errors::OK;
+    
+    Result(const T&amp; value) : Value(value) {}
+    Result(Errors error) : Error(error) {}
+};</code></pre><p id="fb7979cb-c01c-4e35-8681-660b6eef712d" class="">Functions that return a value, return the value wrapped inside the <code>Result</code> type.</p><p id="55b9e4cb-3424-4863-84ea-1eb8b944a996" class="">The implicit constructors make the construction of the <code>Result</code> type more readable.</p><pre id="b0f0e1cf-a7ff-48fd-ad5a-eb0c8e170c02" class="code"><code>Result&lt;T&gt; GetAt(uint32_t index)
+{
+    if (index &gt;= Size)
+    {
+		    return Errors::IndexOutOfRange;
+		}
+
+    return _values[index];
+}</code></pre><h1 id="9218c43d-9e8b-4257-ba18-aa2eb04b564f" class="">Exceptions</h1><p id="38e7dc06-8c5e-41d9-bde5-1f48302e7fe1" class="">In C++, exceptions are a mechanism in which an error is <em>thrown</em> in a method with an exception object, and the application <em>jumps</em> to an exception handler at any previous frame of the callstack (<em>stack unwinding</em>).</p><p id="6675e520-86ca-4ce5-88ab-e95aca2977e8" class="">To handle an exception, a <em>try-catch</em> block wraps the call the functions than can throw exceptions. When an exception is throw, the catch block that matches the exception object that was thrown is invoked.</p><p id="2f51c6c7-e35f-4f41-9bfc-7f2bc8ca53b8" class="">This is known as <em>exception handling</em>.</p><pre id="90e25bf9-e845-4b1b-96aa-fc3010b72e1e" class="code"><code>#include &lt;stdexcept&gt;
+
+T GetAt(uint32_t index)
+{
+    if (index &gt;= Size)
+    {
+		    throw std::exception(&quot;Index out of range.&quot;);
+		}
+
+    return _values[index];
+}
+
+void main()
+{
+    Vector&lt;float, 3&gt; float3;
+
+    try
+    {
+		    float z = float3.GetAt(2); // OK
+		    float w = float3.GetAt(4); // Fail
+		}
+		catch (const std::exception&amp; e)
+		{
+				// Handle the error
+				std::cout &lt;&lt; e.what() &lt;&lt; std::endl;
+		}
+}</code></pre><p id="be6d4e24-4630-46ea-8a6f-9be9a23b9e61" class="">You can declare more specific exception types, to provide more specific information or force the callers to catch that specific exception.</p><pre id="401a4e18-31ad-45ae-823a-33386366a3ce" class="code"><code>class IndexOutOfRangeException : public std::exception
+{
+public:
+	  virtual const char* what() const throw()
+		{
+		    return &quot;Index out of range.&quot;;
+	  }
+};</code></pre><p id="6b13f3e5-a509-4e41-bd8a-299daf3f0971" class="">The <code>IndexOutOfRangeException</code> exception is handled in the catch block, but other exceptions bubble up the callstack.</p><pre id="270c4ebf-375c-48f3-b9af-9bf09a5ef875" class="code"><code>T GetAt(uint32_t index)
+{
+    if (index &gt;= Size)
+    {
+		    throw IndexOutOfRangeException();
+		}
+
+    return _values[index];
+}
+
+void main()
+{
+    Vector&lt;float, 3&gt; float3;
+
+    try
+    {
+		    float z = float3.GetAt(2); // OK
+		    float w = float3.GetAt(4); // Fail
+		}
+		catch (const IndexOutOfRangeException&amp; e)
+		{
+				// Handle the error
+				std::cout &lt;&lt; e.what() &lt;&lt; std::endl;
+		}
+}</code></pre><h2 id="a0ea015e-df78-47ba-9bfe-aab1f5c0eef3" class="">Advantages</h2><p id="1e810450-0600-452b-a88e-27c1dbece406" class="">Exception handling ensure that the caller that is most able to handle the error, is able to do so.</p><p id="107f0b76-996f-4e06-9eb9-f144d2ec516a" class="">Using error codes, many callers would have to pass the error to their own respective callers.</p><p id="7ce483fb-cb8f-498a-adf4-5297ae5c8d39" class="">Exceptions are designed to leverage the constructors and destructors of the types in an application to ensure that objects are correctly destroyed when an exception is thrown.</p><h2 id="3bb94f26-0b59-4adf-bda0-74feccb2feae" class="">Issues</h2><p id="e7d66404-0331-417c-bd16-7a62f06f6e5a" class="">There are several issues with exception handling.</p><ul id="aaab0ddc-f479-4347-adad-10aee684a2a1" class="bulleted-list"><li>Exceptions add overhead to an application by generating additional machine code to support stack unwinding operations. It increases the code size and degrade the performance of the instruction cache.</li></ul><ul id="3e73012d-6ff0-44fc-ab04-bf5c1295c9e1" class="bulleted-list"><li>Exception handling can be expensive.</li></ul><ul id="b451dde4-fa84-4557-a189-73cc2a9583ac" class="bulleted-list"><li>Exception handling is hard to follow in a large program, and can be worse than <em>goto</em> statement.</li></ul><ul id="ef99d4f2-64e8-43e4-986c-1069a9232c98" class="bulleted-list"><li>The implementation is platform-dependent, which makes the actual cost of using exception variable across platforms.</li></ul><ul id="c2ade69f-3c50-4002-b5ad-c1ddef7c534a" class="bulleted-list"><li>In real-time applications, handling immediate errors is more critical than bubbling up every errors in a generic handler.</li></ul><ul id="984e32e8-44f0-42b9-82f1-53e02d0eafb2" class="bulleted-list"><li>In practice, in a game, recovering from exceptions is only possible by the immediate callers, which makes the the bubble up through the callstack useless.</li></ul><ul id="c01496db-86b1-4a2a-8bdb-305334d717bd" class="bulleted-list"><li>If an exception were to bubble up through the callstack, the frame in the callstack that ends up handling the exception would only recover from the exception by crashing the game.</li></ul><h1 id="de591781-9d55-4e7a-969e-20ad2259f7ec" class="">Conclusion</h1><p id="0b062ba7-37da-48e4-8f03-5bfda21b52fc" class="">In a game engine, exceptions are generally disabled on every platforms.</p><p id="a5e8e1d7-e2c1-4d4d-94de-2118e52845c9" class="">A more fine grained error handling mechanism using error codes is generally the preferred method to handle errors.</p></div></article></body></html>

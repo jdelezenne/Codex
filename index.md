@@ -43,17 +43,17 @@ A review of the different implementations of SIMD.
 
 An overview of the architecture of a computer system and its fundamental components.
 
-💻[Computer](Computer.html){:target="_blank"}
+💻[Computer](Hardware/Computer.html){:target="_blank"}
 
 
 A review of the CPU's cache memory, and best practices.
 
-🚅[Cache Memory](Cache Memory.html){:target="_blank"}
+🚅[Cache Memory](Hardware/Cache-Memory.html){:target="_blank"}
 
 
 To debug programs compiled for an Intel x86 architecture, some fundamental knowledge of the processor and its instructions is necessary.
 
-[Intel x86](Intel x86.html){:target="_blank"}
+[Intel x86](Hardware/Intel-x86.html){:target="_blank"}
 
 # 🖥 Software
 
@@ -61,22 +61,22 @@ To debug programs compiled for an Intel x86 architecture, some fundamental knowl
 
 The code translation process that includes the compilation and linking of source code to a binary executable.
 
-🔤[Code Translation](https://www.notion.so/juliendelezenne/Code-Translation-cb66ee3bb4be4240bbff99ddb5057a54){:target="_blank"}
+🔤[Code Translation](Software/Code-Translation.html){:target="_blank"}
 
 
 The storage of a program's executable on different plaforms.
 
-▶️[Executable](https://www.notion.so/juliendelezenne/Executable-5c6143da707145ddb89b15dc24e29d61){:target="_blank"}
+▶️[Executable](Software/Executable.html){:target="_blank"}
 
 
 A program uses a portion of heap memory known as the stack.
 
-[📚 Stack](https://www.notion.so/juliendelezenne/Stack-eddf0c34dc934379ab05627709fff38f){:target="_blank"}
+[📚 Stack](Software/Stack.html){:target="_blank"}
 
 
 A review if the different kind of memory, and the best practices for writing efficient programs.
 
-🗄[Memory](https://www.notion.so/juliendelezenne/Memory-6c8b73d5c1e042d78bbe01ac5e6e750b){:target="_blank"}
+🗄[Memory](Software/Code-Translation.html){:target="_blank"}
 
 
 A review of different allocation strategies and their use in a game engine.

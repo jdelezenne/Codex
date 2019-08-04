@@ -1,0 +1,565 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Numeric Types</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d562f84c-7ea6-45d6-90e6-bbf2bf361923" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🔢</span></div><h1 class="page-title">Numeric Types</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th>Category</th><td><span class="selected-value">System</span></td></tr></tbody></table></header><div class="page-body"><h1 id="33649065-ef80-49d5-a3f0-3da5fb596c61" class="">Overview</h1><p id="3437915f-ace5-438a-b272-7e5226c470aa" class="">Data is the fundamental element of programming.</p><p id="208a5c40-2c80-40a9-aedd-62577a283b9f" class="">Computer operations work on data.</p><p id="e83a8541-731f-45b4-be72-a41408a1c8e3" class="">For a computer system to operate on data, a representation of the data is required.</p><h1 id="fc3d9d2a-ffb0-49dc-914b-25349f44fa53" class="">Numeric Bases</h1><h2 id="3c27e72b-2838-401f-8f3b-65f8567e9c33" class="">Decimal</h2><p id="aa89e7d2-0b78-4b7c-9c11-6f9b2ed1229f" class="">The decimal representation is known as <em>base ten</em>.</p><p id="d719dcab-9ec3-4821-bef1-a6d613b436ea" class="">Number are represented with digits from 0 to 9.</p><p id="59b8da23-0ce1-4acb-9a46-93a73a9937b9" class="">A decimal number is the sum of the powers of 10 which each digit represents.</p><h2 id="6ce350ef-b4d0-45a6-b640-eb0c9f468cab" class="">Binary</h2><p id="8238f2ee-f73f-47e2-bf84-48df89f55947" class="">The binary representation is known as <em>base two</em>.</p><p id="49cf2003-7d39-41f3-99e9-a790ddbe0094" class="">It is the fundamental representation of computer data, as electronic components send regular pulses that are either <em>on</em> (1) or <em>off</em> (0).</p><p id="20f9cda5-afe2-41cb-b044-162e8ecc9eeb" class="">Each digit is referred to as a <em>bit</em>.</p><p id="240894ab-dcb0-496c-bea3-a0abc4d25291" class="">A binary number is the sum of the powers of 2 which each digit represents.</p><h2 id="64ed6461-4161-4dc8-bcd6-657b45630138" class="">Hexadecimal</h2><p id="6bb8a468-3fd9-4630-b233-e8dd8f18bd65" class="">The hexadecimal representation is known as <em>base 16</em>.</p><p id="eead924a-3c46-4ea2-ac0f-1f2711b84a55" class="">Number are represented with digits from 0 to 9 and letters from A to F that represents values from 10 to 15.</p><p id="b95ee387-8a95-43b8-af7e-48884f3d7d9c" class="">The hexadecimal representation is also fundamental in computers, as data is generally packed into <em>bytes</em> which are a set of 8 bits.</p><p id="558446f6-1e95-4200-8b2f-29e60a41a226" class="">The FF hexadecimal number is the largest value that can be stored in a byte, which is equal to 255 as a decimal number.</p><h1 id="eaf11994-a5c3-4742-9ce3-62290dd2e016" class="">Data Types</h1><h2 id="a2dfefa7-caf4-4d0a-aeeb-4c1bf091c8d6" class="">Integers</h2><p id="59255fe3-6f4d-4723-a8ab-31be3d0b693e" class="">Integers are known as <em>natural numbers</em> in mathematics.</p><p id="28a18621-61be-4963-8295-ee0bc1dc76fe" class="">Integer numbers are generally represented with the following sizes:</p><ul id="43aa6104-0fa8-4dc8-8ae1-19456fb5d2e9" class="bulleted-list"><li>Byte (8 bits)</li></ul><ul id="dc072aab-22c4-4176-901f-9cb8d381658d" class="bulleted-list"><li>Short (16 bits)</li></ul><ul id="3fd1191f-627d-4d7b-b801-0bd0180ac23e" class="bulleted-list"><li>Int (32 bits)</li></ul><ul id="c54b34a4-1870-49d1-959f-cb53dec4e41c" class="bulleted-list"><li>Long (64 bits)</li></ul><p id="a19c14c3-e15a-4836-96f5-417cee1a2168" class="">Integers can be positive or negative.</p><p id="13ca462b-33c6-47ff-9cdc-c54bda387f0d" class="">Positive integers and negative integers are represented by distinct types, because their encoding is different.</p><p id="56180bd6-52b8-4486-9ef3-1a39e2078e23" class="">Negative integers use the <em>two complement notation</em>.</p><p id="a9417d59-8a01-474a-a6a7-bde40657eace" class="">If the most significant bit is set, the number is negative.</p><h2 id="e5a16253-92d8-4eed-a169-7e18d7afc4d4" class="">Fixed Points</h2><p id="5b985d62-0057-4d59-b2d8-baaf00d5b427" class="">To represent fractions, a different notation is used to express the concept of a decimal point.</p><p id="3ee88468-7bd6-4c95-93d2-261ef9171697" class="">In the fixed point notation, a number of bits represent the <em>whole part</em> of the number, and the remaining bits represent the <em>decimal part</em>.</p><p id="595fa418-acc6-4e88-b6b3-c87924f023dd" class="">The fixed point notation constrains the range of whole numbers that can be represented and the amount of precision for the decimal part.</p><h2 id="e17609ed-42c8-445b-a42a-af75c99e6d3b" class="">Floating Points</h2><p id="26bf3661-1550-4ee1-914c-530541620db5" class="">In the floating point notation, the position of the decimal point is determined by an exponent.</p><p id="97a03574-7365-4911-b338-ca51e20bdd0d" class="">A floating point number has three parts:</p><ul id="8b0e426b-da6a-469b-815e-449695215f7e" class="bulleted-list"><li>A <em>mantissa</em> that contains the digits on both side of the decimal point.</li></ul><ul id="a656a41b-d355-410b-8dff-f1c0f2f7777b" class="bulleted-list"><li>An <em>exponent</em> that indicates the position of the decimal point.</li></ul><ul id="6836eb1e-779b-46a3-9fe8-aaefb25652d8" class="bulleted-list"><li>A <em>sign bit</em> that indicates whether the number is positive or negative.</li></ul><p id="798ebecd-80d9-4825-8e40-5c17cc8f5e51" class="">Floating point numbers are generally represented as:</p><ul id="d9a73a1e-304b-462d-9ea3-87bf800013e5" class="bulleted-list"><li>Single-precision (32 bits)</li></ul><ul id="a32bb1ad-efcf-4ec9-8af8-d6859b59e528" class="bulleted-list"><li>Double-precision (64 bits)</li></ul><p id="1c962bf6-708e-4ab9-baef-42876cecd8e5" class="">The most common standard to represent floating point numbers is IEEE-754.</p><p id="e14b6a55-7a74-4719-9759-00e9374040d2" class="">For a single-precision number:</p><ul id="515242c8-1223-4172-acc0-c5168a590bdb" class="bulleted-list"><li>The sign is in the most significant bit.</li></ul><ul id="aeedfe1d-c36d-4cb1-9d62-0a1b87e46434" class="bulleted-list"><li>The exponent is stored on 8 bits.</li></ul><ul id="2eb33c02-9e15-4621-ae34-8a70996e88d9" class="bulleted-list"><li>The mantissa is stored on 24 bits.</li></ul><p id="e9d8673e-7ade-4bb2-92db-256b8fbdd1eb" class="">The precision of a floating-point value is proportional to its magnitude.</p><p id="5195f511-763a-4b88-a70f-686e129a29ba" class="">It means that the precision of a floating point number increases as the magnitude decrease, and the precision decreases as the magnitude increase.</p><h3 id="ca22aa72-04f9-4b60-bdee-d50b0bf17faf" class="">Epsilon</h3><p id="4de0dd0f-3021-48be-ab8e-83fcd81740c3" class="">The epsilon (or <em>machine epsilon</em>) is the relative error (independent of the exponent).</p><p id="040e2af9-2526-4c8c-9617-22d718c6fbf5" class="">It indicates the maximum error in the mantissa after a given operation.</p><p id="371742a8-95db-42ee-830d-9fdeca44053a" class="">It is the minimum distance that is recognized between two floating point numbers.</p><p id="522ff83c-5888-4872-b318-d8ff4d08b193" class="">It satisfies the following equation:</p><figure id="f7762f57-ad25-4134-8793-047389830af4" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1.0</mn><mo>+</mo><mi>ϵ</mi><mo>=</mo><mn>1.0</mn></mrow><annotation encoding="application/x-tex">1.0+\epsilon=1.0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">.</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">ϵ</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">.</span><span class="mord">0</span></span></span></span></span></div></figure><h2 id="21352f6d-9f74-470b-94d1-4e865a191d64" class="">Word</h2><p id="19704796-b2dd-414e-92b2-8833ba1415c2" class="">A <em>word</em> corresponds to the <em>natural size</em> of a processor.</p><ul id="64d35cab-f1f8-4eb0-9b7c-039bcaf430cc" class="bulleted-list"><li>A 32-bit processor has a word size of 4 bytes.</li></ul><ul id="468c0add-ef14-4af3-9995-75851a752fb6" class="bulleted-list"><li>A 64-bit processor has a word size of 8 bytes.</li></ul><h1 id="eb404c4f-54c3-4138-b689-6739486263df" class="">Endianness</h1></div></article></body></html>

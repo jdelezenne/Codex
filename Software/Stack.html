@@ -1,0 +1,568 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Stack</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="eddf0c34-dc93-4379-ab05-627709fff38f" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📚</span></div><h1 class="page-title">Stack</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th>Category</th><td><span class="selected-value">System</span></td></tr></tbody></table></header><div class="page-body"><h1 id="d3e09ea8-2d7f-4137-ab79-f1193b09782e" class="">Overview</h1><p id="ba2b0a94-5518-4cb0-946d-b41c747b4518" class="">When a program is started by the operating system, a fixed block of memory is allocated in system memory for the <em>program stack</em>.</p><p id="2edba830-8374-4c41-b48b-f480bcefc5a7" class="">The program stack is also known as the <em>call stack</em>.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c3f430fe-42c6-4771-9484-cb5e6beeff29"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The size of the call stack is fixed and the size is platform-dependent.</div></figure><h1 id="82b67860-108b-4808-8a7a-f0fa90a3cc55" class="">Call Stack</h1><p id="5e89640f-f45e-423b-911a-767f86e7c521" class="">The portion of the stack allocated for a single function call is called a <em>stack frame</em>.</p><p id="aebb0390-ced8-40cd-a01f-6bd595ac0c8b" class="">The stack behaves like a Last In, First Out (LIFO) queue.</p><p id="b5afa1b0-44c0-4e85-ad93-81e1f2668352" class="">When a function is called, a new frame is <em>pushed</em> onto the stack.</p><p id="c9d50fa7-7609-48d4-b03d-33965e79f2cd" class="">When the function returns, the frame is <em>popped</em> from the stack.</p><p id="28741cc5-8370-409a-acc1-e28544785b3a" class="">The <em>calling convention</em> of a function determine what is pushed on the stack, and in what order.</p><p id="c5ba106b-e226-4170-9711-bcbd2aa915ae" class="">The stack contains:</p><ul id="07861bd6-91c4-4543-ac65-1bea1a420fa0" class="bulleted-list"><li>The return address of the calling function (to resume execution of the program when a function returns).</li></ul><ul id="87e6da75-e35e-49f4-815e-4483fd33feba" class="bulleted-list"><li>The values of certain CPU registers (to restore their values if they are overridden by a function call).</li></ul><ul id="104f3db5-2707-42ce-8523-342442bb3cb8" class="bulleted-list"><li>The values of local variables (some local variables are stored in CPU registers).</li></ul><p id="470d0c30-16b6-4ac8-940e-61f70160e6f9" class="">The current position on the stack is determined by the <em>stack pointer</em>.</p><p id="45d1aa93-2da1-49a6-a4c3-df34e2763971" class="">The direction in which the stack grows depends on the processor architecture.</p><p id="6e5a4cc1-de24-48fd-bd15-925651fdc9a2" class="">In the Intel x86 architecture, the stack grows down.</p><p id="fa66c9e7-94ca-4e88-b82a-6997dd77ddb8" class="">Therefore, when memory is allocated on the stack (push), the stack pointer decreases; and when memory is freed from the stack (pop), the stack pointer increases.</p><h1 id="399efefc-23f3-461a-92b2-58028289689d" class="">Registers</h1><p id="11734017-8679-435e-ae00-eb997e4d725b" class="">The stack frame is managed by two CPU registers: the <em>stack pointer</em> and the <em>base pointer</em>.</p><p id="3b0dd377-a967-43f5-a552-d827c2f6b23f" class="">The base pointer points to the bottom of the stack frame (<strong>BSP</strong> on Intel x86).</p><p id="4811561b-927e-4a2b-8c3a-db97c195b167" class="">The stack pointer points to the top of the stack frame (<strong>ESP</strong> on Intel x86).</p><p id="e57e5ccf-84b9-4c51-b7ef-40225e53e856" class="">When a function is called, we need to save the current position on the stack, to allow the program to resume execution after the function returns.</p><p id="e4fb9541-8a86-4630-a468-56d444b83df5" class="">When a function is about to be called:</p><ul id="c1d873b0-7247-48bc-a75a-9b7450ec2b8b" class="bulleted-list"><li>The base pointer register is pushed onto the stack.</li></ul><ul id="f23da329-3a4b-4fbc-8c62-d50e5e246e02" class="bulleted-list"><li>The stack pointer register is saved into the base pointer register.</li></ul><pre id="77b8318b-03af-49cc-8b02-0706aeaefcb5" class="code"><code>pushl %ebp
+movl %esp %ebp</code></pre><p id="aad72cc0-0abd-4e12-92a6-1e70327e9ceb" class="">When the current function returns:</p><ul id="644707a4-f68b-4f15-9722-599f7d1188fd" class="bulleted-list"><li>The stack pointer register is restored from the base pointer register.</li></ul><ul id="79406767-eff7-4810-aa91-12991c7f68f3" class="bulleted-list"><li>The base pointer register is popped from the stack.</li></ul><ul id="2ae5de39-ff80-4da1-9348-f801338d31c0" class="bulleted-list"><li>The function returns, and the execution resumes in the caller function.</li></ul><pre id="31888720-aa2c-4c39-8044-164e49681c84" class="code"><code>movl %ebp, %esp
+popl %ebp
+ret</code></pre><h1 id="22eacf97-3f17-4af1-8a67-0fad3bd6bedd" class="">Allocation</h1><p id="e7043149-a150-4fae-84e9-914637e24ac6" class="">It is possible for a program to allocate memory on the stack by changing the value of the stack register.</p><p id="91ca7a5e-e312-42ff-b2ce-a5054343dc4b" class="">This is useful for allocating temporary memory efficiently, but the amount of free memory is very limited.</p><h1 id="37d92275-3fb4-4854-9d29-47196cbdbd72" class="">Languages</h1><h2 id="cd326ce8-c84d-4c67-b230-b50f2b418449" class="">C and C++</h2><p id="d35c86fb-16e5-40aa-94d5-feb04e816673" class="">Any type can be allocated on the stack as long as there is enough space.</p><p id="227189bb-6539-43f2-bfd8-8f5dd1772610" class="">Additional memory can be allocated on the stack using the <code>_alloca</code> function.</p><h2 id="57f2abe0-5e88-4422-b3f4-4f3148057154" class="">C#</h2><p id="3f7b37da-7c25-481e-b1ce-5c01572428fd" class="">Only value types can be allocated on the stack.</p><p id="7294cc31-2616-485d-a0be-3c8e3b24e80f" class="">A <code>ref struct</code> can only be allocated on the stack.</p><p id="45497f9a-6ac8-4958-8bc8-f07468ce7e98" class="">A reference type can be allocated on the stack when it is allocated with <code>stackalloc</code>.</p></div></article></body></html>

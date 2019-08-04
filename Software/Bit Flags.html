@@ -1,0 +1,671 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Bit Flags</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b6f54688-b068-4f53-9bf1-1149fd8c4cd9" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🚩</span></div><h1 class="page-title">Bit Flags</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th>Category</th><td><span class="selected-value">Core</span></td></tr></tbody></table></header><div class="page-body"><h1 id="d8e80289-5fa4-4a24-b1a5-052e7b4fb2f4" class="">Overview</h1><p id="60598c5a-6234-46e1-bcf1-fa2166c88947" class="">Flags are values that can be combined using bitwise-operations.</p><p id="0cf93bc6-7882-4152-8fd6-b3f13d8e65af" class="">They are often implemented as enum types.</p><h1 id="668a4e8f-31f4-491b-a55c-9e1dfd8714f4" class="">C</h1><p id="cec5842e-8938-4620-ab72-e50371811b6b" class="">In C, it&#x27;s common to define flags as preprocessor defines.</p><pre id="235c689a-e4ab-438b-88bc-766eb89c7d57" class="code"><code>#define FileModeRead   = 0x1
+#define FileModeWrite  = 0x2
+#define FileModeAppend = 0x4</code></pre><p id="c311a9dc-16df-4aff-9972-be945e7442ed" class="">Or as constant integers.</p><pre id="db4b45ca-c158-48b3-a175-ad9ad057348b" class="code"><code>static const unsigned FileModeRead   = 0x1;
+static const unsigned FileModeWrite  = 0x2;
+static const unsigned FileModeAppend = 0x4;</code></pre><h1 id="38860057-e15d-4a4b-b60d-0ee24b5d2329" class="">C++</h1><h2 id="fdc65ecb-af65-4e1a-98dc-74309faddb93" class="">Enum type</h2><p id="496d07c1-bfa5-4d0c-85dd-fbfb182f2396" class="">In C++, enums are not scoped, and it&#x27;s a best practice to add a prefix to each member.</p><pre id="d2aa4b56-3849-40ac-9a77-6b5407f8305b" class="code"><code>enum PrimitiveType
+{
+    PrimitiveType_Point,
+    PrimitiveType_Line,
+    PrimitiveType_LineStrip,
+    PrimitiveType_Triangle,
+    PrimitiveType_TriangleStrip,
+};
+
+PrimitiveType type = PrimitiveType_Triangle;</code></pre><p id="c6d9ed62-4c92-4f62-b239-9ec41eb3d449" class="">Enum types have an integer underlying type.</p><p id="5fef3735-9409-4cbc-b33a-ccb541339be5" class="">By default, the first constant is set to 0, and the value increases with each constant sequentially.</p><p id="51384ff5-f2ea-4e1a-8c01-6b102a65f023" class="">It&#x27;s also possible to specify the value for each constant instead.</p><pre id="232ab4a5-e0aa-49c9-8c43-8ed2a5e69be2" class="code"><code>enum PrimitiveType
+{
+    PrimitiveType_Point = 0,
+    PrimitiveType_Line = 1,
+    PrimitiveType_LineStrip = 2,
+    PrimitiveType_Triangle = 3,
+    PrimitiveType_TriangleStrip = 4,
+};
+
+PrimitiveType type = PrimitiveType_Triangle;</code></pre><h2 id="ac97ebe3-34f5-4b82-9970-7e17657190cf" class="">Enum class type</h2><p id="5a25244f-5f5f-4fc4-bfbf-c261f3019475" class="">Since C++11, <code>enum class</code> has been introduced and provide a scope for enum values.</p><pre id="65446980-11eb-4a24-aa66-3eca854a5be8" class="code"><code>enum class PrimitiveType
+{
+    Point,
+    Line,
+    LineStrip,
+    Triangle,
+    TriangleStrip,
+};
+
+PrimitiveType type = PrimitiveType::Triangle;</code></pre><h2 id="d6f8a053-6a8a-4084-8f89-92eeaf27e03b" class="">Flags with enum</h2><p id="457153c4-7b17-471c-8293-a5cef050d4c8" class="">Enum types can be used as flags by specifying power-of-two values.</p><pre id="e76b2180-4c78-4a83-9749-ef990198192f" class="code"><code>enum FileMode
+{
+    FileMode_Read   = 1,
+    FileMode_Write  = 2,
+    FileMode_Append = 4,
+};</code></pre><p id="6f615152-839a-4a2a-9342-e927ea7a1277" class="">The values can be specied sequentially using the bitwise-left operator <code>&lt;&lt;</code>.</p><pre id="ece056a1-e6fb-4250-aed6-5a7631aa9051" class="code"><code>enum class FileMode
+{
+    FileMode_Read   = (1 &lt;&lt; 0),
+    FileMode_Write  = (1 &lt;&lt; 1),
+    FileMode_Append = (1 &lt;&lt; 2),
+};</code></pre><p id="6c458409-9e5a-4769-b8be-60201fcf80a5" class="">The values can be combined using a <em>bitwise-or</em> operation.</p><pre id="47354d68-369f-4f30-bb38-d1d773761f2b" class="code"><code>int mode = (FileMode_Read | FileMode_Write);</code></pre><p id="3baf73a5-cfbf-4af8-946f-184bd68329c7" class="">The result has to be stored into an <code>int</code> value, but we can do a <code>static_cast</code> to the enum type.</p><pre id="b09f0c98-22e7-4e00-b783-15078d889a68" class="code"><code>FileMode mode = static_cast&lt;FileMode&gt;(FileMode_Read | FileMode_Write);</code></pre><p id="3c26a367-a516-4900-abe5-ee6137825b81" class="">We can check if a flag contains a specific value using a <em>bitwise-and</em> operation.</p><pre id="ad65bdd6-5769-43d7-ac49-dfd481b2b05d" class="code"><code>bool canRead = ((mode &amp; FileMode_Read) != 0);</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="410a4851-3fa7-4ba8-9c7c-287c76e2b4f3"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">One major problem with the enum type is that it is automatically promoted into an integer value and it&#x27;s easy to create invalid values by combining different enum types together.</div></figure><pre id="650a461b-78dd-445e-8b0b-be55c91219ab" class="code"><code>int mode = FileMode_Read | PrimitiveType_TriangleStrip;</code></pre><p id="7faedd7a-331c-43b4-ac59-b7be358427a2" class="">In this case, <code>mode</code> will have an integer value of 4, which is not the expected result.</p><p id="7aff49d7-188f-4411-92d9-fb9cddb6c336" class="">When the result is cast to <code>FileMode</code>, it will have an invalid value that can create an undefined behavior.</p><pre id="d1664044-e322-429b-9be0-eee1902f7b58" class="code"><code>FileMode mode = static_cast&lt;FileMode&gt;(FileMode_Read | PrimitiveType_TriangleStrip);</code></pre><h2 id="12cb13a9-292d-4097-b142-928ca6b7e5f2" class="">Flags with enum class</h2><p id="886e29cf-a84b-4c41-b077-9acb5f68aea9" class="">We can define flags using the enum class type to increase the type safety.</p><pre id="143bf948-8a18-48ab-9923-41919db79566" class="code"><code>enum class FileMode
+{
+  Read   = (1 &lt;&lt; 0),
+  Write  = (1 &lt;&lt; 1),
+  Append = (1 &lt;&lt; 2),
+};</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3496d2de-f242-4d4d-af25-76807d5946e2"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Unfortunately, bitwise operations does not compile.</div></figure><pre id="2a63fca8-ad62-4822-9755-eac0ef4e4b6a" class="code"><code>FileMode mode = (FileMode::Read | FileMode::Write);
+bool canRead = ((mode &amp; FileMode::Read) != 0);
+</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7811067d-5a82-4b9d-8282-d14e18d88900"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">To be able to compile we need to perform many <em>static casts</em>.</div></figure><pre id="cc581722-30de-441f-9af3-5de14deab550" class="code"><code>FileMode mode = (static_cast&lt;FileMode&gt;(static_cast&lt;int&gt;(FileMode::Read) | static_cast&lt;int&gt;(FileMode::Write)));
+bool canRead = ((static_cast&lt;int&gt;(mode) &amp; static_cast&lt;int&gt;(FileMode::Read)) != 0);
+</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="334db244-2b05-47f3-9a1d-4e7a267da9bc"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Furthermore, it doesn&#x27;t solve the mismatch issue as we need to cast to <code>int</code> to perform the bitwise operations.</div></figure><pre id="8a5d8cc9-4a88-4686-9499-1279d98912cc" class="code"><code>FileMode mode = static_cast&lt;FileMode&gt;(static_cast&lt;int&gt;(FileMode::Read) | static_cast&lt;int&gt;(PrimitiveType::TriangleStrip));</code></pre><p id="47c60968-2b9d-4b7c-a56d-65d79e38bd16" class="">It can still produce invalid values.</p><h2 id="46dc2c54-2a29-447b-a0f1-8b5886f2eabc" class="">Flags class</h2><p id="0ec6d1f6-7c7f-4f4f-b640-9c8f1cd125f1" class="">We can define custom operators for each bitwise operation.</p><p id="1ca41029-4139-4e40-a0ff-2b522621f7aa" class="">We use <code>std::underlying_type</code> instead of a hardcoded integer type.</p><h3 id="1296e974-4cff-4e9f-ac77-dd6feaad07dd" class="">Bitwise operations</h3><pre id="27534876-c2ec-4d7f-a940-92791eaf5164" class="code"><code>Flags operator &amp;(Flags lhs, Flags rhs)  
+{
+    return static_cast&lt;Flags&gt; (
+        static_cast&lt;std::underlying_type&lt;Flags&gt;::type&gt;(lhs) &amp;
+        static_cast&lt;std::underlying_type&lt;Flags&gt;::type&gt;(rhs)
+    );
+}
+
+Flags operator |(Flags lhs, Flags rhs)  
+{
+    return static_cast&lt;Flags&gt; (
+        static_cast&lt;std::underlying_type&lt;Flags&gt;::type&gt;(lhs) |
+        static_cast&lt;std::underlying_type&lt;Flags&gt;::type&gt;(rhs)
+    );
+}
+
+Flags operator ^(Flags lhs, Flags rhs)  
+{
+    return static_cast&lt;Flags&gt; (
+        static_cast&lt;std::underlying_type&lt;Flags&gt;::type&gt;(lhs) ^
+        static_cast&lt;std::underlying_type&lt;Flags&gt;::type&gt;(rhs)
+    );
+}
+
+Flags operator ~(Flags value)  
+{
+    return static_cast&lt;Flags&gt; (
+        ~static_cast&lt;std::underlying_type&lt;Flags&gt;::type&gt;(value)
+    );
+}</code></pre><h3 id="b31aeb8d-86da-48c0-8c56-62f7f9d13615" class="">Bitwise assignments</h3><pre id="fc3b4ec9-7f1e-405a-9d7d-7093377ee080" class="code"><code>Flags&amp; operator &amp;=(Flags&amp; lhs, Flags rhs)  
+{
+    lhs = static_cast&lt;Flags&gt; (
+        static_cast&lt;std::underlying_type&lt;Flags&gt;::type&gt;(lhs) &amp;
+        static_cast&lt;std::underlying_type&lt;Flags&gt;::type&gt;(rhs)
+    );
+
+    return lhs;
+}
+
+Flags&amp; operator |=(Flags&amp; lhs, Flags rhs)  
+{
+    lhs = static_cast&lt;Flags&gt; (
+        static_cast&lt;std::underlying_type&lt;Flags&gt;::type&gt;(lhs) |
+        static_cast&lt;std::underlying_type&lt;Flags&gt;::type&gt;(rhs)
+    );
+
+    return lhs;}
+
+Flags&amp; operator ^=(Flags&amp; lhs, Flags rhs)  
+{
+    lhs = static_cast&lt;Flags&gt; (
+        static_cast&lt;std::underlying_type&lt;Flags&gt;::type&gt;(lhs) ^
+        static_cast&lt;std::underlying_type&lt;Flags&gt;::type&gt;(rhs)
+    );
+
+    return lhs;
+}</code></pre></div></article></body></html>

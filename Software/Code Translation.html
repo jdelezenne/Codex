@@ -1,0 +1,573 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Code Translation</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="cb66ee3b-b4be-4240-bbff-99ddb5057a54" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🔤</span></div><h1 class="page-title">Code Translation</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th>Category</th><td><span class="selected-value">System</span></td></tr></tbody></table></header><div class="page-body"><h1 id="36da3f08-e349-4cbb-a0c6-763409eaad70" class="">Overview</h1><p id="d4400c30-a8a6-4c91-8986-fb8be365fc58" class="">Computers can only execute <em>machine code instructions</em>.</p><p id="98120947-f240-4f7a-802b-7d26e0bc33be" class="">Machine code instructions are part of an <em>instruction set</em>, specific to a type of processor.</p><p id="6a8e249f-45b5-4576-ae5b-3cc1bc77f9f5" class="">Programs are written in <em>source code</em> using a low-level or high-level language, and stored as text files.</p><p id="2c6c3378-58f9-47ba-a6eb-def60250d6fd" class="">The source code is translated into <em>machine code</em>.</p><p id="22657da5-7f2d-43cb-a45c-e6e91df90e14" class="">The machine code is stored into an <em>executable</em> file that is run by the operating system and executed by the computer.</p><p id="862f14fa-561b-4ca4-abf4-906edd698fef" class="">The machine code can also be stored into <em>library</em> files that are loaded by the operating system to provide shared functionality across multiple programs.</p><p id="e58ca19e-eeb3-48f4-91f7-4b24051a6a61" class="">The source code of some high-level languages is translated into <em>bytecode</em> that is interpreted by a <em>virtual machine</em>, which in turn generates the machine code that is executed by the computer.</p><h1 id="1d53288c-71fb-45de-987f-d2aafb02f0f7" class="">Translation</h1><p id="f874f0f8-d100-4e53-9bbb-e6580cbd11b3" class="">The translation of source code to machine code is made of several processes.</p><h2 id="14e36232-b4d5-422a-b1df-38a5e0e46a03" class="">Compilation</h2><p id="844b5d15-1852-49ad-bd41-4b328cbbb3a1" class="">The <em>compilation</em> is performed by the <em>compiler</em>.</p><p id="c87111f1-cb6c-4fd2-baae-5d066a42ee8b" class="">The <em>compiler</em> translates source code from a high-level language to a low-level language.</p><p id="ea87be44-e049-4edf-9b1e-7b7472de5e6d" class="">Assembly languages are compiled into machine code.</p><p id="f49e5633-06cc-4c94-95cc-3630a63f60c3" class="">Native languages like C and C++ are compiled into <em>object code</em>.</p><p id="7acf198c-eff8-4b11-9a44-88bda9fd37fa" class="">Managed languages like C# and Java are compiled into <em>bytecode</em>.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="cda7f256-3b8c-4385-a02b-2d8c649420f6"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Bytecode is also known as intermediate language (IL).</div></figure><p id="2b41cc8b-051b-4fff-bb99-c7a8eac6dd73" class="">The compilation itself is made of several stages: the front end, middle end, and back end.</p><p id="28433318-97c2-426b-9200-5558db16c070" class="">The front end performs the translation of the source code into an intermediate representation in several steps.</p><h3 id="ea662a09-7e94-4c95-8c02-77263ee4514d" class="">Preprocessing</h3><p id="b50cdca4-618e-456f-9d27-122f61ef1739" class="">The <em>preprocessing</em> is performed by the p<em>reprocessor</em>.</p><p id="26825af2-e680-42ae-ae9b-0f8b3c93239d" class="">The <em>preprocessor</em> performs textual substitutions and macro expansions before the compilation.</p><h3 id="7bdc3405-92ac-4616-8a78-2125bff49a17" class="">Tokenization</h3><p id="86eb421e-23e7-4ad3-80ee-cce97ce757c2" class="">The <em>tokenization</em> (or <em>lexical analysis</em>) is performed by the <em>lexer</em>.</p><p id="13c8b6f4-0ed1-4f0e-9a6e-48f15a104f79" class="">The <em>tokenization</em> is the process of converting a sequence of characters into a sequence of <em>tokens</em>.</p><p id="52915793-68c7-4f10-be5d-26b20f8619ca" class="">Tokens are strings with an identified meaning.</p><h3 id="b3468148-a301-4037-8301-d1717e1d45cd" class="">Parsing</h3><p id="daae5f4f-ebb2-49d5-83dc-545f00d8f83f" class="">The <em>parsing</em> (or <em>syntax analysis</em>) is performed by the <em>parser</em>.</p><p id="7b3f1a92-d00c-4e16-9889-ba2a56112ee9" class="">The <em>parsing</em> is the process of identifying the syntactic structure of the program from a sequence of tokens.</p><p id="5903c221-640c-4f62-80ea-09bfc8628b09" class="">The parser builds an <em>abstract syntax tree</em> (AST).</p><h2 id="d3ef5eda-0964-4ef1-a11c-f2f3c09f3bfb" class="">Assembly</h2><p id="5c7135d6-25ad-4cc9-b998-9dfa2344bc4b" class="">The <em>assembly</em> is performed by the <em>assembler</em>.</p><p id="a05c6284-5f38-4a16-a43e-dcfa662ef981" class="">The <em>assembler</em> translates object code to machine code.</p><h2 id="1f7b3d73-6d2d-4c2e-86ce-b662940e4524" class="">Linking</h2><p id="fd84617f-a44c-48c7-b388-c4422bceba5e" class="">The <em>linking</em> is performed by the <em>linker</em>.</p><p id="6d53a45a-46c7-4411-9d81-53550b072e6c" class="">The <em>linker</em> combines the machine code from multiple object files into a single executable file.</p><h1 id="cce25399-0ead-49c9-951f-bde49a7c973d" class="">Toolsets</h1><p id="6a515773-fe68-4972-b01c-645eb7d8a90f" class="">Clang and LLVM provide the compilation of C languages to machine code.</p><h2 id="75779ca1-c9b2-41b9-b366-a311f570f679" class="">Clang</h2><p id="873b6a5b-a761-47e1-bafa-f541250faffa" class=""><a href="https://clang.llvm.org/">Clang</a> handles the front end stage of the compilation of a C language source code to intermediate representation (IR).</p><h2 id="42ce7780-8cf6-4d6c-a6f4-909153a72037" class="">LLVM</h2><p id="9882106c-5b81-4549-a2b6-83927561896e" class=""><a href="https://llvm.org/">LLVM</a> handles the middle end and back end stages of the compilation of an intermediate representation to machine code.</p><p id="03dec37b-210f-4175-a06f-47052942a603" class="">The LLVM Core libraries provides a modern optimizer and supports code generation for many CPUs.</p><h1 id="596fb671-c24b-49ec-b2ee-0541bece0ed8" class="">Example</h1><p id="a912773a-9527-413c-9a17-73e4463fbf1c" class="">Let&#x27;s review an example of the translation of a simple C program.</p><pre id="07fe5d49-8f71-4d0f-9ea7-1c01f3eacc77" class="code"><code>void main()
+{
+    puts(&quot;Hello World!&quot;);
+}</code></pre><h2 id="be2a7394-f9e5-44a4-a9b5-444760efb5bc" class="">Preprocessing</h2><h3 id="d0220286-3ee2-4583-ba63-e1294eec1a08" class="">Include directive</h3><p id="9b992310-9b0d-4606-a4e4-6b3f80f1bc48" class="">Adds the contents of the file named <code>stdio.h</code> to the source code.</p><pre id="835284f4-b8e5-426b-ad55-d223f1eca69f" class="code"><code>#include &lt;stdio.h&gt;</code></pre><h3 id="c7da2944-927b-469d-9d38-dacbf82c16a7" class="">Macro directive</h3><p id="b1778126-24f2-460f-9e47-4c2b7f8d00cf" class="">Substitutes the token string <code>WIDTH</code> with the as the integer constant <code>42</code>.</p><pre id="dc42c4e2-0bad-4e16-8c01-78ec1005c764" class="code"><code>#define WIDTH    42</code></pre><h3 id="2b1f122c-9a71-4d6a-9624-6064b30cb860" class="">Conditional directives</h3><p id="d020daf4-97f1-4dd5-ba86-c900112b6229" class="">Controls the compilation of portions of a source file depending on the value of the <code>DEBUG</code> symbol.
+If the <code>DEBUG</code> preprocessor symbol is defined, the <code>&quot;Debug&quot;</code> string is written; otherwise, the <code>&quot;Release&quot;</code> string is written.</p><pre id="46cf87a0-fc89-413d-8a0d-f4a312c16906" class="code"><code>#if defined(DEBUG)
+puts(&quot;Debug&quot;);
+#else
+puts(&quot;Release&quot;);
+#endif</code></pre><h2 id="726484eb-2cd5-4b22-8310-902f9245d549" class="">Tokenization</h2><p id="83210dd9-c312-459e-bc20-f3bd4b6bc41f" class="">The program is converted into the following tokens:</p><ul id="4822a529-f4ce-43f1-add9-7a8a77d595f3" class="bulleted-list"><li>void</li></ul><ul id="a1991062-c1a1-49f5-a228-9b665d60718c" class="bulleted-list"><li>main</li></ul><ul id="f0693d46-0e1f-4951-b5b3-68e999c69a05" class="bulleted-list"><li>(</li></ul><ul id="e1034225-3417-4a3b-9828-bece5950e787" class="bulleted-list"><li>)</li></ul><ul id="afd62b61-f78c-4ee4-83c6-f674f107bf6a" class="bulleted-list"><li>{</li></ul><ul id="271c73aa-2e89-4367-bcbe-44520ab4e135" class="bulleted-list"><li>puts</li></ul><ul id="a84e5b78-3b6f-4bc8-8a62-698ffa75fdc5" class="bulleted-list"><li>(</li></ul><ul id="6d33fde8-e5c2-4582-a96d-241f502eba17" class="bulleted-list"><li>&quot;Hello World!&quot;</li></ul><ul id="3e189b6f-ab05-4215-aea1-4df9fb4ac09f" class="bulleted-list"><li>)</li></ul><ul id="c51bf5ed-55eb-41a7-9749-12d8d6132a27" class="bulleted-list"><li>;</li></ul><ul id="1f1a70e5-ac3b-4b26-96f3-79dfe3bb11f4" class="bulleted-list"><li>}</li></ul></div></article></body></html>
