@@ -30,12 +30,12 @@ The advantage of building a wiki instead of a blog is that the information can b
 
 A retrospective on the different versions of DirectX.
 
-[DirectX](History/DirectX.html){:target="_blank"}
+☢️[DirectX](History/DirectX.html){:target="_blank"}
 
 
 A review of the different implementations of SIMD.
 
-[SIMD](History/SIMD.html){:target="_blank"}
+🔢[SIMD](History/SIMD.html){:target="_blank"}
 
 
 # 💻 Hardware
@@ -52,7 +52,7 @@ A review of the CPU's cache memory, and best practices.
 
 To debug programs compiled for an Intel x86 architecture, some fundamental knowledge of the processor and its instructions is necessary.
 
-[Intel x86](Hardware/Intel x86.html){:target="_blank"}
+⚙️[Intel x86](Hardware/Intel x86.html){:target="_blank"}
 
 # 🖥 Software
 
@@ -93,7 +93,7 @@ There are different methods to handle errors in C++.
 
 C++ and best practices.
 
-🌀[C++ Best Practices](Software/CPP Best Practices.html){:target="_blank"}
+👑[C++ Best Practices](Software/CPP Best Practices.html){:target="_blank"}
 
 ## C# {#csharp}
 
@@ -101,7 +101,7 @@ Fundamental information on C# and best practices.
 
 🌀[C#](Software/CS.html){:target="_blank"}
 
-🌀[C# Best Practices](Software/CS Best Practices.html){:target="_blank"}
+👑[C# Best Practices](Software/CS Best Practices.html){:target="_blank"}
 
 
 Information on the internals of .NET.
@@ -143,7 +143,7 @@ A review if the different kind of memory, and the best practices for writing eff
 
 A review of different allocation strategies and their use in a game engine.
 
-⛓[Memory Allocators](Core/Memory Allocators.html){:target="_blank"}
+⛓[Allocators](Core/Allocators.html){:target="_blank"}
 
 
 An overview of the fundamental container types and their usage.
@@ -174,12 +174,12 @@ An overview of the recommended project configurations for a game engine.
 
 Strategies to provide a platform abstraction for the low-level functionality of the engine.
 
-[Cross-Platform](Runtime/Cross Platform.html){:target="_blank"}
+💻[Cross-Platform](Runtime/Cross Platform.html){:target="_blank"}
 
 
 Overview of platform-independant and platform-spefic features for the low-level functionality of the engine.
 
-[Platforms](Runtime/Platforms.html){:target="_blank"}
+🖥[Platforms](Runtime/Platforms.html){:target="_blank"}
 
 
 Best practices on implementing loading and saving in a game engine.
@@ -196,9 +196,9 @@ A review of popular version control systems, and how they can be integrated into
 
 Overview and tutorials on the Windows platforms and the APIs that are required in a game engine.
 
-[Windows](https://www.notion.so/juliendelezenne/Windows-850f22698c5d46079f5b42c2ef1298f1){:target="_blank"}
+🖥[Windows](https://www.notion.so/juliendelezenne/Windows-850f22698c5d46079f5b42c2ef1298f1){:target="_blank"}
 
 
 Tutorials on HLSL.
 
-[HLSL](https://www.notion.so/juliendelezenne/HLSL-8cf24e8312464ccd90dd10a21b07d200){:target="_blank"}
+✨[HLSL](https://www.notion.so/juliendelezenne/HLSL-8cf24e8312464ccd90dd10a21b07d200){:target="_blank"}
