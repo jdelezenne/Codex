@@ -1,0 +1,569 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Intel x86</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2401eae3-0863-43d5-a938-1998ebe9419d" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">⚙</span></div><h1 class="page-title">Intel x86</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th>Category</th><td><span class="selected-value">System</span></td></tr></tbody></table></header><div class="page-body"><h1 id="b369da95-8906-4b91-b305-2f52dcb641ce" class="">Memory Segmentation</h1><h2 id="48eb1557-2674-4a0e-b4c0-f19987a47f5e" class="">History</h2><p id="dc30eaa5-9af8-458d-93dd-e50790f2b9b7" class="">The Intel 8086, 8088, and 80186 had a 20-bit address bus.
+Therefore, they had a 20-bit address space that limited the addressable memory to 1 MB.
+They used 16-bit register that limited address offsets to 64 KB.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d6a86e3a-f7e0-4fa1-be04-002a0fde2419"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">640 kilobytes were reserved for the operating system and the applications.
+The remaining 384 kilobytes were reserved for the BIOS.</div></figure><p id="a0768769-37c6-4605-8566-737d6f5ef195" class="">The Intel 8086 introduced <em>real mode</em> which use memory segmentation as a way to allow programs to address more than 64 KB of memory.</p><p id="4b5519b4-e2ec-4309-b7c0-539664237488" class="">The Intel 80286 introduced <em>protected mode</em> with support for virtual memory and memory protection.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5963f4b7-9ffd-4e17-a567-206241e30cb3"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The processor needed to be reset to switch between real mode and protected mode.</div></figure><p id="27268980-ed8b-41a3-a98c-f4d61a9ce35d" class="">The Intel 80386 improved the protected mode and added a paging unit.
+It had a 32-bit address space and 32-bit registers that increased addressable memory to 4 GB.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30c993cd-476b-405e-bcdf-a83736d53589"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The processor could switch between real mode and protected mode without resetting.</div></figure><p id="fc396bc3-c933-42fe-8d5c-cbd53c5a9b17" class="">Processors that supports protected mode always start in real mode, in order to maintain backward compatibility with earlier processors.</p><h2 id="fc2f13b9-9eed-42c0-9569-33c4241443da" class="">Overview</h2><p id="6c83c52c-7d8b-4bfd-a994-c552288dbbc8" class="">The CPU uses 16-bit segment registers to determine the actual memory address.</p><p id="8740c4e1-8fab-4fb4-a8b6-800277e93858" class="">In real mode, the segment registers CS, DS, SS, and ES point to:</p><ul id="c86a1919-7c70-464e-b9f2-965f63b84118" class="bulleted-list"><li>the currently used program code segment (CS)</li></ul><ul id="648e48af-4d2f-4c07-a779-90b870f6ccff" class="bulleted-list"><li>the current data segment (DS)</li></ul><ul id="ec5edc93-79cc-4c49-9f33-cb330beca325" class="bulleted-list"><li>the current stack segment (SS)</li></ul><ul id="f7dd9c7b-35ab-4d89-909e-12833195135b" class="bulleted-list"><li>an extra segment determined by the programmer (ES)</li></ul><p id="dd660d51-7c48-40c7-9a42-b5a5c332138b" class="">The Intel 80386 added two segment registers: FS and GS.</p><h2 id="967e3f99-8327-4d85-bb41-657851b94491" class="">Real mode</h2><p id="9dd647d0-418a-4b45-9b8f-d059ee95f684" class="">In real address mode, the processor uses a 20-bit segmented memory address space, that allows 1 MB of addressable memory.</p><p id="049866c6-10f6-4150-9620-9cf5f8a2a97a" class="">The 16-bit segments is shifted 4 bits left and added to a 16-bit address offset to compute a 20-bit physical address.</p><p id="fd7e06f0-08e4-460f-8ccd-402e5e1a20b4" class="">The Intel 80286 had 24-bit address bus and computed 24-bit physical addresses.</p><p id="d58890eb-0b2f-4e3b-ba0e-af150a42a5f8" class="">Many segment:offset pairs produce the same physical address.</p><p id="c8456adf-71e6-444c-8eea-9a0b665f9a35" class="">The segment address is a linear address, which is the same as physical address.</p><h2 id="9df41482-4d62-40a3-ab37-ea257c3690aa" class="">Protected mode</h2><h3 id="b791f403-f6c5-4dc7-902f-e856ebdeeb7d" class="">286</h3><p id="8ca87b82-23c2-4c64-b845-eb3c217524ef" class="">The protected mode uses 24-bit addressing and extends the address space to 16 MB.</p><p id="cfc8d4b2-b6a6-4c36-845d-d10cb228eeaf" class="">The 16-bit segment registers contain an index into a table of segment descriptors containing 24-bit base addresses to which the offset is added.</p><h3 id="bac7eb14-5777-4912-819e-a5831d3782af" class="">386</h3><p id="e0a3d3a1-63bf-4973-bd4e-2953aec09977" class="">The protected mode uses 32-bit addressing and extends the address space to 4 GB.</p><p id="584748b2-15b4-4d63-a513-cf9fdc098326" class="">The 32-bit segment registers can access the full address space without using address offsets.</p><h2 id="c2cb16f4-60a5-4cee-aefd-75bc71deabba" class="">Long mode</h2><p id="b2e14b6b-4b2e-4eb9-a7cb-c46bcfada5e7" class="">In the x86-64 architecture, long mode provides access to 64-bit instructions and registers.</p><p id="37aca300-a7b7-4169-ac57-e919d86d5abf" class="">To reduce the complexity and cost of address translation, 64-bit processors use a 48-bit address space that limits the addressable memory to 256 TB.</p><p id="09b9ebb2-1bcf-4b87-862f-23b0ca40d63e" class="">32-bit and 16-bit protected mode programs are executed in a sub-mode called compatibility mode (or legacy mode).</p><p id="423ff996-a1d0-4eaf-a9e3-73947067ae60" class="">Real mode programs cannot be executed.</p><h1 id="2faf2c4d-3eed-4420-b5a5-697f82abca5a" class="">Assemblers</h1><h2 id="34805c0c-3fc8-40ea-b3c1-3c021ff471a5" class="">Borland TASM</h2><p id="2a1f6dcf-a7fa-4106-95e7-51904ed64fe3" class="">Borland Turbo Assembler (TASM) was released on 1989.</p><ul id="d1ae528d-3103-4c7c-bc44-06c711c0db3b" class="bulleted-list"><li>Produces 16-bit and 32-bit code for DOS and Windows.</li></ul><ul id="be0ccd74-992f-4fcb-9f7c-92b705d46354" class="bulleted-list"><li>The last version is Turbo Assembler 5.4 and was released on 1996.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5548d787-c0ce-49c8-8816-2b7f51b01a7a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">First assembler to allow 32-bit segments.</div></figure><h2 id="9e265615-7fb3-4c3f-9208-4ac10d5abc6e" class="">Microsoft MA</h2><p id="34b06a56-6ef0-4086-8ea7-28895e2943e2" class="">Microsoft Macro Assembler (MASM) was released on 1981.</p><ul id="6c4dafe7-59cb-4c0c-b2bb-bd9d9c8d9267" class="bulleted-list"><li>It supports Windows and 32-bit code from version 6.11 which was released on 1993.</li></ul><ul id="86506cd0-fca3-421a-9932-09e46b7d82c9" class="bulleted-list"><li>It was included with Visual Studio from version 7.</li></ul><ul id="2fd335d7-3f82-4d43-ade7-ec762615427e" class="bulleted-list"><li>Since version 8, there are two versions:<ul id="bff028f8-0833-4b6e-967a-70614029d5e4" class="bulleted-list"><li>ML for 16-bit and 32-bit code</li></ul><ul id="e9812406-ea7b-4482-aad7-1566a4ed7ff0" class="bulleted-list"><li>ML64 for 64-bit code</li></ul></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="bd155a4b-46a2-4af8-be85-a6d7a701f67f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Only produces code for DOS and Windows.</div></figure><h1 id="90867405-0ccb-41bf-b9a2-c0283d3f924f" class="">Registers</h1><h2 id="38053cbe-bc98-4f82-b32d-ffa28481c537" class="">16-bit Address Registers</h2><ul id="b28a7084-d2b1-434e-ac25-6a207e744ff4" class="bulleted-list"><li><code>AX</code></li></ul><ul id="afc81423-3140-4bd4-9a23-9e390faec71a" class="bulleted-list"><li><code>BX</code></li></ul><ul id="9d8f4b97-e938-46a8-b898-475da70d9cfc" class="bulleted-list"><li><code>CD</code></li></ul><ul id="f7bc300b-7d26-4b7f-96ca-b49060f34298" class="bulleted-list"><li><code>DX</code></li></ul><ul id="a3d06690-82e8-4a69-9e21-98bb9d22c1c8" class="bulleted-list"><li><code>SI</code></li></ul><ul id="381be033-c5bc-4e11-921f-ad0f1e600593" class="bulleted-list"><li><code>DI</code></li></ul><ul id="1be2de41-f518-40f2-b2e4-360d3e6b4fb1" class="bulleted-list"><li><code>BP</code></li></ul><ul id="8178eb4e-85ea-4c5f-9bed-96d86bbd1b95" class="bulleted-list"><li><code>SP</code></li></ul><ul id="d13ea20d-1d54-4781-946a-9db8b20a80e0" class="bulleted-list"><li><code>IP</code></li></ul><ul id="c431d2f0-565c-4e4c-82fc-de6b72295c89" class="bulleted-list"><li>Status</li></ul><h3 id="2bfa56e7-e475-47fa-b435-025878895e27" class="">Instruction Pointer (IP)</h3><p id="08d9f2e5-205e-4d83-923c-7b4d6f949ef0" class=""><code>IP</code> is the instruction pointer (or program counter).</p><p id="a74f0fba-79ff-4a5a-b1c8-bd18a0c882ab" class="">It contains the address of the next instruction to be executed.</p><p id="e8abb385-5543-4078-9bfc-26c846de953c" class="">It is incremented after fetching an instruction.</p><h3 id="9530f606-4250-4e19-b7b8-b4fa2926f09e" class="">Stack Pointer (SP)</h3><p id="4f1d8404-ab9d-4c6b-a612-5ccb2c01f1aa" class=""><code>SP</code> is the stack pointer.</p><p id="106ee087-8095-4e82-92ef-d5ba820c65d5" class="">It is used to access the stack segment.</p><p id="2909f294-dce8-4438-9986-678060af76fb" class="">It contains the top address of the stack.</p><h3 id="48c3192f-1dbe-4fcc-9b9a-9c33f3f36617" class="">Base Pointer (BP)</h3><p id="185581a1-b335-419d-ba65-fac9c4189c74" class=""><code>BP</code> is the base pointer.</p><p id="f0baa258-fa82-4485-8401-0a66987af6d7" class="">It is used to access the stack segment.</p><p id="f3bb23f7-14b0-4027-8ac2-8309c2e17cbe" class="">It contains the base address of the stack.</p><h3 id="67c928e9-cb70-4ecb-b239-48788c9f15c5" class="">Source Index (SI)</h3><p id="63347631-99c7-4b7e-b5f4-4d008db37b17" class=""><code>SI</code> is the source index.</p><p id="124aec0e-233b-476a-bb96-3661493c03bc" class="">It is used to access the data segment.</p><h3 id="e88da523-78c7-40e2-9a0e-c4939f7eafca" class="">Destination Index (DI)</h3><p id="77835bad-6788-430c-b68f-a519e7a343a1" class=""><code>DI</code> is the destination index.</p><p id="08e870fd-5370-4f92-be33-b1750014ae3a" class="">It is used to access the data segment.</p><h3 id="5165e856-8a56-454f-b16a-5a0b9a6c9188" class="">Accumulator Register(AX)</h3><p id="5f7d764c-1550-4a89-b4ab-d172e825b105" class=""><code>AX</code> is the accumulator register.</p><p id="1d4705c0-6e5d-4aba-afde-c70778389bbb" class="">It is used in arithmetic, logic, and data transfer operations.</p><h3 id="c830818a-eedc-4955-90d4-f3108681626a" class="">Base Register(BX)</h3><p id="54975e00-b31d-4795-9767-e6fddc14f8e1" class=""><code>BX</code> is the base Register.</p><p id="f64caaf0-aff0-4c32-a73d-6284bacaba83" class="">It contains the address of the base storage location from where the data were stored continuously.</p><h3 id="e5829553-820c-4171-bb3f-61d783f41c0f" class="">Count Register(CX)</h3><p id="062e0419-a997-4d24-99f6-3a5cb12f8e18" class=""><code>CX</code> is the count register.</p><p id="9afd3669-4815-4613-b04f-d55c087e9c03" class="">It is used as a loop counter.</p><h3 id="de2acc9c-29c9-4f84-9eac-a932f4c5a4e9" class="">Data Register(DX)</h3><p id="e769e4d6-7871-4586-a017-a86d56395966" class=""><code>DX</code> is the data register.</p><p id="a553a620-8ee4-447b-b711-7da231155971" class="">It is used in I/O operations; and in division and multiplication operations.</p><h3 id="850abb16-70b8-4e05-b604-a92ec876f76c" class="">Status</h3><p id="7f56693b-b041-4c9a-98c1-af575fdd12c9" class="">The flags register is a set of 16 bits that are updated depending on the result of an operation.</p><h2 id="5e629035-613f-480b-912b-eda0286df81d" class="">16-bit Segment Registers</h2><ul id="18b520a0-922f-449e-82d2-1ebeb49e86f4" class="bulleted-list"><li><code>CS</code></li></ul><ul id="8cf691f0-d960-4778-8518-b24070ab74aa" class="bulleted-list"><li><code>DS</code></li></ul><ul id="80aca56d-01e0-4153-b8c4-4e2cdf89f05b" class="bulleted-list"><li><code>SS</code></li></ul><ul id="866a6c72-744d-48a4-92de-1febe0f426fb" class="bulleted-list"><li><code>ES</code></li></ul><ul id="6df0df7c-b4a9-460d-82e4-092e5f92063d" class="bulleted-list"><li><code>FS</code></li></ul><h3 id="4374c1eb-0392-4847-8bbb-a1fbd4c2f3cd" class="">Code Segment(CS)</h3><p id="28309ad6-44f0-402d-9c10-0d318a3eedd0" class=""><code>CS</code> is the code segment register.</p><p id="c8592cb3-d344-4a0c-8c34-325477ba7ffc" class="">It contains the address of the code segment.</p><p id="a8007024-5a1f-4ea7-ac73-6b596a7a0632" class="">The code segment contains the instructions that are to be executed.</p><h3 id="cf3193ea-0834-491d-8295-cbb776b1fc5f" class="">Data Segment(DS)</h3><p id="c738eaf3-2c5d-4bae-812e-eaf33ebb8b8c" class=""><code>DS</code> is the data segment register.</p><p id="1bfe1259-c926-4ae7-b2a9-e1e0bf8cca1c" class="">It contains the address of the data segment.</p><p id="66cf3c97-17c8-4c55-a755-06ca06f83d27" class="">The data segment contains static variables.</p><h3 id="19927352-602e-42de-92f7-b3d3144dad1a" class="">Stack Segment(SS)</h3><p id="c427a1ae-b13a-445e-ac09-88e284bd4d5f" class=""><code>SS</code> is the stack segment register.</p><p id="ee02114f-fe1b-41c5-be66-ddc2f4ec30dd" class="">It contains the address of the stack segment.</p><p id="4f99eb03-afd7-4b52-bc26-34c28f33fa73" class="">The stack segment contains the address of subroutines and procedures from the callstack.</p><h3 id="5baa4c9b-1982-421a-b5c6-3ce4e6848610" class="">Extra Segment(ES, FS, GS)</h3><p id="fe01e2e2-3e7a-42e3-9897-5ecb542b5180" class=""><code>ES</code>, <code>FS</code>, and <code>GS</code> are extra segments used to access the code segment and data segment.</p><h2 id="2d7b5d7d-ad22-45d5-80b7-274d91d0e696" class=""><strong>32-bit Registers</strong></h2><ul id="3768a78f-bdaf-4a2d-ba33-dd13b6dc82f0" class="bulleted-list"><li><code>EAX</code></li></ul><ul id="0b6be7b5-e8ee-44ad-a237-a6238daf074c" class="bulleted-list"><li><code>EBX</code></li></ul><ul id="8d2f1c88-2805-4d2a-9ac4-5828defc6acc" class="bulleted-list"><li><code>ECD</code></li></ul><ul id="11b76ce3-45b9-45b0-81b6-838a228991d2" class="bulleted-list"><li><code>EDX</code></li></ul><ul id="5288b67c-e6b2-4cac-8bf0-32f27c3cce39" class="bulleted-list"><li><code>ESI</code></li></ul><ul id="5131b3e4-17a9-4a2b-b658-757b7fccb0fb" class="bulleted-list"><li><code>EDI</code></li></ul><ul id="b6e2c1d5-1a75-403a-9eb3-da0e978dcc9f" class="bulleted-list"><li><code>EBP</code></li></ul><ul id="92e94bb5-4d71-4251-be67-2ce0d2fd013f" class="bulleted-list"><li><code>ESP</code></li></ul><ul id="48491f09-b9b8-4bec-a99a-44812a809f2c" class="bulleted-list"><li><code>EIP</code></li></ul><ul id="f686ca19-4134-4b33-85a4-85a890cec152" class="bulleted-list"><li>Status</li></ul><h2 id="9354a208-0312-4f2f-8f1c-45f883c500ab" class=""><strong>64-bit Registers</strong></h2><p id="f12ec30a-0d98-44ac-8288-5275d9368b89" class="">64-bit registers are only available in 64-bit mode.</p><ul id="40451cd8-340a-427d-9ca8-a785dac8b220" class="bulleted-list"><li><code>RAX</code></li></ul><ul id="ef6884c6-396d-4837-a453-06ae6868ee50" class="bulleted-list"><li><code>RBX</code></li></ul><ul id="d69845c2-4434-4765-951b-a5847492e4ce" class="bulleted-list"><li><code>RCX</code></li></ul><ul id="da825dd7-c98f-4fe1-95c6-5d66fadbc194" class="bulleted-list"><li><code>RDX</code></li></ul><ul id="6ce8fab8-558a-42ec-85e3-446509c742cb" class="bulleted-list"><li><code>RSI</code></li></ul><ul id="ea8081a5-94c2-4542-8c95-56c769210bb6" class="bulleted-list"><li><code>RDI</code></li></ul><ul id="c5ae3e74-8812-41fc-8ad7-a5bb5fa0e996" class="bulleted-list"><li><code>RBP</code></li></ul><ul id="22747bd7-5e08-4369-819c-0c1aeb009eba" class="bulleted-list"><li><code>RSP</code></li></ul><ul id="5a3b1ca9-273a-4d3e-93fc-cdd938d7a527" class="bulleted-list"><li><code>RIP</code></li></ul><ul id="eeb9b6a7-198c-4a6e-88dd-139aa1d1929f" class="bulleted-list"><li>Status</li></ul><h1 id="65872779-8fb1-480d-85c4-cede7679f48c" class="">Operations</h1><p id="257926a8-9a68-4b9c-99ee-3c41e751d0c2" class=""><code>AX</code>, <code>BX</code>, <code>CX</code>, <code>DX</code> can be accessed as 16-bit registers, or as 8-bit registers (low and high).</p><ul id="4063aed8-b17b-41b3-b9e9-aa648fdc8d01" class="bulleted-list"><li>Low registers: <code>AL</code>, <code>BL</code>, <code>CL</code>, <code>DL</code></li></ul><ul id="26a05dee-6b21-4736-a7d3-78a410377ee0" class="bulleted-list"><li>High registers: <code>AH</code>, <code>BH</code>, <code>CH</code>, <code>DH</code></li></ul></div></article></body></html>

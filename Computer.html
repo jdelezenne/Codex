@@ -1,0 +1,566 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Computer</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="70c2c3fb-bc29-4467-82e0-2b8e0e6be940" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">💻</span></div><h1 class="page-title">Computer</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th>Category</th><td><span class="selected-value">Hardware</span></td></tr></tbody></table></header><div class="page-body"><h1 id="b831c1cb-078b-43ad-ae63-015e10261e34" class="">Overview</h1><p id="6ed29b51-7578-479e-8c47-1f1a00842781" class="">Essentially, a computer consists at least of:</p><ul id="b33a203e-08ec-4a8a-9b79-eeb13d951b8a" class="bulleted-list"><li>A <em>Central Processing Unit</em> (CPU)</li></ul><ul id="ff472b3c-92b4-48e1-a2ee-2483cd163394" class="bulleted-list"><li><em>Random Access Memory</em> (RAM)</li></ul><ul id="f76a64af-5a5b-46bc-92e2-ae79c3d1aa77" class="bulleted-list"><li>Internal and external <em>buses</em></li></ul><h1 id="0789f135-af50-4b1d-a231-a974037ca1f9" class="">CPU</h1><p id="9f12e757-3fd2-48aa-ba0b-f651c718bfed" class="">The c<em>entral processing unit</em> (CPU) performs the operations of a computer.</p><p id="283fa39e-b7b9-44be-93f5-9210ba257b79" class="">The operations executed by a processor are called <em>instructions</em>.</p><p id="f44fc4c2-4396-4328-a77a-04ef25dc374c" class="">The rate of a processor is determined by the frequency of its <em>clock</em>.</p><p id="3d02ba49-ea58-4d8c-92f1-40d14d7051cf" class="">Instructions are executed in a certain number of <em>clock cycles</em>.</p><p id="fa0e7fa7-ba59-4ff3-9317-3489ea59e0d1" class="">Modern CPUs are pipelined and can execute multiple instructions in several stages.</p><p id="051298ca-d50a-4f3f-acbc-3e4f9da0ce8a" class="">On modern architectures, Most of the instructions are pipelined, which means that a new instruction can be issued every cycle.</p><h2 id="5eaa1b83-9fb6-4489-b198-c4042a9e78c8" class="">Throughput</h2><p id="df162ef0-2941-4286-b45e-467e84a651ee" class=""><em>Throughput</em> is how frequently a particular instruction can be issued.</p><h2 id="ba44a878-7d5a-42da-997d-65a12c0b3281" class="">Latency</h2><p id="c9d52b04-d40f-406f-919c-ed3c8bac18f0" class="">Latency is the minimum delay between dependent instructions.</p><h2 id="0ac2e9d8-c8cd-43b1-a69f-9be24475f2ab" class="">Microcode</h2><p id="cc830955-7b97-4090-a1a0-50177863a91d" class="">The more complex instructions are implemented as a combination of simpler instructions known as <em>micro-instructions</em> (or <em>microcode</em>).</p><p id="4c39d7e2-a44f-48ff-937e-908dfd1057ae" class="">Micro-instructions can increase parallelism at the instruction level, which is especially good for out-of-order execution.</p><p id="4148bcfc-bfd9-4146-9a53-cc7769ee0799" class="">In non–performance-critical code, microcoded instructions reduce the instruction cache usage.</p><p id="6affcd27-d87d-4bff-8fea-4eb9e6931291" class="">However, in performance-critical code, microcoded instructions can affect performance.</p><h2 id="ef336148-fee0-41cf-90fc-84c0e3b05eb4" class="">Components</h2><p id="a2b5a991-cbbb-491b-9278-583a4f8134d5" class="">A CPU is made of several components.</p><ul id="a146dd13-5587-45a0-b93a-cbe40d69f345" class="bulleted-list"><li>An <em>Arithmetic Logic Unit</em> (ALU)</li></ul><ul id="0cc93132-50e0-4b21-97ff-57e17b4551bc" class="bulleted-list"><li>A <em>Floating Point Unit</em> (FPU)</li></ul><ul id="6cc7bf59-ec36-4c23-a35e-532b8960e6e6" class="bulleted-list"><li>A <em>Vector Processing Unit</em> (VPU)</li></ul><ul id="d5fec950-544e-49df-a3db-5d7af0cc5253" class="bulleted-list"><li>A <em>Memory Management Unit</em> (MMU)</li></ul><ul id="d5f015c9-4f8e-4031-8bb1-51f4f014da04" class="bulleted-list"><li>A <em>Control Unit</em> (CU)</li></ul><ul id="f211e7c0-8cd2-44e7-a5ba-65ae64c570d5" class="bulleted-list"><li>A set of <em>Registers</em></li></ul><ul id="83f3c696-355b-497a-9f9d-c5e4b8fb30b3" class="bulleted-list"><li>Levels of <em>cache memory</em></li></ul><p id="145ab36b-b08c-44be-801b-31f053da7473" class="">Modern CPUs are divided in individual cores.</p><p id="bdf156d8-83f2-4e72-9754-40202104b5f9" class="">Each core has its own set of components, but some memory can be shared.</p><h2 id="d3417d32-153e-47d4-8afa-d1fdee23bc2e" class="">ALU</h2><p id="2433976c-74c5-4a00-a111-54eb190936b0" class="">The a<em>rithmetic logic unit</em> (ALU) performs unary and binary integer arithmetic operations,  logical operations, and bit shifting operations.</p><h2 id="29f47ff7-1da7-4ce3-a2f9-6f059989ad97" class="">FPU</h2><p id="76b93e4e-4868-45bb-b429-770e907cad05" class="">The f<em>loating point unit</em> (FPU) performs floating point arithmetic operations.</p><h2 id="a84baadd-7e92-4d91-ac11-9be6a22a95ec" class="">VPU</h2><p id="36987c57-6ca7-4864-9272-848eb3cded70" class="">The v<em>ector processing unit</em> (VPU) performs floating point and integer operations on multiple data in parallel.</p><p id="bfc6178c-7e1a-415e-8130-623c0106ed78" class="">Vector processing is known as <em>Single Instruction, Multiple Data</em> (SIMD).</p><p id="7f6dd67f-b238-4ed0-8b0c-06e1168adcb6" class="">In modern CPUs, the FPU operations are handled by the VPU.</p><h2 id="83b3afc8-777f-483f-99f4-a4cf690e60c6" class="">MMU</h2><p id="dbfde412-0630-4f78-b2ef-58bd6a720aae" class="">The m<em>emory management unit</em> (MMU) performs the translation of virtual memory addresses to physical addresses.</p><h2 id="c9eaa6d2-401a-48bc-8527-ccb662a901b1" class="">CU</h2><p id="46b6f625-17cd-4093-b1e9-066b5551b5ed" class="">The c<em>ontrol unit</em> (CU) directs the operation of the processor by controlling the flow of data between the units of the CPU.</p><p id="96ec959d-d93a-4c9c-8c98-efe849e06678" class="">The control unit handles branch prediction and out of order execution of instructions.</p><h2 id="dfe4ccb7-c8fd-4665-9bcd-3afb15df42e4" class="">Registers</h2><p id="3fb2f30a-deaf-4502-b764-c990a58da1da" class="">Registers are accessed directly by the the processor units.</p><p id="112e6c25-f0ef-4e01-a77f-f504791e5300" class="">They are the most frequently-used memory in a computer and have the fastest access speed.</p><p id="f56f130c-c28b-461f-89c5-dcb495851f67" class="">A processor contains several kinds of registers including:</p><ul id="dbaa8696-4974-49c0-9281-fb8b8b47fa7c" class="bulleted-list"><li>General-purpose registers (GPRs)</li></ul><ul id="072da3dc-7cb1-4d7c-a7b0-b146d9b54167" class="bulleted-list"><li>Special-purpose registers (SPRs)</li></ul><ul id="2b88d338-474c-44dd-bf6b-9a414c8583eb" class="bulleted-list"><li>Floating-point registers (FPRs)</li></ul><ul id="a5b71c39-3988-45fb-8749-b0b08775b3b0" class="bulleted-list"><li>Vector registers</li></ul><h3 id="07df87be-9b00-46e7-b6b6-21f8186d3374" class="">General-purpose registers</h3><p id="846edf36-1084-4637-9ec5-14e7e886a8a4" class="">The general-purpose registers include the data registers, and the address registers</p><h3 id="6f50f59d-06b6-461e-a22a-556ccf7e01c8" class="">Special-purpose registers</h3><p id="4ddb7460-d079-4c14-81ce-397e1d1fa61c" class="">The special-purpose registers include the instruction pointer register, the stack pointer register, the base pointer register, and the status register.</p><h2 id="0ffad316-1da3-4b1d-b408-38b711b2dc24" class="">Cache Memory</h2><h1 id="33a49c47-68af-446b-bcb8-1122ea29e7bc" class="">Memory</h1><p id="8b8ca9c7-a204-4110-bf6b-7141c7587594" class="">The system memory is known as random-access memory (RAM).</p><p id="9a62ed91-8a51-4fc7-847e-326abd9ec3a9" class="">In modern computers, there are two kind of RAM: SRAM and DRAM.</p><h2 id="25811820-4ee4-427d-8774-e182869bb762" class="">SRAM</h2><p id="a64d2b83-d2b4-499f-acc3-d341232c5cbf" class="">Static RAM (SRAM) is faster than dynamic RAM but more expensive to produce.</p><p id="73f086ce-b9e3-4ba1-bb20-4501be3a6ea3" class="">A SRAM cell is composed of several transistors that requires constant power.</p><p id="2cd786ff-0fa3-450a-890a-fd13747b0916" class="">The state of the cell is stable and SRAM can be read almost immediately.</p><h2 id="44195ecc-f245-460f-8c23-c4aac0ee1820" class="">DRAM</h2><p id="6b2bab49-3b01-4f9e-8731-73e696545c41" class="">Dynamic RAM (DRAM) is simpler than static RAM.</p><p id="629abe86-f80c-44c5-894a-2974c4be4213" class="">A DRAM cell is composed a single transistor and capacitor.</p><p id="919bd089-c7fa-4cea-a8eb-82c0f4908729" class="">The capacitor needs to be constantly refreshed and it takes some time for the capacitor to be charged and discharged.</p><p id="feab2996-ebab-4c7c-9b16-3248f652f42f" class="">The state of the cell is accessed with a delay that limits the speed of DRAM.</p><p id="213d5b1a-4cb3-4ec2-a904-d86511b80791" class="">Modern computers use synchronous DRAM (SDRAM).</p><p id="fa3d697d-e2c4-492d-9b25-d6e96e163979" class="">There are two kind of SDRAM: SDR and DDR.</p><p id="8d485f0c-fc19-4133-b7c7-7f0d5d6088c3" class="">The difference between single data rate (SDR) and double data rate (DDR) is the amount of data that is transported per cycle.</p><h1 id="d0beebac-4e5d-4900-8b07-c12497dcfb87" class="">North Bridge and South Bridge</h1><p id="172b1963-a5e9-4f65-8a84-319b49088c7c" class="">Computers were designed with a <em>north bridge</em> and <em>south bridge</em> chipset architecture.</p><ul id="97fbf389-bd75-4d33-852a-148ff5bafbe2" class="bulleted-list"><li>The north bridge connects the CPU to the memory and the buses.</li></ul><ul id="fb51a3ef-bed9-4eff-8a62-a74396c31b0a" class="bulleted-list"><li>The south bridge controls the I/O functions.</li></ul><p id="84d2ff5c-f72a-4284-bab0-e15d7b995548" class="">In modern computers, the functions of the north bridge are usually included in
+the processor itself; and the south bridge is replaced by the Platform Controller Hub (PCH) companion chip.</p><h1 id="5bd5168f-91d8-4373-bc3e-cbe71aae4037" class="">DMA Controller</h1><p id="0fa8ebb1-6156-4f7e-9dec-b42c2d3a4424" class="">The direct memory access (DMA) controller performs bulk data transfers, reading data from a source address range and writing the data to a different address range.</p><p id="82ada138-fcc8-4a24-9089-d35695f847e3" class="">The DMA controller transfers data as efficiently as possible, reading and writing data at the maximum pace allowed by the source or destination.</p><p id="5ff5e98f-2754-476b-997e-82d15cc5b7ff" class="">The DMA controller transfers data without intervention from the CPU.</p><ol id="fe3d47cd-aa86-4e3b-a1c8-8e12ebd1c9fe" class="numbered-list" start="1"><li>The CPU prepares the DMA controller for a transaction.</li></ol><ol id="538c829d-3aca-4de2-830f-2db261f768ac" class="numbered-list" start="2"><li>The CPU enables the DMA controller.</li></ol><ol id="12f3b625-3263-4244-9c7a-ee671b779c06" class="numbered-list" start="3"><li>When the DMA transaction ends, the DMA controller can generate an interrupt request (IRQ).</li></ol><ol id="f1775bd2-5eb8-4bfd-9236-037839f9f463" class="numbered-list" start="4"><li>The CPU can determine if a transaction is in progress, or has ended through a status register.</li></ol></div></article></body></html>
