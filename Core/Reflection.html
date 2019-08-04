@@ -1,0 +1,565 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Reflection</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="01c7a4c0-143a-4881-afad-aec6fbef5fc6" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📠</span></div><h1 class="page-title">Reflection</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th>Created</th><td><time>@Jun 09, 2019 10:56 PM</time></td></tr><tr class="property-row property-row-multi_select"><th>Tags</th><td></td></tr></tbody></table></header><div class="page-body"><h1 id="dbf00cf8-418d-4bfa-9878-68d96a65dd7a" class="">Goals</h1><ul id="b14bd028-31f6-4bf8-8b47-616e0c7d79bc" class="bulleted-list"><li>Expose type information from C++ source code in editor builds.</li></ul><ul id="27dd9027-d07e-4646-823c-2caee386ed9d" class="bulleted-list"><li>Instantiate objects from their type information.</li></ul><ul id="b56faf80-58fd-4fd6-9b21-972b8dfeddd7" class="bulleted-list"><li>Modify data structures at run-time.</li></ul><h1 id="8f2ada63-8e53-43a9-8226-8fa762dd481a" class="">Usage</h1><ul id="c3610a29-2f4e-4914-99fb-58222b37f5ea" class="bulleted-list"><li>Type introspection.</li></ul><ul id="f339a7f4-3d2f-4e6f-9dc1-76b3b8159ca3" class="bulleted-list"><li>Type factory.</li></ul><ul id="a6473abf-d89c-4c55-9129-9727146a9609" class="bulleted-list"><li>Serialization.</li></ul><ul id="b029263f-2020-485c-813a-de10b2fa45ed" class="bulleted-list"><li>Networking.</li></ul><ul id="beef02bd-7c87-4adf-9ab7-54725305532f" class="bulleted-list"><li>Bindings to shader systems.</li></ul><ul id="eee44aa2-5c43-4d25-8c1b-aa668eb21684" class="bulleted-list"><li>Bindings to scripting systems.</li></ul><ul id="7326f550-545b-48ec-824a-1e6a5d10c6d1" class="bulleted-list"><li>Dependency tracking.</li></ul><ul id="2060e54a-4a37-4c5a-80e1-ecda65e90cd1" class="bulleted-list"><li>Copy and paste.</li></ul><ul id="535646c6-c2f5-47bc-9641-2aa286655a7e" class="bulleted-list"><li>Undo and redo.</li></ul><ul id="49685a3c-c3c4-4055-a6f5-3fab916021e2" class="bulleted-list"><li>Collaboration.</li></ul><h1 id="5532446d-54d8-455c-8869-11207fd2b286" class="">RTTI</h1><p id="6f43d148-e459-4295-9314-d106252cb31c" class="">Run-time type information (RTTI) is a C++ feature that allows the type of an object to be determined at run-time.</p><p id="34a8d857-c0a8-44cd-ac2c-0a1b4ebdb4e3" class="">RTTI is optional with some compilers, and must be enabled.</p><p id="b5ef5bff-68bd-488b-b47f-e90092cf52c7" class="">✔️</p><ul id="1f673b7d-72c7-40bb-b4b6-5b7e5e020e94" class="bulleted-list"><li>Provides the <a href="https://en.cppreference.com/w/cpp/language/typeid"><code>typeid</code></a> operator to to determine the type of an object at run-time.</li></ul><ul id="65d9f2f6-a7ff-4545-a547-fbccc02d4c62" class="bulleted-list"><li>The type of an object is represented by the <a href="https://en.cppreference.com/w/cpp/types/type_info"><code>std::type_info</code></a> class.</li></ul><ul id="a0bb8604-0412-4cd4-b285-3b823d6e57c2" class="bulleted-list"><li>The <code>std::type_info</code> class can be used to obtain the name of a type and compare types.</li></ul><ul id="a3773b74-d90e-45e3-801d-9bab8f141bb3" class="bulleted-list"><li>Provides the <a href="https://en.cppreference.com/w/cpp/language/dynamic_cast"><code>dynamic_cast</code></a> operator to safely cast an object using type information.</li></ul><p id="c51e84c0-73d6-4468-8fe9-6923e799ec69" class="">❌</p><ul id="afad3a18-4d14-4b77-83fe-2d885b5eec39" class="bulleted-list"><li>Available only for classes that are polymorphic (require at least a virtual destructor).</li></ul><ul id="7c3c2ec7-1927-4602-80bc-708f117ab5eb" class="bulleted-list"><li>Does not provide information about data members.</li></ul><p id="a3c7621e-46a8-4378-923d-40c7921c854a" class="">As RTTI lacks fundamental features that are required for a reflection system, it should be disabled and implemented with a custom solution.</p><h1 id="24748e49-0a4c-4fb5-a201-f95a91aa5759" class="">Structure</h1><p id="17df47d0-6275-4e1c-a423-24f85115e85c" class="">There are two types of data: structured and unstructured.</p><p id="3e9955d0-edc0-4c86-9d5e-80bbe4a87caf" class="">Structured data works with the reflection system and is described as a graph of objects, themselves described as a set of properties.</p><p id="33352e63-0586-488e-baeb-e058d23d6b80" class="">Unstructured data is represented by a block of memory that cannot be introspected such as a texture resource.</p><p id="504dea21-6f16-4bd8-9525-be8402f69a31" class="">A reflection system should fully describe structured data, but only provide unstructured data as an opaque type.</p><h1 id="3e23a98b-aff8-46b4-9b02-55e9eb2e0333" class="">Strategies</h1><h2 id="19472412-fd03-43e8-94aa-6cfa05f9c61f" class="">Preprocessor Macros</h2><p id="bb960d41-fb79-45e7-af27-b67388b4fe10" class="">A reflection system based on macros is generally implemented by injecting static members into types.</p><p id="fe3ea7cc-3885-4397-9cf6-a4f14b4c8183" class="">The system can be implemented using templates that are declared by the macros.</p><p id="4bc9c4e5-2eab-4abe-a292-08c0add5f93d" class="">✔️</p><ul id="2e37e834-9bff-457a-b85a-b4c443135695" class="bulleted-list"><li>The simplest solution.</li></ul><p id="5583f0f3-4cf5-49b2-b97b-7572f6406e20" class="">❌</p><ul id="78d3ca02-9fd1-4212-8c66-b08109250d94" class="bulleted-list"><li>Increases the code size. As the reflection system is generally only enabled in development builds, it&#x27;s not a big issue.</li></ul><ul id="687211f8-aa1e-4357-8e7b-51c18ed036ba" class="bulleted-list"><li>Requires macros to be defined for each reflected type and member.</li></ul><ul id="dcfc500a-3279-449e-bc62-768129def920" class="bulleted-list"><li>Duplication of declaration in C++ headers, and macros.</li></ul><h3 id="566b0b39-aa9f-4f31-8f42-32d498755bc4" class="">Examples</h3><ul id="b78ad508-1d5b-4e49-8dc2-db0bc9725e94" class="bulleted-list"><li>CryEngine</li></ul><h2 id="0e25c452-85cf-48da-9f4c-edd788b5eb9f" class="">Parsing and Code Generation</h2><p id="b5211578-aac5-462a-ba3a-baa82afb0c1c" class="">A more elegant approach is to modify the build system in two passes.</p><p id="9471af91-d206-40d2-b148-cf4f4259c800" class="">The first pass uses a custom utility to parse the C++ source code and generate additional files.</p><p id="b7afd856-1cd6-48a7-8c0a-953fd5f8a021" class="">The second pass performs the compilation of the engine with the generated files.</p><p id="6d3fbd3d-7dcc-491f-9396-d7ddc461e6c2" class="">There are two strategies to parse C++ code.</p><ul id="2f4e96ca-c2b7-4637-adcc-9941d099aacd" class="bulleted-list"><li>Parse the actual C++ AST. It can be done with Clang for example, but it also requires additional metadata that is not part of the C++ AST. This metadata can be provided using C++ attributes, comments, or macros.</li></ul><ul id="d23a52b4-fd66-4b45-a53a-8c42d6faf1ed" class="bulleted-list"><li>Parse the C++ headers to detect macros. Some special empty macros can be used in the header files to decorate the types and members. These macros are generally empty, and only exist for the parser.</li></ul><p id="624c94e8-2a81-4117-b0f0-659cee2de22c" class="">✔️</p><ul id="1d9500b3-228b-4832-b2de-887734a57e50" class="bulleted-list"><li>Do not require a complex set of macros and templates.</li></ul><p id="5dc3e5cb-48e7-485f-8e7f-62dbe7ff02f8" class="">❌</p><ul id="ea834c6c-1000-4c7d-a6ee-8f82ac545066" class="bulleted-list"><li>Parsing C++ is more complex.</li></ul><ul id="b3978d35-782d-404e-9e17-36f7d4b8916f" class="bulleted-list"><li>Require changes in the build system to generate additional files.</li></ul><h3 id="bf33d600-826b-4dec-a599-b0c798d9e8a2" class="">Examples</h3><ul id="002ed225-7dca-4b9f-a7c3-eb9ad482eb63" class="bulleted-list"><li>Unreal</li></ul><h2 id="59893e95-8142-49f9-8155-4bc2425507c0" class="">Data Language and Code Generation</h2><p id="56b358bc-83c8-4995-8333-56ef823bc8c8" class="">The previous solutions require the C++ source code to be decorated and are rather intrusive.</p><p id="82e58e28-9c79-42f5-86a8-7aa0441df14d" class="">A different approach is to design a custom data language to describe the type and their members.</p><p id="6311beee-7e4a-4874-b939-9e0589e97970" class="">With a build system in two passes, the first pass parses the data specifications and generates additional C++ source files used by the second phase of the build system.</p><p id="88c2eedf-027b-4928-bf8c-f0409d52a219" class="">The C++ source files are left unchanged.</p><p id="e3c74750-6233-477a-b397-e32898dabb09" class="">✔️</p><ul id="3ea38627-457f-4007-8c2e-c117efa562d5" class="bulleted-list"><li>Do not require a complex set of macros and templates.</li></ul><ul id="4409d883-c61e-4e28-8aad-bd309b00f2ac" class="bulleted-list"><li>Do not require changes in the source code.</li></ul><p id="216fb369-5f6e-4962-a241-035c9ae997bf" class="">❌</p><ul id="6372ee50-658f-41cd-99b4-ea502ab9ec0e" class="bulleted-list"><li>Implementing a custom language is more complex.</li></ul><ul id="01b5d065-a0cb-4171-bc78-1cbc9e01d6cd" class="bulleted-list"><li>Require changes in the build system to generate additional files.</li></ul><h3 id="b501cc5b-292f-4bbe-8733-8ee540778db5" class="">Examples</h3><ul id="6df503cd-5d6a-4580-8d1b-0d46b951f59b" class="bulleted-list"><li>WinRT (IDL)</li></ul></div></article></body></html>

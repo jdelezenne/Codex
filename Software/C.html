@@ -1,0 +1,623 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>C#</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="01e53316-48d0-4f6a-a4ac-8ef4db270f4d" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🌀</span></div><h1 class="page-title">C#</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th>Category</th><td><span class="selected-value">C#</span></td></tr></tbody></table></header><div class="page-body"><h1 id="41473e36-c25c-469d-b37d-60eeb6ca160d" class="">.NET</h1><h2 id="ea80e674-b0c6-47da-b76e-50e093c7e6ab" class="">Common Language Runtime</h2><p id="75a39dd4-d86e-40f4-b168-0fdd2b67639f" class="">The <strong>Common Language Runtime</strong> (CLR) is the .NET runtime.</p><h2 id="821481f4-128a-4bb4-9b15-e8f30c5e00f3" class="">Base Class Library</h2><p id="4511f8ff-af73-4f75-92e8-8dccbf17338a" class="">The <strong>Base Class Library</strong> (BCL) is the core library of .NET.</p><h2 id="9ae51b2f-5435-4bd1-b388-a79c7204767a" class="">Garbage Collector</h2><p id="970b1029-15e6-4a54-b4e0-da60a2fbf09a" class="">The <strong>Garbage Collector</strong> (GC) is a process that periodically determines what part of the physical memory is in use, and collects unused data.</p><p id="0439342c-361f-4e0b-979d-b386c63fd3b2" class="">The behavior of the GC is non deterministic.</p><p id="a1b2e0f3-9745-40f7-ab68-e19ab336e4af" class="">The GC is mark &amp; sweep and generational.</p><h3 id="cc63d50c-1ae6-43e2-94ea-6179403edca0" class="">Mark &amp; sweep</h3><p id="364ff258-fd92-4b9f-bec4-9eff40d97b61" class="">The GC marks objects to collect them once they are dereferenced.</p><h3 id="5029334d-e441-41a0-a8ed-0d149e329269" class="">Generational</h3><p id="e7ca96ac-68ca-4cd6-bccf-6dea757c15a8" class="">The GC divides objects into generations according to their age.</p><p id="daae423b-2a74-4eeb-a4b0-215ad6538c59" class="">Objects are collected one generation at a time.</p><p id="2785e8bd-8c58-4273-b544-5027742c355c" class="">The GC collects objects in generation 0.</p><h1 id="272f16d3-b545-4e7f-be94-dcbe5a9888cd" class="">Memory</h1><h2 id="8886bd6c-df79-4c38-b330-80109d6369b1" class="">Managed Memory</h2><p id="e0b4ddb0-616f-42bd-848a-dfd325a75e82" class="">The <strong>managed memory</strong> of the process is the memory managed by the .NET runtime and cleaned by the GC.</p><p id="7d649fa3-e3d1-412a-8c68-6cae168af683" class="">The .NET runtime is responsible for allocating and deallocating the memory.</p><p id="35125d3d-b49b-4d48-ab2f-73285a076d25" class="">It&#x27;s not possible to control the managed memory manually.</p><p id="8c6483b3-0f98-43b8-8202-ebc3dd4d8f52" class="">Managed memory is allocated with the <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/new-operator"><code>new</code></a> operator, followed by the type to allocate and initialize.</p><p id="2a2a670d-c975-4dd1-8ba9-2b08b8c3c52b" class="">⚠Allocating and deallocating reference types over time will increase the work for the GC and create memory fragmentation.</p><h3 id="5101fc83-3958-479b-9b3b-c0cad991199c" class="">Stack Memory</h3><p id="63f37d8d-ff77-4f80-865e-2c3d34bc1cd7" class="">The stack memory is not garbage collected.</p><p id="a0484858-50cc-453f-a438-f035eb15004b" class="">During the execution of a method, the <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/stackalloc"><code>stackalloc</code></a> operator allocates a block of memory on the stack. The memory is deallocated automatically when the method returns.</p><p id="0a4d487e-5e5b-48e4-a597-41c9d8fcaa9c" class="">The <code>stackalloc</code> operator is used like the <code>new</code> operator.</p><p id="aeecf940-30d2-49f8-8aa0-783cd9fb7d61" class="">When the allocated memory is assigned to a pointer, the operator must be used in an <code>unsafe</code> context.</p><pre id="595ab263-c873-477c-9cc1-bb6f7f71a497" class="code"><code>unsafe
+{
+  int* numbers = stackalloc int[3];
+  ...
+}</code></pre><p id="a1844be5-b851-4140-a2c2-217854d8125a" class="">When the allocated memory is assigned to a <code><a href="https://docs.microsoft.com/en-us/dotnet/api/system.span-1">Span&lt;T&gt;</a></code>, the operator don&#x27;t need to be used in an <code>unsafe</code> context.</p><pre id="b04c957f-d8f9-4e0e-93d3-8c4feaf7bda5" class="code"><code>Span&lt;int&gt; numbers = stackalloc int[3];
+...</code></pre><h2 id="ed0ec5ae-ce68-4385-879d-390871f454f3" class="">Unmanaged Memory</h2><p id="cff54969-ddb4-4318-8293-a3264d0f8ef4" class="">The <strong>unmanaged memory</strong> (or <em>native memory</em>) of the process is the memory that is not managed by the .NET runtime.</p><p id="971b77d1-ba22-43dd-8baf-55065f68f204" class="">Unmanaged memory in .NET is handled through:</p><ul id="30dbd1d5-e1e4-4f33-b386-455f5b9acd73" class="bulleted-list"><li>Interop</li></ul><ul id="1a31e7b2-b003-4df6-be8c-ae705703ca1a" class="bulleted-list"><li>Unsafe code</li></ul><ul id="2f213810-ae11-4c49-a152-bb72eb80923a" class="bulleted-list"><li>Marshalling</li></ul><h3 id="8d2f715b-4033-4108-abb6-84b6533f71f3" class="">Interop</h3><p id="f5fe5a11-e080-4d28-9baa-25636c49a64b" class="">Interop (or P/Invoke) allows communication with native libraries or the Windows API.</p><p id="fb569623-e5bb-483c-84b4-fde06d55750d" class="">The <a href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices"><code>System.Runtime.InteropServices</code></a> namespace provide the functionality to perform interop.</p><p id="f38522b0-e412-4dea-90ab-7f750a7254e6" class="">A function can be defined with the <code>DLLImport</code> attribute to allow the corresponding native function from the specified DLL to be called from managed code and .NET will handle marshalling.</p><pre id="7eef3f97-a478-4709-9175-0064b85255cc" class="code"><code>[DllImport(&quot;kernel32.dll&quot;)]
+static extern void OutputDebugString(string lpOutputString);</code></pre><h3 id="8a8e2c01-1ffd-4ca0-b317-4905982b7584" class="">Marshalling</h3><p id="a819396d-ff01-497a-874c-15691476d705" class="">The process of transitioning between unmanaged memory and managed objects is called marshalling.</p><p id="605535b4-9eba-4b05-abc4-289ee7fdd461" class="">The <a href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.marshal"><code>Marshal</code></a> class provides the functionality to perform marshalling.</p><ul id="d99cc024-7503-4cd4-b79b-7cba8aee0458" class="bulleted-list"><li>Allocating and deallocating unmanaged memory</li></ul><ul id="108eeb15-9cbc-43b2-8662-b4b594ed7aba" class="bulleted-list"><li>Copying unmanaged memory blocks</li></ul><ul id="168a29f3-d4fe-40fe-96bf-bc42f1856331" class="bulleted-list"><li>Converting managed to unmanaged types</li></ul><p id="4b548cb4-40d1-4aee-82e4-2b72cdd8a2d3" class="">Unmanaged memory can be allocated by calling the <a href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.marshal.allochglobal"><code>Marshal.AllocHGlobal</code></a> method. The memory requires the number of bytes to allocate and returns a <code>IntPtr</code> to the block of memory.</p><pre id="62436905-9edd-410c-bdcb-4903bfb936b0" class="code"><code>public static IntPtr AllocHGlobal(int cb);</code></pre><p id="1a784fcf-34da-4f97-ac20-848a679e9c41" class="">The memory must be released using the <code>Marshal.FreeHGlobal</code> method with the <code>IntPtr</code> that was returned during allocation.</p><pre id="b2846b5b-d1a6-43dd-a0d8-54e7a26a7ba0" class="code"><code>public static void FreeHGlobal(IntPtr hglobal);</code></pre><p id="fa6e7351-3ce5-423c-b3c6-825b85e68c77" class="">For example, we allocate 100 bytes.</p><pre id="2b3c1d27-ab48-434f-bdf4-50e924da9ebc" class="code"><code>IntPtr hglobal = Marshal.AllocHGlobal(100);
+Marshal.FreeHGlobal(hglobal);</code></pre><p id="e3597ee4-f234-45c4-81c7-4dd3d5c05b35" class="">ℹThe memory is allocated on the heap using <code>GlobalAlloc</code> or <code>LocalAlloc</code> depending on the implementation.</p><h3 id="9f7e916b-539b-4ea7-9936-d5c1886376a5" class="">Unsafe code</h3><p id="7d119c86-2f87-4e11-b3d6-de36ebdcc9ed" class="">Methods and code areas can be defined with the <code>unsafe</code> keyword allowing pointer operations and object pinning. The memory won&#x27;t be moved by the GC.</p><p id="9db2535b-c64a-4aa5-bab3-84c07d4888a8" class="">The <code>IntPtr</code> type is a struct that represents a platform-specific pointer.</p><p id="5ef02679-75fe-4faa-b04b-f71613f46fa1" class="">The type is a 32-bits integer on 32-bit systems, and a 64-bits integer on 64-bit systems.</p><p id="8f2ac9a0-ccb4-4863-851c-37d8b7f45bcc" class=""><code>IntPtr</code> values can be converted to actual pointers with a cast.</p><p id="a3ca0307-fc31-49ff-bdcf-54edc86cd805" class="">The pointer can then dereferenced and assigned a value with the <code>new</code> keyword.</p><p id="85b955ad-efbc-49e2-bf96-25305796423d" class="">A value type can be allocated on the heap using this method.</p><pre id="9b50f449-e8ab-48bf-91ab-5b1ae530afd9" class="code"><code>struct MyStruct
+{
+	public int Value;
+}
+ 
+unsafe void MyMethod()
+{
+	var ptr = (MyStruct*)Marshal.AllocHGlobal(sizeof(MyStruct));
+  *ptr = new MyStruct { Value = 100 };
+
+  Marshal.FreeHGlobal((IntPtr)ptr);
+}</code></pre><h2 id="2eb2aa3b-0dcc-460c-8a5e-1dd9fd6bed2d" class="">Layout</h2><p id="7a690ba1-9f4f-4266-a8ae-cdfe11d51d6e" class="">By default, the members are laid out sequentially if they don&#x27;t contain any pointers.</p><p id="fa3c224f-f649-4057-8a0d-7adf114839a1" class="">The physical layout of the fields can be controlled with the <a href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.structlayoutattribute"><code>StructLayout</code></a> attribute and the specified <a href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.layoutkind"><code>LayoutKind</code></a> value.</p><p id="f13622f0-bd5a-4695-9983-724c770bef8f" class="">The <code>LayoutKind.Auto</code> value lets the CLR choose an appropriate layout for the members.</p><p id="bb0bf40c-d50f-4a0b-adfe-867ee9397396" class="">If the type contains pointers, <code>LayoutKind.Auto</code> is the default layout.</p><h2 id="038c0481-fb5e-442b-a493-1722c419e104" class="">Alignment</h2><p id="9125dd16-e150-4314-87b6-8349a43d4e62" class="">The default alignment of a type is the size of its largest field.</p><p id="e99f209c-b94e-428e-a50a-a7dfc6a57475" class="">Fields are aligned by their size. For example:</p><ul id="fb74a5c4-4f49-4a07-980b-39010c00d90a" class="bulleted-list"><li>Byte fields align on 1-byte boundaries</li></ul><ul id="f6e05eb3-7d41-442b-b555-3a50632671a1" class="bulleted-list"><li>Int16 fields align on 2-byte boundaries</li></ul><ul id="a7887018-fbb4-4aef-8da6-abd27df5efb3" class="bulleted-list"><li>Int32 fields align on 4-byte boundaries</li></ul><p id="72c50e7b-b05c-4fe5-96cf-7437ae7919d7" class="">⚠Embedded structs are aligned on word boundaries even if they are smaller.</p><p id="63a25d8f-1491-4227-8ab8-278d5ea1fbd8" class="">The <code>StructLayout</code> attribute has an additional <code><a href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.structlayoutattribute.pack">Pack</a></code> value that controls the alignment of the members.</p><p id="1033ed64-684c-45c2-8c00-1528d6be3d52" class="">By default, the value is 0, indicating packing on word boundaries.</p><p id="9b67a731-d3c9-4305-a633-e0d2755e3a13" class="">Setting the value to 1 packs the members tightly but can decrease the performances because of unaligned memory operations.</p><h1 id="14c00a92-f8e4-4bf3-925a-7393b382d08f" class="">Types</h1><h2 id="d4878b39-9303-46c7-90c2-007505225fc4" class="">Value types</h2><p id="dfcc423d-7829-434a-8c20-30e18b6e33ff" class=""><strong>Value types</strong> are declared with the <code>struct</code> keyword.</p><p id="8087512d-ccb7-4190-aaaa-2725aecee61e" class="">The .NET primitive types are also value types (<code>bool</code>, <code>int</code>, <code>float</code>, ...).</p><ul id="6d7b514e-e4cc-4650-ab45-b018427273e8" class="bulleted-list"><li>Allocated on the stack</li></ul><ul id="5f520f9b-fe99-4a58-87fb-5bbb1a73e20c" class="bulleted-list"><li>Allocated on the heap when part of a reference type</li></ul><ul id="63114858-a167-4f13-87ef-35af1dc47ed7" class="bulleted-list"><li>Not managed by the GC</li></ul><ul id="3e871f2f-a3ba-468b-b782-baebc6404966" class="bulleted-list"><li>Passed and returned by value by default (value copy)</li></ul><ul id="8120ff52-bee6-49f4-b2f0-549dfb9f5719" class="bulleted-list"><li>The <code>Equals</code> method performs a bitwise comparison when possible (no reference fields); otherwise the comparison is performed with reflection.</li></ul><h3 id="4a08fd0c-dca6-4ab6-b3b4-415fae1b73fe" class="">Struct</h3><ul id="0b70316c-62ef-48c4-8d6f-7b8b5c815ec6" class="bulleted-list"><li>Structs implicitly derive from <a href="https://docs.microsoft.com/en-us/dotnet/api/system.valuetype"><code>System.ValueType</code></a></li></ul><ul id="04ab1445-10b5-49c1-b47e-1ec3c773f24e" class="bulleted-list"><li>Structs are implicitly sealed</li></ul><ul id="b7f480bb-94f2-4cee-949e-56cd5b6e356f" class="bulleted-list"><li>A <code>ref struct</code> is always stored on the stack. It cannot be part of a class or a regular struct.</li></ul><h2 id="f702fa45-9cdd-41df-abde-614522a06c38" class="">Reference types</h2><p id="42c87f73-93b9-4a09-9b18-323b1afdefe8" class=""><strong>References types</strong> (or <em>objects</em>) are declared with the <code>class</code> keyword.</p><ul id="a690be49-0b16-4da6-a326-a0e53e53285b" class="bulleted-list"><li>Allocated on the heap</li></ul><ul id="2b0599cb-290d-42d6-aa86-f8688a64aa1c" class="bulleted-list"><li>Managed by the GC</li></ul><ul id="4af60bfe-d721-4c63-be01-e1c2be935cfa" class="bulleted-list"><li>Passed and returned by reference (pointer copy)</li></ul><ul id="15b9f3de-d8b9-4550-a91c-7196dfd1084b" class="bulleted-list"><li>The <code>Equals</code> method performs a reference comparison</li></ul><h3 id="34374168-81d1-494e-b973-791f9622c319" class="">Class</h3><ul id="c6ed1a58-83d0-49d6-b66a-ec857e8e6cc6" class="bulleted-list"><li>Classes implicitly derive from <a href="https://docs.microsoft.com/en-us/dotnet/api/system.object"><code>System.Object</code></a></li></ul><h1 id="53555401-cda2-4e35-80e2-d40840ff2919" class="">Base types</h1><h2 id="71633822-000e-413e-be59-657a5f691afa" class="">String</h2><p id="98f1c92a-0a23-4dfe-882c-4df9a28fc613" class="">A string is a sequence of Unicode characters.</p><p id="f0e1f1f1-a9f9-4fdf-8766-ae2ce1f306fe" class="">A string is represented by the <a href="https://docs.microsoft.com/en-us/dotnet/api/system.string"><code>System.String</code></a> type. <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/string"><code>string</code></a> is an alias for <code>String</code>.</p><p id="ad880132-df87-4001-8407-474872b11cc0" class="">A character is represented by the <code><a href="https://docs.microsoft.com/en-us/dotnet/api/system.char">System.Char</a></code> type. <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/char"><code>char</code></a> is an alias for <code>Char</code>.</p><p id="a7868fa2-c658-4e13-97a1-48a597084df4" class="">Characters are represented by UTF-16 code units.</p><ul id="49c58555-606c-4519-8ebe-695449201794" class="bulleted-list"><li>String is a reference type.</li></ul><ul id="42160588-1d02-4fbd-af0c-cca24a28ea8f" class="bulleted-list"><li>Strings are immutable.</li></ul><ul id="f98f49d1-4968-457f-9000-6425e4bb002d" class="bulleted-list"><li>String overrides the <code>==</code> operator to perform a string comparison.</li></ul><h1 id="c61e794e-a9a9-4a34-8554-d44e8523da4f" class="">SIMD</h1><p id="0d22c7a0-b6c8-498c-b425-f28c4ae31686" class="">SIMD instructions are supported using the NuGet package <a href="http://nuget.org/packages/Microsoft.Bcl.Simd">Microsoft.Bcl.Simd</a>.</p><h1 id="73cf7069-6a3c-46f3-a094-fc77c88c6b98" class="">Boxing</h1><p id="b8d5f3b1-272f-4d19-9882-605743e1d96d" class=""><strong><a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/types/boxing-and-unboxing">Boxing</a></strong> is the process of converting a value type to a reference type (such as an interface type). When the CLR boxes a value type, it wraps the value inside a <code>Object</code> instance and stores it on the managed heap.</p><p id="70405254-7cec-4fe5-947b-564a74061562" class="">Boxing is an implicitly conversion.</p><p id="65f2b2bb-fdeb-405d-9c49-6b09a282a5ae" class=""><strong>Unboxing</strong> extracts the value type from the object reference.</p><p id="00dda5d2-63f7-4124-b889-f5d0b9cadc12" class="">Unboxing is an explicit conversion that requires a cast to a value type.</p><p id="9f13c418-de18-464e-bb41-69bf25da89fb" class="">⚠The GC tracks references to boxed value types.</p><p id="f8ecab5d-8049-44e7-9346-38f893301e89" class="">ℹBoxing should be avoid as it allocates memory and adds work for the GC.</p><p id="936287ab-f296-4a15-9b6c-8e03f9f4570b" class="">ℹBoxing can be avoided using generic constraints.</p><hr id="215bd882-7b36-4fd4-82b9-89ffa5f50976"/><p id="384a84f7-ba06-4e0f-ac9b-920243de8ccd" class="">When a value type needs to behave like an object, boxing happens.</p><ul id="85144266-fde8-4d90-8adb-655a0db19a63" class="bulleted-list"><li>A value type is assigned to an interface it implements.</li></ul><ul id="a861abdd-027a-4b16-a9d3-c48429c2c954" class="bulleted-list"><li>A value type is passed as a parameter of a method as an <code>Object</code> reference.</li></ul><ul id="c7e6f87f-7beb-4b55-be50-f82df7d00c58" class="bulleted-list"><li>A member from the <code>Object</code> type is called from a value type such <code>GetHashCode</code> or <code>Equals</code>.</li></ul><ul id="ff248821-6fe3-4904-8fed-796fe9489e44" class="bulleted-list"><li>ℹWhen a member from the <code>Object</code> type is overriden in the value type, boxing is avoided.</li></ul><h1 id="e14312ea-cad1-41ac-8ce9-ed29392ccb80" class="">Pinning</h1><p id="a52e5ba0-cbcc-4cab-97c7-c054f9443a8e" class=""><strong>Pinning</strong> is used to prevent the GC from moving an object in memory.</p><p id="50a9f1df-2044-4356-92f1-febad2ccd32b" class="">During the Compact Phase, the GC moves object in memory to reduce fragmentation.</p><p id="15b75d1e-709f-47dc-8a64-9db817921ed9" class="">An object is pinned to allow unmanaged code to access it using a pointer, and during pinning its memory address must not change.</p><p id="e25fa93d-25c6-440c-88be-af802bfd3ce6" class="">There two methods to perform pinning.</p><ul id="69a15b40-f95a-4dd9-8085-e1d4055c227c" class="bulleted-list"><li>The <code>fixed</code> keyword: used for a short duration in a code block.</li></ul><ul id="d203d46c-5811-42f8-b9c1-52a8f117f187" class="bulleted-list"><li>The <code>GCHandle</code> class: longer lifetime (can cause GC overhead).</li></ul><p id="ebe0e577-becc-4b30-98ad-e9eb83828243" class="">ℹP/Invoke automaticlaly pins object for the duration of the method call.</p><h1 id="baf69580-012e-4524-9449-1984b6f844cb" class="">Static Constructor</h1><p id="38f1ce64-af9e-4aea-b02a-fda125b6d81e" class="">A <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/static-constructors">static constructor</a> is used to initialize static data or to perform an action only.</p><p id="0b2c4159-217f-4205-93f8-16ddbb765853" class="">ℹDoes not accept arguments.</p><p id="9e786ed9-d994-4bc9-bbf2-b223f4a186fb" class="">ℹDoes not accept access modifiers.</p><p id="e4d17ee3-5096-4798-9e93-9e82bdf2cc5f" class="">ℹCalled automatically when the type is loaded in the application domain (before the first instance is created or any static members are referenced).</p><p id="c42fb0e1-1ed4-4564-8b8c-ab7cb0001ca5" class="">ℹExceptions that are throw in static constructors are wrapped inside a <a href="https://docs.microsoft.com/en-us/dotnet/api/system.typeinitializationexception"><code>TypeInitializationException</code></a>.</p><p id="0b4b082c-80d5-457b-8ef9-b8eacc5c86ca" class="">⚠The order of execution of static constructors depends on the CLR.</p><p id="2da777dc-631f-45cf-9b48-9b99354ae9a5" class="">⚠Types with static constructors do not benefit from the <code>beforefieldinit</code> flag optimization (lazy initialization of the type).</p><p id="8510f287-3193-4bc5-bc79-c6e7931c03d9" class="">✔Useful to implement a singleton.</p><h1 id="1357695d-db8c-45bb-85ae-e787328bd517" class="">Destructor</h1><p id="0b557639-9d64-4fbc-a0c4-e80b7b6642ab" class="">A destructor is called a finalizer.</p><p id="92d4f3a4-f072-4c42-b863-59eca5c6c32b" class="">When an object has a finalizer, it is stored in a finalization queue when it is allocated.</p><p id="47ec5cb3-6324-408a-bdce-c160213d87e1" class="">When the GC collects the object, it puts it in the f-reachable queue.</p><p id="e9395413-2a23-4e07-b9ff-c7b68fa00bf7" class="">A specialized CLR thread monitors the f-reachable queue, and calls the finalizer methods to give a chance to the objects to perform some cleanup (typically unmanaged references).</p><p id="b8a38490-c797-413b-996e-df364fa15b5e" class="">⚠Adding a finalizer method to a class has a high performance cost as the GC is not able to collect to object immediatly.</p><p id="9717526e-4618-4302-bcc9-9b975eee7c47" class="">⚠The finalizer method is always called from a CLR thread.</p><h1 id="41ed8e8f-4843-4711-ae90-bc2ecfb1d2c4" class="">Unsafe type</h1><p id="67a80bc9-daa5-4e4b-ab71-f102495b908e" class="">A struct or a class can be declared with the <code>unsafe</code> keyword, to allow all its code to be used in an unsafe context.</p><pre id="af0aef6f-510f-4d95-a235-1c321046c59d" class="code"><code>unsafe class MyClass
+{
+    static void Copy(byte* source, byte* destination, int count) {...}
+}</code></pre><p id="e1ad617d-2b99-41f1-8efd-e188c15657cf" class="">Otherwise, the unsafe keyword needs to be specified in a member declaration.</p><pre id="f2aec6aa-4b44-4009-ada5-21846e40b825" class="code"><code>class MyClass
+{
+    unsafe static void Copy(byte* source, byte* destination, int count) {...}
+}</code></pre><h1 id="45c4b61a-0560-4710-b6c8-6179f56cb07e" class="">Fixed-size arrays</h1><p id="953123f8-ac23-41b1-9e6a-62e15c0f9890" class="">When an array is defined as a field in a type, it is stored as a pointer.</p><p id="ecadd9b7-56fc-4691-8660-e19d89ccc964" class="">The array can be initialized to any size and the reference will point to the corresponding array data.</p><p id="056c8653-67a3-452b-aa04-4e3f17801c47" class="">An array can defined as a fixed-size array with the <code>fixed</code> keyword and a size value.</p><p id="1ecf5c09-a317-4fca-a126-883ea06f1bed" class="">The type that contains the fixed-size array must be defined as <code>unsafe</code>.</p><pre id="cf7354b2-4296-4479-82cf-51b184cf77ad" class="code"><code>unsafe struct MyStruct
+{
+    public fixed int buffer[1024];
+}</code></pre><h1 id="892275f7-f260-42ba-814b-43e8188ff87e" class="">Readonly struct</h1><p id="c78049c2-93ba-4747-84ab-be660e74f142" class="">A <code>readonly</code> struct can only contain <code>readonly</code> fields that are immutable.</p><pre id="0f3eaee2-a5a4-43b9-a4c4-d2188f22832d" class="code"><code>readonly struct MyStruct
+{
+    public readonly int MyValue = 42;
+}</code></pre><h1 id="51c6b7ae-635e-41c3-915f-e53cde704808" class="">Patterns</h1><h2 id="808ba008-f288-44d5-b670-789eef54594b" class="">Lazy Allocation</h2><pre id="d6442614-a561-49b4-b1fc-72a4b365d93b" class="code"><code>private MyInstance _instance;
+
+public MyInstance Instance
+{
+    get
+    {
+        if (_instance == null)
+        {
+            _instance = new MyInstance();
+        }
+        return _instance;
+    }
+}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7e55d504-7fc8-49bc-8e43-016c1bbd7aba"><div style="font-size:1.5em"><span class="icon">✔️</span></div><div style="width:100%">The cost of allocating the property is deferred to its access</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="974fd26b-c42f-4ab6-bd0f-3ea997ea6956"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">The property might be called from multiple threads.
+You need to use locks to protect the if statement.</div></figure><pre id="4561ae66-5178-442f-9042-fcc8b48c37a8" class="code"><code>private MyInstance _instance;
+
+public MyInstance Instance
+{
+    get
+    {
+        lock (this)
+        {
+            if (_instance == null)
+            {
+                _instance = new MyInstance();
+            }
+        }
+        return _instance;
+    }
+}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ba560111-b551-47a2-982f-8afc718af2c8"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Acquiring the lock takes a nontrivial amount of time.</div></figure></div></article></body></html>

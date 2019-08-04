@@ -1,0 +1,584 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Best Practices</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="88d916f2-34f5-446e-ad5c-eafca9a4aadd" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">👑</span></div><h1 class="page-title">Best Practices</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th>Category</th><td><span class="selected-value">System</span></td></tr></tbody></table></header><div class="page-body"><h1 id="5034c97c-c676-4def-bdef-d3c0dfc42edd" class="">Overview</h1><p id="00e4d4db-6892-4fdc-a7b0-1a34d5a384cf" class="">This documents contains best practices that are mostly platform-independent and applicable to C++, C# and other languages.</p><h1 id="edb6fcf2-1a1b-404b-b45b-5cf33b55565a" class="">32-bit vs 64-bit Architectures</h1><ul id="66596c7a-e582-47c4-bccc-19acc7f198f8" class="bulleted-list"><li>Casting pointers to 32-bit integers loses information; casting back results in an incorrect pointer.</li></ul><ul id="50fc75d9-6a2b-49cb-87e6-5ba1e4859307" class="bulleted-list"><li>Structures that contain pointers change in size.</li></ul><ul id="5996f10d-506c-45e2-9f75-bd00aff339cb" class="bulleted-list"><li>Structures that contain pointers may no longer pack the same way due to alignment rules.</li></ul><h1 id="8b238045-c755-4c48-9c93-5d8d5c390bdd" class="">Precision</h1><p id="e2dbecfc-3883-466b-ae73-24825f6afd91" class="">Floating point comparisons should use a small epsilon to allow for minor variations in final floating point bit patterns as hardware changes.</p><p id="4a1a86eb-8a7e-4591-a9cb-14138f2e8b71" class="">The same calculation may produce different results depending on the CPU model or GPU model.</p><h1 id="b1be4f6f-eda4-4268-a52d-2413285cafa8" class="">Memory</h1><h2 id="3cd8b3e5-ac8b-45ee-ac2a-e9b917ff6250" class="">Throughput</h2><p id="1de84fd5-e519-4b6e-8303-51c3732132d5" class="">Memory throughput depends on the hardware.</p><p id="216974c0-ae6a-4462-a50a-2e6c948f3ba8" class="">Some of the things that can impact the throughput of memory include:</p><ul id="fad10508-1e1c-4475-97b4-12012528ddc4" class="bulleted-list"><li>Contention from another core or another thread.</li></ul><ul id="0dbb0735-6d1d-4869-b7ab-e63159c195ea" class="bulleted-list"><li>Cache design</li></ul><ul id="c3b6ed14-0706-4667-830f-2144c99c8526" class="bulleted-list"><li>Page sizes</li></ul><h2 id="67203301-3df8-4742-b2ad-9c10e8c2379c" class="">Caches</h2><ul id="68973ee7-5dbc-418e-86ef-3ac72cfc75e9" class="bulleted-list"><li>Work with contiguous structures (dynamic structures cause more cache misses).</li></ul><ul id="a1bc290f-3df1-4c70-9c01-ef6ea65c6ade" class="bulleted-list"><li>Pack and unpack data in registers (with specific SIMD instructions).</li></ul><ul id="445e90eb-59f2-4f41-8e37-e741f7db9f66" class="bulleted-list"><li>Split Hot and cold data structures to prevent loading unneeded data into the cache.</li></ul><h1 id="bebb501c-01c8-4aca-b615-78f7482ec6db" class="">Branch prediction</h1><p id="91fea840-c61b-47b3-a15e-4ec325dee285" class="">Branch misprediction incur a heavy penalty.</p><ul id="1f63b80c-714d-4374-9107-ee76e6f51cff" class="bulleted-list"><li>Branches that are always taken or never taken are, by far, the fastest patterns.
+The worst branching pattern is alternating taken and not taken.</li></ul><p id="1335d839-9a6d-43e6-a356-bf48abc191c9" class="">In very critical code, avoid:</p><ul id="eb1fea85-3166-4d4a-9aa1-032f71e67220" class="bulleted-list"><li>Virtual function calls to wide varieties of polymorphic classes from the same base class.</li></ul><ul id="8d3ae796-3acd-4110-8ff2-aaee62346b0f" class="bulleted-list"><li>Function pointer dereferences.</li></ul><ul id="4223a6ed-7461-44fe-86e6-ecc6fca3b289" class="bulleted-list"><li>Conditions based on effectively random data.</li></ul><h2 id="ddc7163a-f2a9-41ac-8624-482449f78018" class="">Optimizations</h2><ul id="75b86baa-7043-4676-b92d-b6c14e9f808b" class="bulleted-list"><li>Order the data so that all not taken items are processed first, followed by all taken.</li></ul><ul id="10f7221e-dc82-4a65-9be3-8422e479fe1a" class="bulleted-list"><li>Arrange nested branches so that branches with more predictable branching behavior are the outer branches.</li></ul><ul id="e36d2ea9-1bd0-4cca-a4e9-a0b2548f25ec" class="bulleted-list"><li>Keep jumps to branch targets within the same memory page (usually 4 KB).</li></ul><ul id="fdc9bfed-11c7-436b-ac03-a5b99c027b94" class="bulleted-list"><li>Aim for two branches per cache line, both in the same high or low 32 byes.</li></ul><ul id="48274a8c-76ac-49bf-be6e-87071d8f1340" class="bulleted-list"><li>Consider unrolling loops.</li></ul><h1 id="31b77598-bb01-4c4f-af45-ba0879b4befb" class="">Multithreading</h1><h2 id="9076bc13-f40d-492c-a9ca-92ec53c2ba04" class="">General</h2><ul id="a7c03397-2b2a-4888-9121-f7162a042472" class="bulleted-list"><li>Use CPUID to determine the system architecture including the number of cores.</li></ul><ul id="0af774ac-8c4e-4a9f-8e9d-f94b90ffec4a" class="bulleted-list"><li>Place threads on specific cores (using thread affinity).</li></ul><ul id="891b1a5d-c2de-4e64-9e73-ee03c32c8b49" class="bulleted-list"><li>Two threads working with the same data should be on the same module to avoid remote cache latencies (especially with on systems split L2 cache).</li></ul><ul id="e21c45f1-bfc9-43a8-a1f3-cfb7105f9b19" class="bulleted-list"><li>Split work into as many logical threads as can be reasonably synchronized.</li></ul><ul id="2ef92977-2fdc-4419-a7ff-9e1b94a79705" class="bulleted-list"><li>When synchronization is not required, a thread pool setup based on the number of cores detected.</li></ul><h2 id="d0c9c96d-97bb-40d0-8312-d9df266b31c3" class="">Cross-Core Memory Costs</h2><ul id="72138673-edda-418b-9528-2e701cf423f1" class="bulleted-list"><li><em>False sharing</em> occurs when two memory addresses resolve to the same cache line.<ul id="59a75da1-b7fc-4006-90c0-10dde20babcd" class="bulleted-list"><li>Avoid multiple cores making concurrent writes to the same cache line.</li></ul><ul id="bb3b2c1f-4fd4-430f-a3d7-c1acb8b71390" class="bulleted-list"><li>Add padding by a multiple of a cache line in size to structures.</li></ul></li></ul><ul id="a580dbe3-e37e-44f8-bf4d-af34bd4250da" class="bulleted-list"><li>Data structure: switch from using an array of structures (AoS) to a structure of arrays (SoA) when each thread is operating on a unique structure.</li></ul><ul id="b4afc208-f3e4-4dea-81ff-116157db83c1" class="bulleted-list"><li>Separate read-only data from read/write data.</li></ul><ul id="3a9fdf0b-8c71-4ad2-92aa-6ba86424177a" class="bulleted-list"><li>Avoid data sharing, such as a direct sharing of variables, such as a reference count on a structure.</li></ul><ul id="fb67d597-7eef-4808-adc4-18c458293fd0" class="bulleted-list"><li>Prefer a unique job queue for each thread instead of one job queue that is shared by multiple threads (use work stealing algorithm to help balancing the load between the threads).</li></ul><h2 id="50ee641c-e396-4ea1-a1cd-9db2921822e7" class="">Interlocked Operations</h2><p id="5f20ecaa-d4e5-46fb-aac7-06d35e778a1b" class="">Interlocked operations can help prevent race conditions between CPU cores, but can have drastic differences between CPUs.</p><h2 id="0cdb416e-ce6a-4efe-8be7-35d13d2c5b57" class="">Order</h2><p id="167fd1a0-179f-4af9-ad72-33b84e34b99a" class="">There is no guarantee on the order of execution between threads unless specifically enforced with syntonization primitives.</p><h2 id="e089bab1-71f5-46ae-956d-97aec5ab8654" class="">Lock Convoy</h2><p id="d8b13fe7-5612-4e9c-b59f-479e164b0a61" class="">The issue shows up when each of these pieces of work is running on different threads that block waiting for the completion of dependent pieces of work. If one of the tasks happens to take longer than normal, the entire system stalls waiting for a lock.</p><pre id="f51984cf-c5bc-4a7c-bfa6-54a353f31ab3" class="code"><code>void TaskA()
+{
+    DoWorkA();
+    SetEvent(WorkADone);
+}
+
+void TaskB()
+{
+    WaitFor(WorkADone);
+    DoWorkB();
+    SetEvent(WorkBDone);
+}
+
+void TaskC()
+{
+    WaitFor(WorkBDone);
+    DoWorkC();
+    SetEvent(WorkCDone);
+}</code></pre><p id="b307b27e-151c-41b3-8cb2-536086643ce8" class="">In this case, task C was waiting on task B, which was waiting on task A. Task A ends up taking slightly longer to execute, which causes task B to suspend until A is finally done. This delay then cascades down to task C.</p><h2 id="2aca2a57-6d7d-4fec-bd0e-da1973c2c7a9" class="">OS Locking Primitives</h2><p id="9f34d130-8a24-408d-928d-5c46e9269820" class="">The cost for using an OS locking primitive is not always cheap if the code is required to transition to the kernel.</p><p id="f7441106-9631-452a-96fb-84a280becb3f" class="">In a use case of a creator job and a consumer job, if the consumer job thread is constantly suspending waiting on work to perform, the cost for each task increases with the cost of transitioning to the kernel.</p><p id="76725844-f3db-499a-aab7-8209b61fd2fc" class="">The solution to the problem is to create larger tasks or to create a batch of jobs.</p><h2 id="b71cfb46-7474-4b7d-9baa-0331b8e57501" class="">Locks</h2><p id="70b3bbd7-0112-47ee-853f-0fee745dbbb6" class="">When lock are used too heavily, it results in thread stalls.</p><p id="25125fda-8a9e-4bb7-b139-c444ef267bc3" class="">A change in timing for just one piece of code ends up affecting all other threads that are using the same locking primitive.</p><p id="d5786a80-e0dd-4e3c-8a4e-1cd75c5038f6" class="">For example, memory allocation.</p><p id="40e43186-021e-4f4e-bbbf-de30b058eb82" class="">The solution is to reduce the amount of locking and contention.</p><ul id="1b37ec79-8578-4903-b95e-b97e54df825e" class="bulleted-list"><li>Make sure that the use of locks is protecting the minimum amount of code possible.</li></ul><ul id="dd3fda5a-4eaf-4f8c-85fc-b38405b8ea29" class="bulleted-list"><li>Prefer lockless implementations whenever possible.</li></ul><ul id="e5360443-7780-4887-be57-51aa317cf7cd" class="bulleted-list"><li>Proper use of reader/writer locks.</li></ul><ul id="de114db1-3653-4bb3-9723-1a7108535b36" class="bulleted-list"><li>Prefer algorithms that treat input data as read-only. All threads can read the data simultaneously without needing the lock.</li></ul><h2 id="48a30df4-758c-4292-8c70-f07a354ee653" class="">Testing</h2><p id="bca22a9d-fa17-4a33-a756-44ab0b77abb9" class="">Applications should test against a variable number of processor cores. Testing against multiple machine configurations is possible by using <code>SetProcessAffinityMask</code> to restrict the application to a reduced set of cores.</p><h1 id="7c21449e-a85f-458b-9a00-23386c8e0455" class="">I/O</h1><p id="7f6e74f2-e71b-453e-86c6-8b5059d5fe5c" class="">Treat all I/O requests as asynchronous operations.</p><p id="ab6d3cdd-88f4-4e93-a8fd-6b7cf29579c1" class="">The standard C library functions are blocking. They perform one read operation at a time, waiting for each read to finish before requesting another read.</p><p id="75555cff-4d05-4a48-8c31-00b887fb8382" class="">Using overlapped I/O with the maximum number of requests possible allows the hardware to reorder the requests to match the underlying layout.</p><h1 id="d8bd71ee-5531-4e22-b825-359f00e9b4b0" class="">Video</h1><h2 id="9d5d2017-7108-4227-9f61-de0a8c07c83f" class="">GPU</h2><p id="6161d33d-ce7d-4990-bba9-70a285941915" class="">The GPUs in various platforms have different speeds as well as a different number of compute units.</p><p id="95e36f47-6930-4030-9134-250b17233f56" class="">Avoid tight coupling between GPU and CPU work that latency can affect.</p><h2 id="14d0654a-b43d-4994-9a31-d56868c88648" class="">Resolution</h2><p id="21456115-a4aa-41d6-ad85-f4cdd89a98f6" class="">Support multiple resolutions for desktop applications, as well as the ability to toggle between windowed and full-screen modes.</p><h2 id="0e3bdb06-6d73-49c6-8a35-2b5b29bc6e98" class="">Dynamic Resolution</h2><p id="1e3328ba-f279-4281-b96c-3bd5abfa1e2c" class="">To present the best resolution available and to preserve frame rate, downgrade or upgrade the resolution automatically as the application becomes more or less GPU bound.</p><h1 id="fdf3b920-07e2-4bbd-b717-02710cf9ee9b" class="">Audio</h1><p id="6d5d3fda-2ccb-4a85-8529-b998e53b494c" class="">The minimum size for audio packets can be larger or smaller on different systems.</p><p id="f33e3e23-bc33-4ca9-8f2c-053dcf85b3d3" class="">Attempts to synchronize gameplay to audio by making assumptions on the size of those packets can result in audio stutter.</p><p id="c4669621-7f44-40fb-95e0-9e84744486b5" class="">The solution is to query the packet sizes from the audio APIs where possible and then adjust the packets sent to the audio hardware to avoid extra latency caused by the OS having to convert the packets to match the hardware.</p><h1 id="87c093f0-e49f-4a80-be77-3469c83f4fc1" class="">Networking</h1><p id="019293fb-292e-4b9a-bd35-17521a72aeea" class="">Connection time-outs can vary drastically on different platforms.</p><p id="7518db68-f73c-4a3d-b0d6-af2e50a2b09a" class="">Be sure to test all network calls under varying conditions.</p><p id="acab02e6-cfe5-4c4c-9c20-975c8661a567" class="">Avoid testing solely on internal LAN networks, to make sure your title can handle different network topologies, bandwidths and latencies.</p><p id="f53cb9c0-694d-4788-a8e9-337f2d9d29c7" class="">Also try adding simulating varying levels of packet-loss and delays to your network system.</p></div></article></body></html>

@@ -1,0 +1,592 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Serialization</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="54ffe6ff-fac0-497a-a30b-fc99ab447bf8" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">💾</span></div><h1 class="page-title">Serialization</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th>Created</th><td><time>@Jun 09, 2019 10:56 PM</time></td></tr><tr class="property-row property-row-multi_select"><th>Tags</th><td></td></tr></tbody></table></header><div class="page-body"><h1 id="e5c667dc-98ce-45b2-b9e4-2f77723c666e" class="">Overview</h1><p id="5d55f69a-33c6-4ec1-8cbf-64e41854c58b" class="">Serialization is the process of converting the state of an object into a format that can be stored and reconstructed later.</p><h1 id="b416db30-3238-4105-bc5b-cc0d0451c5c1" class="">Goal</h1><p id="5aa88736-015a-4d27-a770-f0405d5babc8" class="">Read and write a set of objects from and to memory.</p><h1 id="611fa825-8494-489e-80bc-84b3b79ccbad" class="">Serializer</h1><p id="c3a8b0e6-1f25-4959-8bf7-5c3ada964bd8" class="">The serializer is an interface for serializing data.</p><p id="6b194799-0bb7-44d2-9a0e-9a0b98888f75" class="">The format of the data in depends on the serializer implementation.</p><p id="b747db21-5159-47a2-951d-46f118171cfe" class="">Examples of serializers:</p><ul id="e55595fa-f164-4e04-9bc1-6af5df894e8c" class="bulleted-list"><li>Binary</li></ul><ul id="b5451874-b2ab-4b23-861c-30311e27bf77" class="bulleted-list"><li>JSON</li></ul><ul id="3cb6311d-b966-4c0d-acbd-d68c57982c7d" class="bulleted-list"><li>XML</li></ul><ul id="2d0fb052-82a2-42b3-8152-67be3b0ac83a" class="bulleted-list"><li>YAML</li></ul><h1 id="0894929f-0f35-450d-a17b-ce3f790255ba" class="">Code Generation</h1><p id="6a658b1d-81cf-4ec3-8bde-9cdac82a4061" class="">With a reflection system where code is generated to build type information, the serialization code can be generated as well.</p><h1 id="7b2c63f2-aa6e-42e1-b76c-2316320ae2ec" class="">Inheritance</h1><p id="7acd64b6-98d1-418f-b1b7-b37189fdd34a" class="">The inheritance approach:</p><ul id="49ec6764-6249-4fb9-9c0e-583306a2f8c7" class="bulleted-list"><li>Define a base type for serializable objects.</li></ul><ul id="5795970c-2bb1-4423-87e3-86605acd5b9c" class="bulleted-list"><li>Define a method that is overriden in serializable objects to implement the serialization of each members.</li></ul><pre id="23c478ba-60a4-4d5d-923a-99c7eeec686f" class="code"><code>class ISerializable
+{
+public:
+  virtual void Serialize(ISerializer* serializer) abstract;
+};
+
+class MyComponent : public ISerializable
+{
+private:
+  int _int;
+  float _float;
+  Color _color;
+
+public:
+  virtual void Serialize(ISerializer* serializer) override
+  {
+    serializer-&gt;Serialize(“int”, _int);
+    serializer-&gt;Serialize(“float”, _float);
+    serializer-&gt;Serialize(“color”, _color);
+  }
+};</code></pre><p id="99787648-2bcd-4740-9b06-581911fb231c" class="">✔</p><ul id="8cd2d5f2-5cd3-4bf4-8adc-4b3be49bdf52" class="bulleted-list"><li>Data introspection is easily implemented with a special <em>type serializer</em> that builds type information.</li></ul><ul id="46171e5c-0abe-4783-89b0-4c1f76569631" class="bulleted-list"><li>Data can be serialized and deserialized in the same method.</li></ul><p id="8b8736e3-c26f-491f-9c9d-045e58fc55d9" class="">❌</p><ul id="eddd6a95-6f14-4c24-adf4-baab2cfabc64" class="bulleted-list"><li>The serialization process is hidden in the method implementation.</li></ul><ul id="7aa690a5-406c-4fd7-abea-dac7a5fbaa95" class="bulleted-list"><li>Metadata has to specified in the serialize method which complxify the implementation or it has to be provided in a separate format (for default values, ranges...).</li></ul><ul id="eae9c9f1-bb08-4fcc-bfa7-2499f0633eb7" class="bulleted-list"><li>Serializable classes need to inherit from the serializable interface.</li></ul><ul id="4862359a-e7e7-452c-b6ed-1b6173200aa4" class="bulleted-list"><li>POD types have to handled separately.</li></ul><h1 id="9efb5914-d852-4b51-877d-df72c6a47df3" class="">Schema</h1><p id="0977aaf9-d87c-45bc-ae71-c8df2f99e796" class="">A different approach is to define a custom schema to describe the data.</p><ul id="c93c6beb-ea32-442e-978f-7d488dbe2e20" class="bulleted-list"><li>In development builds, the runtime reads a key-value store based on the schema. Backward and forward compatibility is easily supported.</li></ul><ul id="1581c783-f8c4-4c21-92d0-96de64f6a1e2" class="bulleted-list"><li>In final builds, the runtime reads a block of data. Backward and forward compatibility is not needed, and it is the most efficient solution.</li></ul><h1 id="489a42f1-da3a-4503-8a64-5b2da71d9b42" class="">Backward Compatibility</h1><p id="e16f29aa-c8e0-4942-a432-f88bf70ee4b5" class="">Backward compatibility is the ability of newer versions of a program to load data stored from older versions.</p><h2 id="25cd170d-2b53-4aa6-94b6-becf36931d21" class="">Version</h2><p id="153544f1-db8c-40aa-8349-bd8df1450e94" class="">You store a version number before the serialized data, and you check the current version to provide different code paths to deserialize the data.</p><p id="0a5f6b65-b6bc-40df-9fcd-60d5d8e12d5f" class="">The latest version number is generally defined in the code, and the serializer writes this value for the newly serialized data.</p><p id="75456a50-a5e9-4a8f-b249-2c4f5786ab41" class="">When the definition of the data changes, the version number is incremented.</p><pre id="11bff714-ecbf-46a3-8ae3-338f40c4202e" class="code"><code>if (version == 1)
+{
+    ...
+}
+else if (version == 2)
+{
+    ...
+}</code></pre><h1 id="1fbac43e-9145-47ce-9a3e-1dc042772243" class="">Forward Compatibility</h1><p id="94fd785b-fd01-4e71-9b14-baf8ea3c7fd7" class="">Forward compatibility is the ability of older versions of a program to load data stored from newer versions.</p><p id="de4c4eba-e121-4478-9129-1e9f1bafc308" class="">Versioning is impossible, as it&#x27;s impossible to predict the new changes related to newer versions.</p><ul id="22560c39-7406-4d28-9739-543c232aefeb" class="bulleted-list"><li>Ignore new elements.</li></ul></div></article></body></html>

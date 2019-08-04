@@ -1,0 +1,565 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>DirectX</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="bbf599db-ca4e-47b3-8325-b3955a547644" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">☢</span></div><h1 class="page-title">DirectX</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th>Created</th><td><time>@Jun 24, 2019 9:20 PM</time></td></tr><tr class="property-row property-row-multi_select"><th>Tags</th><td></td></tr></tbody></table></header><div class="page-body"><h1 id="e5654d07-d3c2-4377-b12e-b0277206e37b" class="">Overview</h1><p id="cfcde623-bb6f-493f-a996-907840d9ee2e" class="">DirectX is a set of APIs from Microsoft for applications and games on Windows and Xbox systems.</p><h1 id="20186634-d021-4479-ab12-199cd21ae22f" class="">DOS</h1><p id="cc7d123c-5394-4b4f-834b-83640b2247da" class="">DOS allowed direct access to video cards, sound devices, input devices and other components of the system.</p><p id="742c3736-7554-4f56-91e7-45740172656d" class="">High performance DOS games used blitting and page flipping with direct access to video memory.</p><h1 id="942dbcb3-ea72-49ff-965f-c64c02d5d9ed" class="">GDI</h1><p id="ca527d54-7819-4a88-848d-dc701e13b3e3" class="">The Graphics Device Interface (GDI) is the original graphics interface for 16-bit Windows.</p><p id="be41e712-623f-4564-9fa3-92b4188c675d" class="">Windows 3.x had several problems to enable high performance applications.</p><ul id="d3856dd1-7e5b-4f48-ad2a-17c744473f33" class="bulleted-list"><li>Bitmap operations could be done using the Windows Graphics Device Interface (GDI) but only in main memory.</li></ul><ul id="8ae2779d-b284-43ab-a425-90f3adc4849b" class="bulleted-list"><li>No support for creating Device Contexts (DC) based on Device Independent Bitmaps (DIB).</li></ul><ul id="2738e323-6c86-4677-8034-94e3c3cb3ec0" class="bulleted-list"><li>No direct access to video memory.</li></ul><ul id="19ad8700-b7fe-4e10-8fe2-94bdb5e4c4ca" class="bulleted-list"><li>No support for page flipping.</li></ul><h1 id="aee902a1-7280-4816-b2c0-2347e0240f82" class="">GDI+</h1><p id="63c7c995-2687-4509-9f8a-b748058ad8aa" class="">GDI+ was introduced in Windows XP as a successor to GDI.</p><p id="e7be6d2b-1c25-440a-9964-cb698dba055a" class="">GDI+ is a C++ API with a few additional features but the same limitations regarding direct access to video memory.</p><p id="695aac84-fa2b-4f61-b6da-951bd7926d19" class="">The .NET Framework also provides a managed version of GDI+.</p><h1 id="4fb80dd8-0b66-425f-91ce-75b876c614fd" class="">WinG</h1><p id="205af56a-2cbb-48d6-9700-e3f5170a41ef" class="">To fix the issues with GDI, Microsoft released the <strong>WinG</strong> library on September 1994.</p><p id="6f9103e2-2fcc-45e9-9e32-7619deffeb01" class="">WinG used the Device Control Interface (DCI) driver that exists at the same software layer as the GDI to exploit the video acceleration features of graphic cards.</p><p id="9f5cd300-f40a-4dab-adc6-8cdb8af97f8f" class="">WinG introduced a new type of DC called the <code>WinGDC</code> and a new type of DIB called <code>WinGBitmaps</code>.</p><p id="2c15f63d-d11c-4627-b883-f06c197090a8" class="">WinG allowed reading and writing directly to memory and fast transfers to the display device.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="db8faad0-b3a5-4cdc-bc1b-568877ff4a47"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The WinGBitmap scan lines are aligned on 32-bit boundaries.</div></figure><ul id="cd63d437-9b62-4df0-b046-020819f488f0" class="bulleted-list"><li><code>WinGRecommendDIBFormat</code> determines the most appropriate DIB format on the system.</li></ul><ul id="3a8c1d44-f839-409b-8d10-5962d9175c90" class="bulleted-list"><li><code>WinGCreateBitmap</code> allocates a block of memory using the specified <code>BITMAPINFO</code> structure describing the size and format of the bitmap.</li></ul><ul id="53877c72-dba2-4fc3-88cc-1e8ecfccad70" class="bulleted-list"><li>The bitmap palette is still managed using the GDI APIs.</li></ul><ul id="8e681053-be0e-4e8a-937e-c911c3f54be9" class="bulleted-list"><li>Applications overwrite the system palette with <code>SetSystemPaletteUse</code> with the palette mode:<ul id="9654d79d-a8e5-4518-8d9e-14933a19624c" class="bulleted-list"><li>The <code>SYSPAL_STATIC</code> mode gives access to 236 colors out of 256.</li></ul><ul id="951161ad-90f3-4587-86d6-d581d10e44db" class="bulleted-list"><li>The <code>SYSPAL_NOSTATIC</code> mode gives access to 254 colors out of 256 by also overwriting the static colors.</li></ul></li></ul><ul id="c4783c38-ba3c-4979-86eb-241ac3ddff9b" class="bulleted-list"><li>The frame buffer is transfered to the display device using two methods:<ul id="4bc0cd70-c133-4e06-9e13-87bb8c7a729f" class="bulleted-list"><li><code>WinGBitBlt</code> transfers the WinGBitmap to the display for full-screen resolution.</li></ul><ul id="a30494c3-0ed6-45dd-995c-98e78013e1d5" class="bulleted-list"><li><code>WinGStretchBlt</code> stretches the WinGBitmap to fit a window resolution.</li></ul></li></ul><h1 id="4e7fda54-4729-4acb-a7dc-eca44c84a244" class="">Windows 95</h1><p id="15198f6b-2be4-43da-b60e-420b3c7f66b2" class="">Windows NT 3.5 and Windows 95 introduced <code>CreateDIBSection</code> to support creating DCs based on DIBs.</p><p id="7e94b07a-a9ae-45bc-9697-44aa4bc24d70" class="">However, Windows 95 had a protected memory model that restriced access to the hardware.</p><h1 id="157a1a90-68d5-4659-9d29-2e4677bfe9ec" class="">Game SDK</h1><p id="3e59f789-5616-4945-a473-e93306e90ccc" class="">The first version of DirectX was called <strong>Windows 95 Game SDK</strong> or <strong>Game SDK</strong>.</p><p id="c7545083-d6a4-4870-9ee0-e55f39e0e07c" class="">It was announced in March 1995 at CGDC.</p><p id="5f7f7ba4-db1f-4654-8778-82b1d90be133" class="">It was released on September 1995.</p><p id="7f4b0349-50a6-4268-b6e3-35b6af635d79" class="">It supported Windows 95.</p><p id="20dc84c7-fa2d-4c18-ad24-a118ad48d8b8" class="">The libray provided four set of APIs:</p><ul id="eea8bc70-e463-494a-a620-53706cacd53e" class="bulleted-list"><li>DirectDraw (DD)</li></ul><ul id="4844f02d-7e22-430f-bd88-9190a79191cb" class="bulleted-list"><li>DirectSound (DS)</li></ul><ul id="18d605da-397f-4c74-bcd6-e29dba5fb3ab" class="bulleted-list"><li>DirectInput (DI)</li></ul><ul id="57aeb2a1-e20c-4b89-bdf0-cf828a265aa4" class="bulleted-list"><li>DirectPlay (DP)</li></ul><h2 id="bcda445b-2f12-48ea-b54d-78ba19006de2" class="">COM</h2><p id="35d02c36-8943-42ad-86d4-84cd1d133393" class="">DirectX is composed of interfaces based on the Component Object Model (COM).</p><p id="b4dbe95c-e299-4419-a8f7-52d967f6a471" class="">Each interface supports a set of functions.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7f53617a-f74e-4457-96bd-34eeaeda3693"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">A COM interface is like a pure abstract base class in C++.</div></figure><h2 id="b13dde42-335b-44a9-8036-fdda0705e0ed" class="">DirectDraw</h2><p id="e6edff08-7632-4458-b275-dda16eea4cba" class="">DirectDraw is a Hardware Abstraction Layer (HAL).</p><p id="4dc7e3b9-4457-49a1-9208-0ea33e37dc8e" class="">DirectDraw can emulate hardware functionality in software using its Hardware Emulation Layer (HEL).</p><p id="f5274afb-6041-4ef4-a5ca-dfdce72de3b4" class="">DirectDraw provides a memory manager for video memory. Memory can be allocated, moved, transformed, and freed.</p><p id="2649f11c-1aca-4fd4-9312-74a77d33bd72" class="">An image in video memory is referred to as a <em>surface</em>.</p><ul id="889ce8ba-75a4-4cf6-be5a-3e249460a000" class="bulleted-list"><li>Allows direct manipulation of video display memory</li></ul><ul id="9d732886-906b-4cd7-a7bc-8412eee8de12" class="bulleted-list"><li>Access to hardware blitters</li></ul><ul id="82b8f630-5172-4104-8ea4-e22669e4a321" class="bulleted-list"><li>Transparent blitting with color keys</li></ul><ul id="69ffb348-1ad3-49c6-b48c-0b0e8a6f6c3a" class="bulleted-list"><li>Hardware overlays with z ordering (sprites and multiple layers of animation)</li></ul><ul id="60af3ecb-a024-4071-993e-9bf012832bd5" class="bulleted-list"><li>Support for double-buffering and page flipping</li></ul><ul id="3b8face0-2069-441c-9bce-98bf02fc68a5" class="bulleted-list"><li>Support for clipping, stretching, and non-RGB color format</li></ul><ul id="80ed03b0-99c3-4809-a445-cc0cd67b832d" class="bulleted-list"><li>Support for depth buffers</li></ul><ul id="91af9d5e-66e3-4935-b34d-347adb6dd928" class="bulleted-list"><li>Support for palletized primary surfaces: 8-bit (256 entry) and 4-bit (16 entry) palettes.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="bd640ee7-4db8-4b86-9aa4-1d0b0c929543"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Maintains compatibility with Windows GDI.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ad950dda-8951-4287-8eb9-6de8f7dc2463"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Display modes are limited to a 640-by-480 resolution with pixel depths of 8-bpp and 16-bpp.</div></figure><h2 id="b3bb8c4b-3052-43b7-aea8-f5fd39c359e4" class="">DirectSound</h2><p id="6e20434f-fdd1-40e1-b746-96572a534757" class="">DirectSound provides hardware acceleration (HAL).</p><ul id="0a99c2d4-5399-44c3-bbc3-1e1a6d071567" class="bulleted-list"><li>Low-latency mixing of audio stream</li></ul><ul id="37ba1afe-4d6b-474d-976c-6a41a6f64332" class="bulleted-list"><li>Access to hardware memory</li></ul><p id="507e1fb2-0fef-45a3-9d6f-0bb950afd46b" class="">DirectSound can emulate hardware functionality in software using the Windows waveform audio functions (HEL).</p><p id="4ad10b59-c76e-4ca0-a8f8-fe3a3f54dad1" class="">DirectSound supports uncompressed PCM formats.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ad57b518-f404-4809-83be-9648a6db121b"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">DirectSound does not support compressed wave formats.</div></figure><h2 id="d04f7496-600c-4a21-81c3-316ebc8d0cdf" class="">DirectInput</h2><p id="3bac4b58-e18d-4abc-9233-4dd4f9120803" class="">DirectInput only provides support for joysticks.</p><p id="075cd139-d8f7-4928-8c70-a42e47c65214" class="">The Windows API provided limited support for joysticks using the <code>joyGetPos</code> function:</p><ul id="95db9c5e-9fcd-426a-9e4a-911ed4431082" class="bulleted-list"><li>The coordinates of up to three axis.</li></ul><ul id="ff6e9c9b-e4f6-4e3b-b186-bcef34504383" class="bulleted-list"><li>The state of up to four buttons (pressed or released).</li></ul><p id="bb707417-3df7-46f3-975d-533e0951eac1" class="">DirectInput added an extended function: <code>joyGetPosEx</code>:</p><ul id="7eb29536-6729-4c56-9e15-0bc89946b5e4" class="bulleted-list"><li>The coordinates of up to six joystick axes.</li></ul><ul id="0c5add62-ac2a-4f70-a280-f8df3334ea9a" class="bulleted-list"><li>The state of up to 32 buttons (pressed or released).</li></ul><ul id="2e64cb56-e5aa-48e8-8106-6a7fbb2b3f55" class="bulleted-list"><li>The position of the point-of-view control.</li></ul><h2 id="225c4d2c-9aa9-42e4-bee5-4ce60da548d1" class="">DirectPlay</h2><p id="1b40d9f6-a923-4398-aade-f826dacb9816" class="">DirectPlay is a high-level software interface between applications and communication services.</p><p id="eb519f49-8e30-4f24-a9f9-9b715c26e563" class="">DirectPlay is built on the User Datagram Protocol (UDP).</p><h1 id="f1bca7c2-0186-4254-a424-9f7e32933ce6" class="">DirectX 2</h1><p id="b3b9ccd2-4cab-4028-8c8c-e2e7ffe8c619" class="">It was announced in April 1996 at CGDC.</p><p id="b5eb32db-43b5-439e-9a47-c802607172d5" class="">It was released on June 1996.</p><p id="c9e7fcf1-9a4f-4732-83a5-ed3652fb3e3a" class="">A minor revision was released: DirectX 2.0a.</p><p id="06d90767-a72e-4a56-9b6c-6714e9ab4466" class="">It supported Windows 95 OSR2 and Windows NT 4.0.</p><h2 id="70cf5caa-f0f9-483c-9eb9-1187275f6783" class="">Direct3D</h2><ul id="00607fec-d5aa-48b1-9a74-27a0d08559d2" class="bulleted-list"><li>Introduced <strong>Direct3D </strong>(D3D), based on the technology of Rendermorphics.</li></ul><ul id="66c6f13f-f892-446c-888c-0922481c8c66" class="bulleted-list"><li>Introduced the Direct3D File Format (.X files).</li></ul><ul id="5d1ea14f-94a8-400b-8360-4793938ba1ae" class="bulleted-list"><li>High-level Retained-mode interface.</li></ul><ul id="a3a2d1f7-9ee4-4a61-8c82-f6ddbaeaac8b" class="bulleted-list"><li>Low-level Immediate-mode interface.</li></ul><ul id="db58333d-9d36-4c7d-ba58-f8663fe76873" class="bulleted-list"><li>Full 3D rendering pipeline (transformations, lighting, and rasterization).</li></ul><ul id="006a6342-92d9-471f-936d-de2999a2bbb7" class="bulleted-list"><li>Floating-point precision of 53.</li></ul><ul id="6d8cce09-b7f5-4bcb-9d45-f8567e32ec1d" class="bulleted-list"><li>Advanced graphics capabilities of 3D hardware accelerators:<ul id="b4b09068-9b65-4dbe-ab0a-234180a0e405" class="bulleted-list"><li>Z-buffering</li></ul><ul id="9e5c0397-5c70-49e2-be2c-fa7233c003b7" class="bulleted-list"><li>Anti-aliasing</li></ul><ul id="bebd2102-4bb9-48c5-9cec-d7e867dfe473" class="bulleted-list"><li>Perspective-correct texture mapping</li></ul><ul id="c390685e-2cb8-41d5-9c92-928712ad0440" class="bulleted-list"><li>Alpha blending</li></ul><ul id="25a4066a-fced-4657-b633-83515a193fef" class="bulleted-list"><li>Mipmapping</li></ul><ul id="a8aff627-b2bf-401a-bec5-fae5d9933145" class="bulleted-list"><li>Atmospheric effects</li></ul></li></ul><h2 id="c6c6dddf-74ea-4534-9fc1-a791a1b751b4" class="">DirectDraw</h2><ul id="7ebdb588-80cf-4c6b-b218-bb5a8ff6ea67" class="bulleted-list"><li>Added support for 24-bit and 32-bit surfaces.</li></ul><ul id="e2cdeb03-baef-4b5a-862f-75d50a1ab9d5" class="bulleted-list"><li>Display mode descriptions include the refresh rate.</li></ul><ul id="b942a7a5-e14e-4874-9652-c113605e5324" class="bulleted-list"><li>Support for locking a page of system memory (to prevent it from being paged out by the system).</li></ul><ul id="ec72f1cc-ee24-4e11-9971-1e7a8fbadb66" class="bulleted-list"><li>Windowed applications don&#x27;t need to provide a window handle.</li></ul><ul id="b6e0c6ae-3404-4873-982c-d1bef15ef2e3" class="bulleted-list"><li>Palettes can be attached to any surfaces.</li></ul><ul id="f4018ecd-a79f-4344-b762-a8dfa914c726" class="bulleted-list"><li>Added support for 1-bit (2 entry) and 2-bit (4 entry) palettes.</li></ul><ul id="51cdde5d-f279-47f4-a7df-6edf880e4f8d" class="bulleted-list"><li>Added support for texture, mipmap and z-buffer surfaces.</li></ul><h2 id="bce879a5-7a7d-47bf-80e1-cc138fc68db6" class="">DirectInput</h2><p id="4f18c64b-ff1c-48ff-a773-522740c0bc13" class="">Keyboard and mouse are provided as wrappers to the Windows API.</p><p id="dbd09ee4-ec06-4a57-b0a1-4fe04a29d04b" class="">Support for up to 16 joysticks, each with up to six axes of movement and up to 32 buttons.</p><h1 id="a36845f9-1587-4305-a4d3-ee1fece66067" class="">DirectX 3</h1><p id="18c0e786-3628-4505-b32c-7bef703e0075" class="">It was released on September 1996.</p><p id="3ea3b485-e4ac-4221-b050-1759ef3c24f5" class="">Two minor revisions were released: DirectX 3.0a and 3.0b.</p><ul id="7cd3e74a-6844-468d-b79a-5a07113f654c" class="bulleted-list"><li>Introduced DirectSound3D (DS3D) as an extension to DirectSound.</li></ul><ul id="5f427750-8438-4d7d-9002-4195fd93cdfb" class="bulleted-list"><li>Support for the MMX technology.</li></ul><h2 id="783b269b-7847-4cab-b02d-f8e22a9bb34c" class="">DirectInput</h2><ul id="e52328cc-6bf4-4914-ac70-fb83a1200034" class="bulleted-list"><li>Added support for keyboards and mouse.</li></ul><ul id="0075187e-7e12-4f81-ad75-323b90797eea" class="bulleted-list"><li>Improved support for joysticks.</li></ul><h1 id="96f0fde5-2cbd-491b-a5e2-142b0dfe8c12" class="">DirectX 4</h1><p id="ed6c0191-12bb-40de-93b6-932bbda57c2a" class="">It was planned for December 1996 with special features for Cirrus Logic chips.</p><p id="ad4f64f9-85ec-42c2-9a00-7028815d2127" class="">The released was skipped because of the delay of the chips.</p><h1 id="433fd990-dfb8-4049-b056-3e91ad335961" class="">DirectX 5</h1><p id="a197d98c-7b1a-4354-9843-a5010c83086b" class="">It was released on July 1997.</p><p id="dfff5d49-6a96-42dc-94fe-c683c644c9e3" class="">It supported Windows 98.</p><p id="400aa32a-d8be-4138-ac65-fadd6e8fe1db" class="">DirectX 5.2 was released for:</p><ul id="37026846-84e1-4ebe-b1b6-7103b3aac905" class="bulleted-list"><li>Windows 95 on May 1998</li></ul><ul id="3d940f87-7edc-458d-8005-e0001af86d3f" class="bulleted-list"><li>Windows 98 on June 1998</li></ul><p id="17c743f9-d783-49ac-9947-2a0e7b0ff024" class="">It included:</p><ul id="a685b4ef-eb9c-42f2-bfc3-0dbf196e0911" class="bulleted-list"><li>Improved support for MMX.</li></ul><ul id="50ed73b7-31b3-49f5-9213-bb4c14faf16b" class="bulleted-list"><li>Support for multiple monitors on Windows 98.</li></ul><h2 id="a9b9bbb6-c32c-4bbd-8329-18e8b56bc2ec" class="">DirectInput</h2><ul id="a70d224b-503f-4663-8a14-f36b2ffccf0a" class="bulleted-list"><li>Improved support for joysticks.</li></ul><ul id="b48e75ee-04e8-4665-ab3a-cc51725eb43a" class="bulleted-list"><li>Improved mouse support by increasing the number of buttons from 4 to 8.</li></ul><ul id="57c74bea-9416-4aeb-8035-4448878bfff4" class="bulleted-list"><li>Added a <em>Game Controllers</em> control panel.</li></ul><ul id="401ba1d6-b994-4ff5-9cc7-f1fc85384977" class="bulleted-list"><li>Added support for force feedback controllers.</li></ul><h1 id="493c29db-6101-4a75-a722-caf2256affa5" class="">DirectX 6</h1><p id="78250133-fab4-494d-8b5e-8fd3b276c5b1" class="">It was released on August 1998.</p><p id="dc9613a5-c319-4829-9eee-eb51928c193e" class="">It was released as Windows CE on the Sega Dreamcast.</p><ul id="f1b1ccd4-d8d7-40a9-97b5-bae9080f9918" class="bulleted-list"><li>Support for AMD’s 3DNow! technology</li></ul><ul id="51d5f913-dd4d-40b8-ab0f-8e7380ab1546" class="bulleted-list"><li>Added new Direct3D features:<ul id="5f5bba6e-66cd-409f-8369-b3467b1d3aad" class="bulleted-list"><li>Bump mapping</li></ul><ul id="cb515316-d327-416b-a155-8f0e0f329b47" class="bulleted-list"><li>Texture compression</li></ul><ul id="a39acd66-a10a-490f-95b9-fd7e2263e563" class="bulleted-list"><li>Stencil buffers</li></ul></li></ul><p id="98783fb1-881f-4dc2-a773-eada03ddb6a2" class="">The introduction of DirectMusic was delayed.</p><h1 id="d599b76d-d431-4f4e-8bf0-9c9058a1f001" class="">DirectX 6.1</h1><p id="684d33ab-d8bf-4e82-9efd-ed2b6c05099a" class="">It was released on February 1999.</p><p id="91e261f2-bd31-4c68-bb0f-44d73c729e3d" class="">A minor revision, DirectX 6.1a was released on May 1999 for Windows 98 SE.</p><ul id="ac7fbc26-523a-4f04-b0cd-e68745b15bfc" class="bulleted-list"><li>Added DirectMusic (DM)</li></ul><h1 id="b3a222bb-d02e-4ed6-ab4b-de586ec03a41" class="">DirectX 7</h1><p id="78565dc8-e7e9-4cca-86d5-cad102bced65" class="">It was released in 1999.</p><p id="4f805091-cfe0-41b5-a82c-3b5950c51f87" class="">A version for Windows 2000 was released on February 2000.</p><p id="be10eb5e-5dcc-4ad2-b96e-5505be0e44d7" class="">A minor revision, DirectX 7.0a was released on March 2000.</p><h1 id="fdaf87fd-f8fe-45c6-a6df-a7d03040e831" class="">DirectX 7.1</h1><p id="21d8cc64-2c18-465d-ab0c-a023fa75089c" class="">It was released on September 2000.</p><p id="194bd4bc-dae0-4017-a087-f5ba042642d7" class="">It required at least Windows ME.</p><ul id="f6ea25f8-de5a-4c81-9a69-f7cd1533d989" class="bulleted-list"><li>Introduced DirectPlay Voice.</li></ul><h1 id="a72a4f60-075b-4a74-8a20-3349145d138e" class="">DirectX 8</h1><p id="006abce2-d280-4ea0-8593-236410eb6836" class="">It was released in 2000.</p><p id="2c756cb2-f9b8-435d-bab4-45a210bb71e4" class="">A minor revision, DirectX 8.0a was released on February 2001.</p><ul id="f701a437-83f4-4f0c-aca6-8ec8d0104b7b" class="bulleted-list"><li>Introduced DirectX Graphics that included Direct3D and DirectDraw.</li></ul><ul id="f1f54123-a95f-4698-8f99-3e6e1b4df0ab" class="bulleted-list"><li>DirectSound and DirectSound3D were merged into DirectX Audio.</li></ul><ul id="11d41580-0b2b-4b9b-8615-a9cc0509cbda" class="bulleted-list"><li>Added action mapping to DirectInput.</li></ul><ul id="7c1f6092-ea2c-48a6-a664-08a321f35b5d" class="bulleted-list"><li>Major overhaul of DirectPlay to be a lightweight networking library.</li></ul><h2 id="57db9dcc-a1a6-45fe-aebc-356f2a05291f" class="">Direct3D</h2><ul id="77e74fb8-a6b3-40ff-abcf-1bdf6a203132" class="bulleted-list"><li>Introduced Shader Model 1 with support for pixel shader and vertex shader.</li></ul><h1 id="88e68bd0-879c-4fa0-8909-b5beaf60f188" class="">DirectX 8.1</h1><p id="96b0b9a5-c3cf-40df-a7ee-eb1671858dd5" class="">It was released on November 2001.</p><p id="50eb5de4-3f67-4755-a004-204fc6c6775f" class="">It required at least Windows 98 and Windows 2000.</p><p id="b0798580-58ff-4540-801a-bbbd1988d59f" class="">Two minor revisions, DirectX 8.1a and 8.1b were released in 2002.</p><p id="72196a0b-8624-4994-9db9-434a544727be" class="">The Xbox system was based on DirectX 8.1.</p><h1 id="d1044f3a-a2aa-4725-b4ed-7f00a05467aa" class="">DirectX 8.2</h1><p id="9cca72de-36dc-4b18-9c8d-60a82cd3c871" class="">It was released in late 2002.</p><p id="1c363a4b-1288-4080-8e00-3cc8eea60429" class="">It included DirectPlay 8.2.</p><h1 id="8fbc4985-3bd0-425e-8742-041a08640cb3" class="">DirectX 9</h1><p id="61b64495-b808-4522-83a6-0b359de22ebb" class="">It was released on December 2002.</p><p id="57f0459d-1cad-44dd-94a5-dc1d6be83911" class="">The original release supported Windows 98 and Windows XP.</p><p id="3999ea88-1843-4bf8-b589-11657c25ba1c" class="">The February 2005 release is the released with support for 64-bit systems.</p><p id="3b596163-4e93-433f-b0b7-8c546a172a79" class="">The last update was DirectX 9.0c.</p><p id="f86fc61f-31a6-43c8-be11-043480b4d069" class="">The April 2006 release added support for Windows Vista and required at least Windows XP or Windows 2000.</p><p id="0ead9d86-3e25-402c-b22d-d11fdff1e6f4" class="">The Xbox 360 system was based on the 2008 release.</p><p id="f3c3c8ff-e28d-44ab-afc6-0f2258009d8f" class="">The August 2009 release added support for Windows 7.</p><h2 id="f248ee6f-3710-4a8d-b47f-295b8b92d2ad" class="">Direct3D</h2><ul id="49d9e223-8ea2-40be-9901-b11140149d94" class="bulleted-list"><li>Introduced Shader Model 2.</li></ul><ul id="3da34acb-56aa-4181-99e2-bf1cdd413af6" class="bulleted-list"><li>DirectX 9.0c introduced Shader Model 3.</li></ul><h2 id="df8128fd-d35c-4939-843e-afc811f3f433" class="">XInput</h2><ul id="deb09ed9-8209-4231-bb80-70b61a0bf9a0" class="bulleted-list"><li>XInput was introduced with the Xbox 360.</li></ul><ul id="e529bd22-f50c-44ef-b213-090801c0daba" class="bulleted-list"><li>Support for XInput was then added to DirectX.</li></ul><ul id="b4f5758f-f4dc-4639-b8db-42e7435e4ebe" class="bulleted-list"><li>XInput 1.3 supports Windows Vista, Windows 7, and Windows 8.</li></ul><ul id="93f71d27-83cd-45b0-8899-9a4760a37acd" class="bulleted-list"><li>XInput 1.4 supports Windows 8.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d222a16a-113e-4509-8279-575a26eca665"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">DirectInput has limited support for the Xbox 360 and Xbox One controllers.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fbfb0096-8a73-4253-be6c-fbfb07838eea"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">XInput has limited support for legacy Windows controllers.</div></figure><h2 id="2ae1a35e-3283-450b-a75e-a00a94c7d5aa" class="">Managed DirectX</h2><p id="ab1f32c3-c130-42b6-9dfa-56bd609ab350" class="">Managed DirectX (MDX) 1.1 was introduced in 2002.</p><ul id="1cba0091-5b3c-415f-ae20-0398217434ce" class="bulleted-list"><li>Can be used under .NET Framework 1.1 and 2.0.</li></ul><ul id="9e70c2b2-c28e-4e9b-aca6-effa3dfe28cb" class="bulleted-list"><li>Exposed functionality from DirectX 9.</li></ul><p id="be2cdcbb-db63-4378-b8c2-286299cc6225" class="">MDX 2.0 was in beta from 2005 but was cancelled in 2006.</p><h2 id="6270bcbd-a1d4-48a1-bec7-f111086c433d" class="">XNA Framework</h2><p id="154e3aac-1eb5-4e27-b082-70f9a42dd7e1" class="">XNA was announced on March 2004 at GDC.</p><p id="130a6046-643c-4620-8ec7-e9da084c37b3" class="">A first Community Technology Preview of XNA Build was released on March 2006.</p><p id="6f6b1fc4-823a-4e96-afb8-9bf24441d8cb" class="">The first beta version of XNA Game Studio Express was released on August 2006, followed by a second version on November 2006.</p><p id="6828bbe0-25af-4dd5-a727-7192d237e0cb" class="">XNA Game Studio Express was released on December 2006.</p><p id="78d819ca-edd4-4041-99b6-8954f4948883" class="">XNA Game Studio Express 1.0 Refresh was released on April 2007.</p><p id="9209a900-67fa-4664-b1bc-bcb8c09e4d2c" class="">XNA Game Studio 2.0 was released in December 2007.</p><ul id="b542991b-1223-404c-8788-fed5c07f804d" class="bulleted-list"><li>Added a networking API for some Xbox Live functionality on Windows and Xbox 360.</li></ul><p id="a84c6af1-1d52-4f62-825d-5f17c65cbc17" class="">A beta of XNA Game Studio 3.0 was released on September 2008.</p><p id="6912b857-109d-4747-9ddc-e9df035ceb8b" class="">XNA Game Studio 3.0 was released on October 2008.</p><ul id="22bbf146-3f5e-4dda-8ef2-a535c71d7128" class="bulleted-list"><li>Added support for C# 3.0 and LINQ.</li></ul><ul id="ca337008-e29b-446d-b5b9-1f2ef9b74045" class="bulleted-list"><li>Added support for Zune.</li></ul><ul id="d7556de6-c427-476d-8c2f-887e2e8c0578" class="bulleted-list"><li>Added support for trial mode on Xbox 360.</li></ul><ul id="0de13b44-96c9-4420-9bca-5aa2c81d5aea" class="bulleted-list"><li>Added support for multiplayer features on Xbox Live.</li></ul><p id="268eb111-15db-4e65-92e3-6ebff85f3647" class="">XNA Game Studio 3.1 was released on June 2009.</p><ul id="f0e8d3f0-99e0-4f1e-aa48-e7dff3611fa4" class="bulleted-list"><li>Added support for video playback.</li></ul><ul id="d6b53f8d-ce8e-4f48-9d91-53c40f17a6c1" class="bulleted-list"><li>Added a revised audio API.</li></ul><ul id="2121a7a3-20fa-49dd-a142-6172b522debc" class="bulleted-list"><li>Added support for Xbox LIVE Party.</li></ul><ul id="cb0a221f-c8e3-4d89-8396-ce2ff413b03d" class="bulleted-list"><li>Added support for the Xbox 360 Avatars.</li></ul><p id="8d196bc6-dea9-4ccf-b906-8c39b694acd5" class="">XNA Game Studio 4.0 &quot;Community Technical Preview&quot; was released on March 2010.</p><p id="530768d6-57b7-4cfc-a0da-3b62d5e998f8" class="">XNA Game Studio 4.0 was released on September 2010.</p><ul id="161fa2a9-f8a4-4cdb-90e7-e89bea550b74" class="bulleted-list"><li>Added support for Windows Phone.</li></ul><ul id="26541646-1ba7-4ea6-9330-a1b148d767e5" class="bulleted-list"><li>Included the Windows Phone Development Tools.</li></ul><p id="871d19fe-e5f2-4638-8b9e-8bba6b1c4608" class="">XNA Game Studio 4.0 Refresh was released on October 2011.</p><ul id="b7abe97f-848b-4a18-9c36-a905de7ae470" class="bulleted-list"><li>Added support for Windows Phone 7.5 (Mango).</li></ul><ul id="410c5d17-3eb6-4b26-9fba-fe993bb493fe" class="bulleted-list"><li>Added support for Visual Basic.</li></ul><p id="f5a68cd3-c2fe-4298-95b8-543eb7fdbf4e" class="">XDK Extensions was available with the Xbox 360 Development Kit for licensed developers.</p><ul id="5003b268-4679-483e-8a27-a360e268eb6a" class="bulleted-list"><li>Added support for achievements and leaderboards.</li></ul><p id="bbf03fae-61eb-45a6-99f6-a85bf6f86169" class="">In 2013, the development of XNA was discontinued.</p><hr id="91f494eb-8245-4426-a291-785af6076af7"/><p id="680f87a0-1524-46a4-a544-b1ad68aba05e" class="">XNA Framework is based on the native implementation of .NET Compact Framework 2.0 for Xbox 360 development and .NET Framework 2.0 on Windows.</p><p id="bc1eeaea-ba0b-49b7-842d-218c77674240" class="">XNA is available on Windows XP, Windows Vista, Windows 7, Windows Phone and Xbox 360.</p><h1 id="b80377c1-e7e8-48fe-8619-77f04b11a892" class="">DirectX 10</h1><p id="335142cb-52d6-4c25-9b52-a7c0420d9fa8" class="">It was released in November 2006.</p><p id="53744df2-3aa2-40f1-9e5e-93589117114b" class="">It required Windows Vista.</p><ul id="a70cf4ae-bac2-4a49-94ad-fdf6ab7d47b8" class="bulleted-list"><li>Deprecated Direct3D Retained Mode</li></ul><ul id="8bd51c41-077d-404c-b87c-bfcc7d4cf0cb" class="bulleted-list"><li>Deprecated DirectInput</li></ul><ul id="7951bf5f-04af-4dad-8299-b9418c79772d" class="bulleted-list"><li>Deprecated DirectSound</li></ul><ul id="ac5eda95-9878-4a91-bcbd-46801ffaf8ad" class="bulleted-list"><li>Deprecated DirectPlay Voice</li></ul><ul id="1f0e2aa1-adf2-4257-b1aa-9ecfecbcbcd2" class="bulleted-list"><li>Deprecated DirectPlay in 2007</li></ul><ul id="8248333f-0863-4405-bed1-8f185094764c" class="bulleted-list"><li>Introduced XACT</li></ul><ul id="a62d8351-13e6-4772-8407-4496de7c605b" class="bulleted-list"><li>Introduced Shader Model 4</li></ul><p id="86aadd38-44f4-4f7a-85b0-e36d76ebb4aa" class="">DirectX 10.1 was released on February 2008 and added support for Windows Server 2008.</p><p id="2e4d943f-56c3-4053-9a76-acd28ad014dd" class="">Direct3D 10.1 introduced <em>feature levels</em> and Shader Model 4.1.</p><p id="222c02bc-9b43-4744-ad3c-263e5eb80a02" class="">Added support for:</p><ul id="8af473ff-8643-4ed4-a6fa-c8cda8468fc1" class="bulleted-list"><li>Shader Model 4.1</li></ul><ul id="cd643cbb-7e3d-45e9-abf8-23bc0eedb2ad" class="bulleted-list"><li>Cube map arrays</li></ul><ul id="24c4d50d-da0d-4d4f-a84d-c31cc2607d39" class="bulleted-list"><li>Separate blend modes per-MRT</li></ul><ul id="0d06b6b8-5ac0-4b11-b081-27c8c58bd13c" class="bulleted-list"><li>Coverage mask export from a pixel shader</li></ul><ul id="3b29d3d2-45e8-4a8a-bf8c-a329368b8875" class="bulleted-list"><li>Running pixel shader per sample</li></ul><ul id="21aeb488-f9da-494e-ae05-1e9acfb60c8a" class="bulleted-list"><li>Accessing multi-sampled depth buffers</li></ul><h1 id="9f946a90-4a72-4be2-afb1-f4cad31c9550" class="">DirectX 11</h1><p id="6403e271-b555-40dd-a297-24dd05640544" class="">It was released in October 2009.</p><ul id="43bf19b0-2fc6-4c73-b8b2-6991767bb04c" class="bulleted-list"><li>Introduced Shader Model 5 with support for compute shaders.</li></ul><ul id="dcce85a9-31f5-4563-a13b-fd029e2cdc11" class="bulleted-list"><li>Introduced DirectCompute for GPGPU support</li></ul><ul id="b2f20a5d-35f2-4ce2-bc9e-2e6214c08583" class="bulleted-list"><li>Introduced Direct2D</li></ul><ul id="408885c7-397a-447e-8c44-15477d52e308" class="bulleted-list"><li>Support for tessellation</li></ul><p id="1effd636-aa92-41d1-b130-fbdde169803e" class="">DirectX 11.1 was released on August 2012.</p><ul id="96f68d13-7233-42d8-afdc-f50ef9d0a211" class="bulleted-list"><li>Included DirectXMath, XAudio2, and XInput libraries from the XNA framework</li></ul><ul id="7dfb7e00-a973-414b-a2be-24fa46e05180" class="bulleted-list"><li>Added support for stereoscopic 3D</li></ul><p id="4e01c39c-0888-44b3-8d29-29178877f3fa" class="">DirectX 11.2 was released on October 2013.</p><ul id="b8c971a5-81a5-4db4-bb97-c12ef75fcbee" class="bulleted-list"><li>Added support for Windows 8.1 and Windows RT</li></ul><ul id="4faa6705-2a5c-42e8-a0dc-0cfd0242cc45" class="bulleted-list"><li>Added swap chain composition</li></ul><p id="a55a9cb8-e27a-4ffc-8947-9ceaf03a336f" class="">The Xbox One system is based on DirectX 11.2.</p><p id="28d327f0-3236-44ff-b670-9ec78abe0bb8" class="">DirectX 11.3 was released with DirectX 12.</p><p id="bd1d435f-b791-4990-832c-34f0f6897ce5" class="">It added support for:</p><ul id="1b60dd56-58bb-4ef9-9326-2942cbce72dd" class="bulleted-list"><li>Shader Model 5.1</li></ul><ul id="3f0c76b0-c18b-434d-8d3e-c2b534f29379" class="bulleted-list"><li>Ordered rasterizer View</li></ul><ul id="fa3d34c4-43b9-4074-a764-e2525fd1c621" class="bulleted-list"><li>Typed UAV Load</li></ul><ul id="18570684-bbc3-4214-99bc-daafd3cccbeb" class="bulleted-list"><li>Volume Tiled Resources</li></ul><ul id="cffdf235-26ac-4cfa-a6c4-698aeadd09d8" class="bulleted-list"><li>Conservative grid</li></ul><h1 id="8a68d80d-8fc2-4677-bb73-7e3616d19303" class="">DirectX 12</h1><p id="08706933-9169-42d7-9611-8439af9177a2" class="">It was announced on March 2014 at GDC.</p><p id="0a7a6c23-e6db-4204-bba7-59e58c64eaad" class="">It was released in July 2015.</p><p id="7d264483-bef9-407a-9ca4-9b48f5390637" class="">It requires Windows 10.</p><ul id="a0b09ae6-f8fa-44a6-bdbf-06459efc4c36" class="bulleted-list"><li>Introduced Shader Model 5.1</li></ul><ul id="bab1a36d-cc5d-47e5-8cd4-eff3d6c012e9" class="bulleted-list"><li>Introduced Shader Model 6 with a range of wave operation intrinsics.</li></ul><ul id="c9d6a1a3-4ed9-4ba8-8d8a-5c41ab7e6219" class="bulleted-list"><li>Updated to Shader Model 6.4 in 2019.</li></ul><p id="e9b98410-20a9-47ed-bebc-acdc3609f7f5" class="">DirectX 12 is also featured on Xbox One.</p><ul id="3956576d-7983-4a4c-abad-69f964dc9c10" class="bulleted-list"><li>The March 2017 released added support for Depth Bounds Testing and Programmable MSAA</li></ul><ul id="64378a3a-96da-4a67-ae90-d5e6c3c33e02" class="bulleted-list"><li>The October 2018 released added support for DirectX Raytracing</li></ul><ul id="ffe81a5b-0377-442b-9868-4259f00a7064" class="bulleted-list"><li>The May 2019 released added support for Variable Rate Shading (VRS)</li></ul></div></article></body></html>

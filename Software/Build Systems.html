@@ -1,0 +1,566 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Build Systems</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d66da054-a959-4170-96d9-9d4bf9922afd" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🔨</span></div><h1 class="page-title">Build Systems</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th>Category</th><td><span class="selected-value">Build</span></td></tr></tbody></table></header><div class="page-body"><h1 id="4c9217f6-da7c-4088-9f5e-8ae08d47e227" class="">Overview</h1><p id="3612914d-73fe-4d07-97b2-34a5aa1289d7" class="">A build system is a set of tools designed to automate the process of program compilation.</p><p id="43af2a63-7d71-46c5-996b-c8de005e86b4" class="">The purpose of a build system is to map a set of source files to a target executable.</p><p id="78f18704-4784-42ce-9611-9a0285b1b078" class="">A C/C++ project is composed of multiple source files that can be compiled into several static or dynamic libraries.</p><p id="eeac5603-e6a2-419f-b03c-d8408b9f8404" class="">The build process invokes compilers to generate object files from source files, and then linkers to generate the final executables.</p><p id="6a2d485e-d28f-4662-8282-9cbc6a25015e" class="">A makefile is a set of directives used by a build automation tool to generate a target.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="890619b6-23c6-461a-a1e1-e7dc6a7de352"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Project files or makefiles are required when working on large projects.</div></figure><h1 id="11f51601-3016-4ae4-bb36-5a4ae8dd5b7b" class="">Requirements</h1><ul id="f95661ff-e9b5-494a-b1bb-39bf8584b00d" class="bulleted-list"><li>Cross-platform support</li></ul><ul id="9fe91a70-877f-41cf-84d8-16198512fa6e" class="bulleted-list"><li>Fast incremental builds</li></ul><ul id="d9fc063a-c32b-43f9-9442-6e2251265e70" class="bulleted-list"><li>Customizable (custom build tools and build rules)</li></ul><ul id="1b643133-34ca-4d48-8756-7f85e3152b75" class="bulleted-list"><li>Project generation</li></ul><h1 id="04a1877b-8bbc-4171-a021-da7f33aa79f0" class="">Projects Files</h1><p id="9babf8b4-3b67-4850-8a4b-9fda0fe85587" class="">Create projects manually in the respective toolsets for each platform.</p><ul id="0650074c-d411-4321-b073-b50fa7fd429d" class="bulleted-list"><li>Visual Studio for Windows and Xbox</li></ul><ul id="b1a74ee3-9ad8-4fe4-91d0-f9795db79678" class="bulleted-list"><li>Xcode for macOS and iOS</li></ul><ul id="6909e905-c9a3-4bd5-ae6d-569973421573" class="bulleted-list"><li>Android Studio for Android</li></ul><hr id="455206ce-51b1-4d3b-98ff-867bee2ce7d9"/><p id="8f28ca32-7fd1-4c5f-84f6-408822a13ecb" class="">✔<div class="indented"><ul id="dea7c98d-04de-4d48-aa9b-ac7bf0172a81" class="bulleted-list"><li>Easy to change settings and find related documentation</li></ul><ul id="e5447bc7-73cc-487a-8698-c7c9d39ba2bb" class="bulleted-list"><li>Convenient to work with the same toolset to setup the project and work on the source files</li></ul></div></p><p id="ad7fe897-316b-453e-b101-15c2a55893c1" class="">❌<div class="indented"><ul id="0ccb878e-3530-47be-a4c5-30663f90f8ff" class="bulleted-list"><li>Projects need to be setup separately on each toolsets</li></ul><ul id="bbe6dead-9ff3-435d-8fed-72107b2f2643" class="bulleted-list"><li>Difficult to maintain source files and shared settings</li></ul></div></p><h1 id="f83b7d7b-4976-404e-be4c-3f99434e683c" class="">Build Tools</h1><p id="e0653c60-1819-4427-bb22-6c5cc3be6ec3" class="">Instead of creating and maintaining multiple project files, we can use a cross-platform build tool to generate the project files for us.</p><h2 id="6587f13d-0a60-4127-8e9e-d053bbb9122d" class="">Make</h2><p id="f2a0dc57-f6d6-4b00-ab86-9a93746e44a7" class=""><a href="https://www.gnu.org/software/make/">Make</a> was created at Bell Labs in 1976.</p><p id="1b8a92a7-3fa0-4e58-9e21-77616517b414" class="">The modern version of Make is <strong>GNU Make</strong>.</p><p id="642b87ba-4e36-428b-b549-e93424f83717" class="">It is one of the most widespread open-source build tool.</p><p id="6775d318-68d9-41d1-a58d-60ce60d720bf" class="">The principle of Make is to define:</p><ul id="eb88505e-7a12-4ed0-9a12-b410e4bac2b3" class="bulleted-list"><li>A list of files we want to create</li></ul><ul id="39c47131-32a3-4624-993d-14d162d7d313" class="bulleted-list"><li>Their dependencies on other files</li></ul><ul id="0ea97644-9874-453c-b0d2-7645648e7f84" class="bulleted-list"><li>The commands to run to build the executable</li></ul><hr id="57f30eac-e413-4189-8c51-8c5e0f495632"/><p id="151a00b7-e2ed-4e5f-a089-7b9dfff02f11" class="">✔<div class="indented"><ul id="0c1be2a4-851e-42fa-b31d-a72a6fddfc72" class="bulleted-list"><li>Open-source</li></ul><ul id="72786ebd-2106-4b5f-b988-31a90843a5ae" class="bulleted-list"><li>Small and simple</li></ul></div></p><p id="929303fa-5162-4bab-8c20-3b6f1d01419a" class="">❌<div class="indented"><ul id="5b5bf3e2-9eb4-45bf-ab48-430c249db27f" class="bulleted-list"><li>Makefiles are not portable and need to be setup on each platform</li></ul><ul id="4efed75a-1d2c-4da0-9380-3b2ca6cde03e" class="bulleted-list"><li>Specifying source files dependencies is difficult</li></ul><ul id="58635f0f-1f62-4c3c-a11b-99bdcf6a3611" class="bulleted-list"><li>Specifying makefiles dependencies is also difficult</li></ul><ul id="eb3f6287-4898-45c4-b34c-d215c56c1311" class="bulleted-list"><li>Difficult to write makefiles in a large project</li></ul><ul id="7dedca36-36d7-4701-8961-fbda4bcf86bf" class="bulleted-list"><li>The tab syntax is akward</li></ul><ul id="4e531af2-0674-4232-a202-4cc31977b591" class="bulleted-list"><li>Cannot work with the platform&#x27;s native tools</li></ul></div></p><h2 id="ed7a4a2b-7706-46a0-b5d6-26aa64d7d513" class="">CMake</h2><p id="c233f04d-767f-498e-a9ff-cb26fe183cbe" class=""><a href="https://cmake.org/">CMake</a> is open-source and cross-platform created in 2000.</p><p id="363c1808-3f19-4d02-bf4f-7d6cfe3e2e5e" class="">The modern CMake is version 3.0 and was released in June 2014.</p><p id="f416ac75-5713-4a23-bde1-66ac9aba56e5" class="">The build process is split in two stages:</p><ul id="822d2971-78c8-4d73-a98f-eca28fd3f9f1" class="bulleted-list"><li>Build files are created from configuration files</li></ul><ul id="66f6ff4e-a9b0-4e9e-9896-6c199d2e3535" class="bulleted-list"><li>The platform&#x27;s native build tools are used to build the executable.</li></ul><p id="27cc4762-0855-4447-a404-0b54bbdb4ac7" class="">The principle of CMake is to write CMakeLists.txt files in a directory hierarchy to control the build process. The CMakeLists.txt files contain a list of commands to define the build rules.</p><hr id="09c6606d-d686-4d67-834d-98cb3bf7b05a"/><p id="ecd28ef5-da37-4055-b966-c8ce695ecd18" class="">✔<div class="indented"><ul id="c987f61d-26af-4cf2-9daf-4e05d8df12e0" class="bulleted-list"><li>Open-source</li></ul><ul id="3bd26a75-0b8e-4137-b1bd-7c8c7070ab0c" class="bulleted-list"><li>Cross-platform</li></ul><ul id="a2c10848-c4e7-4eb7-90a3-6e89b01cda65" class="bulleted-list"><li>Support directory hierarchies</li></ul><ul id="b7a28675-4488-441c-b0f1-1548d4b387e3" class="bulleted-list"><li>Generates the platform&#x27;s project files</li></ul><ul id="06ceb938-8d27-4ad4-b693-85991bf8f5bd" class="bulleted-list"><li>Easy to switch between static and dynamic libraries</li></ul><ul id="46775aec-6a9c-42b2-a6a6-bd9939cba367" class="bulleted-list"><li>Integrated in Visual Studio 2017 &amp; 2019</li></ul></div></p><p id="9035ec04-a83d-476f-9197-ecabc9e650f0" class="">❌<div class="indented"><ul id="45618f4c-3901-41de-9691-86e52218a1b2" class="bulleted-list"><li>Generates a lot of intermediate files</li></ul></div></p><h2 id="dd95eb25-fd81-43db-be28-03b1b9faa7e9" class="">Usage</h2><ul id="df467ac0-a783-4bce-9ad7-33bf5054a482" class="bulleted-list"><li><a href="https://docs.cryengine.com/display/CEPROG/CMake">CryEngine</a></li></ul><h1 id="d7e0a310-60af-4660-aa46-b4e72d7ed53c" class="">References</h1><h2 id="3495d6c3-f5b6-41bb-a169-3914e003b295" class="">Unreal Engine 4</h2><p id="b68b9c2e-3f77-4dc0-96ef-dc3a9c4f8c66" class=""><a href="https://docs.unrealengine.com/en-us/Programming/Development/CompilingProjects">Unreal Engine</a> provides <a href="https://docs.unrealengine.com/en-US/Programming/BuildTools/UnrealBuildTool">UnrealBuildTool</a> (UBT) as a custom tool for automating the build process.</p><ul id="58e30d95-28ff-4dff-8f33-4ff96c3d4601" class="bulleted-list"><li>UE4 is split in modules</li></ul><ul id="0348466a-bd32-4f03-903c-ff97427d33a8" class="bulleted-list"><li>Each module has a <code>.build.cs</code> file that controls how it is built</li></ul><ul id="315f12a4-977c-4991-8071-ee91fac16ef6" class="bulleted-list"><li>The platform&#x27;s project files can also be generated</li></ul><h2 id="33752bc2-859b-4c24-954f-bae6d4cbeb56" class="">Unity Engine</h2><p id="efb52c22-857e-4e43-9033-a9cf61579b99" class="">The <a href="https://aras-p.info/blog/2017/03/16/Developer-Tooling-a-week-in/">Unity</a> build system is based on a combination of <a href="http://jamplus.org/">JamPlus</a> and C# scripts.</p><p id="850851f0-1d57-4c3d-9c17-ac78cda34a76" class="">JamPlus is based on the original Perforce version of <a href="https://www.perforce.com/documentation/jam">Jam</a>.</p><p id="3b123efa-18ab-40c9-9b15-ef9663728fe6" class="">The transition from JamPlus to C# is internally called &quot;JamSharp&quot;. It is JamPlus with support for Mono. The build scripts are written in C# instead of the Jam language.</p><h2 id="6475216a-7de1-46c7-85ba-b795e695134f" class="">Sharpmake</h2><p id="9909af05-7c80-420f-aa8b-da9d798f87ee" class=""><a href="https://github.com/ubisoftinc/Sharpmake">Sharpmake</a> is an open-source build tool based on C# that generates native project files.</p><p id="b3c41e32-f81d-431f-b4e4-4b0bce77d6b0" class="">It was developed internally at Ubisoft for Assassin&#x27;s Creed 3 in 2011.</p><p id="d176f1db-f835-46d3-818b-276bc453c2aa" class="">It is designed for speed and scale.</p><p id="6ea7d46a-b145-4119-a794-672d33f839d5" class="">
+</p></div></article></body></html>

@@ -1,0 +1,687 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Memory</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="6c8b73d5-c1e0-42d7-8bbe-01ac5e6e750b" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🗄</span></div><h1 class="page-title">Memory</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th>Created</th><td><time>@May 09, 2019 12:01 PM</time></td></tr><tr class="property-row property-row-multi_select"><th>Tags</th><td></td></tr></tbody></table></header><div class="page-body"><nav id="2b7c559c-98ad-469c-8ce8-1e90c08ea4c4" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f3b706bc-7382-4e43-880d-84096e40e097">Overview</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#871ba0de-d733-4003-8128-e811f15d2d3a">History</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#083a3524-7add-4065-bd96-e5a96273f922">STL Allocator</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#06f81d39-1dc9-417f-9896-76166ca71cb8">Virtual Memory</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#49652f5f-64fa-4e4f-b680-a79ca16a0a89">Heap Memory</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#bb5dfe62-6920-454b-b85c-e1bca2cd29a4">Memory Types</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6762612c-8b38-4ab6-b024-6d54da1f0815">CPU</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#686f46b6-3c85-409b-8f5a-cf64699cd34d">Registers</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b8ba49f0-7be3-40eb-ac88-c9d320bcc46c">Cache</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c3c813c9-18b8-41bb-994e-cd870a4bfdbd">Static Memory</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#10c2c2bb-5a74-49ad-9ab9-ab36eef65b0d">Stack Memory</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#bd0c2577-e60d-4b8b-92c7-a16c99a8eedf">Dynamic Memory</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#266b6f00-666f-48e8-bbc1-179cd9ec6b88">Fragmentation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2e4e31e0-f85c-445e-9ace-1ecf61f94325">Heap</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#d1baa0c3-44e2-4ea9-8dc4-4e30cdd8ad3c">C runtime</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#9f038702-b5ba-46bb-8561-6048f5e75186">C++ runtime</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#0ec214b5-3734-4956-b2c4-89721bce66be">Windows</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#79346732-ca96-427f-9abd-0e3128ebaa04">macOS</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#356f9e26-fc9d-45c2-8ff3-1d1e84429ae3">Virtual Memory</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#d8eee7ea-7daa-483e-8988-6019470c62f5">Protected Pages</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#14ced1d3-0ff8-410e-8c76-6491a6fff409">Guard Pages</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#f4d626a2-5104-430e-9056-3c9cf153f9a4">Windows</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#571ec101-72eb-4edd-8496-e6d3dc912c2e">macOS</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#f42a7280-9d63-4b2a-aa3c-fb623efcd800">Linux</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b8c597c4-e93d-4c70-8b19-63254fb66ebc">Write-Combined Memory</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#78baaae3-1c95-43c7-a3d6-ba3f6a2af6c3">File Mapping</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#87e9fcd2-23cf-4b1e-b1d3-50c4639536e3">Alignment</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#88416845-a1f1-4c18-a913-f06d7ff51ef6">Power of two</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f1cf2914-2794-4907-bcfd-753c8d97f3d4">Align an address</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9c8b6559-4198-44b3-bcc2-86d50149fb4e">Structure</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#6e8dd000-dd87-4134-8eee-a558f12272c4">Alignment</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f648ad04-e7b5-4b1c-8b83-34c4116b26a3">Relocatable Heap</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5a4ec498-6881-491c-aaef-01533bdccb4a">Garbage Collection</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a637fb16-ed0f-45e1-8814-585e435d4ff8">References</a></div></nav><hr id="2bd203e4-c0b2-47a5-8510-24c99ff65e60"/><h1 id="f3b706bc-7382-4e43-880d-84096e40e097" class="">Overview</h1><p id="5bdd1bcc-c5ce-4ccc-b8d5-c881c973ac65" class="">Memory is an important resource in a game.</p><p id="294a2d5b-f296-4030-9f2b-2a77c32cd973" class="">Games use large amount of memory and memory allocation has a performance cost.</p><p id="1ede97da-ffb3-4047-98de-2652e842c0b5" class="">Carefully planning the memory allocation strategy is important when designing a system.</p><p id="dfcb5b86-d440-44a8-a85c-4bb54c5de473" class="">Some languages provide automatic memory management using different strategies: garbage collection (GC), automatic reference counting (ARC), resource acquisition is initialization (RAII).</p><h1 id="871ba0de-d733-4003-8128-e811f15d2d3a" class="">History</h1><p id="20a07fe0-2ee8-4c36-926b-77e276989710" class="">On 16-bit architectures, the memory was segmented and there were near and far pointers. Therefore, on 16-bit Windows, the heap was divided into a local heap and a global heap.</p><p id="619ca79f-63fc-4dae-95a0-5270498e6b3a" class="">Starting from 32-bit architectures, the heap is backed by a paged memory model. The stack and heap are both backed by pages of memory managed by the operating system.</p><h2 id="083a3524-7add-4065-bd96-e5a96273f922" class="">STL Allocator</h2><p id="77bfcb6b-90c4-42b6-9df0-002e179eed8d" class="">The STL allocator was originally designed to work on 16-bit architectures and abstract the near and far pointers.</p><p id="a04deeed-d30f-44f3-85c0-a0d89136b5b3" class="">STL allocators do not have any reference to near and far pointers anymore but it&#x27;s original purpose is now gone.</p><p id="f7b74376-13b9-473d-8e65-243492f86e62" class="">❌STL allocators are assumed to be stateless, which makes the implementation of custom allocators impossible.</p><p id="a27ea378-741c-4c3f-ae51-f6facb57d2b3" class="">❌STL allocators must be used as a template parameter, but work with void* instead of using a template type.</p><h1 id="06f81d39-1dc9-417f-9896-76166ca71cb8" class="">Virtual Memory</h1><p id="a5bdf476-dd37-4684-8405-a648ccde43e3" class="">Each process has its own <em>virtual address space</em> (or <em>logical address space</em>). All threads of a process can access its virtual address space. However, a process cannot access memory that belongs to another process unless it is shared.</p><p id="33bc950e-c3b7-4118-9ba0-d4afc65148fd" class="">A virtual address does not represent the actual physical location in memory.</p><p id="226bd975-79a6-4769-a454-b1aca2e3bb6f" class="">The operating system maintains a page table for each process that maps virtual addresses into their corresponding physical addresses.</p><p id="da459829-942b-40a7-a657-6916e1638b4c" class="">The virtual address space can be smaller or larger than the total physical memory available on the system.</p><p id="a502f028-f081-47df-94b4-f666e5c101a5" class="">The virtual address space is organized into uniformly-sized chunks of memory called <em>pages</em>.</p><p id="8e94018e-773c-42b8-87ad-9d2b881df6b6" class="">The size of a page depends on the system.</p><ul id="3406afc5-bd4a-4a03-af40-c27c2eb534e2" class="bulleted-list"><li>On Windows and OSX, the size of a page is 4 kilobytes.</li></ul><ul id="82fb0664-5c29-48d9-97ba-e2b27e19b9ae" class="bulleted-list"><li>On console platforms, the size of a page is generally 4 kilobytes.</li></ul><ul id="1f6e5922-275c-4190-a0e0-92dbc19465ea" class="bulleted-list"><li>On iOS, the size of a page is 16 kilobytes (also backed by 16 kilobyte physical pages on A8 systems).</li></ul><p id="76b71678-383b-4bcc-bd0b-b285c28e9376" class="">On desktop platforms, the system can perform <em>demand paging</em> by moving (<em>swapping</em>) pages of physical memory to and from a paging file on disk (<em>backing store</em>).</p><p id="c69e6a2d-ab76-4e42-8956-877c0fe8b2f2" class="">On mobile and on consoles, there is no demand paging.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5f7e2f93-2ad2-4642-a986-60780136d588"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Paging affects performance negatively, and should avoided on desktop platforms.
+- Allocations smaller than the size of a virtual memory page cannot be page-aligned.
+- Large allocations are guaranteed to be page-aligned.
+</div></figure><p id="a44c9ce6-ca9c-4d55-a373-1f93c61fdd03" class="">The advantage to using virtual memory addresses, backed by pages of RAM, is that available RAM can be mapped into a contiguous virtual address range, even if the RAM itself is fragmented throughout physical memory.</p><h1 id="49652f5f-64fa-4e4f-b680-a79ca16a0a89" class="">Heap Memory</h1><p id="6d29a769-63f0-4b63-a8af-635437696805" class="">A process can create and access a <em>private heap</em>, which is a block of one or more pages of virtual memory in the address space of the process.</p><p id="61bdaf8b-36e9-4b9f-9a93-d4f85ab32105" class="">On most platforms, the heap is designed and optimized for the allocation and deallocation of small blocks of memory (smaller than the system page size).</p><p id="5c9a6b30-a038-43d0-8e1d-efdc0ce2af0a" class="">Heaps allocate virtual memory and manage smaller allocations and deallocations within that section of virtual memory.</p><figure class="callout" style="white-space:pre-wrap;display:flex" id="c558f68a-9a72-45d8-858e-7435c5ee55df"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The memory-management routines in the CRT libraries are built on top of the platform-specific heap functions. It is more efficient to call the heap functions directly.</div></figure><h1 id="bb5dfe62-6920-454b-b85c-e1bca2cd29a4" class="">Memory Types</h1><p id="a644a822-e4cb-4a6b-b4b5-0328545ee202" class="">There are different kind of memory in the hardware of a system.</p><p id="e18a7bf9-79fe-44c9-b9e6-ff7b71d5845c" class="">At the lowest level, the processor performs instructions using its registers and use its cache memory to reduce access to the main memory.</p><p id="57c67204-e3d9-402c-bda0-8646967771b3" class="">Access to the main memory is performed through the bus which is a very slow operation compared to access to cache memory.</p><p id="e01b8cd4-b0a8-4838-960a-b148736a969c" class="">The main memory is managed by the operating system as paged memory. The system allocates pages of memory during the lifetime of a program. The main memory is divided in three main blocks: static memory, stack memory and heap memory.</p><p id="6c1edeb6-b1ef-450b-ae03-a8ff0a7aa548" class="">Finally, the external storage is the slowest memory but contains permanent data. Accessing disk memory requires the data to be copied to the main memory or using file mapped data, the memory can be streamed from the disk to the main memory.</p><ul id="4897d946-9ff2-4fb6-8490-c88936aaf4b6" class="bulleted-list"><li>CPU<ul id="aff95f33-daee-44ce-bd1c-c502fa9f1db6" class="bulleted-list"><li>Registers</li></ul><ul id="e199c933-f588-4c02-b2b2-10d70f7c4ffe" class="bulleted-list"><li>Cache</li></ul></li></ul><ul id="25a98bd9-be58-465d-af19-793cdafba780" class="bulleted-list"><li>RAM<ul id="04dd4824-0c41-4255-b1ef-159f3974ac6b" class="bulleted-list"><li>Static</li></ul><ul id="b8a7da92-df89-4d3b-9556-aaf983d080fc" class="bulleted-list"><li>Stack</li></ul><ul id="0cfb7698-1a0e-4003-8c7c-7b6807bb5967" class="bulleted-list"><li>Heap</li></ul></li></ul><ul id="1c88edc7-6c70-4c5c-9f16-2f267b531726" class="bulleted-list"><li>I/O<ul id="44fa7612-9d42-4432-afa5-99761e4e33b1" class="bulleted-list"><li>Disk</li></ul><ul id="94951727-ca52-4240-b4b2-8afbbbbcf39d" class="bulleted-list"><li>Mapped</li></ul><ul id="20414718-c367-4c15-9b55-7211b06e0441" class="bulleted-list"><li>Network</li></ul></li></ul><hr id="a64cfb40-9a74-40d8-8285-107d24b69472"/><h1 id="6762612c-8b38-4ab6-b024-6d54da1f0815" class="">CPU</h1><h2 id="686f46b6-3c85-409b-8f5a-cf64699cd34d" class="">Registers</h2><p id="68fd379e-5dfd-474b-9b5c-887d7222d30f" class="">The CPU registers are the fastest accessible locations.</p><p id="73bd8ccf-cadc-43c2-a043-fcbf9b52f196" class="">The CPU perform operations using its registers.</p><p id="d0333ffc-f686-4fd2-95b9-74120f23a573" class="">There are few registers, and they are constantly being overridden by values from the local cache.</p><h2 id="b8ba49f0-7be3-40eb-ac88-c9d320bcc46c" class="">Cache</h2><p id="35d88894-a0a9-4d20-a19a-abf9e530c6fe" class="">The CPU accesses memory from the cache very efficiently but the cache is very small.</p><p id="5139b299-8637-4498-8437-4d8c7f093fc6" class="">When the data is not in the cache, the data is retrieved from the main memory and copied into the cache. This operation is costly.</p><p id="16b20ede-d0b2-49dd-8a7a-467be4cb2b30" class="">There are different levels of cache (typically 3 levels) to reduce access to the main memory.</p><p id="e753b8f3-a217-41af-b90f-1ec72ebacda0" class="">The data is copied from the main memory to the cache using the length of a cache line.</p><p id="b357ed9e-3a2b-47ef-be2b-c760aede075c" class="">Typically, on a 64-bit CPU, the cache line is 64 bytes.</p><p id="e02ec72e-d2fe-4556-81a4-71231e18179a" class="">Optimizing the layout of data in main memory for efficient use of the cache line is called <em>locality</em>.</p><h1 id="c3c813c9-18b8-41bb-994e-cd870a4bfdbd" class="">Static Memory</h1><p id="d43da284-609e-42b4-bf75-07903fd3b9f4" class="">A process usually has in its address space the machine code and the program data.</p><p id="79fe560f-2bff-40a7-a998-a60cdba21f05" class="">The <strong>static memory</strong> is part of the executable code of the program and is allocated in main memory.</p><p id="1267f4dd-6939-435c-ae0f-93e5f092da2b" class="">Static variables are stored:</p><ul id="6d9d2b56-3599-4636-a035-571565979753" class="bulleted-list"><li>in the data segment of the program (if initialized)</li></ul><ul id="baa5bbb2-a2bc-4d69-a832-561038a063d8" class="bulleted-list"><li>in the uninitialized data segment (<em>BSS segment</em>) of the program (if uninitialized)</li></ul><p id="68e771da-d2e0-4223-9ec1-a62dec989f72" class="">Static variables persist for the lifetime of the program.</p><p id="6c088114-a3c8-4abd-b0f9-41a8b7fc51d2" class="">✔️Allocated automatically when the program starts.</p><p id="daa6e3b9-2963-4982-ac09-354e01c199d0" class="">❌Persists for the lifetime of the program even when not needed.</p><h1 id="10c2c2bb-5a74-49ad-9ab9-ab36eef65b0d" class="">Stack Memory</h1><p id="8f835960-da08-4aec-91d1-16366302bbb0" class="">The <strong>stack memory</strong> is a region in main memory where data is added or removed in a last-in-first-out manner.</p><p id="25dfbb96-e177-48e3-a5f7-132276a5c09c" class="">Each thread has its own reserved region of stack memory.</p><p id="36863ffd-35bd-4bb4-8950-bce624066b54" class="">Stack memory is allocated and deallocated automatically when functions are called and return.</p><p id="d2c19c9a-c7ec-43da-a9fd-8d4eb1fcbabf" class="">Allocating more memory on the stack than is available can result in a crash due to stack overflow.</p><p id="8b3d08fd-a1a0-4c1b-af0f-5d9db381800b" class="">✔️Run-time dynamic allocation from the stack is possible with the <code>alloca()</code> function.</p><p id="08e64210-6f17-4fe5-80bb-99141136d47f" class="">❌Cannot persist across multiple function calls.</p><p id="84a7c891-3905-4e20-bdba-7ae936f4ee5b" class="">❌ The <code>alloca()</code> function is platform and compiler dependent and its use is discouraged.</p><h1 id="bd0c2577-e60d-4b8b-92c7-a16c99a8eedf" class="">Dynamic Memory</h1><p id="d1324477-f8da-47c8-9e2d-a9a07ba8d2d8" class="">When applications need more memory, they can request a block of memory from the operating system. The memory is allocated in the <em>heap</em>.</p><p id="bcfe17dd-92b8-45cd-91ab-cd1010fd31ff" class="">The heap memory is managed using virtual memory.</p><p id="3dde058e-194d-4c0f-acbb-b00059aa7374" class="">To dynamically allocate memory in a program, virtual memory pages are requested from the operating system. Alternatively, the heap memory can be allocated directly and the operating system will manage the virtual pages.</p><h2 id="266b6f00-666f-48e8-bbc1-179cd9ec6b88" class="">Fragmentation</h2><p id="2b81fc18-44b8-4405-b248-e4313c064629" class="">Multiple allocations and deallocations over time create memory fragmentation.</p><p id="9ef09890-60e5-4734-bec8-0f9eb87e30a4" class="">Fragmentation occurs when there are many small gaps between allocated memory blocks, which prevent their use for another allocation request.</p><h2 id="2e4e31e0-f85c-445e-9ace-1ecf61f94325" class="">Heap</h2><p id="4b0efbf3-4c5c-4d6c-a39a-dc059b2ee0ad" class="">The <strong>heap memory</strong> (or <em>free store</em>) is stored in the RAM and is slower to access than the CPU cache.</p><p id="1b04f3f2-8e90-4879-aab1-526b2d0cb583" class="">✔️The size of the memory is dynamic at runtime.</p><p id="3602c13c-edbc-4c99-852b-d0e48953ee6f" class="">✔️Custom allocation strategies can be implemented.</p><p id="7dda3de8-5e58-4cc3-9059-a727b8a1a356" class="">❌Create memory fragmentation.</p><p id="2f5d9e44-c4a1-4176-a3ac-7a0dd402ceae" class="">❌Memory leaks are difficult to track.</p><p id="5f3ed3f5-c27a-4c9f-a404-ba25b1c435dc" class="">There are different methods to allocate heap memory.</p><h3 id="d1baa0c3-44e2-4ea9-8dc4-4e30cdd8ad3c" class="">C runtime</h3><p id="b36234b5-a767-4e9f-88b3-5acd52364e73" class="">The <a href="https://en.cppreference.com/w/c/memory/malloc"><code>malloc()</code></a> function allocates a block of memory on the heap (<em>CRT heap</em>). The program accesses this block of memory via a pointer that the function returns.</p><p id="df265da2-975c-4cb5-affe-8e4baddebd18" class="">When the memory is no longer needed, the pointer is passed to the <a href="https://en.cppreference.com/w/c/memory/free"><code>free()</code></a> function which deallocates the memory.</p><p id="e8ec664f-04a7-4824-8e44-d6498fc15e45" class="">Most implementations allocate several pages of virtual memory and divide those pages into smaller arena of memory to reduce lock contention.</p><p id="d502c34c-c4c6-4ddd-b1b2-f1d121c744c2" class="">Most implementations also handle coalescing nearby allocations into contiguous regions, putting several small allocations on the same page.</p><p id="3fef93c6-849c-4f8d-bb64-8ee4b1160481" class="">ℹThe <code>malloc()</code> function works on raw bytes of memory.</p><p id="78d7bc64-8e93-405a-93e2-7add2c30a57d" class="">✔️The simplest method to allocate heap memory.</p><p id="942fb3ac-a891-4d68-b3c4-970858ca286c" class="">❌The implementation of <code>malloc()</code> and <code>free()</code> is greatly dependent on the system.</p><p id="8e1784ae-03cc-4ce0-a836-b6fb3a3ed3eb" class="">❌Some implementations suffer from lock contention.</p><h3 id="9f038702-b5ba-46bb-8561-6048f5e75186" class="">C++ runtime</h3><p id="369c84b1-5054-4cfd-8f38-6d387744b672" class="">The <a href="https://en.cppreference.com/w/cpp/memory/new/operator_new"><code>new</code></a> and <a href="https://en.cppreference.com/w/cpp/memory/new/operator_new"><code>new[]</code></a> operators calls the <code>malloc()</code> function and the <a href="https://en.cppreference.com/w/cpp/memory/new/operator_delete"><code>delete</code></a> and <a href="https://en.cppreference.com/w/cpp/memory/new/operator_delete"><code>delete[]</code></a> operators calls the <code>free()</code> function.</p><p id="b685c18e-bb0d-470b-92e6-aecba1135e2c" class="">The <code>new</code> operator also calls the constructor of the allocated object type if  a constructor exists.</p><p id="4c77b7a8-7b8b-4217-a655-49dae8333b2d" class="">ℹThe <code>new</code> operator works with types instead of raw bytes of memory.</p><p id="49ab20ad-605f-490e-ac92-e824e1cc1d0e" class="">✔️The <code>new</code> and <code>delete</code> operators can be overloaded. The only rule is that the first argument to the <code>new</code> operator must be of type <code>size_t</code>, which is automatically passed by the compiler.</p><p id="c9fb5eca-d269-4b43-a4e0-940d5701a6e7" class="">❌The implementation of <code>new</code> and <code>delete</code> is compiler dependent.</p><p id="675f283f-7520-4b49-a43e-54c51639c6ef" class="">❌The <code>new</code> / <code>delete</code> and <code>new[]</code> / <code>delete[]</code> operators are inconsistent.</p><p id="f19eb172-d67c-4e6e-8228-752d40564750" class="">ℹThe <a href="https://en.cppreference.com/w/cpp/language/new#Placement_new"><code>placement new</code></a> operator doesn&#x27;t allocate memory but can be called to invoke a constructor on an block of memory. </p><h3 id="0ec214b5-3734-4956-b2c4-89721bce66be" class="">Windows</h3><p id="4bb37093-f32e-4138-9c67-15283bad2c56" class="">On Windows, the <code>malloc()</code> function calls the <a href="https://docs.microsoft.com/en-us/windows/desktop/api/heapapi/nf-heapapi-heapalloc"><code>HeapAlloc()</code></a> function from the Windows API, and the <code>free()</code> function calls the <a href="https://docs.microsoft.com/en-us/windows/desktop/api/heapapi/nf-heapapi-heapfree"><code>HeapFree()</code></a> function.</p><p id="be1675e7-858e-434f-949d-dc4a5c2694fc" class="">Each process has a default heap provided by the system. The handle to the default heap is returned by the <a href="https://docs.microsoft.com/en-us/windows/desktop/api/heapapi/nf-heapapi-getprocessheap"><code>GetProcessHeap()</code></a> function.</p><p id="bddf4fd0-e24d-4a0e-acfb-fa9ec004a62f" class="">A private heap can be created by calling the <a href="https://docs.microsoft.com/en-us/windows/desktop/api/HeapApi/nf-heapapi-heapcreate"><code>HeapCreate()</code></a> function. Initially, at least one page is committed. If the maximum size of the heap is not specified, the heap can be resized as needed. Otherwise, the maximum size is rounded up to a multiple of the system page size.</p><p id="99b5c40f-2933-4c41-b297-546b2de6ef05" class="">If allocation requests exceed the size of the committed pages, the system commits additional pages of memory for the heap until the maximum size is reached, or the system runs out of physical memory.</p><p id="01b6f414-3260-4a99-be1f-a70e831c9191" class="">A heap is destroyed by calling the <a href="https://docs.microsoft.com/en-us/windows/desktop/api/heapapi/nf-heapapi-heapdestroy"><code>HeapDestroy()</code></a> function. The committed pages are then decommitted and released.</p><h2 id="79346732-ca96-427f-9abd-0e3128ebaa04" class="">macOS</h2><p id="f6f701c9-6e3d-4094-b06c-5fbd6d4aabd0" class="">On macOS, all malloc allocations are zoned allocations. The <code>malloc()</code> function calls the <a href="https://opensource.apple.com/source/libmalloc/libmalloc-116/man/malloc_zone_malloc.3.auto.html"><code>malloc_zone_malloc()</code></a> function using the default malloc zone, and the <code>free()</code> function calls the <a href="https://opensource.apple.com/source/libmalloc/libmalloc-116/man/malloc_zone_malloc.3.auto.html"><code>malloc_zone_free()</code></a> function. Malloc zones can be created with <a href="https://opensource.apple.com/source/libmalloc/libmalloc-116/man/malloc_zone_malloc.3.auto.html"><code>malloc_create_zone()</code></a> and destroyed with <a href="https://opensource.apple.com/source/libmalloc/libmalloc-116/man/malloc_zone_malloc.3.auto.html"><code>malloc_destroy_zone()</code></a>.</p><h2 id="356f9e26-fc9d-45c2-8ff3-1d1e84429ae3" class="">Virtual Memory</h2><p id="d145a518-e2be-4cb9-b9f2-18e4c2329c33" class="">Operating systems use virtual memory to separate the memory addresses used by a process from actual physical addresses.</p><p id="92ffac46-a999-46ba-80af-c971821ed137" class="">Virtual memory is allocated with the granularity of a page (on most platform the default page size is 4 KB). It means than smaller allocations (for example 10 bytes) will allocate a whole page (4096 bytes).</p><p id="648d915b-269d-43d7-9d27-cdccaadcf25f" class="">Pages of virtual memory are reserved by a process to restrict their use from other processes. The physical memory is only allocated when the process accesses that memory. On Windows, it&#x27;s necessary to commit the pages before accessing them.</p><p id="523de318-b4f4-494d-bb15-ee68f3ee6836" class="">Managing pages of virtual memory manually allows us to use specific debugging techniques such as:</p><ul id="693af9d2-60ff-49a0-893e-eb3c1703b096" class="bulleted-list"><li>protected pages</li></ul><ul id="c6968a47-870c-4170-882b-fa995e5af6a3" class="bulleted-list"><li>guard pages</li></ul><h3 id="d8eee7ea-7daa-483e-8988-6019470c62f5" class="">Protected Pages</h3><p id="a1a9a485-0709-4564-af8e-372748873665" class="">Pages can have memory-protection options to enable read-only access or write-only access; or disable all access to the page.</p><p id="62593391-c5fa-469a-8a6c-a7a3a040c499" class="">Protected pages are used to monitor invalid access to freed memory.</p><ol id="634e2b36-87f6-413d-940d-ce833c133186" class="numbered-list" start="1"><li>Allocate a block of memory at the end of a page.</li></ol><ol id="eb8012e1-d36e-4c5c-b2b7-b5d54e6d5fd4" class="numbered-list" start="2"><li>Reserve and protect the following page.</li></ol><pre id="5be20306-b35f-47bd-a2ea-533f63eff038" class="code"><code>void* AllocateAtEndOfPage(size_t size)
+{
+  size_t pages = (size + PageSize - 1) / PageSize;
+  char* address = VirtualAlloc(pages * PageSize);
+  size_t offset = (pages * PageSize) - size;
+  return address + offset;
+}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6f03edef-86fe-48a0-8292-dc00fd5c1281"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">This allocation model will waste a page size for each allocation.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="cf921c43-2b36-45a6-a537-47d078538db3"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">It only works for fixed-size allocations.</div></figure><h3 id="14ced1d3-0ff8-410e-8c76-6491a6fff409" class="">Guard Pages</h3><p id="58d604f4-c3d6-48fd-acdc-4eb84be6a951" class="">Guard pages are used to monitor the growth of large dynamic data structures.</p><p id="0f90e2ac-f08b-4ced-97b5-eef1d324e2f9" class="">When accessing an address within a guard page, the system raises a page fault.</p><h3 id="f4d626a2-5104-430e-9056-3c9cf153f9a4" class="">Windows</h3><ul id="801215fa-8bb7-4315-a75c-7fe27f84f629" class="bulleted-list"><li><a href="https://docs.microsoft.com/en-us/windows/desktop/api/memoryapi/nf-memoryapi-virtualalloc"><code>VirtualAlloc</code></a> — reserves memory in the virtual address space of the process.</li></ul><p id="f742f07e-ae55-4f2e-b01c-14a809efd285" class="">If the size of the page is not specified, the size is rounded up to the next multiple of the system page boundary.<div class="indented"><ul id="0923d086-92c9-404f-b6f2-454df1a18cd1" class="bulleted-list"><li>The <code>MEM_COMMIT</code> flag indicates that the memory is immediately committed to physical memory.</li></ul><ul id="d3afb262-03ca-47a6-99c0-56df59d7be93" class="bulleted-list"><li>It&#x27;s possible to allocate a large quantity of memory with the <code>MEM_RESERVE</code> flag to indicate that the memory is only reserved but not yet committed. <code>VirtualAlloc</code> can be called later on with the <code>MEM_COMMIT</code> flag and a specific address range to commit part of the reserved memory.</li></ul></div></p><ul id="d9ad0fe5-2281-4de6-982e-f32e3d8025fc" class="bulleted-list"><li><a href="https://docs.microsoft.com/en-us/windows/desktop/api/memoryapi/nf-memoryapi-virtualfree"><code>VirtualFree</code></a> — decommits and releases a region of pages within the virtual address space of the process.</li></ul><p id="62c33df0-fde0-49de-b1e8-5b981c09b6e3" class="">Additionally, <a href="https://docs.microsoft.com/en-us/windows/desktop/api/memoryapi/nf-memoryapi-virtuallock"><code>VirtualLock</code></a> enables a process to lock one or more pages of committed memory into physical memory, preventing the system from swapping the pages out to secondary storage.</p><p id="d07b1c2a-a878-42ee-8cda-f0050602e63b" class="">To determine the size of a page on the system, call <code><a href="https://docs.microsoft.com/en-us/windows/desktop/api/sysinfoapi/nf-sysinfoapi-getsysteminfo">GetSystemInfo</a></code> and inspect the value of <a href="https://docs.microsoft.com/en-us/windows/desktop/api/sysinfoapi/ns-sysinfoapi-_system_info"><code>SYSTEM_INFO.dwPageSize</code></a>.</p><pre id="5b269d92-7131-4990-949b-a67c9c1ef3d2" class="code"><code>void* Allocate(size_t size)
+{
+    void* address;
+
+    address = VirtualAlloc(nullptr,
+                           size,
+                           MEM_COMMIT,
+                           PAGE_READWRITE);
+
+    if (address == nullptr)
+    {
+        address = nullptr;
+    }
+ 
+    return address;
+}</code></pre><pre id="6cfb96eb-a526-48fb-8f05-656586c243dc" class="code"><code>bool Deallocate(void* address)
+{
+    return VirtualFree((LPVOID)address,
+                       0,
+                       MEM_RELEASE);
+}</code></pre><h3 id="571ec101-72eb-4edd-8496-e6d3dc912c2e" class="">macOS</h3><ul id="5b2b5799-5eb9-45ee-91f7-f7360391b645" class="bulleted-list"><li><code><a href="http://web.mit.edu/darwin/src/modules/xnu/osfmk/man/vm_allocate.html">vm_allocate</a></code> — allocates a region of virtual memory.</li></ul><ul id="6b9f2309-f950-4211-8e0f-98bfd7e84b60" class="bulleted-list"><li><a href="http://web.mit.edu/darwin/src/modules/xnu/osfmk/man/vm_deallocate.html"><code>vm_deallocate</code></a> — deallocates a region of virtual memory.</li></ul><p id="1e71a5fc-b857-4405-9d92-2262ed930113" class="">The requested size must be a multiple of a virtual page size. </p><p id="64d5631e-f52c-4944-b97f-0a913e3ecfe8" class="">To determine the size of a page on the system, use the <a href="http://web.mit.edu/darwin/src/modules/xnu/osfmk/man/host_page_size.html"><code>host_page_size()</code></a> function and inspect the value of <code>page_size</code>.</p><p id="b31ac4ca-58cd-4ea4-9115-89dcf3a51a84" class="">ℹ️macOS doesn’t distinguish reserve and commit operations.</p><pre id="20ff4dae-bcfb-453e-a130-aab2ea269ecb" class="code"><code>void* Allocate(size_t size)
+{
+    void* address;
+    kern_return_t error;
+  
+    error = vm_allocate((vm_map_t)mach_task_self(),
+                        (vm_address_t*)&amp;address,
+                        size,
+                        VM_FLAGS_ANYWHERE);
+ 
+    if (error != KERN_SUCCESS)
+    {
+        address = nullptr;
+    }
+ 
+    return address;
+}</code></pre><pre id="ffde43a4-ecf9-4133-8b92-57c876f62c5e" class="code"><code>bool Deallocate(void* address, size_t size)
+{
+    kern_return_t error;
+  
+    error = vm_deallocate((vm_map_t)mach_task_self(),
+                          (vm_address_t*)address,
+                           size);
+ 
+    if (error != KERN_SUCCESS)
+    {
+        return false;
+    }
+ 
+    return true;
+}</code></pre><h3 id="f42a7280-9d63-4b2a-aa3c-fb623efcd800" class="">Linux</h3><ul id="1ed57593-d02a-4628-aa76-2d27f664c8e8" class="bulleted-list"><li><code><a href="https://pubs.opengroup.org/onlinepubs/009695399/functions/mmap.html">mmap</a></code> — maps pages of memory.</li></ul><ul id="15b913ae-258e-4fca-a7ba-0057e058acbd" class="bulleted-list"><li><code><a href="https://pubs.opengroup.org/onlinepubs/009695399/functions/munmap.html">munmap</a></code> — unmap pages of memory.</li></ul><p id="1a7161dc-a451-4e38-83de-7abb52121281" class="">The size of a page is obtained with <code><a href="http://man7.org/linux/man-pages/man2/getpagesize.2.html">getpagesize</a></code>.</p><p id="b1e1918c-6dd6-4492-bc21-e07f7740c608" class="">ℹ️Linux doesn’t distinguish reserve and commit operations.</p><pre id="8c9db615-6df7-45a3-be63-a69c23e501a9" class="code"><code>#include &lt;sys/mman.h&gt;
+
+void* Allocate(size_t size)
+{
+    void* address;
+    kern_return_t error;
+  
+    address = mmap(nullptr,
+                   size,
+                   PROT_READ | PROT_WRITE,
+                   MAP_PRIVATE
+                   0,
+                   0);
+ 
+    if (address == MAP_FAILED)
+    {
+        address = nullptr;
+    }
+ 
+    return address;
+}</code></pre><pre id="8263ec14-528b-471e-aca5-064161bb0153" class="code"><code>bool Deallocate(void* address, size_t size)
+{  
+    int result = munmap(address, size);
+ 
+    if (result != 0)
+    {
+        return false;
+    }
+
+    return true;
+}</code></pre><h2 id="b8c597c4-e93d-4c70-8b19-63254fb66ebc" class="">Write-Combined Memory</h2><p id="35a64445-e11c-437b-a94b-a796358b0196" class="">Write-combined memory is a type of non-cacheable memory where writes bypass the CPU caches and are written directly to main memory.</p><figure class="callout" style="white-space:pre-wrap;display:flex" id="8a5c3c52-ac1e-43b5-9c8a-cf2eba70943f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Useful for data destined for the GPU that will not be read by the CPU.</div></figure><figure class="callout" style="white-space:pre-wrap;display:flex" id="5c34ba0c-1e5e-4e27-836e-0231ed0b684f"><div style="font-size:1.5em"><span class="icon">🎮</span></div><div style="width:100%">On the Xbox 360, use the <code>XPhysicalAlloc</code> function to create write-combined memory heaps.</div></figure><h1 id="78baaae3-1c95-43c7-a3d6-ba3f6a2af6c3" class="">File Mapping</h1><p id="aa80825d-9ab9-4a5d-bbda-f9b4f67ac8a2" class="">File mapping is the association of a file with a portion of the virtual address space of a process.</p><p id="aee5e30c-0f25-4171-8a1c-134b8597ece9" class="">It also allows the process to work efficiently with a large data file, without having to map the whole file into memory.</p><p id="d77bf58a-1bcc-48ea-ac44-ea519f3b9859" class="">File mapping can be used for inter-process communication, and can be a solution for the communication between a runtime (in dev mode) and an editor. </p><h1 id="87e9fcd2-23cf-4b1e-b1d3-50c4639536e3" class="">Alignment</h1><p id="6d5eba8a-795a-42dc-a252-710c0c3295c4" class="">Memory alignment means storing the data at a memory offset equal to a multiple of the <em>word size</em> of the processor.</p><p id="c391ab0e-a919-4bf3-aadd-bab46f850f4c" class="">❌Some processor cannot access unaligned memory.</p><p id="055ce73d-78fc-4a10-a112-eeb9aa555fe9" class="">⚠Modern processors can access unaligned memory but with a performance cost as the processor will have to read multiple words and combine them together.</p><p id="e2106908-18fb-4560-95da-bfc1f5c67c3c" class="">Heap allocations are guaranteed to be aligned to the fundamental alignment, which is 8 bytes on 32-bit platforms and 16 bytes on 64-bit platforms.</p><p id="88c21216-7d8d-43f7-9ea6-321ac7360343" class="">For larger alignment requirement, platform-specific functions can be used, or manual alignment is required.</p><p id="d86aa526-3ceb-48b3-a19a-3f6a24ed7927" class="">An alignment is specified as values of the type <code>std::size_t</code>.</p><p id="5f2f5902-df35-4f58-9990-0f72f5354a27" class="">An alignment is expressed as a positive power of two value (equal or larger than <code>size_t</code>).</p><p id="cb7da63c-a9d9-4fdc-917b-f8bc3f6d8a16" class="">When a block of memory is allocated with a specific alignment, the allocated size can be larger than the requested size. The additional bytes are called <em>padding bytes</em>.</p><h2 id="88416845-a1f1-4c18-a913-f06d7ff51ef6" class="">Power of two</h2><p id="a1dc7eb4-1f38-49b9-bb2a-33632a3fd3fa" class="">Numbers which are powers of two have one and only one bit set in their binary representation.</p><p id="7922a562-456e-4b68-9ea1-608419689876" class="">So if <code>x</code> is a power of two then <code>x &amp; (x-1)</code> will be 0.</p><pre id="e5c0fb7d-cb34-431e-8031-e15127933b8c" class="code"><code>bool IsPowerOfTwo(std::uintptr_t x)
+{
+	return (x != 0) &amp;&amp; ((x &amp; (x-1)) == 0);
+}</code></pre><h2 id="f1cf2914-2794-4907-bcfd-753c8d97f3d4" class="">Align an address</h2><p id="7c5df033-684a-46a2-bcfa-83c92e934d96" class="">The memory address must be is a multiple of the specified alignment.</p><p id="6730423f-60fc-4d31-87f8-cfeeeb0411a0" class="">To align a memory address to a specified alignment, we perform a modulo arithmetic.</p><p id="4cd054e9-2235-436c-a573-9d98ffd14f2e" class="">As the alignment is a power of two, the modulo <code>ptr % alignment</code> can be replaced with by <code>ptr &amp; (alignment - 1)</code>.</p><pre id="f2465912-1913-4208-bdbb-39d1820b1f78" class="code"><code>void* Align(std::uintptr_t ptr, std::size_t alignment)
+{
+  return (void*)((ptr + (alignment - 1)) &amp; -((int)alignment));
+}</code></pre><h2 id="9c8b6559-4198-44b3-bcc2-86d50149fb4e" class="">Structure</h2><p id="bdcb5ce2-97bd-4dff-95c9-85f373bc9a4b" class="">The C++ standard guarantees that the members of a class or struct appear in memory in the same order as they are declared.</p><p id="75bb51f3-6ecd-43ca-818f-a62e3985293f" class="">When a structure is allocated, padding bytes are inserted between member fields to ensure that each member is properly aligned.</p><p id="1eb7b554-392e-4dad-8efc-f8207a134d54" class="">The size of structures should be a multiple of <code>size_t</code> when possible to ensure that no memory is wasted by padding.</p><p id="9ed6a855-cdf1-407f-aab5-d3929f09ccd3" class="">By default, structures are aligned at the size of the largest element they contain.</p><p id="bce8a0d8-9752-4210-b88f-6bfda97c39bf" class="">Each member is aligned to respect the natural alignment of its type.</p><p id="7ef26697-3cec-453a-b87c-d8f821c55adc" class="">The natural alignment of a type corresponds to its size in memory.</p><ul id="f0ff2b45-1033-47a5-a598-e1830ee14833" class="bulleted-list"><li><code>uint8_t</code> is 1-byte aligned</li></ul><ul id="28deea98-e827-4acc-8c06-a8f120fbf8ba" class="bulleted-list"><li><code>uint16_t</code> is 2-bytes aligned</li></ul><ul id="490f87ae-62eb-467b-9417-bbae01650b87" class="bulleted-list"><li><code>uint32_t</code> is 4-bytes aligned</li></ul><hr id="ffca470c-bed2-4b10-acab-2db25cc6b53a"/><pre id="eda5e977-61c1-40fa-beb1-fa186e8cbf92" class="code"><code>struct Vertex
+{
+  uint16_t a; //0x0000+4
+  uint32_t b; //0x0004+4
+  uint8_t  c; //0x0008+4
+};</code></pre><p id="b5c16a16-fcc5-419c-9a4b-6118977fc8f1" class="">The size of <code>Vertex</code> is 12 bytes.</p><ul id="65c6ebfe-dfca-41ac-8041-abd369cfc779" class="bulleted-list"><li><code>a</code> is aligned to 4 bytes with 2 bytes of padding.</li></ul><ul id="4840a888-d8ba-4ff5-8232-188b606b6d9a" class="bulleted-list"><li><code>c</code> is aligned to 4 bytes with 3 bytes of padding.</li></ul><p id="52dd4add-f9b0-477b-a748-5c15bae0d95c" class="">The offset of a member can be inspected using the <code>offsetof</code> macro.</p><pre id="4551e5fb-dc82-4037-9948-fdf4d31a83d9" class="code"><code>offsetof(Vertex, a)</code></pre><hr id="b5099385-18ba-4152-8046-1b22c8b2258d"/><p id="5044bb40-7558-426f-a9ff-baa293b6e83b" class="">We can reorder the members in the structure to reduce the padding.</p><pre id="cd10f52c-4344-4804-a6c7-d0ae6399948b" class="code"><code>struct Vertex
+{
+  uint32_t b; //0x0000+4
+  uint16_t a; //0x0004+2
+  uint8_t  c; //0x0006+2
+};</code></pre><p id="454c4c14-d84e-44bf-9083-3fadb4c4acc6" class="">The size of <code>Vertex</code> is 8 bytes.</p><ul id="51a146e6-bba9-4cc1-8f4e-be44c2b353d1" class="bulleted-list"><li><code>a</code> is aligned to 2 bytes with no padding.</li></ul><ul id="6f5f7e11-9d81-4d43-9a37-a68888e97e75" class="bulleted-list"><li><code>c</code> is aligned to 1 byte with 2 bytes of padding.</li></ul><hr id="28a0cb66-574a-4077-bd20-b32393dd2648"/><p id="03705fee-ecdb-4039-b3aa-3ac99809eb1d" class="">To force the compiler to remove any padding, a keyword can be specified in the declaration of the struct.</p><ul id="d34f8709-6947-4470-a3cc-f6d89a74b0da" class="bulleted-list"><li>MSVC: use the <code>pack</code> pragma directive before the declaration. <a href="https://docs.microsoft.com/en-us/cpp/preprocessor/pack"><code>#pragma pack()</code></a></li></ul><ul id="7061e9a3-6e71-41a0-b614-36f5917cc990" class="bulleted-list"><li>Clang/GCC: declare the structure with the <code>__attribute__</code> keyword. <code><a href="https://gcc.gnu.org/onlinedocs/gcc-4.0.2/gcc/Type-Attributes.html">__attribute__((packed))</a></code></li></ul><p id="aa0fb589-2bd1-45e0-a244-f7964fb81c43" class="">⚠Unfortunately, it comes at a performance cost as the compiler generates extra instructions to perform the memory access in a way that does not cause unaligned access violation (typically by reading part of the data from two memory addresses and combining them).</p><div id="d5ca8ab2-a6b6-424b-a851-1b6708767172" class="column-list"><div id="67f732ac-9bc8-4979-89ac-cc238f38d8b4" style="width:50%" class="column"><pre id="817f5ee2-5447-4d24-bb23-673d4f058645" class="code"><code>#pragma pack(push)
+struct Vertex
+{
+  uint32_t b; //0x0000+4
+  uint16_t a; //0x0004+2
+  uint8_t  c; //0x0006+1
+};
+#pragma pack(pop)</code></pre></div><div id="6f9c43f0-ce70-4d93-a7c0-eac909fc0c31" style="width:50%" class="column"><pre id="a6a6e561-4b0c-46a7-9482-6fa1207aa83b" class="code"><code>struct __attribute__((packed)) Vertex
+{
+  uint32_t b; //0x0000+4
+  uint16_t a; //0x0004+2
+  uint8_t  c; //0x0006+1
+};</code></pre></div></div><p id="f51747b8-c520-4d20-82d4-427c525c27dd" class="">The size of <code>Vertex</code> is 7 bytes.</p><h3 id="6e8dd000-dd87-4134-8eee-a558f12272c4" class="">Alignment</h3><p id="c448aafc-9011-4518-a0fa-9c275f00254a" class="">Aligning data structures can improve the performances by ensuring that cache lines are properly used.</p><p id="d53cd802-c014-463c-9b31-c09d83bf8c98" class="">C++11 provides the <code>alignof</code> macro to determine the alignment of a specified type.</p><pre id="ab78e341-a8ed-4e6e-b33b-ece2ac7d7b9c" class="code"><code>alignof(Vertex)</code></pre><p id="093509ac-4b10-448c-8b00-72941e7d707e" class="">The alignment of the <code>Vertex</code> structure would be 4 as its largest member is of type <code>uint32_t</code>.</p><hr id="eddba876-b004-415a-8fe4-828e6ad99aa0"/><p id="92c1b2c7-f94f-42e3-8a4c-34294478cf2d" class="">The C++11 macro <code>alignas</code> can be used in the declaration of the structure to force a specific alignment.</p><pre id="16e3d448-739b-43ee-aa2b-9628da88c33b" class="code"><code>struct alignas(16) Vertex
+{
+  uint32_t b;
+  uint16_t a;
+  uint8_t  c;
+};</code></pre><p id="b2fb494a-15e7-4998-bd1c-19ace126c04f" class="">The alignment of <code>Vertex</code> is now 16.</p><h1 id="f648ad04-e7b5-4b1c-8b83-34c4116b26a3" class="">Relocatable Heap</h1><p id="36d49b7d-c12d-4887-975b-7ab8253e3682" class="">A relocatable heap helps with fragmentation by moving all the allocated block in memory to removes the holes.</p><p id="08f8d3d8-2d2c-4d1d-8191-6148a38a7ed8" class="">⚠️When a block of memory is moved, all the pointers to that block of memory become invalid.</p><p id="124e1c0b-440f-4283-8b55-9dfc58a6304a" class="">To support a relocatable heap, it&#x27;s necessary to have a handle system instead of using pointers directly.</p><p id="4613df96-b382-4c30-ab8d-7843b877ab84" class="">A relocatable heap is not practical as the only method of avoiding fragmentation, but can be a good solution in some cases. For example, scripted objects usually work with handles instead of pointers to support hot-reload.</p><h1 id="5a4ec498-6881-491c-aaef-01533bdccb4a" class="">Garbage Collection</h1><p id="9fddcfe5-5dac-4430-8f73-b3915f7bc453" class="">Garbage collection is a strategy for automatically detecting memory allocated to objects that are no longer in use.</p><p id="a59f4f44-f1f9-48bd-9f7a-c0ca439500af" class="">Manual memory management enable several types of bugs in a program:</p><ul id="1153a848-d680-41ae-b715-3b28868fef2d" class="bulleted-list"><li>memory leaks – an unused object is never released.</li></ul><ul id="9708c8dd-4775-4271-b2bb-94f395cea7ef" class="bulleted-list"><li>memory corruption – destruction of a different object that occupy the same location in memory.</li></ul><ul id="bbc338c6-4ecd-47dc-97f1-c9c8b1a2fc35" class="bulleted-list"><li>dangling pointers – pointers that do not point to a valid object.</li></ul><p id="b82ef3c5-5fed-4ab1-90a6-23eb2e5fe72c" class="">Garbage collection provides a solution for these bugs, though memory leaks can still occur.</p><p id="02722e4b-6496-4f99-bc6e-728e15d6c4a4" class="">However, garbage collection also suffers from other issues:</p><ul id="18784145-4eeb-435d-b12c-f8b290b80353" class="bulleted-list"><li>higher memory usage</li></ul><ul id="a91b7f59-37e0-4c57-bd50-8293e3fc31a1" class="bulleted-list"><li>collection cycles – CPU consumption.</li></ul><ul id="5e551708-c0b9-4295-a9ce-c1831dee89c1" class="bulleted-list"><li>finalizer problem – finalization is non-deterministic.</li></ul><h1 id="a637fb16-ed0f-45e1-8814-585e435d4ff8" class="">References</h1><ul id="8c3999ce-a2a2-48a2-bda0-406f51e66e6a" class="bulleted-list"><li>Memory management, Wikipedia, <a href="https://en.wikipedia.org/wiki/Memory_management">https://en.wikipedia.org/wiki/Memory_management</a></li></ul><ul id="1d7bc152-aaf7-4f36-afa0-7d510cf5b949" class="bulleted-list"><li>Virtual Memory Tricks, Our Machinery, <a href="https://ourmachinery.com/post/virtual-memory-tricks/">https://ourmachinery.com/post/virtual-memory-tricks/</a></li></ul></div></article></body></html>

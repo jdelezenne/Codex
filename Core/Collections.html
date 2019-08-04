@@ -1,0 +1,565 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Collections</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e53f4fbd-8fd3-472f-9f94-a9c40d19d45e" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📦</span></div><h1 class="page-title">Collections</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th>Created</th><td><time>@Jun 04, 2019 10:33 AM</time></td></tr><tr class="property-row property-row-multi_select"><th>Tags</th><td></td></tr></tbody></table></header><div class="page-body"><h1 id="8988f9cc-f783-4ecc-804b-a5f76306b4d4" class="">Overview</h1><p id="0d5a18b6-6d6f-46fc-8777-1b79be4c788a" class="">Collections or containers are used to create and manage groups of related objects.</p><p id="5c5001a9-614e-44c5-8fe8-0cc739100b59" class="">Fixed containers have a fixed capacity. They are useful for creating and working with a fixed number of objects.</p><p id="6dbfc405-52d1-4552-99dd-3a255ce193bc" class="">Dynamic containers are more flexible. They are used for creating and working with a dynamic number of objects.</p><p id="4e0e1294-7ba1-486f-a422-3b4c9e83455d" class="">Associative containers use keys to uniquely identify objects.</p><p id="3d289a3a-d1a2-4cbe-a563-a74a2e99b399" class="">In C++, the <a href="https://en.cppreference.com/w/cpp/container">standard library</a> provides several types of containers.</p><p id="33322be0-a9f5-415d-94d4-ce5e25ff3e8f" class="">In C#, the <a href="https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic">Collections.Generic namespace</a> provides various collections of objects.</p><h1 id="1399ce72-a6c9-4a13-a04e-a48e9d01df55" class="">Containers</h1><h2 id="4b96f0e4-cbd8-43d9-bd26-14507c4f7703" class="">Array</h2><p id="eb247ec3-8b2c-46a7-a9d3-d96b5ed3c6dc" class="">An <strong>array</strong> is a static collection of elements.</p><p id="089410bf-15dd-4335-8363-56e156228e8f" class="">It&#x27;s implemented as a fixed single block of memory.</p><h3 id="c0aa301b-5f5e-4a4b-be74-88d69b3c45d6" class="">Advantages</h3><ul id="2e92cbf0-4c91-40a2-8ce0-5df6bbeca0ed" class="bulleted-list"><li>Contiguous memory location (cache-friendly)</li></ul><ul id="0fae0f55-4c77-4f02-91ed-6fefb4d3f21d" class="bulleted-list"><li>No allocation and deallocation</li></ul><h3 id="745df6cf-88f0-4e4f-9de9-090f503b08e6" class="">Disadvantages</h3><ul id="a409588d-3e67-41fd-a630-e9a0bc82255a" class="bulleted-list"><li>Fixed capacity</li></ul><ul id="1ca76b92-22b5-416b-99e2-4bf1b9c46fb5" class="bulleted-list"><li>No insertions and erases</li></ul><h3 id="88dd41c0-fa48-407a-aeb2-77bd4dd47ae7" class="">Use cases</h3><ul id="f1624f38-a885-47bd-afb3-10b8a883a26d" class="bulleted-list"><li>Collections of elements</li></ul><ul id="3528f260-0a0a-40fa-84ec-26c099200455" class="bulleted-list"><li>Capacity is known</li></ul><ul id="289d19b7-8d5e-4b87-b5a5-fcce28dcf52c" class="bulleted-list"><li>Order is important</li></ul><ul id="db221841-5b54-46b5-b40a-512f2018f5a1" class="bulleted-list"><li>Access by index is important</li></ul><h3 id="993b1626-a8a6-4418-bfb2-3f6090e85cf1" class="">C++</h3><ul id="080c0be9-780f-460d-996c-cf1e9299d323" class="bulleted-list"><li><a href="https://en.cppreference.com/w/cpp/container/array"><code>std::array</code></a></li></ul><h3 id="9a28e577-20c8-4db9-bf1a-e397b8910aa0" class="">C++/CX</h3><ul id="8257abc2-44d3-4e51-bc0e-ddb4ec36346b" class="bulleted-list"><li><a href="https://docs.microsoft.com/en-us/cpp/cppcx/platform-array-class"><code>Platform::Array</code></a></li></ul><h3 id="b8de1954-4ee3-4b6f-a49c-e3ddf63f3f10" class="">C#</h3><ul id="255fef11-9d19-4fa5-a0b9-b0fe15431308" class="bulleted-list"><li><a href="https://docs.microsoft.com/en-us/dotnet/api/system.array"><code>Array</code></a></li></ul><h2 id="f2762ff8-6324-424a-b781-7051dd04c3a3" class="">Vector</h2><p id="baa708e1-ff92-47e0-b416-ccbc50c92137" class="">A <strong>vector</strong> is a dynamic collection of elements.</p><p id="9801197a-7757-44e0-8a86-c7cf8212f31e" class="">It&#x27;s implemented as a single block of memory.</p><h3 id="5ad33564-59ad-4829-b425-da930004b9af" class="">Advantages</h3><ul id="1ad180b7-ce77-42c0-8588-520fdd28a926" class="bulleted-list"><li>Contiguous memory location (cache-friendly)</li></ul><ul id="f3fac02d-eb24-489b-b0b0-2350ba790cd7" class="bulleted-list"><li>Few allocations and deallocations</li></ul><h3 id="8997eaca-1249-4075-a045-066ec2e827b9" class="">Disadvantages</h3><ul id="fbc8042c-12cd-47ab-b4be-dc8a1e7d70a3" class="bulleted-list"><li>Slow insertions and erases</li></ul><h3 id="945b91ac-fa0d-49b5-b1a8-72b88f33de2a" class="">Use cases</h3><ul id="49da12f4-1814-4987-85ec-2855444a6cef" class="bulleted-list"><li>Collections of elements</li></ul><ul id="e9d1c83e-edfd-48c3-8ebb-5edad5c2cdcc" class="bulleted-list"><li>Capacity is not known</li></ul><ul id="cb64c052-f77c-412f-b84d-88ddf931e50d" class="bulleted-list"><li>Order is important</li></ul><ul id="4d8be726-af9d-4b96-89e0-09795f4c8ed3" class="bulleted-list"><li>Access by index is important</li></ul><ul id="22260257-84ae-4502-bcb4-7975d7b6f607" class="bulleted-list"><li>Few insertions and erases</li></ul><h3 id="0ebed856-ac12-4c0b-a831-29629e31488e" class="">C++</h3><ul id="f9bccc52-2c18-4a0f-bf83-8fb4a5ac5c17" class="bulleted-list"><li><code><a href="https://en.cppreference.com/w/cpp/container/vector">std::vector</a></code></li></ul><h3 id="7da21a0a-f1c2-48fc-9afc-7c694ddfb5ca" class="">C++/CX</h3><ul id="c14b0bb9-dd17-4741-8213-cd0d6f9d9426" class="bulleted-list"><li><code><a href="https://docs.microsoft.com/en-us/cpp/cppcx/platform-collections-vector-class">Platform::Collections::Vector</a></code></li></ul><h3 id="16e72891-30b7-46c6-9765-ac7792b4cb3e" class="">C#</h3><ul id="e272e330-803a-48cb-b876-b57c7c2513e0" class="bulleted-list"><li><code><a href="https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1">List&lt;T&gt;</a></code></li></ul><h2 id="3660d144-7065-49eb-af1e-a93d760fee80" class="">List</h2><p id="a831a781-901d-40f8-9f15-a4a281fbeddf" class="">A <strong>list</strong> is a dynamic collection of elements.</p><p id="39444db3-ce4b-4fca-a8ac-a33fd143a807" class="">It&#x27;s implemented as a double-linked list.</p><h3 id="2412e3af-ae65-474a-971b-2b6ab58a095a" class="">Advantages</h3><ul id="b95a8135-f25c-4e09-a8b9-5522b435aaee" class="bulleted-list"><li>Fast insertions and erases</li></ul><h3 id="981e986b-246c-41e0-ba66-2cd88dcaf6c0" class="">Disadvantages</h3><ul id="771d43a9-222f-4748-bf93-16e5450f4b81" class="bulleted-list"><li>Non contiguous memory location (not cache-friendly)</li></ul><h3 id="827c5c24-95f0-4ea2-a28f-17c573389864" class="">Use cases</h3><ul id="a4ac3d9a-7700-4c76-8e18-37c73732ffb6" class="bulleted-list"><li>Collections of elements</li></ul><ul id="1a9323aa-4255-4438-a7b9-15918ae4b359" class="bulleted-list"><li>Order is not important</li></ul><ul id="b9da7a63-819f-4467-8ba1-552d1ae15716" class="bulleted-list"><li>Access by index is not important</li></ul><ul id="8dd77c43-b8fd-4cb0-aeb6-52c2fd759891" class="bulleted-list"><li>Frequent insertions and erases</li></ul><h3 id="72fec364-d266-48fc-9bdb-be16dd758986" class="">C++</h3><ul id="e22a1632-0671-47af-b7e6-0612c6541d3a" class="bulleted-list"><li><code><a href="https://en.cppreference.com/w/cpp/container/list">std::list</a></code></li></ul><h3 id="b328495b-b077-45c1-9a34-330300b747cf" class="">C#</h3><ul id="985c6b09-7f1e-4600-96ce-eb69e3972523" class="bulleted-list"><li><code><a href="https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.linkedlist-1">LinkedList&lt;T&gt;</a></code></li></ul><h2 id="3fe0ba71-8739-4e11-a64e-0a4fc8377268" class="">Intrusive List</h2><p id="b6737d67-542c-4f1c-ab1c-5d265c6e3204" class="">An <strong>intrusive list</strong> is a dynamic collection of elements.</p><p id="ffb97a56-6da5-413c-9db9-fc59c30b69c6" class="">It&#x27;s implemented as a double-linked list that does not contain any data.</p><p id="628dbad8-ddaf-49e0-b476-6e2f729699e4" class="">Decouples memory allocation from the container itself.</p><p id="16ea4ac7-bc09-43a2-9e60-ca8b35c2c9ee" class="">The list can be implemented as a circular list.</p><h3 id="da5e2a5b-55a4-4ce1-814c-088733bef0c4" class="">Advantages</h3><ul id="cc8fc1f1-84e8-4db1-b360-c1a70c0d5f5a" class="bulleted-list"><li>To add an element to the list, it is not necessary to perform an allocation</li></ul><ul id="1db8d76f-2d8c-4fa1-9569-9843536a6f3a" class="bulleted-list"><li>To remove an element from the list, it doesn&#x27;t need to be looked up and it is not necessary to perform a deallocation</li></ul><ul id="6bc4f2dc-9c3e-4f1b-aa4f-1455cc0667de" class="bulleted-list"><li>The list node and the surrounding data are cache-friendly</li></ul><h3 id="b0dc4985-5318-402c-845b-4cb0f36d7da6" class="">Disadvantages</h3><ul id="a8fa4cbf-bafe-48c0-99ba-5d1618e9c4cd" class="bulleted-list"><li>An element can only belong to a single list</li></ul><ul id="619d0947-113c-4455-9b14-6c1d9a89e030" class="bulleted-list"><li>The debugger cannot inspect the data</li></ul><p id="413721f2-f7ed-4214-88bf-40643d899748" class=""><a href="https://www.gamasutra.com/view/news/128568/InDepth_Intrusive_Lists.php">https://www.gamasutra.com/view/news/128568/InDepth_Intrusive_Lists.php</a></p><p id="c56b7fd2-cba5-441a-87b4-a28633f65735" class=""><a href="https://github.com/Edgarins29/Doom3/blob/master/neo/idlib/containers/LinkList.h">https://github.com/Edgarins29/Doom3/blob/master/neo/idlib/containers/LinkList.h</a></p><h2 id="94fe74ae-754b-4eb7-8a36-6c2562a9cb70" class="">Set</h2><p id="4c1f7172-10b7-4d3a-8e73-dd880b5dc578" class="">A <strong>set</strong> is a dynamic collection of unique elements.</p><p id="801df063-1b35-4007-9232-616b1afd63c3" class="">It&#x27;s typically implemented as a binary search tree.</p><h3 id="7dcd3ff1-9163-49a6-b6be-c99065eaaa62" class="">Advantages</h3><ul id="e6927b6c-7f9f-4a67-9d38-1e7926ee5e9f" class="bulleted-list"><li>Fast insertions and erases</li></ul><ul id="55ce3381-8624-465a-a671-2bc8ba90f5a1" class="bulleted-list"><li>Fast lookups</li></ul><h3 id="b8785803-27fb-49fe-a7d3-870452293c7b" class="">Disadvantages</h3><ul id="d59badf5-0ef4-4813-bf9a-f302b1981210" class="bulleted-list"><li>Non contiguous memory location (not cache-friendly)</li></ul><h3 id="490c8d8e-f469-43e3-bff7-14dd9d3e038e" class="">Use cases</h3><ul id="a9ea4ab3-c7a4-4268-b355-bb5b1b64a0ca" class="bulleted-list"><li>Collections of unique elements</li></ul><ul id="a24584bc-8165-4f02-ab49-aa2b0228a7c6" class="bulleted-list"><li>Order is not important</li></ul><ul id="2f1594bc-4c94-4738-81aa-cf0791fa8245" class="bulleted-list"><li>Access by index is not important</li></ul><ul id="a2ff0601-88e9-4519-ae88-7fc2527cecdc" class="bulleted-list"><li>Frequent insertions and erases</li></ul><ul id="08830fd1-42b3-4d6a-9d93-b1fff95e81b2" class="bulleted-list"><li>Frequent lookups</li></ul><h3 id="c8963eca-0e48-400f-89a7-f675f73dbd91" class="">C++</h3><ul id="5cf2fd66-add0-4809-8a3a-7290087e522c" class="bulleted-list"><li><code><a href="https://en.cppreference.com/w/cpp/container/set">std::set</a></code></li></ul><h3 id="cd75f485-e83a-4de4-85b1-e2f8296d1c55" class="">C#</h3><ul id="1d6683cb-ed2a-4b75-8744-0d5110bb1490" class="bulleted-list"><li><code><a href="https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedset-1">SortedSet&lt;T&gt;</a></code></li></ul><h2 id="e619733b-668f-471f-8c6b-b48199ebcfbd" class="">Vector Set</h2><p id="1c095600-fcbf-42dd-90d7-1f1c7ab62fba" class="">A <strong>vector set</strong> is a set implemented like an ordered vector.</p><h3 id="7cfb4b7b-2192-4b7b-be3b-743eb95afecd" class="">Advantages</h3><ul id="9d3e4af4-99f4-440b-b907-22ecf5078c3e" class="bulleted-list"><li>Contiguous memory location (cache-friendly)</li></ul><ul id="19cc3662-392a-4841-856a-0514376716cd" class="bulleted-list"><li>Fast lookups</li></ul><h3 id="fb254cdc-45dd-4d83-8a59-1e2cbfcbcefb" class="">Disadvantages</h3><ul id="f0045eb9-d1bd-410c-88c7-47fdb854426e" class="bulleted-list"><li>Slow insertions and erases</li></ul><h3 id="a46c0f73-92a8-48e3-b8cd-5801575cfca9" class="">Use cases</h3><ul id="f61912b5-3060-48f7-917b-49a12f360b2b" class="bulleted-list"><li>Cache-friendly set</li></ul><h3 id="f7f83e32-2dd5-4084-91cc-862110e2cbd4" class="">C#</h3><ul id="76e10c0c-252f-4752-93b3-cb6432b7d6c4" class="bulleted-list"><li><code><a href="https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.hashset-1">HashSet&lt;T&gt;</a></code></li></ul><h2 id="3ce19a08-7a51-4858-94fb-16d173ef7d0e" class="">Map</h2><p id="760d1d62-8a10-4ca5-8389-dfbe75686f49" class="">A <strong>map</strong> is a dynamic collection of key / value elements.</p><p id="84e50dae-8501-47e2-8913-6fc97b2836a6" class="">It&#x27;s typically implemented as a binary search tree.</p><h3 id="6dee0488-e414-40e4-b888-71ad80e543ef" class="">Advantages</h3><ul id="1b156a89-4d75-446a-8827-d19561537aa4" class="bulleted-list"><li>Fast insertions and erases</li></ul><ul id="346de48b-3129-4093-8bf8-424e76732a33" class="bulleted-list"><li>Fast lookups</li></ul><ul id="b675553e-c7ae-467d-8d14-f0ebd485f6d9" class="bulleted-list"><li>Distinction of key and value</li></ul><h3 id="ae29e21e-054b-4cf9-8349-3440ae425e65" class="">Disadvantages</h3><ul id="eb6cc5c4-2a44-4429-9dd4-7b76a9426e9f" class="bulleted-list"><li>Non contiguous memory location (not cache-friendly)</li></ul><h3 id="ad66747c-2db4-4361-bd67-b9f592c00f75" class="">Use cases</h3><ul id="e4301d22-4ae4-4fa2-90bb-4c9da28d207a" class="bulleted-list"><li>Collections of elements with unique keys</li></ul><ul id="c7e7191c-3f2b-48e5-8c86-64da05ff4001" class="bulleted-list"><li>Order is not important</li></ul><ul id="469e4334-48b4-4821-859b-7dfa76c96513" class="bulleted-list"><li>Access by index is not important</li></ul><ul id="79879b96-026f-4898-947e-b307d70e2fba" class="bulleted-list"><li>Frequent insertions and erases</li></ul><ul id="7cafdd90-a4da-4a22-afd5-2ff92ce24497" class="bulleted-list"><li>Frequent lookups with keys</li></ul><h3 id="581caf60-e15a-4445-baf2-3824130c9a29" class="">C++</h3><ul id="6022cf8a-314c-4301-a4a7-ade75a3665cf" class="bulleted-list"><li><code><a href="https://en.cppreference.com/w/cpp/container/map">std::map</a></code></li></ul><ul id="6248e642-581f-449a-8ed9-777943b2853a" class="bulleted-list"><li><a href="https://en.cppreference.com/w/cpp/container/unordered_map"><code>std::unordered_map</code></a></li></ul><h3 id="99b1e94c-728b-407d-a4bb-b3a90a8f1eb9" class="">C++/CX</h3><ul id="7c893fd6-5ab4-4084-b2c8-10d30bfa8e95" class="bulleted-list"><li><code><a href="https://docs.microsoft.com/en-us/cpp/cppcx/platform-collections-map-class">Platform::Collections::Map</a></code></li></ul><ul id="33ef057d-ccd6-4b4a-8b9e-948014b86def" class="bulleted-list"><li><code><a href="https://docs.microsoft.com/en-us/cpp/cppcx/platform-collections-unorderedmap-class">Platform::Collections::UnorderedMap</a></code></li></ul><h3 id="e2d657a3-208f-49ba-9e2e-9a143f657d7f" class="">C#</h3><ul id="7773ffcc-7462-4dc5-b363-ee7013366756" class="bulleted-list"><li><code><a href="https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2">Dictionary&lt;T&gt;</a></code></li></ul><h2 id="ac2f4307-cf14-44e7-86a2-fa1f3d30ff6a" class="">Vector Map</h2><p id="378190c4-dbe6-43ed-a9d3-c52a7458bbd8" class="">A <strong>vector map</strong> is a map implemented like an ordered vector.</p><p id="8afdde7c-ef13-4bcf-9256-b5b8d52cab30" class="">It&#x27;s implemented as either a vector of key / value pairs or as separate vectors of keys and values.</p><h3 id="31c85fca-73b7-4061-835b-22af7bc1c262" class="">Advantages</h3><ul id="d00790d2-56f1-416f-86e6-ba6dc8b088cc" class="bulleted-list"><li>Contiguous memory location (cache-friendly)</li></ul><ul id="4744b6ff-6496-4a18-ad6c-3de62d1542c2" class="bulleted-list"><li>Fast lookups</li></ul><h3 id="05268272-89f9-437e-b00f-43cd8a6f10c8" class="">Disadvantages</h3><ul id="e8e1a201-9703-4c3e-82ac-6e9913496298" class="bulleted-list"><li>Slow insertions and erases</li></ul><ul id="df00abbb-992b-4150-8c60-f84003bc395b" class="bulleted-list"><li>Large values cause cache misses when key / value pairs are stored in contiguous memory location</li></ul><h3 id="7e5b220e-ace5-4a82-9847-27640b8bab4f" class="">Use cases</h3><ul id="1386f182-0281-4ad0-9d2a-8c70ed575f79" class="bulleted-list"><li>Cache-friendly map</li></ul></div></article></body></html>

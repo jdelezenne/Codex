@@ -1,0 +1,819 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>C++ Best Practices</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2d458c79-f87e-4488-ba76-93fbdf87c1d7" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">👑</span></div><h1 class="page-title">C++ Best Practices</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th>Category</th><td><span class="selected-value">C++</span></td></tr></tbody></table></header><div class="page-body"><h1 id="0cfec9e5-0fb0-49eb-869e-f9a886e7a715" class="">Macros</h1><ul id="7036cbbc-3e1e-4974-864f-431e80d88fc9" class="bulleted-list"><li>A macro can be written on multiple line by ending a line with the <code>\</code> character.</li></ul><ul id="8bbf1a59-969c-47ec-9e21-a298a42230e2" class="bulleted-list"><li>A macro can contain multiple statements separated by the <code>,</code> character.</li></ul><pre id="8eefa5c6-f840-4340-a9ba-3efe5138950e" class="code"><code>#define Delete(ptr) \
+    delete ptr, \
+    ptr = nullptr</code></pre><h1 id="ea9b2b95-b9a0-4e18-850b-e8d0257a4b21" class="">Types</h1><p id="56dca778-2d47-4442-98ad-5c8ebf41e6be" class="">The smallest allocation is typically one byte.</p><p id="263073b6-868f-4cff-b73b-f12e6f5b4285" class="">Therefore, an empty <code>struct</code> or <code>class</code> will have a size of one byte.</p><pre id="4aa97962-a67e-4177-bc6a-5b69fcd62157" class="code"><code>struct T
+{
+};</code></pre><p id="195612c2-2fcb-4329-a6a5-609e40073b2f" class="">Outputs &quot;1&quot;:</p><pre id="4b9ea7c9-1f60-4274-97db-3e0bfc23b5df" class="code"><code>std::cout &lt;&lt; sizeof(T) &lt;&lt; endl;</code></pre><h1 id="f37b0408-f6dc-4891-ad1c-c959f92e7233" class="">Explicit Constructors</h1><p id="41d8e0ae-8bb6-4e2c-9f59-e46b71973568" class="">By default, C++ allows implicit conversions when a type contains a constructor that takes one required parameter. However, in many cases, it would not make sense to allows such conversions.</p><pre id="5471ff70-5826-43e6-99e4-486d0345330e" class="code"><code>class Player
+{
+public:
+    Player(uint32_t health);
+    ...
+};</code></pre><p id="4834d84f-016b-4092-92c5-25d0d2443a26" class="">We do not want to allow this initialization:</p><pre id="8ed052e1-14f9-4a93-b6a6-a42428911445" class="code"><code>auto player = 50;</code></pre><p id="aea1a3d5-c54b-48c1-b13c-0fe34d46bd70" class="">To prevent such implicit conversions, the constructors have to be made <code>explicit</code>.</p><pre id="95162fbe-9a36-4fd1-9801-cf1ddfd93304" class="code"><code>class Player
+{
+public:
+    <strong>explicit</strong> Player(uint32_t health);
+    ...
+};</code></pre><p id="9edeae02-2980-411d-86c1-549c85cda37e" class="">If we compile the same initialization, we get an error:</p><pre id="85cbb305-9b9b-4dae-a8fd-5c83fb965547" class="code"><code>auto player = 50; // error: No viable conversion from &#x27;int&#x27; to &#x27;Player&#x27;</code></pre><p id="26198aae-97c5-4823-bbf6-7a9325b0c455" class="">Now, we need to call the constructor explicitly:</p><pre id="8989e800-fdaa-4953-808a-98322d735e8a" class="code"><code>auto player = Player(50);</code></pre><h1 id="680e1091-acdf-4808-b9af-1f4fc685b65a" class="">Casts</h1><h2 id="d3e83e0e-457f-4165-affd-ab0af0faa27f" class="">Static cast</h2><p id="792ac59d-c6e5-4761-ab8d-3c82397cf014" class="">The C-style cast isn&#x27;t checked by the compiler and can fail at run-time.</p><pre id="bf556ea6-4613-4b89-b0b2-cd9d0d81d57f" class="code"><code>uint8_t x = 10;                 // 1 byte
+uint32_t* ptr1 = (uint32_t*)&amp;x; // 4 bytes
+
+*ptr1 = 5; // run-time error: stack corruption</code></pre><p id="f7e584a6-9f45-4711-98d2-286001b63a03" class="">The C++-style cast is checked by the compiler and produce compile-time errors. It cannot fail at run-time.</p><pre id="99a9fe79-d11c-435e-bbfc-4fc000de616c" class="code"><code>uint32_t* ptr2 = static_cast&lt;uint32_t*&gt;(&amp;x); // compile-time error</code></pre><p id="75e5934c-0b2b-464a-9e4f-9fd287dc8e2c" class="">For this reason, it is preferable to use C++-style casts over C-style casts.</p><h2 id="b4e0ef9e-4472-4870-b31d-15e3fca33d28" class="">Reinterpret Cast</h2><p id="7f29bcae-0d21-477e-8d93-55325facc2c6" class="">The reinterpret cast handles conversions between unrelated types.</p><p id="ae3a7139-0160-4438-8ab1-ee747795ad09" class="">It performs a binary copy of the data (like the C-style cast) that is platform-dependent and should be use with caution.</p><h1 id="247c4dd7-ab66-41db-ab40-fb0bdaa0ed71" class="">Pointer Aliasing</h1><p id="7c8b90e1-5cea-4f4a-94aa-01c7b301cea2" class="">Because of pointer aliasing, the C++ compiler will not perform some optimizations if two pointers can potentially have overlapping memory regions.</p><pre id="c42d2972-a741-4190-af12-af2cae423987" class="code"><code>void Copy(char* to, const char* from)
+{
+    for (size_t i = 0; i &lt; strlen(from); ++i)
+    {
+        to[i] = from[i];
+    }
+}</code></pre><p id="e8fb66d3-5675-4ccb-a8ba-315b2fb60c12" class="">In the <code>Copy</code> function, the compiler assumes that a write to <code>to</code> can potentially write to <code>from</code>, because the result of the call to <code>strlen(from)</code> could change in each loop iteration.</p><p id="e0fcd082-4deb-4a52-a20f-0e4a21e01436" class="">There are several ways to allow the compiler to optimize the function.</p><p id="0e751f73-6132-4e18-a723-2ec665e6f91f" class="">A simple solution is to use a local variable to store the result from <code>strlen(from)</code>.</p><pre id="754c3d9d-417b-4ad2-8837-f3b510f566cd" class="code"><code>void Copy(char* to, const char* from)
+{
+    size_t length = strlen(from);
+    for (size_t i = 0; i &lt; length; ++i)
+    {
+        to[i] = from[i];
+    }
+}</code></pre><p id="00b72bba-0744-4d6f-8e2a-b2f0c115ad12" class="">Another solution is to use the <code>restrict</code> modifier to indicate that a symbol is not aliased.</p><ul id="6195299e-05bc-44ca-87b0-2bedfddcc3b7" class="bulleted-list"><li>MSVC: <a href="https://docs.microsoft.com/en-us/cpp/cpp/extension-restrict"><code>__restrict</code></a></li></ul><ul id="86cff449-f27c-43da-b31d-cf3ef87e4ae7" class="bulleted-list"><li>Clang/GCC: <code><a href="https://gcc.gnu.org/onlinedocs/gcc/Restricted-Pointers.html">__restrict__</a></code></li></ul><pre id="bc10efab-bbcd-4bc0-a2e2-425b4be523f0" class="code"><code>void Copy(char* __restrict to, const char* __restrict from)
+{
+    ...
+}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="28389a3a-53c5-493c-84fb-dfb46655a378"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">The <code>restrict</code> modifier can also be used on methods to indicate that the members of a class are not aliased.</div></figure><pre id="a3a6df21-c71c-4588-83d2-e3c27f6b9bdb" class="code"><code>class Xor
+{
+private:
+    uint8_t _key;
+
+public:
+    Xor(uint8_t key) : _key(key) {}
+    void Encrypt(uint8_t buffer) __restrict;
+};</code></pre><h1 id="c7a959c3-c5a2-4dc6-ba31-0dbe61dd542e" class="">Memory Copy</h1><p id="654ad1f0-3d09-4575-b1fc-59f027300aba" class="">On a 64-bit platform, 8-byte boundary gives the best performance for <code>memcpy</code>.</p><p id="38049a69-72ab-456b-bbc3-6502bcb04340" class=""><code>memcpy</code> runs fastest if the difference between the source and destination is a multiple of 8.</p><p id="0fff186c-c056-49d7-9634-c1c066d859be" class="">If the destination buffer is not aligned, initial work must be done to copy enough bytes to align the destination.</p><p id="6498236b-795b-45c2-822c-753c84e9ee85" class="">If the source buffer is not aligned, then extra work must be done for every byte that is copied in order to fix the alignment.</p><p id="01b746b4-4c66-4226-a9af-743d55875a51" class="">If the source has a 4-byte alignment but not an 8-byte alignment, then <code>memcpy</code> falls back to a 4-byte copy routine.</p><p id="9a07c8a1-83e7-43e5-a9ec-acd1f982b7ac" class="">If the source has an alignment of less than 4 bytes, then <code>memcpy</code> falls back to code that uses single-byte reads and shifts to align the data.</p><h1 id="7596540f-ae7e-4821-b8fa-6049d881c115" class="">volatile</h1><p id="4836622f-7817-4146-b8ee-db446135511b" class="">A variable declared as <code>volatile</code> indicates to the compiler that no reads or writes with this variable will be optimized away.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fe321d96-2546-42e8-9ad8-e8122be63d7a"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">The <code>volatile</code> keyword is not a synchronization primitive.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9870ff26-bd96-49ab-ad18-f1d5016a4e30"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">Using a <code>volatile</code> variable instead of a synchronization primitive can create race conditions on some platforms because of instruction reordering.</div></figure><h1 id="23f9e542-d985-4748-bcf4-5d58694618da" class="">Template Type Deduction</h1><p id="5922d75a-faea-4127-947d-ef82828c372e" class="">When calling a template function, if an argument is omitted, the compiler performs <em>template argument deduction</em> to detemine the correct type.</p><p id="98f9ed83-9290-464e-9aa2-f5e3863478bc" class="">We define a templated <code>Max</code> function to return the maximum between two value.</p><pre id="277a8b2e-e43a-4a4d-88f9-2667b3ec53da" class="code"><code>template &lt;typename T&gt;
+T Max(T a, T b)
+{
+  return (a &gt; b) ? a : b;
+}</code></pre><p id="e84d692d-b43f-4b6a-b45b-8c1791c14724" class="">With immediate values, the compiler can easily determine the type to be <code>int</code>.</p><pre id="4e42bc2a-dcbf-4167-8524-ba4f8bf86b13" class="code"><code>int max = Max(24, 42);</code></pre><p id="55c65485-b86e-40f5-b19c-225191808d97" class="">However, If we define an enum type, the compiler will fail to resolve the enum type to an <code>int</code>.</p><pre id="fa7e7ef1-a652-4c7a-a681-5de0e7410c0f" class="code"><code>enum MyEnum
+{
+		Value24 = 24,
+		Value42 = 42,
+		...
+};</code></pre><p id="e1c84f7d-62c5-4d35-b478-9469f85c0930" class="">This will not compile:</p><pre id="5fbb6b74-8b41-4a00-b2a6-e926b1199145" class="code"><code>int max = Max(24, Value42); // Error</code></pre><p id="c7c34563-8e3e-417c-bdad-095a53fd16f0" class="">We obtain these errors:</p><pre id="f863f620-48d7-46be-8c99-368236d455ce" class="code"><code>No matching function for call to &#x27;Max&#x27;
+
+Candidate template ignored: deduced conflicting types for parameter &#x27;T&#x27; (&#x27;int&#x27; vs. &#x27;MyEnum&#x27;)</code></pre><p id="0a0cfb1a-56ec-46db-9eb0-400c0b8481f7" class="">Using the <code>+</code> unary operator tells the compiler to perform the type promotion first, before deducing the template arguments.</p><pre id="286374d3-aac3-4680-852e-df4056103ff6" class="code"><code>int max = Max(24, +Value42); // OK</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f333fe9f-6e4a-40d0-a6be-95c9cc2ca156"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">Unfortunately, it does not work when using an <code>enum class</code>.</div></figure><h1 id="1bf02df1-5696-4a21-a1ec-b60200cb8005" class="">Static variables in functions</h1><p id="c7bab09b-0e41-4f81-8bf6-79ce63f3aa57" class="">Defining a static variable is inside a function can reduce the performances:</p><p id="53d7399a-1574-4aba-b8e2-f696cc154e69" class="">❌</p><ul id="61acc3e3-7a83-4191-a09c-c1ed66ab72fb" class="bulleted-list"><li>Branching will occur to check if the variable was initialized.</li></ul><ul id="309a9c5a-7181-4689-97f6-fb9c602bbff4" class="bulleted-list"><li>Cache trashing will occur because of the initialization code.</li></ul><ul id="f28d48f7-39d0-44f0-909f-6426824ecb65" class="bulleted-list"><li>The function will not be inlined if the static variable is too large.</li></ul><pre id="4b052e06-3cd3-4ebc-ba22-e6f3cf07d68d" class="code"><code>enum class RasterizerMode
+{
+    CullNone,
+    CullClockwise,
+    CullCounterClockwise,
+    Wireframe
+};
+
+inline RasterizerState RasterizerModeToState(RasterizerMode mode)
+{
+		static RasterizerState states[] =
+	  {
+				{
+				    FillModeSolid,
+				    CullModeNone,
+				},
+				{
+				    FillModeSolid,
+				    CullModeFront,
+				},
+				{
+				    FillModeSolid,
+				    CullModeBack,
+				},
+				{
+				    FillModeWireframe,
+				    CullModeNone,
+				}
+		};
+	
+		return states[mode];
+}</code></pre><p id="0804605a-a5fe-49a6-a42c-d9ffb5a57f69" class="">The static variable should be declared outside of the function.</p><p id="4555375b-b930-4075-ade9-84ae32af2ad2" class="">✔</p><ul id="a7ed63f2-fb36-428a-9dd1-5501d293d600" class="bulleted-list"><li>No branching.</li></ul><ul id="56f23cf0-c628-4ad3-98d8-e6741cabf623" class="bulleted-list"><li>No initialization code.</li></ul><ul id="c01222e6-deef-4189-8643-493785c02df1" class="bulleted-list"><li>The function is simple and guaranteed to be inlined.</li></ul><pre id="9efd9eb0-111e-400d-9726-b364442f8151" class="code"><code>static const RasterizerState s_RasterizerStates[] =
+{
+		static RasterizerState states[] =
+	  {
+				{
+				    FillModeSolid,
+				    CullModeNone,
+				},
+				{
+				    FillModeSolid,
+				    CullModeFront,
+				},
+				{
+				    FillModeSolid,
+				    CullModeBack,
+				},
+				{
+				    FillModeWireframe,
+				    CullModeNone,
+				}
+		};
+};
+
+inline RasterizerState RasterizerModeToState(RasterizerMode mode)
+{
+		return RasterizerStates[mode];
+}</code></pre><h1 id="92d79fdd-8f7a-4bd0-b3d2-fe858f4b0e73" class="">Temporary Allocations</h1><p id="6c59b5e7-dcd7-40a4-8ff8-c96c136a1b97" class="">When adding elements to a container in a loop, performances can be impacted because of multiple heap allocations to resize the container.</p><pre id="41c8dd52-a397-439e-aa8c-9664170a1637" class="code"><code>std::vector&lt;Task&gt; _pendingTasks;
+
+void OnTaskComplete()
+{
+	  std::vector&lt;Task&gt; tasksToSchedule;
+	
+	  for (auto&amp; task : _pendingTasks)
+	  {
+		    if (task-&gt;CanBeScheduled())
+		    {
+			      tasksToSchedule.push_back(task);
+			      ...
+		    }
+	  }
+	
+	  for (auto&amp; task : tasksToSchedule)
+	  {
+		    ...
+	  }
+}</code></pre><p id="3adec258-4c49-4586-ab68-1ca0885bc141" class="">As the lifetime of the elements is scoped to the function, the performances can be improved by reserving enough memory in advance with the <code>reserve</code> method.</p><pre id="8605b7ad-6099-45e7-914c-b163aa708c88" class="code"><code>void OnTaskComplete()
+{
+	  std::vector&lt;Task&gt; tasksToSchedule;
+	  tasksToSchedule.reserve(_pendingTasks.size());
+	
+	  for (auto&amp; task : _pendingTasks)
+	  {
+		    if (task-&gt;CanBeScheduled())
+		    {
+			      tasksToSchedule.push_back(task);
+			      ...
+		    }
+	  }
+	
+	  for (auto&amp; task : tasksToSchedule)
+	  {
+		    ...
+	  }
+}</code></pre><h1 id="e16eee42-2b5f-483f-b4a3-8f03607b3495" class="">Delegates</h1><p id="365ab20c-27d8-4bbd-98a7-243d2dc12128" class="">Delegates can be implemented using function pointers and template specialization.</p><h2 id="e53e11eb-ff58-419d-a4dc-9f771a77f5e7" class="">Free functions</h2><p id="20172f35-4345-4a4d-b25d-a8c7f42526f4" class="">A function pointers is declared with the <code>typedef</code> keyword.</p><pre id="f1b7298d-c4b9-4a53-9360-22f2ea517359" class="code"><code>typedef void (*MyFunction)(int);</code></pre><p id="6bd821d0-e367-42fd-b961-e1bebe39c54e" class="">Since C++11, a function pointer can be declared as an alias with the <code>using</code> keyword.</p><pre id="90245dd5-4fc0-4216-90a5-96960b35a4a6" class="code"><code>using MyFunction = void (*)(int);</code></pre><p id="172fd965-02ad-4117-8f7c-2a2aa58817ab" class="">The <a href="https://en.cppreference.com/w/cpp/utility/functional/function"><code>std::function</code></a> wrapper type can also be used.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0307ca1f-b1cd-4b58-9c08-5c36264174b1"><div style="font-size:1.5em"><span class="icon">🔥</span></div><div style="width:100%">The <a href="https://en.cppreference.com/w/cpp/utility/functional/function"><code>std::function</code></a> class allocates memory.</div></figure><pre id="f2c82b82-c131-44c2-8860-7b10d597f66d" class="code"><code>using MyFunction = std::function&lt;void(int arg)&gt;;</code></pre><p id="bd21d25b-6f71-4f49-b555-d53e42012727" class="">The function pointer can be stored in a variable and the function can be called.</p><pre id="cc6f2fd7-d619-40e3-ae1b-fc1a0cd55966" class="code"><code>void Print(int value)
+{
+    cout &lt;&lt; value &lt;&lt; endl;
+}
+
+void main()
+{
+    MyFunction delegate = Print;
+    delegate(42);
+}</code></pre><h2 id="27b8f843-c03f-4547-a949-b94a66f802f5" class="">Member functions</h2><p id="79adb812-9d90-42ef-90d6-011c1b4fe486" class="">The same mecanism can be used with static member functions, as long as they are accessible.</p><p id="6f102af7-39fd-47d2-9328-ac8c96f24f37" class="">The delegate has the same signature.</p><pre id="f9c54087-4298-44d2-8b3d-c56189f58da8" class="code"><code>class MyClass
+{
+public:
+    static void Print(int value)
+    {
+        cout &lt;&lt; value &lt;&lt; endl;
+    }
+};
+
+void main()
+{
+    MyFunction delegate = MyClass::Print;
+    delegate(42);
+}</code></pre><p id="17e51271-549a-41d3-afc9-53dc8a92acc1" class="">The function pointer to an instance method has a different signature.</p><pre id="7b6aadd5-bd5f-4b50-832c-657d23e855c5" class="code"><code>using MyFunction = void (MyClass::*)(int);</code></pre><p id="db94912d-636a-4eb9-836b-78772444a518" class="">To call the function pointer, we specify the instance.</p><pre id="77a8bcec-d5c6-4969-ad2e-e307d10c756e" class="code"><code>MyFunction delegate = &amp;MyClass::Print;
+auto obj = MyClass();
+(obj.*delegate)(42);
+</code></pre><h1 id="c8f3111d-f417-415f-b326-7c305322078d" class="">Allocation</h1><h2 id="eb8d8c5f-40ff-4952-8505-a986d07b6a1c" class="">calloc</h2><p id="31ca2044-675f-43d2-bc34-19329e8ff032" class="">When allocating memory with <code>malloc</code>, you must use <code>memset</code> to initialize the memory to 0.</p><p id="47824b37-c818-44e2-9d35-02ce42cc5b54" class="">On systems that implemented <code>malloc</code> through virtual memory, calling <code>memset</code> forces the virtual memory system to map the corresponding pages into physical memory in order to initialize them.</p><p id="1a025944-792f-4a81-9a05-7649eb0c9815" class="">Instead, the <code>calloc</code> function reserves the required virtual address space for the memory but  the block of memory is not initialized until it is actually used.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="846a8c33-34d1-44d8-853a-b2b3e78f8e48"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">The implementation of <code>calloc</code> is platform-dependent.</div></figure><h2 id="98c189c5-000c-46e0-9c66-34f9b643a91e" class="">New operator</h2><p id="5be98179-65d5-4cea-a032-66f410c01d80" class="">The <a href="https://en.cppreference.com/w/cpp/memory/new/operator_new"><code>new</code></a> operator allocates a block of memory.</p><pre id="2af207cf-af58-4097-8843-48d203dafa21" class="code"><code>void* operator new(size_t);</code></pre><p id="9671751f-630e-4809-afb0-972078bceaa4" class="">When calling the <code>new</code> operator, the compiler allocates memory for the type and calls the constructor for non-POD types.</p><p id="43387a29-f2df-484a-bada-01fbb4ba2f43" class="">The <code>size_t</code> parameter is provided by the compiler using the same value given by <code>sizeof(T)</code> for a type <code>T</code>.</p><p id="ecb4e21d-5c46-4ae3-8e90-6b78a57c101a" class="">There is a <strong>global operator new</strong> and <strong>class operator new</strong>. The class operator new typically calls the global operator new.</p><h3 id="1943d4e3-8cc1-4084-bb03-c69a8a0627dd" class="">Global operator new</h3><p id="9d466f3d-ad67-4d2d-8962-74778c732861" class="">The global operator new can be overloaded to implement a custom allocation.</p><p id="83adc360-991f-40ed-aef4-10de6698206f" class="">Additional parameters can also be provided.</p><pre id="b2b5e568-1a4b-4b2e-9618-11162c9605ac" class="code"><code>void* operator new(size_t size, const char* file, int line)
+{
+    ...
+}</code></pre><pre id="954d4b76-268a-4606-8585-17b79ab67ba6" class="code"><code>void* operator new(size_t size, const char* file, int line)
+{
+    ...
+}</code></pre><p id="3c7e5ad1-761d-42e0-a3e6-27cb164c60da" class="">The additional parameters are provided after the <code>new</code> operator.</p><pre id="2acaef82-a336-4a10-ad17-810cba5b8629" class="code"><code>T* obj = new (__FILE__, __LINE__) T;</code></pre><p id="6849f155-19b7-4966-a7c4-db7089fd94d6" class="">It&#x27;s also possible to overload the operator with template parameters.</p><pre id="d52c98d4-d177-4b38-9516-75d225fb74d5" class="code"><code>template &lt;class ALLOCATOR&gt;
+void* operator new(size_t size, ALLOCATOR&amp; allocator, const char* file, int line)
+{
+    return allocator.Allocate(size);
+}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1c373763-3071-4810-89c1-cc3b735f5a11"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">The overload can be called explicitly, but the constructor for the type must be called manually using the <code>placement new</code> operator.</div></figure><h3 id="82cb293b-c46b-442d-af20-24ace5919d39" class="">Class operator new</h3><p id="3cee2c64-32cc-4ea9-a6b6-8aade53f7d5b" class="">The class operator new can be overridden to add additional functionality before calling the global operator new.</p><pre id="bab1ae7d-611c-46de-abfa-19b0462885ce" class="code"><code>#include &lt;iostream&gt;
+
+class T
+{
+    static void* operator new(size_t size)
+    {
+        cout &lt;&lt; &quot;new with size &quot; &lt;&lt; size &lt;&lt; &#x27;\n&#x27;;
+        return ::operator new(size);
+    }
+
+    static void* operator new[](size_t size)
+    {
+        cout &lt;&lt; &quot;new with size &quot; &lt;&lt; size &lt;&lt; &#x27;\n&#x27;;
+        return ::operator new(size);
+    }
+};</code></pre><h3 id="15f33161-b9c2-4fc0-aa66-26e4d5fa0e5d" class="">Placement new operator</h3><p id="9325813b-b516-4337-a685-fad11503d458" class="">The <a href="https://en.cppreference.com/w/cpp/language/new#Placement_new"><code>placement new</code></a> operator doesn&#x27;t allocate memory but can be called to invoke a constructor on a block of memory.</p><pre id="05b81089-7051-4506-8cc0-0508c5a7d7a9" class="code"><code>void* operator new(size_t, void*)</code></pre><p id="625937b6-cf03-4b58-8dda-9c21d74b487b" class="">With the <code>placement new</code> operator, an object can be created in-place from an allocated block of memory.</p><p id="8affa256-5a28-4423-922c-43953265c4c2" class="">The destructor still need to be called manually.</p><h2 id="19874548-bf31-4371-b4bd-ef89fd5687dc" class="">Delete operator</h2><p id="5b5f4ffe-4e48-4ea6-9ad3-25b1d26e9dfb" class="">The <a href="https://en.cppreference.com/w/cpp/memory/new/operator_delete"><code>delete</code></a> operator deallocates a block of memory that was previously allocated by a matching <code>new</code> operator.</p><pre id="910aabc5-cdb9-479e-91ae-cba44e01bc9e" class="code"><code>void operator delete(void*);</code></pre><p id="d4434ebb-e51f-4f59-8d55-76f4b3ac91fa" class="">When calling the <code>delete</code> operator, the compiler calls the destructor for non-POD types and deallocates the memory.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3218f015-dc0e-459e-91d4-29f6412053ba"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">The <code>delete</code> keyword does not support the placement syntax.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="574076db-b734-45e5-adf6-695f092ec641"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">When the <code>new</code> operator is overloaded, the default version of the <code>delete</code> operator is called, even if a corresponding overload of the <code>delete</code> operator exists (unless an exception is thrown during a call to <code>new</code>).</div></figure><pre id="caa9d1c1-fc5a-4be0-9512-3a7552490b5a" class="code"><code>void* operator new(std::size_t size, const char* file, int line)
+{
+  ...
+}
+
+void operator delete(void* ptr, const char* file, int line)
+{
+  ...
+}
+
+T* obj = new (__FILE__, __LINE__) T;
+
+// Calls delete(void*)
+delete obj;</code></pre><p id="4ee43e8e-e2cf-466c-b425-fb3384e9c1b8" class="">A specific overload of the operator <code>delete</code> can be called explicitly, but the destructor for the type is must be called manually.</p><pre id="7b265742-9442-4602-801b-8abf9cd4e954" class="code"><code>T* obj = new (__FILE__, __LINE__) T;
+
+// Calls the destructor manually
+obj-&gt;~T();
+
+// Calls delete(void*, const char*, int)
+operator delete (obj, __FILE__, __LINE__);</code></pre><h1 id="5147e3a2-fb71-4924-968f-66d7c1a3a42b" class="">New[] and Delete[] operators</h1><p id="95cf492a-3989-400b-8122-ccf208228a93" class="">The <a href="https://en.cppreference.com/w/cpp/memory/new/operator_new"><code>new[]</code></a> operator allocates an array of objects.</p><pre id="4d714f9b-2e13-40c3-ba9c-4ee386474a5d" class="code"><code>void* operator new[](size_t);</code></pre><p id="1e67fa14-dab4-4b3e-84ea-9b0586a6e5aa" class="">The <a href="https://en.cppreference.com/w/cpp/memory/new/operator_delete"><code>delete[]</code></a> operator deallocate a block of memory that was previously allocated by a matching operator <code>new[]</code>.</p><pre id="c094ac8e-7270-4679-b097-7ce9794d1bca" class="code"><code>void operator delete[](void*);</code></pre><p id="86cdabd3-9e33-4ca9-a326-3c79b107190d" class="">When calling the <code>new[]</code> operator, the compiler allocates memory for the array and automatically invoke the <code>placement new</code> operator on each element, which in turn calls their constructors.</p><p id="3f48e6ae-f2b7-4d80-9556-d985d50f4686" class="">When calling the <code>delete[]</code> operator, the compiler automatically calls the destructors on each element of the array in reverse-order, and deallocates the memory.</p><p id="f5094035-f78a-46cc-a93d-063fbe006185" class="">The operator <code>new[]</code> and operator <code>delete[]</code> can also be overloaded.</p><pre id="10a8dbfa-2ee5-4086-afe2-0a5bdf87d48b" class="code"><code>void* operator new[](size_t size, const char* file, int line)
+{
+  ...
+}
+
+void operator delete[](void* ptr, const char* file, int line)
+{
+  ...
+}</code></pre><p id="6917e87a-5695-4aca-bad1-9dcca6731fbf" class="">When calling the operator <code>new[]</code> with a fundamental type, the <code>size</code> parameter is computed by the compiler from the size of the array and the size of the object type (<code>sizeof(T)</code>).</p><pre id="83c201b0-cdbc-432d-a0bb-63d8ca151a94" class="code"><code>// Requests 12 bytes, 3 * sizeof(int32_t)
+auto ptr = new int32_t[3];</code></pre><p id="fa7676d0-4612-4c06-b114-ce7d70c550a9" class="">However, when calling the operator <code>new[]</code> with a non-POD type, the <code>size</code> parameter is computed differently.</p><p id="4e416934-6688-4237-8641-923300cc0e60" class="">The matching operator <code>delete[]</code> needs to call the destructors on each element of the array, so the compiler must know how many instances are to be deleted.</p><p id="84510dd5-5e71-4f65-9e3c-d3f8983eadf2" class="">The compiler stores the number of instances in a word value before the array. When calling the operator <code>new[]</code>, the compiler adds 4 or 8 bytes to the <code>size</code> parameter.</p><ul id="1ce1968f-1f34-41e5-973d-3b328e4ea9c9" class="bulleted-list"><li>For <code>N</code> instances of type <code>T</code>, request an allocation for <code>sizeof(T) * N + sizeof(size_t)</code> bytes from <code>operator new[]</code>.</li></ul><ul id="4c19d4a9-88c6-465c-b6ca-720e959ac6d3" class="bulleted-list"><li>Store <code>N</code> in the first 4 bytes.</li></ul><ul id="dc107274-490a-473c-85f8-53629fc92003" class="bulleted-list"><li>Construct <code>N</code> instances using <code>placement new</code>, starting at <code>ptr + sizeof(size_t)</code></li></ul><ul id="38ecbf2e-402f-42e9-b46d-62d5f1a6925d" class="bulleted-list"><li>Return <code>ptr + sizeof(size_t)</code> to the user.</li></ul><p id="f68f1990-2bcd-48f5-adac-5c4dd32b2a28" class="">When the operator <code>new[]</code> is overloaded, the compiler adds a 4 or 8 byte to the memory address that is returned.</p><pre id="16bd9f83-78de-4ca4-99cf-7515e5b31e82" class="code"><code>uint8_t data[4096];
+size_t offset;
+
+void* operator new[](size_t size)
+{
+  void* ptr = (void*)((uintptr_t)data + offset + size);
+  offset += size;
+  return ptr;
+}
+
+// ptr is set to data + offset + size + sizeof(size_t)
+auto ptr = new T[3];</code></pre><h1 id="4ca80c06-c3b9-4ea9-8f68-9fd0220f0596" class="">Patterns</h1><h2 id="00162cda-fcfc-4dca-b304-78a22bd6fc4a" class="">Pimpl Idiom</h2><p id="ed260d49-f4e0-4cdb-b3e9-3103e403d109" class="">The <em>pimpl idiom</em> is a compile-time encapsulation.</p><p id="5a6c3a81-ec7a-4061-97e2-aeb9035c1570" class="">It&#x27;s a technique to hide implementation, minimize coupling, and separate interfaces.</p><p id="1e34ce90-c260-4642-98f9-a6f66e9bd92f" class="">A pimpl type is implemented with an opaque data member that points to the private implementation.</p><p id="e0b7db9d-8838-4122-988e-eeffca127bf7" class="">You can declare the member to the opaque implementation as a <code>unique_ptr</code> to automatically release the memory when the object is destroyed.</p><pre id="1a2968fb-cb77-41ee-ad00-2bd240990060" class="code"><code>// MyClass.h
+class MyClass
+{
+public:
+    MyClass();
+    ...
+
+private:
+    class Details;
+    std::unique_ptr&lt;Details&gt; _details;
+};</code></pre><pre id="c5405eef-5757-42d2-8fde-bef4cc79739e" class="code"><code>// MyClass.cpp
+class MyClass::Details
+{
+    ...
+};
+
+MyClass::MyClass(): _details(new Details())
+{
+    ....
+}</code></pre></div></article></body></html>

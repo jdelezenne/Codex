@@ -1,0 +1,594 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Endianness</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9b3b3c9e-b4f4-440c-ac97-bc87f078a750" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🔟</span></div><h1 class="page-title">Endianness</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th>Category</th><td><span class="selected-value">System</span></td></tr></tbody></table></header><div class="page-body"><nav id="7aca1769-d8db-480e-9e6b-2b93e8139b29" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#949f3951-31b3-482a-81fa-f3d43d893675">Overview</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0a2394a4-f646-42d1-9725-50c76b76994a">Bit Endianness</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b81296b4-7b03-441d-b819-cd4b33c7700f">Least Significant Byte</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b6d397a9-0a31-4ade-a860-33a30b1056b0">Most Significant Byte</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#bde9c13b-9e86-42c3-a692-5d5270a855cb">Byte Endianness</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1b631bd4-242b-4584-916d-398b1bc4457e">Big-endian</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#61a118d5-763f-43f2-be33-15ec8c5e1570">Little-endian</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#0b7ca4e5-cba3-44e0-a221-711acf876c3f">Bi-endianness</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#42f76c02-0f1c-4d33-ae99-902eecc6451e">Hardware</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#282e9efb-9df5-4b91-ae14-2f11aee5cab3">Byte Swap</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c609d847-383a-4119-a1e4-77e42d25e12a">Implementations</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#21bf940d-b773-4158-860d-661d87bed4b4">Strategies</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0ce3b121-07a2-4288-93df-11a5d4b8d7e2">References</a></div></nav><hr id="e347f417-6e79-4f1f-9c15-0e94d425abda"/><h1 id="949f3951-31b3-482a-81fa-f3d43d893675" class="">Overview</h1><p id="6f84df53-89cc-4c7c-9a96-1e9a1d1b20a2" class=""><em>Endianness</em> is the sequential order in which bytes are arranged when stored in memory.</p><p id="165221cd-e0bc-45e5-ba5a-c0495c8687cc" class="">Bytes are represented in <em>big-endian</em> or <em>little-endian</em> format.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="07b4bf9e-881f-45b0-b7ab-79a8f96e8271"><div style="font-size:1.5em"><span class="icon">❤️</span></div><div style="width:100%">Modern platforms mostly use the little-endian representation.</div></figure><h1 id="0a2394a4-f646-42d1-9725-50c76b76994a" class="">Bit Endianness</h1><p id="c5d22b92-faab-4592-a5bf-62537ad172b3" class=""><em>Bit endianness</em> is the convention used to identify the bit positions in a binary number.</p><h2 id="b81296b4-7b03-441d-b819-cd4b33c7700f" class="">Least Significant Byte</h2><p id="3cc51311-4546-4f87-b7e2-2d3bb736db67" class="">The <em>least significant byte</em> (LSB) is the byte containing the least significant bit.</p><figure id="b7d53499-c3bd-46e1-a0a9-b964007a8127" class="image"><a href="Endianness/Untitled.png"><img style="width:560px" src="Endianness/Untitled.png"/></a><figcaption>The binary representation of 149, with the LSB highlighted.</figcaption></figure><h2 id="b6d397a9-0a31-4ade-a860-33a30b1056b0" class="">Most Significant Byte</h2><p id="e4a74cdf-470c-49cf-b607-737fb8f7d7ac" class="">The <em>most significant byte</em> (MSB) is the byte containing the most significant bit.</p><figure id="3850e358-30d9-400c-b67c-c3f81c3aa5dc" class="image"><a href="Endianness/Untitled 1.png"><img style="width:560px" src="Endianness/Untitled 1.png"/></a><figcaption>The unsigned binary representation of 149, with the MSB highlighted.</figcaption></figure><h1 id="bde9c13b-9e86-42c3-a692-5d5270a855cb" class="">Byte Endianness</h1><h2 id="1b631bd4-242b-4584-916d-398b1bc4457e" class="">Big-endian</h2><p id="852c5d6c-63fb-425a-96cd-b416dcb80db7" class="">Bytes are ordered from the most significant bit to the least significant bit.</p><p id="a21de0fe-79c9-441e-93f2-d073ac97c8fb" class="">The most significant bit is stored first and the least significant bit is stored last.</p><figure id="cd2eb6cb-f5b6-4246-becf-aa0be928c422" class="image"><a href="Endianness/Untitled 2.png"><img style="width:560px" src="Endianness/Untitled 2.png"/></a></figure><h2 id="61a118d5-763f-43f2-be33-15ec8c5e1570" class="">Little-endian</h2><p id="6c0f0525-8c8e-4221-9e6e-79afcec25085" class="">Bytes are ordered from the least significant bit to the most significant bit.</p><p id="0bb28b24-cfcc-4777-b7b0-8a5effd0f3f4" class="">The least significant bit is stored first and the most significant bit is stored last.</p><figure id="ce1c3272-a840-4c49-89bf-bdeaf3bab8c3" class="image"><a href="Endianness/Untitled 3.png"><img style="width:560px" src="Endianness/Untitled 3.png"/></a></figure><h2 id="0b7ca4e5-cba3-44e0-a221-711acf876c3f" class="">Bi-endianness</h2><p id="32df6e27-0643-4583-a057-865ef5cb15aa" class="">Some architectures feature a setting which allows for switchable endianness.</p><h1 id="42f76c02-0f1c-4d33-ae99-902eecc6451e" class="">Hardware</h1><div id="05c15764-5773-4114-84f5-99ffa00e386b" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th>Name</th><th>Endianness</th></tr></thead><tbody><tr id="be7cab92-a85b-40c7-a48b-7554e55f8084"><td class="cell-title"><a href="Endianness/Untitled Database/ARM.html">ARM</a></td><td class="cell-[tT8"><span class="selected-value">bi-endian</span></td></tr><tr id="57542cac-93ee-45d0-881a-b2c5e34bd8a5"><td class="cell-title"><a href="Endianness/Untitled Database/Intel x86.html">Intel x86</a></td><td class="cell-[tT8"><span class="selected-value">little-endian</span></td></tr><tr id="4f10c211-0a1e-4f21-bb9c-878cba2c6d1c"><td class="cell-title"><a href="Endianness/Untitled Database/Intel x86 64.html">Intel x86-64</a></td><td class="cell-[tT8"><span class="selected-value">little-endian</span></td></tr><tr id="6517655e-758b-4666-83b0-58533facfcf6"><td class="cell-title"><a href="Endianness/Untitled Database/iOS.html">iOS</a></td><td class="cell-[tT8"><span class="selected-value">little-endian</span></td></tr><tr id="6deb953c-4d37-4717-9164-de87f6562bf6"><td class="cell-title"><a href="Endianness/Untitled Database/PlayStation 3.html">PlayStation 3</a></td><td class="cell-[tT8"><span class="selected-value">big-endian</span></td></tr><tr id="b06ceb95-a13f-40c4-9284-5fd55468a23c"><td class="cell-title"><a href="Endianness/Untitled Database/PlayStation 4.html">PlayStation 4</a></td><td class="cell-[tT8"><span class="selected-value">little-endian</span></td></tr><tr id="bb4e2d93-64bd-484a-933b-b396ba2bddc3"><td class="cell-title"><a href="Endianness/Untitled Database/PlayStation 5.html">PlayStation 5</a></td><td class="cell-[tT8"><span class="selected-value">little-endian</span></td></tr><tr id="f9df3406-9ece-45ab-99f3-c074c7c58e39"><td class="cell-title"><a href="Endianness/Untitled Database/Switch.html">Switch</a></td><td class="cell-[tT8"><span class="selected-value">little-endian</span></td></tr><tr id="f807e31c-ca2c-4b97-b143-86c3a0e1c311"><td class="cell-title"><a href="Endianness/Untitled Database/Wii.html">Wii</a></td><td class="cell-[tT8"><span class="selected-value">big-endian</span></td></tr><tr id="ed8c8155-7551-4184-93d7-3716bdf62804"><td class="cell-title"><a href="Endianness/Untitled Database/Wii U.html">Wii U</a></td><td class="cell-[tT8"><span class="selected-value">big-endian</span></td></tr><tr id="b55ce43e-6dff-453a-a3ae-8e2f511b7467"><td class="cell-title"><a href="Endianness/Untitled Database/Xbox 360.html">Xbox 360</a></td><td class="cell-[tT8"><span class="selected-value">big-endian</span></td></tr><tr id="df1f3df5-a189-42d8-925b-41d3cab4e0c8"><td class="cell-title"><a href="Endianness/Untitled Database/Xbox One.html">Xbox One</a></td><td class="cell-[tT8"><span class="selected-value">little-endian</span></td></tr><tr id="226b99f1-52dc-43e2-bcdd-04894d6f25cd"><td class="cell-title"><a href="Endianness/Untitled Database/Xbox Scarlett.html">Xbox Scarlett</a></td><td class="cell-[tT8"><span class="selected-value">little-endian</span></td></tr></tbody></table></div><h1 id="282e9efb-9df5-4b91-ae14-2f11aee5cab3" class="">Byte Swap</h1><p id="52e0d3fb-8031-49cf-a1f0-8f244c0c6214" class="">When a binary file created on a platform is read on another platform with a different endianness, byte swapping is required.</p><p id="94c6e245-c08c-4047-bb81-e76b7e363d79" class="">Byte swap depends on the size of the numbers (ie. a 16-bit value and a 32-bit value require a different byte swap).</p><p id="c7aba6c5-22e2-4f49-a217-d57882e0e628" class="">The data format must therefore be known to perform endianness conversion.</p><h2 id="c609d847-383a-4119-a1e4-77e42d25e12a" class="">Implementations</h2><p id="f7686116-d452-4f5f-a36f-6b29a1233ed8" class="">16-bit integer: swap 2 bytes.</p><pre id="aff254be-7f04-4ab4-a18f-bf0e0dd43e45" class="code"><code>uint16_t Swap(uint16_t value)
+{
+    uint16_t result = 0;
+    result |= (value &amp; 0x00FF) &lt;&lt; 8;
+    result |= (value &amp; 0xFF00) &gt;&gt; 8;
+    return result;
+}</code></pre><p id="de8ca925-5383-4f3c-838b-91a09cec8903" class="">32-bit integer: swap 4 bytes.</p><pre id="12b223ea-ca0a-4375-a413-f58789ae1644" class="code"><code>uint32_t Swap(uint32_t value)
+{
+    uint32_t result = 0;
+    result |= (value &amp; 0x000000FF) &lt;&lt; 24;
+    result |= (value &amp; 0x0000FF00) &lt;&lt; 8;
+    result |= (value &amp; 0x00FF0000) &gt;&gt; 8;
+    result |= (value &amp; 0xFF000000) &gt;&gt; 24;
+    return result;
+}</code></pre><p id="0ce27049-0b80-4134-a8bd-3e3eb7995418" class="">32-bit floating point:</p><ul id="e1f7790f-f4b1-4c8d-957d-98d77adf2ff0" class="bulleted-list"><li>Perform a <code>reinterpret_cast</code> from the floating point value to a 32-bit integer. Swap the integer value and performed another <code>reinterpret_cast</code> to cast the result back to a floating point value.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="141c2f8f-004c-4d66-a143-871e9a2426ab"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">This method is not recommended because some compiler performs optimizations than cause invalid results when doing a <code>reinterpret_cast</code> between floating point and integers values.</div></figure><pre id="014a5cca-587e-42bf-b9b7-24b59d8818e4" class="code"><code>float Swap(float value)
+{
+    uint32_t result = Swap(reinterpret_cast&lt;uint32_t&gt;(value));
+    return reinterpret_cast&lt;float&gt;(result);
+}</code></pre><ul id="a7b3d89a-3ff0-42e8-b411-2c6343da0f2f" class="bulleted-list"><li>Store the floating point value to a temporary union of a float and 32-bit integer and swap the integer value.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0a101ff5-69f4-4c40-8208-eb0bbb06ca69"><div style="font-size:1.5em"><span class="icon">❤️</span></div><div style="width:100%">This method is recommended as unions are portable on different compilers.</div></figure><pre id="951635ed-042a-4dfd-8d07-8db3769f3251" class="code"><code>float Swap(float value)
+{
+    union
+    {
+        float f;
+        uint32_t u;
+    } swap;
+
+    swap.f = x;
+    swap.u = Swap(swapper.u);
+    return swap.f;
+}</code></pre><h2 id="21bf940d-b773-4158-860d-661d87bed4b4" class="">Strategies</h2><p id="194bcbad-858b-4e00-b138-e76e5f9ea49e" class="">There are two strategies when generating binary data.</p><ul id="9f58c88c-a78b-475f-916f-39f3cc40538b" class="bulleted-list"><li>Byte swap when building the data for each target platform in the expected endianness.</li></ul><ul id="74bcae33-d78d-43ce-bcd6-0009bb12698e" class="bulleted-list"><li>Byte swap when loading the data if the endianness of the data is different from the endianness of current platform.</li></ul><h1 id="0ce3b121-07a2-4288-93df-11a5d4b8d7e2" class="">References</h1><ul id="cec8dff5-c565-4034-bcce-729bbbb293f1" class="bulleted-list"><li>Endianness, Wikipedia, <a href="https://en.wikipedia.org/wiki/Endianness">https://en.wikipedia.org/wiki/Endianness</a></li></ul><ul id="53fb1cc9-de0a-40d6-8f7e-c892445b0d9d" class="bulleted-list"><li>Bit numbering, Wikiepdia, <a href="https://en.wikipedia.org/wiki/Bit_numbering">https://en.wikipedia.org/wiki/Bit_numbering</a></li></ul></div></article></body></html>

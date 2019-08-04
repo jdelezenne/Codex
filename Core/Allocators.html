@@ -1,0 +1,1083 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Allocators</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="efa67ff3-5a31-4cb4-8e36-a13f038a419e" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">⛓</span></div><h1 class="page-title">Allocators</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th>Created</th><td><time>@Jun 12, 2019 11:28 AM</time></td></tr><tr class="property-row property-row-multi_select"><th>Tags</th><td></td></tr></tbody></table></header><div class="page-body"><nav id="20f97a49-8215-4107-984a-59baf0b59a73" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cef0a417-91b4-4c95-bb40-91e4de49d60f">Overview</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2eda49ca-170f-49df-82b3-980be7487e4b">Lifetimes</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4ac5f84d-bc38-4f56-8667-b8e9fc06d010">Allocators</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4f9455db-7f1e-40d9-a9ea-ff52f714f1e1">Allocator Properties</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f4234114-2ed0-448e-873c-67a2c715001b">Default Allocators</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#48ec29f7-3b6d-4a22-aad1-ab9305da58ba">STL Allocator</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cf44eaf4-4a23-48ba-946a-dc7749add4e2">Common General Allocators</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cedc9cd2-e1bb-4653-9304-c16aef4f3dfa">Custom Allocators</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4f0c6a64-e8cc-4117-93e7-e8602459515d">Memory Area</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#72d35146-42e3-41d3-8330-ceb68bc9a6da">Debugging and Profiling</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#3633b88c-a159-4492-91e6-d5fb95d27796">Memory tracking</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#30cc0d55-0029-4675-a17c-5ab1d8b22643">Memory marking</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#a0b054c8-93e0-499e-b189-cb5b6a2d0886">Bounds checking</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#2c9dd5aa-b765-4218-8346-d216453befa6">Memory replay</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ed8fa9c3-8a65-4780-878b-1864ae57004d">New / Delete operators</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cf917726-6928-4aff-836b-03c66743dd9b">Macros</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#6194093a-f21d-47d6-b930-4ed431e4b50a">NEW macro</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#5ef5d728-ffdb-41e8-8d8e-6b5d3e174e0a">DELETE macro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#98a830b3-a0dc-4c12-b614-ee7f015cdc5d">Global Allocators</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2eb31901-e21f-4606-b77d-637fe5c5a867">Allocate</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#dc100f1f-3836-4cf9-8e69-8b2e2bd6f133">Deallocate</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c1c536c1-c704-4beb-9580-a5f8b5809124">Interface</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#aa6ba7a2-1d87-4acf-82a5-5cb79ecfc7be">Local Allocators</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#60d261c5-e485-4713-8ad5-70a6deb6f5ad">Create</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1b28fa2b-091f-4da1-80be-2c416a9c3fc8">Destroy</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b5c39061-77df-4b05-84e2-6571d67aa029">Interface</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e079e12c-50af-44a0-b796-0e9153f8bc89">Move operations</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b3e75645-6631-4c54-914d-46fd704d7390">General Allocator</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#58010ac4-3c2f-4466-979e-80ebf31d117e">Usage</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#db7d32e9-cbd0-47ca-920d-32515c0c7993">Use cases</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#055457c0-60c1-445a-84de-57ac7e338e70">Linear Allocator</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2e9ae907-02eb-40c0-b428-706858389361">Usage</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#8b4a0ffd-37fb-4611-b79e-a3a69c36b11c">Use cases</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cf9193fe-8a5b-4aca-b6f9-0bf571412770">Structure</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ab41ad77-ebfd-4217-a1fa-b169398bb774">Allocation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6a6633f7-9c38-4b0d-961a-024d6c739c7e">Deallocation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#11bc9d5e-65cb-4422-bf35-c1cb8d27408f">Implementation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#225b2432-8747-4a24-bd83-d25cb0b6fdf9">Alignment</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#24beb838-b3d0-4ae6-b924-971d8cd31701">Stack Allocator (without LIFO)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a8146831-379b-4210-935d-da8787db2bb4">Usage</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f168f0ad-5124-43fa-a214-1819d0ebd551">Use cases</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a9cbd621-c96e-4e51-8077-edd8a57337d4">Structure</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c2145bf2-6008-4e53-87cb-38493b8ab2aa">Allocation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#744a7c40-c45b-44a9-ae7e-7359ffb8328d">Deallocation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7d87df77-89a8-48db-9851-be20ac95961c">Implementation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4d40fc8d-c856-4919-b298-4b752d3c5d47">Alignment</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#3970252b-9ad6-4274-852d-3d2d54a9a926">Structure</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#554d4b24-5a76-4ce0-856a-7aea66231b63">Allocation</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#456069ce-f9d3-4df4-b364-f668ccb47f91">Deallocation</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#99fbe70a-9bbb-48a1-9dec-9b8479dcd5c9">Implementation</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b20efdf6-050f-4643-a758-6e0a7794d125">Stack Allocator (with LIFO)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2e3529b4-ff54-4ab3-97a5-33ffb2e9d01c">Structure</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5cda3615-53ad-474f-bdc7-10bd0ff11c7a">Implementation</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5a5defbf-ce9f-4bb0-9d1b-1b358cf22d5f">Scoped Stack Allocator</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#df578a75-1b22-4e5e-8bce-782ea13d4823">Structure</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ea80afc0-e649-48ad-b9be-56f6492d7466">Allocation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#aa923205-544a-4a93-8b62-45f5007f7198">Deallocation</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a6db14b4-9a66-4628-ac7f-24d5d9be14d6">Double-Ended Stack Allocator</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#07518f64-ab01-4bea-b9d4-2b836b3f6d61">Use cases</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#05ea5414-0d1a-4270-a2c9-18fd0c233b2f">Structure</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#76387714-6a46-4fe0-b2a5-ecae02c6171e">Allocation</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#d1c22100-a0f8-41ac-b3a4-f65f52f26d7b">Deallocation</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cd5838be-1964-4ae2-bf85-cc7d41794ecd">Pool Allocator</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#67ad8a5a-80ca-4794-8938-dcc60a70afbb">Usage</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#973f41a6-c3d9-486c-8a0f-8d4b10e5a965">Use cases</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9be9801f-7e07-4ede-90fb-0068fbad7c14">Structure</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4f5132be-bf62-4a7c-8995-d3401e34fe92">Allocation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6dcefec0-6266-49af-937e-ff23008bf857">Deallocation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4936a0f7-e341-4bbf-a5c6-1cb835cea1f9">Implementation</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cb47efe0-a568-48d9-94cc-81ceae0daec3">Chunk Allocator</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#78a8f5fc-4ded-47d9-9e40-4b98644fe480">Usage</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#edd5ea24-b006-4466-9d17-f4cb75532318">Use cases</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3150c91c-473e-49ce-a7f1-a26419e2a45f">Free List Allocator</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#25637009-571e-4376-930e-71c06a601847">Linked List Structure</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#0f209181-7083-498a-a04a-269bc04ba828">Allocation</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#cd1df5b9-2c54-4bb6-96a3-d973bb380b77">Deallocation</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#956a98a1-d310-4101-9c3f-86e691a2ea20">Red-Black Tree Structure</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#124fdde3-73c2-4acb-a0fa-e4ba91937184">Buddy Allocator</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#81608428-8200-4088-b866-c4ce2c84d5e7">Structure</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b74596ab-0f82-40f5-9498-bfbd9b71ec17">Ring Allocator</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#185fb132-1927-46e9-9511-a0277ff87591">Structure</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#788fd31d-eb12-4b4a-bbeb-3ef97c3c0511">Allocation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1ad8937b-26df-44e7-b945-fa36f859c15f">Dellocation</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#da4aad95-988f-479c-8872-a33f5509eff7">Growing Allocator</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#29a60370-c963-4d0b-8944-9342251f4808">Sequential Allocator</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#942704da-d7d0-4c2a-85ed-f4579fb111cb">TLS Allocator</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a32dd349-9907-40c4-a78b-e1ceb2c597e0">Small Allocator</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c537651d-8174-4be0-bd60-9c400e059d69">Interfaces</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#40f9eb68-906d-403b-9974-d148fb0f8373">Functions</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9082348e-c955-4109-a533-5024f6565979">Template</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#24a007f5-d5fc-447d-b74c-4c9fb7ca557a">Object</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d5345e6f-d616-473f-84a1-0869ade3be8e">Implementations</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ac342a0a-305c-4cf0-82d5-3ff7c9858b0d">Template</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#8a5f020a-4b07-4d07-a573-d5023e89e18f">Allocator</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#f718ae48-1215-4154-8796-9f15e50b1fef">Usage</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#69c3a572-ff77-409f-8cf9-69d75c68dbcc">Object</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#2f3dc2a0-864d-4774-bcb4-6dcf59e10d38">Allocator</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#33f46a5d-1e77-4605-b988-73bea53152df">Usage</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#606bc6bb-14c9-4a04-b77d-b40155b0e4b2">Local allocator with backend allocator</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#e5576f52-a6d0-4a63-9f6d-fb0cf36ff87c">Allocator</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#5283a0af-b247-4a6d-88b6-1e0ac0fa800d">Usage</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#fb42aec2-6949-4af2-a564-b3239267c549">Local allocator with stack memory</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#981c8f91-e7dc-460d-9a90-01d2b3edd3c4">Allocator</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#99fdb959-dfe3-4a93-b118-b8cbdc4ac61d">Usage</a></div></nav><hr id="6cf73447-be63-4905-9ddc-2a069b3be5b1"/><h1 id="cef0a417-91b4-4c95-bb40-91e4de49d60f" class="">Overview</h1><p id="36a7b4ab-ea41-4305-acbf-978b685e0bd6" class="">When allocating a block of memory, there are three main concepts.</p><ul id="202016f7-8fc7-43e4-a34f-4b8b06d7eaf3" class="bulleted-list"><li>The size of the allocated memory</li></ul><ul id="27b9ed30-fa23-42ae-8728-dcf763e5e640" class="bulleted-list"><li>The lifetime of the memory</li></ul><ul id="3e174fe2-b91f-42bb-bc08-ddda86212e35" class="bulleted-list"><li>The usage of the memory</li></ul><p id="a23a3847-32e4-4915-a2b0-e078599807e7" class="">When each aspects is known, an custom allocator provides the most efficient strategy for memory allocations.</p><h1 id="2eda49ca-170f-49df-82b3-980be7487e4b" class="">Lifetimes</h1><p id="056a3422-c1a7-4a0e-8878-4db96c643a0b" class="">It is useful to think of the lifetime of a block of memory as one these three kind of generations.</p><ul id="bcb877be-af40-45bd-8512-9398371cff2f" class="bulleted-list"><li>Permanent allocation: the memory is persistent during the program lifetime (for example, a singleton).</li></ul><ul id="a1e30f0c-e9bf-4f71-9adb-473de1d33c45" class="bulleted-list"><li>Transient allocation: the memory only persist in a defined cycle (for example, a frame in an update loop).</li></ul><ul id="45d0b4e1-4aee-4a45-9b9b-ae042fb28a90" class="bulleted-list"><li>Temporary allocation: the memory is short lived (for example, a formatted string in a logger).</li></ul><h1 id="4ac5f84d-bc38-4f56-8667-b8e9fc06d010" class="">Allocators</h1><p id="5b518354-58c2-4331-8180-7942907002a7" class="">Allocators work at low-level and perform operations on blocks of memory instead of objects.</p><p id="29bd1e36-ddb8-44c8-a4db-059e3815cbcb" class="">Building custom allocators and writing allocation-aware software has a cost.</p><p id="5b20b6c6-9e7b-4ff7-b9fc-aa968d8d9713" class="">In long running programs, improved memory access is more important than faster allocation calls.</p><p id="601d7edc-c4fd-4db7-a92d-c2a3ada4f6d9" class="">The scope of a memory allocator can be:</p><ul id="c2792ab9-b84d-43aa-8ac6-ed60a44cf9c4" class="bulleted-list"><li>Global: let the system manages the memory</li></ul><ul id="c36afbf6-417a-4c88-a30d-c1d253b41ac8" class="bulleted-list"><li>Local: manages an arena for a duration of time</li></ul><p id="f5dac18c-9337-4635-a0cd-8efc99f1192e" class="">There are two kind of allocators:</p><ul id="d3a83b9a-653e-4779-8b47-468638faf5db" class="bulleted-list"><li>General: general purpose to cover every cases</li></ul><ul id="28653380-c49c-4d65-842b-eb6b8aa7c916" class="bulleted-list"><li>Specialized: to be used in special cases</li></ul><h2 id="4f9455db-7f1e-40d9-a9ea-ff52f714f1e1" class="">Allocator Properties</h2><p id="47bde8d9-0906-41d6-92de-2d35858c694a" class="">No allocator fits all purposes and each allocator has advantages and pitfalls.</p><p id="6aef547f-7a74-4fa5-bd75-10d6f2c5573b" class="">Allocators have different properties that make them more efficient in specific contexts.</p><ul id="86095b16-8b36-4557-ba02-788a6ea16306" class="bulleted-list"><li>Memory Size (fixed/variable)</li></ul><ul id="bcc23be0-d5d7-49ad-b179-b59e64b6d24b" class="bulleted-list"><li>Allocation Sizes</li></ul><ul id="b3020045-c343-4c20-942f-f66c7159e19d" class="bulleted-list"><li>Fragmentation</li></ul><ul id="28ff49e9-9785-4029-9c7b-c327876196df" class="bulleted-list"><li>Wasted space</li></ul><ul id="a8e55b57-cf41-4b96-b53f-b1f7d5a17af5" class="bulleted-list"><li>Performance</li></ul><ul id="85f11eaf-d004-4777-92fa-c53b854cb918" class="bulleted-list"><li>Thread-safety</li></ul><ul id="f7a7cf11-efd9-46e9-8b7c-4eda1dba1de2" class="bulleted-list"><li>Cache-locality</li></ul><h2 id="f4234114-2ed0-448e-873c-67a2c715001b" class="">Default Allocators</h2><p id="6148dedb-54aa-4c4d-a979-5e1f9a8331a4" class="">The default allocators are general and global. There are several problems with their implementation.</p><p id="046e21c1-295b-447d-aae8-7c934c9420ef" class="">❌As general purpose allocators, they must work in every cases (from small to large allocations), and they are not efficient.</p><p id="80f57dac-1af6-40b0-bd20-76ab7fd3b4e8" class="">❌As global allocators, they let the operating system manage the virtual pages of memory which can be very slow.</p><h2 id="48ec29f7-3b6d-4a22-aad1-ab9305da58ba" class="">STL Allocator</h2><p id="9712e6ad-8a43-4127-8ad1-98225cb89f4a" class="">In some cases, such as an external library, it could be necessary to use one of the STL containers. It&#x27;s possible to implement a simple STL allocator to forward the allocations and deallocations to a custom allocator.</p><p id="91d118e6-e70c-4035-98cf-e6bc4b5d1c16" class="">The STL allocator is represented by the <a href="https://en.cppreference.com/w/cpp/memory/allocator"><code>std::allocator</code></a> class.</p><p id="0ad4cd11-297a-4841-b1bd-a730496914ce" class="">The STL allocator is used by the STL containers and implemented as a template parameter.</p><p id="8b649279-5917-41d0-96ca-081749495a5d" class="">There are several requirements when implementing a STL allocator.</p><p id="14deb456-fb5b-4e61-b99a-9b7c53ce723e" class="">For example, for a custom allocator called <code>Allocator</code>, the class is declared the following way:</p><pre id="fec9caa1-2bac-4fff-8479-8ff845a00dcf" class="code"><code>template&lt;typename T&gt;
+class Allocator</code></pre><p id="e521bb97-2ec6-405d-aee7-0e7bce949109" class="">Declare the following aliases:</p><pre id="c3690e95-6c94-47c4-b2e7-a5c74effb33c" class="code"><code>typedef size_t size_type;
+typedef ptrdiff_t difference_type;
+typedef T* pointer;
+typedef const T* const_pointer;
+typedef T&amp; reference;
+typedef const T&amp; const_reference;
+typedef T value_type;</code></pre><p id="a2912cf0-9cb8-4026-b395-576c6a49cb0f" class="">Declare the following methods:</p><pre id="262ac141-a6b3-4b5a-952c-79e3ec420dd0" class="code"><code>Allocator() throw();
+Allocator(const Allocator&amp; other) throw();
+ 
+template&lt;typename U&gt;
+Allocator(const Allocator&lt;U&gt;&amp;) throw();
+
+Allocator&lt;T&gt;&amp; operator=(const Allocator&amp; other);
+ 
+template&lt;typename U&gt;
+Allocator&amp; operator=(const Allocator&lt;U&gt;&amp; other);
+ 
+pointer address(reference x) const;
+const_pointer address(const_reference x) const;
+ 
+pointer allocate(size_type n, const void* hint = 0);
+void deallocate(void* p, size_type n);
+ 
+template&lt;typename U&gt;
+void destroy(U* p);
+ 
+size_type max_size() const;
+ 
+template&lt;typename U&gt;
+struct rebind
+{ 
+  typedef Allocator&lt;U&gt; other; 
+};</code></pre><h2 id="cf44eaf4-4a23-48ba-946a-dc7749add4e2" class="">Common General Allocators</h2><ul id="cd2f1de5-6a44-436c-9c1d-4cb3059ef065" class="bulleted-list"><li><a href="http://g.oswego.edu/dl/html/malloc.html">Doug Lea&#x27;s malloc</a><ul id="6284db15-fc8e-4e58-9e61-7efa6cb8a0d0" class="bulleted-list"><li>❌not multi-thread friendly</li></ul></li></ul><ul id="2c7bfad3-95bd-4225-b9ae-f16c93baa27d" class="bulleted-list"><li><a href="http://www.malloc.de/en/">ptmalloc</a><ul id="aa6d4566-e37e-4755-b6dc-58c9264bd209" class="bulleted-list"><li>❌LPGL licence</li></ul></li></ul><ul id="d5162dcd-0480-48d3-b74b-5ead4bfd95ae" class="bulleted-list"><li><a href="http://goog-perftools.sourceforge.net/doc/tcmalloc.htmlhttp://jemalloc.net/">jemalloc</a><ul id="248701d0-2344-46b1-bce2-084761d5e254" class="bulleted-list"><li>❌general-purpose</li></ul></li></ul><ul id="a89cd164-3d4f-4b88-80db-376264956e39" class="bulleted-list"><li><a href="http://goog-perftools.sourceforge.net/doc/tcmalloc.html">tcmalloc</a><ul id="46e2c862-fe49-49e0-b595-4e83f803acb0" class="bulleted-list"><li>❌general-purpose</li></ul></li></ul><ul id="a4ef913d-7faf-43ed-9e61-b095ffea3e41" class="bulleted-list"><li><a href="https://github.com/rampantpixels/rpmalloc">rpmalloc</a><ul id="9bb664e2-640c-4f1b-a813-e03644c02c26" class="bulleted-list"><li>❌64 KB granularity</li></ul><ul id="b2d0b400-4473-4683-8015-a5b227f44662" class="bulleted-list"><li>❌calls platform-specific API directly</li></ul></li></ul><ul id="7112f5b5-accf-48e1-b890-f0f445904568" class="bulleted-list"><li><a href="http://www.hoard.org/">Emery Berger&#x27;s Hoard</a></li></ul><h2 id="cedc9cd2-e1bb-4653-9304-c16aef4f3dfa" class="">Custom Allocators</h2><p id="a789a23c-e591-44c2-8c35-03b2b6938d8b" class="">Not every allocator needs to be a general purpose allocator, and not every allocator needs to be thread-safe. Implementing different variations of allocators to be used in special cases will increase performances.</p><p id="776d369e-ff4c-42f3-ab7d-1d6f9ee965fe" class="">The main difficulty for a memory allocator is to keep the amount of metadata and the amount of processing time low.</p><p id="b903296c-0639-4fca-ac9b-fece7afe5aba" class="">To increase efficiency:</p><ul id="e518db54-b8d1-42a4-b1af-36eba3b492c8" class="bulleted-list"><li>Most allocators do not track every single byte in memory. For example, a resolution of 16 bytes or more.</li></ul><ul id="c3d8e205-fa4b-4bb3-aa25-a9be046fab2b" class="bulleted-list"><li>Instead of traversing memory on each allocation looking for an empty space of the appropriate size, the allocators can keep lists of free areas categorized by their approximate sizes.</li></ul><p id="57b9d3a0-8386-49d0-89d9-6afa0f20dd2c" class="">Custom allocators resolve the pitfalls of the default allocators and provide additional benefits.</p><p id="95dbdfcc-9602-4ec3-9820-7c4aa4e5dc48" class="">✔They are specialized allocators that are more efficient depending on the use case.</p><p id="a51681ba-ec5f-40b1-8e3b-241152cde22c" class="">✔They reduce the number of allocations and handle virtual pages of memory more efficiently.</p><p id="6e15b71d-74fc-4712-8e13-fe83aba6e8e9" class="">✔They reduce memory fragmentation by allocating within memory arenas.</p><h2 id="4f0c6a64-e8cc-4117-93e7-e8602459515d" class="">Memory Area</h2><p id="bf9b190e-6f31-4b84-8ed8-c67811c86906" class="">Memory areas define where memory is being allocated from. The common areas are heap memory and stack memory.</p><p id="56a9dcb9-7f2b-49e4-8eab-f0cce4bbc9c7" class="">On some platforms, additional areas can be accessible such as GPU memory.</p><p id="917ad539-6305-46dc-a941-14a08770e16c" class="">Allocators are independent from the memory area.</p><p id="027d66a3-706b-476c-ada3-abb39d6b897d" class="">With custom allocators, we can easily switch between areas to reduce fragmentation when needed.</p><h2 id="72d35146-42e3-41d3-8330-ceb68bc9a6da" class="">Debugging and Profiling</h2><p id="0556936e-0430-489b-bf9f-1b82f8d08527" class="">With custom allocators, we can provide additional functionality for debugging and profiling.</p><ul id="7ced0451-1aaf-47a3-b201-b654caa463bb" class="bulleted-list"><li>memory tracking</li></ul><ul id="88f78d70-9d09-4a09-9af7-c50d7199c136" class="bulleted-list"><li>memory marking</li></ul><ul id="e6225292-e1ad-4827-8338-878378b730af" class="bulleted-list"><li>bounds checking</li></ul><ul id="9ee56dfd-7943-48bf-8366-fc6339316e55" class="bulleted-list"><li>memory replay</li></ul><h3 id="3633b88c-a159-4492-91e6-d5fb95d27796" class="">Memory tracking</h3><p id="60ff446c-2945-4b10-8569-45f949f5f814" class="">Keeps track of each allocation made during the lifetime of the application.</p><p id="7883a6f5-de1f-4a73-b498-64e8811d4558" class="">Memory tracking is used to find memory leaks, and inefficient allocations (large allocations, frequent allocations and deallocations).</p><p id="d405a6bf-91ec-45ac-b411-6622094501e7" class="">Memory tracking provide several functionalities:</p><ul id="17c90733-65fe-434e-8530-f3188f583705" class="bulleted-list"><li>Number of allocations</li></ul><ul id="616d6da2-ae3e-4308-9494-c61ad0ee12fe" class="bulleted-list"><li>Source of allocations (file name and line number)</li></ul><ul id="a5274dde-0636-462c-a93b-2343b9eaac0d" class="bulleted-list"><li>Callstack of allocations (high overhead)</li></ul><p id="8c290b04-6a55-4b96-9fb6-a014e3bce921" class="">Memory tracking can be implemented using intrusive or external data.</p><ul id="59ecd99c-d024-4744-817c-d74969c15ada" class="bulleted-list"><li>Intrusive
+❌Requires more memory.
+❌Changes the memory layout.</li></ul><ul id="014a7d68-81a9-429b-93b9-1b6865973a3a" class="bulleted-list"><li>External (using a container)
+✔Do not change the memory layout.</li></ul><h3 id="30cc0d55-0029-4675-a17c-5ab1d8b22643" class="">Memory marking</h3><p id="a2b5c543-61fd-404d-ba9b-cb43d436d80f" class="">Marks allocated memory and released memory with pattern values.</p><p id="b48d793a-1244-490d-b8f0-c14857c87b02" class="">Memory marking is used to find dangling pointers (pointers that do not point to a valid object).</p><p id="557451e5-ea70-4d0e-860c-e858e8fa1b2b" class="">When implementing with specific values it can trigger a segmentation fault.</p><p id="f95157b9-29d1-4ad5-b8d3-8c3edfc31d50" class="">ℹOn Windows, the Visual Studio debug heap marks memory with specific pattern values</p><ul id="90372307-ae51-4b1f-85de-7e2147d3afd6" class="bulleted-list"><li>0xCCCCCCCC: uninitialized stack memory</li></ul><ul id="3c1f9e00-717c-4134-b33f-9ee503c8f284" class="bulleted-list"><li>0xCDCDCDCD: uninitialized heap memory</li></ul><ul id="669aabaf-7899-4e9a-8628-1ab9aaa36f5b" class="bulleted-list"><li>0xDDDDDDDD: freed heap memory</li></ul><ul id="07079f90-e258-4ae2-a0ba-37d502e9c39c" class="bulleted-list"><li>0xFEEEFEEE: freed heap memory (overrides 0xDDDDDDDD sometimes)</li></ul><h3 id="a0b054c8-93e0-499e-b189-cb5b6a2d0886" class="">Bounds checking</h3><p id="9cf78660-99e6-4b31-a0ba-04708295f0c6" class="">Bounds checking is used to detect whether a variable is within some bounds before it is used.</p><p id="066f46ac-2879-4efd-bcaa-de1ae7c441c1" class="">There two possible implementations:</p><ul id="2994fc17-30ef-4fb4-a3d6-114f1ab2cb76" class="bulleted-list"><li>Intrusive: add a pattern value at the start and end of each allocation. During deallocation, we check if the pattern values was overridden, resulting in corrupted memory.
+❌Requires more memory for the pattern values.
+❌Changes the memory layout.</li></ul><ul id="8c6d0543-55e9-4c74-9f21-f418d441c426" class="bulleted-list"><li>Virtual memory: use page access protection. Move allocations to the start or end of a page and restrict access to the surrounding pages.
+❌Requires a lot of memory to allocate the surrounding pages.</li></ul><h3 id="2c9dd5aa-b765-4218-8346-d216453befa6" class="">Memory replay</h3><p id="769632e0-5acf-4a00-8e76-6e7943b40b02" class="">We can record every allocation and deallocation and output the data to a storage or stream it over the network to allow an external tool to replay the allocations during the lifetime of the application.</p><h2 id="ed8fa9c3-8a65-4780-878b-1864ae57004d" class="">New / Delete operators</h2><p id="617b818d-97e3-4dd9-9c85-d00c0dc16592" class="">The default implementation of the <code>new</code> and <code>delete</code> operators is to allocate and deallocate memory through the default global allocator (<code>malloc</code> and <code>free</code>).</p><p id="16ce333c-f55d-4eb6-8718-bca3ada693ce" class="">To be able to allocate memory using custom allocators, we can overload the operators to pass the allocator and additional information such a the file name, line number...</p><p id="e4e6e8f0-421b-45ed-801d-ed5c871f0d41" class="">⚠The <code>delete</code> operator cannot be called with additional parameters, so the <code>operator delete</code> is called instead.</p><p id="bd0c28b6-0f70-4cc9-b133-adb8809a9f90" class="">⚠The <code>operator delete</code> does not call the destructor, so the destructor has to be called manually.</p><pre id="b923ffdb-00ac-4fe6-a47f-f3592852cfaf" class="code"><code>Allocator allocator;
+
+T* ptr = new (allocator, __FILE__, __LINE__) T(0, 1, 2);
+
+ptr-&gt;~T();
+operator delete (ptr, allocator, __FILE__, __LINE__);</code></pre><p id="2706276a-a55c-48e1-bbce-91b730fd4d55" class="">We can also override the <code>new[]</code> and <code>delete[]</code> operators.</p><p id="076c0a4d-5e5a-4ce2-9271-f02cb9907eac" class="">❌Before calling <code>operator delete[]</code>, we need to call the destructors of each element of the array manually, however we don&#x27;t know how many instances were allocated as it is compiler-specific.</p><pre id="55d2b568-a843-4cbe-bf8c-2307360bfef9" class="code"><code>Allocator allocator;
+
+T* ptr = new (allocator, __FILE__, __LINE__) T[10];
+
+// We cannot call the destructors!
+operator delete[] (ptr, allocator, __FILE__, __LINE__);</code></pre><p id="f2cf9eb7-c392-4214-8aca-1d0af066d902" class="">Because of these limitations, it is preferable to use macros instead of operator overloads to use custom allocators.</p><h2 id="cf917726-6928-4aff-836b-03c66743dd9b" class="">Macros</h2><p id="6af8268a-6e59-4a13-9ad9-21afff828e73" class="">We can define two macros to replace the <code>new</code> and <code>delete</code> operators.</p><pre id="1d6aa173-ec36-4931-9c3b-95330a62ea48" class="code"><code>Allocator allocator;
+
+T* ptr = NEW(T, allocator)(0, 1, 2);
+
+DELETE(ptr, allocator);</code></pre><h3 id="6194093a-f21d-47d6-b930-4ed431e4b50a" class="">NEW macro</h3><p id="c54a1b38-42cc-4df9-b6f4-933cc92f53c6" class="">The <code>NEW</code> macro is implemented in a single line. It allocates memory with the allocator and calls the <code>placement new</code> operator. The <code>type</code> parameter is added at the end to invoke the constructor with the argument specified after the macro.</p><pre id="aba7dca2-5e5d-43b7-a457-06c3f2c42bd2" class="code"><code>#define NEW(type, allocator) new (allocator.Allocate(sizeof(type), __FILE__, __LINE__)) type</code></pre><h3 id="5ef5d728-ffdb-41e8-8d8e-6b5d3e174e0a" class="">DELETE macro</h3><p id="6598aaf4-ced3-4ed4-a1e6-3dae30412a0f" class="">As we need to manually call the destructor of the type, we implement a template <code>Delete()</code> function.</p><p id="c9120ea2-b632-4121-b1ec-4ca8a7d27ff2" class="">The <code>DELETE</code> macro calls the <code>Delete()</code> function with the deduced template argument.</p><p id="389886e7-f4a9-4d6b-8d71-49615cb864af" class="">The <code>Delete()</code> function calls the destructor and deallocates the memory with the allocator.</p><pre id="6b36dcd1-4130-4885-804a-69df0d45cabf" class="code"><code>template &lt;typename T&gt;
+void Delete(T* ptr, IAllocator&amp; allocator, const char* file, int line)
+{
+    ptr-&gt;~T();
+ 
+    allocator.Deallocate(ptr, file, line);
+}
+
+#define DELETE(ptr, allocator) Delete(ptr, allocator, __FILE__, __LINE__)</code></pre><h1 id="98a830b3-a0dc-4c12-b614-ee7f015cdc5d" class="">Global Allocators</h1><p id="5221e29b-9db6-42af-bfa3-766f919fb8a4" class="">A global allocator allocates block of memory from the main memory.</p><p id="77707f59-842b-49c1-82c0-5364aef70c4d" class="">Multiple allocations and deallocations can create memory fragmentation.</p><p id="b91dd97f-6517-4cb8-a4e6-34a807f75758" class="">A way to reduce fragmentation is to manage memory using local allocators.</p><p id="12c4d2e2-376a-476d-85ea-4a24a9e521e8" class="">✔Easy to use.</p><p id="84be1276-637f-4248-bdfd-450989337570" class="">❌Cannot achieve great locality.</p><p id="22fe86b2-2a6d-4cdf-8fdb-0e18b4982ec1" class="">❌Cost of deallocations.</p><p id="80aa7cf0-0269-4a2b-9dc1-2655d4923e5d" class="">❌Create memory fragmentation.</p><hr id="507b5266-c2ce-46b8-9664-965d6d5db6b3"/><p id="fb25d0cf-ef07-4a00-97fa-60c6410f8ff5" class="">An allocator only needs to perform two operations: allocate and deallocate.</p><h3 id="2eb31901-e21f-4606-b77d-637fe5c5a867" class="">Allocate</h3><p id="1e587b4b-fd4a-4cab-aa5a-9de253869f68" class="">Allocates of a block of memory of a specified size, and return its address.</p><h3 id="dc100f1f-3836-4cf9-8e69-8b2e2bd6f133" class="">Deallocate</h3><p id="87568a90-e8a6-4598-ba3f-e664d867becc" class="">Deallocates of a block of memory that was previously allocated from its address.</p><h3 id="c1c536c1-c704-4beb-9580-a5f8b5809124" class="">Interface</h3><p id="9a25a57a-96d4-414d-8755-5d205248efd5" class="">A common interface is to allocate memory using a specified alignment, and deallocate without requiring the size of the memory block.</p><pre id="e92ee102-d314-4aa8-b31a-46e7300fe007" class="code"><code>void* Allocate(std::size_t size, std::size_t alignment)
+{
+    ...
+}
+
+void Deallocate(void* address)
+{
+    ...
+}</code></pre><h1 id="aa6ba7a2-1d87-4acf-82a5-5cb79ecfc7be" class="">Local Allocators</h1><p id="69bee8d5-dda7-4a41-adec-1d66c6509261" class="">A local allocator (or <em>static allocator</em>) reserves a region of memory (<em>memory arena</em>).</p><p id="b35a25e8-4da1-4749-bdd0-f74364300a31" class="">All allocations are performed inside this arena and the allocator cannot grow.</p><p id="8e91fa0d-fbd9-4633-93f0-622810812a2b" class="">When a local allocator is released, all its allocations are released.</p><p id="87d64334-7987-41dc-9009-232eb4db5e92" class="">✔Free deallocations by releasing the whole memory arena.</p><p id="b5af59d6-0013-48d7-b6ce-e5c3843507b7" class="">✔Local allocators facilitate threading when distinct thread use separate memory arenas.</p><ul id="bc2dffec-c782-4024-84a0-a07385c30456" class="bulleted-list"><li>Synchronization can be avoided</li></ul><ul id="7b7dec30-ac54-42f4-bc1a-8f0082925d0e" class="bulleted-list"><li>Cache line contention is avoided</li></ul><p id="e454efe1-c4fc-468b-8c6c-e079a20d7afb" class="">❌Requires assumption of the initialize size of the memory arena.</p><hr id="dbb16f19-c74d-4da0-829c-ceb1922a7c7f"/><p id="3a888ed6-b53f-4449-8c0b-8fec6326d6fc" class="">A local allocator performs allocations and deallocations and also handles its memory arena.</p><h3 id="60d261c5-e485-4713-8ad5-70a6deb6f5ad" class="">Create</h3><p id="223d017e-4ff4-44fd-bbf8-ee50260fcde0" class="">Allocate a region of memory using a global allocator.</p><h3 id="1b28fa2b-091f-4da1-80be-2c416a9c3fc8" class="">Destroy</h3><p id="d62359fa-ea99-42a5-85d3-89d4282096a7" class="">Release the region of memory previously allocated.</p><h3 id="b5c39061-77df-4b05-84e2-6571d67aa029" class="">Interface</h3><p id="8701ba46-2011-4e39-a8bb-e98fb140dc4b" class="">A common interface is to create a local arena from an existing buffer, and destroy the arena by releasing all the memory at once.</p><pre id="8b460338-2220-466e-a16a-3535ca15f78b" class="code"><code>void* Create(void* data, std::size_t size)
+{
+    ...
+}
+
+void Destroy()
+{
+    ...
+}</code></pre><hr id="43e27964-684f-4830-abbb-62eba6df53a6"/><h2 id="e079e12c-50af-44a0-b796-0e9153f8bc89" class="">Move operations</h2><p id="8fc46b01-4a46-4076-9fac-2c95a1d3fb39" class="">A move assignment is not as efficient as a copy.</p><p id="b6a8e060-220e-44aa-b63f-affdb70fdb6d" class="">Objects returned by value a constructed in place when they are moved.</p><p id="a70e9cfd-f7f2-490b-b4a8-099c50f15136" class="">A move operation has side-effects:</p><ul id="35b7a011-8ca9-46de-8884-975721811b98" class="bulleted-list"><li>Locality</li></ul><ul id="e11a68a0-fbd4-4cdb-a043-bd4a65575ac4" class="bulleted-list"><li>Prefetching</li></ul><p id="e3caab91-06ed-466f-a2b9-b632b5add483" class="">When using a local allocator, moving is done inside the memory arena.</p><h1 id="b3e75645-6631-4c54-914d-46fd704d7390" class="">General Allocator</h1><p id="da051854-97ae-4ab2-81fc-90256a937d4a" class="">A <strong>general allocator</strong> is typically implemented as a <em>global allocator</em> using variations of <code>malloc</code> and <code>free</code>.</p><hr id="695efccf-e8a5-4abf-8b59-f5048ed857e0"/><p id="1b5d27cf-38f8-4d4c-a875-f25b4178c2c0" class="">❌Slow.</p><p id="fe64ae6e-d6b4-4b73-ba5a-7fa98780e7e9" class="">❌Fragmentation.</p><p id="f0151eaf-ba63-4919-a83c-68862518400c" class="">❌Wasted memory.</p><p id="55940748-c458-4cc3-9bec-cea96e82d966" class="">❌Requires synchronization primitive.</p><h2 id="58010ac4-3c2f-4466-979e-80ebf31d117e" class="">Usage</h2><ul id="6d3eaa76-e2f9-4652-9732-4e695a9efd79" class="bulleted-list"><li>Temporary variable-sized allocations.</li></ul><h2 id="db7d32e9-cbd0-47ca-920d-32515c0c7993" class="">Use cases</h2><ul id="ff213530-4a3b-4039-8712-c09cb16a2c32" class="bulleted-list"><li>File decompression.</li></ul><ul id="099ae5c7-5024-4430-8c91-a252c72824ee" class="bulleted-list"><li>Allocations in third-party libraries.</li></ul><h1 id="055457c0-60c1-445a-84de-57ac7e338e70" class="">Linear Allocator</h1><p id="3c3a7cb7-9f1f-4999-a7a4-885a45bc55ee" class="">A <strong>linear allocator</strong> (or <em>monotonic allocator</em>) allocates contiguous blocks of memory.</p><p id="30fe6a53-7887-47b1-8d3a-14397a6dc059" class="">The allocator contains a <strong>start </strong>pointer to the start of the memory arena and an <strong>offset</strong> pointer to the end of the last allocation.</p><p id="e545485f-3c9e-436b-b98d-54d6d75065b7" class="">To allocate memory, the <strong>offset</strong> pointer is moved forward to the allocated size.</p><p id="050ddfb8-1f8a-4165-9450-f19a6f79dae6" class="">When the allocator is released, the <strong>offset</strong> pointer is reset to the <strong>start</strong> pointer.</p><hr id="f8960f01-f733-4dfd-8ee7-5db023ebfa8f"/><p id="80599cea-0535-4041-bf55-e7185f6f54d4" class="">✔Easy to implement.</p><p id="0fb7c7ac-4b4a-4118-b2e1-eaf6e32fa131" class="">✔Supports any size and alignment.</p><p id="e345a708-8b28-4525-9f35-7e340dba51d7" class="">✔Determinic runtime cost (pointer arithmetic).</p><p id="14da1c69-3f31-4cac-a5da-a839d95fd7b4" class="">✔No fragmentation.</p><p id="8b7e6511-4baf-431a-a943-92ee9afe041f" class="">✔No wasted space.</p><p id="0549d046-afce-4554-95b5-004bec042ef6" class="">✔️Does not require any additional data.</p><p id="c4e45940-e008-437c-8794-56f96d1de0ee" class="">✔Can be made thread-safe.</p><p id="392af037-5b6a-475f-9d94-7aa0ae903080" class="">✔Cache-friendly.</p><p id="284d87dc-27ac-4235-aa6e-697e756f8891" class="">❌Specific blocks of memory cannot be deallocated. The memory is released at once.</p><p id="b0bfc542-fdea-44bf-a353-c4df22c8b687" class="">❌Can only be used with POD (the destructors cannot be called).</p><p id="9de99e55-d427-47ee-a6c1-ba747c341091" class="">ℹLinear allocators can be backed with static memory.</p><h2 id="2e9ae907-02eb-40c0-b428-706858389361" class="">Usage</h2><ul id="9cd69e15-ca76-4c45-a779-a5c831174f62" class="bulleted-list"><li>Allocated once at initialization, and deallocated at shutdown.<ul id="609364ea-3a6d-4cd3-8c7c-22f2b0258c84" class="bulleted-list"><li>Fixed-size</li></ul><ul id="21fce580-9ae3-4c98-bb08-7d67a88b716f" class="bulleted-list"><li>Single-threaded</li></ul></li></ul><ul id="62d4eddb-40c4-4550-85c8-1552f897b266" class="bulleted-list"><li>Allocated for a short duration of time with few data structures.<ul id="64c93b9a-0995-437b-9666-6b4b5a90d02f" class="bulleted-list"><li>Fixed-size</li></ul><ul id="7d1b8858-79b7-4e70-b597-2e79ef0df0ce" class="bulleted-list"><li>Thread-safe</li></ul></li></ul><ul id="bc0c6055-45a6-44d7-83a3-220c4a1f670c" class="bulleted-list"><li>Temporary allocations (allocated on the stack).</li></ul><h2 id="8b4a0ffd-37fb-4611-b79e-a3a69c36b11c" class="">Use cases</h2><ul id="61542f78-b35b-40ed-8271-a7edfb607000" class="bulleted-list"><li>Frame lifetime (render queue)</li></ul><ul id="c6f79ad5-f4c1-4faa-8162-fd9c714662e0" class="bulleted-list"><li>Event handling (input)</li></ul><ul id="a1c07143-f2be-4c72-b070-758409f66b91" class="bulleted-list"><li>Tasks processing (jobs over one or two frames)</li></ul><h2 id="cf9193fe-8a5b-4aca-b6f9-0bf571412770" class="">Structure</h2><p id="cc9c5caa-1134-4af8-8b9e-9d184ebc7f80" class="">A <strong>start</strong> pointer to the start of the memory arena.</p><p id="c69670af-6e02-4467-8a28-bbbc95a4fd0e" class="">An <strong>offset </strong>pointer to the start of the free memory.</p><h2 id="ab41ad77-ebfd-4217-a1fa-b169398bb774" class="">Allocation</h2><blockquote id="252e7da5-e0df-4905-9b24-5aefbd942d2e" class="">Complexity: O(1)</blockquote><p id="8e793128-911f-4b72-8ee8-0c4aaf3113ec" class="">Moves the free pointer forward.</p><h2 id="6a6633f7-9c38-4b0d-961a-024d6c739c7e" class="">Deallocation</h2><p id="c6acf289-0f7a-4681-91d9-ff59f58b6a26" class="">Not supported.</p><h2 id="11bc9d5e-65cb-4422-bf35-c1cb8d27408f" class="">Implementation</h2><pre id="32eaa189-8b25-47c0-96d2-0282a3696ea7" class="code"><code>class LinearAllocator
+{
+	void* _data;
+	size_t _size;
+	size_t _offset;
+	
+	void Create(void* data, size_t size)
+	{
+	  _data = data;
+	  _size = size
+	  _offset = 0;
+	}
+	
+	void Destroy()
+	{
+	  _offset = 0;
+	}
+	
+	void* Allocate(size_t size)
+	{
+	  if ((_offset + size) &gt; _size)
+	  {
+	    return nullptr;
+	  }
+	
+	  void* ptr = (_data + _offset);
+	  _offset += size;
+	  return ptr;
+	}
+	
+	void Dellocate(void* ptr)
+	{
+	}
+};</code></pre><h2 id="225b2432-8747-4a24-bd83-d25cb0b6fdf9" class="">Alignment</h2><p id="9b9c1f14-034a-4b9f-86ca-7ad78fe5f6ca" class="">To take into account the alignment of the allocation, we need to:</p><ul id="6b27faef-4f54-4da0-b724-bcc55c2fbf12" class="bulleted-list"><li>Check if the memory is aligned at the current offset.</li></ul><ul id="8d5ea089-d09c-4833-ab98-2238953f9865" class="bulleted-list"><li>If it is not aligned, we calculate the required padding.</li></ul><ul id="e588a81e-588a-473a-9cf7-88b9e36d43a8" class="bulleted-list"><li>The allocated memory is calculated with the padding.</li></ul><ul id="5a9453ee-275d-433b-83fa-3ffbcd82adf5" class="bulleted-list"><li>The offset is increase of the allocated size and the padding size.</li></ul><h1 id="24beb838-b3d0-4ae6-b924-971d8cd31701" class="">Stack Allocator (without LIFO)</h1><p id="fd9c8afa-137f-41eb-99cf-dfced4d3b96d" class="">The <strong>stack allocator</strong> is a linear allocator that keeps track of each allocations to allow blocks of allocated memory to be deallocated.</p><p id="5a4d05de-e475-4b40-8688-e1412ce30e42" class="">One approach is to store a header before each allocation to store information about that allocation.</p><p id="54adb8e8-2f65-4d10-81cc-4843894fef79" class="">ℹDo not confuse the stack allocator with stack memory</p><hr id="c05636ba-8f5b-4c0d-8a78-cdebb4dbec56"/><p id="fcbebb7d-2769-4ed2-9e9f-3a78fa450628" class="">✔Similar to linear allocator.</p><p id="7e0127a6-ba7a-4f3b-b3b1-3e9a5b8aaf57" class="">✔Allows deallocations.</p><p id="6e89437b-83eb-4d1e-a467-cb55c049f54b" class="">❌Can only deallocate a block of memory, and everything that was allocated after it.</p><p id="6ae6671c-34ac-4509-9745-c255054cdd1c" class="">❌Cannot deallocate a specific block of memory, unless it is the last allocation.</p><p id="8bb51e0a-b27a-4bec-8067-f7392d3eaaf5" class="">⚠The LIFO principle is not enforced, when a block of memory is deallocated, everything that was allocated after it is also deallocated.</p><h2 id="a8146831-379b-4210-935d-da8787db2bb4" class="">Usage</h2><ul id="69c341a3-430a-43b1-9cda-e77615c54bcc" class="bulleted-list"><li>Variable-size</li></ul><h2 id="f168f0ad-5124-43fa-a214-1819d0ebd551" class="">Use cases</h2><ul id="70f14352-d510-48a5-8f1a-97c0ba3d934b" class="bulleted-list"><li>Lifetime of a scene</li></ul><ul id="360acedb-9901-4433-a701-6ec75704a3e7" class="bulleted-list"><li>Scene loading with deallocations in reverse-order</li></ul><h2 id="a9cbd621-c96e-4e51-8077-edd8a57337d4" class="">Structure</h2><p id="72fb2914-1c97-4ac3-8fe6-d030cb35267a" class="">A <strong>start</strong> pointer to the start of the memory arena.</p><p id="4a9b9d5f-82c2-4d97-94ed-9795be987a5c" class="">An <strong>offset</strong> pointer to the start of the free memory.</p><h2 id="c2145bf2-6008-4e53-87cb-38493b8ab2aa" class="">Allocation</h2><blockquote id="8857d2f1-3ed4-43eb-84ab-6d14f1ff40e2" class="">Complexity: O(1)</blockquote><p id="23e6d74e-a066-4e1b-b858-4ab26f7ec627" class="">Moves the free pointer forward.</p><h2 id="744a7c40-c45b-44a9-ae7e-7359ffb8328d" class="">Deallocation</h2><blockquote id="429ddee7-ff19-40e4-8c84-ff015bb77a58" class="">Complexity: O(1)</blockquote><p id="d031fece-b7e3-4c07-93de-be81003dae55" class="">Moves the <strong>offset</strong> pointer backwards.</p><h2 id="7d87df77-89a8-48db-9851-be20ac95961c" class="">Implementation</h2><p id="823544c3-1d3c-4da1-8a51-dac9a3554902" class="">When the allocator is initialized, the <strong>offset</strong> is set to 0.</p><p id="6ca19337-1ff7-4dbc-9c6d-691a6c575243" class="">When the allocator is released, the offset is reset to 0.</p><pre id="39a281aa-652f-49d0-9f16-ab5aa2c52f0f" class="code"><code>class StackAllocator
+{
+  void* _data;
+  size_t _size;
+  uint32_t _offset;
+
+  void Create(void* data, size_t size)
+  {
+    _data = data;
+    _size = size
+    _offset = 0;
+  }
+
+  void Destroy()
+  {
+    _offset = 0;
+  }
+
+  void* Allocate(size_t size)
+  {
+    if (_offset + size &lt;= _size)
+    {
+      return nullptr;
+    }
+
+    void* ptr = (_data + _offset);
+    _offset += size;
+    return ptr;
+  }
+
+  void Deallocate(void* ptr)
+  {
+    Header* header = (Header*)((uintptr_t)ptr - sizeof(Header));
+    _offset = (ptr - _data);
+  }
+};</code></pre><h2 id="4d40fc8d-c856-4919-b298-4b752d3c5d47" class="">Alignment</h2><h3 id="3970252b-9ad6-4274-852d-3d2d54a9a926" class="">Structure</h3><p id="82a28957-a4a5-4709-9e1d-c71eca6fd4c5" class="">To take into account the alignment, we need to add some padding.</p><p id="1e146def-fcaf-4593-afe9-74e546752d9e" class="">We keep track of the padding by storing a header before each allocation.</p><p id="93297b89-eff2-466a-8570-908c1eaf9846" class="">The header can store different kind of data depending on the implementation.</p><ul id="970d5a82-7559-44fa-b833-c69ff9556ea0" class="bulleted-list"><li>The size of the allocation.</li></ul><ul id="f912fff9-901d-47f6-ae56-1c397fa8270d" class="bulleted-list"><li>The padding from the previous offset.</li></ul><ul id="12bd4637-13e8-46ab-968a-50af2435e16b" class="bulleted-list"><li>The previous offset.</li></ul><ul id="53988140-1147-4b5e-8b36-9cf3f051ef3e" class="bulleted-list"><li>The previous <strong>offset</strong> pointer.</li></ul><p id="5ce9b283-96e5-4f37-8be5-53d6ad674207" class="">ℹStoring this data as a <code>uint32_t</code> value instead of <code>size_t</code> or <code>void*</code> minimizes the overhead on 64-bit systems, assuming allocations are under 4 GB of memory.</p><h3 id="554d4b24-5a76-4ce0-856a-7aea66231b63" class="">Allocation</h3><p id="5cd68848-656f-4047-952d-d9846e9bd2cb" class="">Offsets the size of the allocation with the size of the header (<code>size_t</code>).</p><p id="103b1110-6d82-4c67-9e6c-c629ba3abd92" class="">Places a header before the memory block.</p><p id="cfbe1786-662a-4e07-ae95-692f7594a163" class="">Moves the free pointer forward.</p><p id="c482fd6d-f1b5-4cc1-a319-aa41ac2e07b4" class="">To store the header in-place:</p><ul id="74d5c1cd-256c-43dc-bcfb-c18fbb964f0a" class="bulleted-list"><li>We check if the padding is large enough to store the header in-place.</li></ul><ul id="1c7b88fb-1891-457b-ac2f-fd3ae16469d6" class="bulleted-list"><li>If the header does not fit, we extend the padding to the next alignment.</li></ul><h3 id="456069ce-f9d3-4df4-b364-f668ccb47f91" class="">Deallocation</h3><p id="6444889b-1625-4b32-93fe-a22a46d1d1c5" class="">Reads the allocated size from the header stored before the allocated block of memory.</p><p id="9e2e53b8-17b8-45cb-8c6a-e56deb1fcfc7" class="">Moves the <strong>offset</strong> pointer backwards.</p><h3 id="99fbe70a-9bbb-48a1-9dec-9b8479dcd5c9" class="">Implementation</h3><p id="10b76d6d-7be4-425a-a80b-0b3cad82e3b8" class="">Before each allocation, a <strong>Header</strong> structure is stored with the size of the allocation.</p><p id="8ed602af-3163-4774-8039-511e16d63e25" class="">The size of each allocation takes into account the size of the structure.</p><pre id="c880c7e1-080b-4fd1-96eb-1a056b05bcb0" class="code"><code>class StackAllocator
+{
+  struct Header
+  {
+    uint32_t size;
+  };
+
+  void* _data;
+  size_t _size;
+  uint32_t _offset;
+
+  void Create(uint8_t* data, size_t size)
+  {
+    _data = data;
+    _size = size
+    _offset = 0;
+  }
+
+  void Destroy()
+  {
+    _offset = 0;
+  }
+
+  void* Allocate(size_t size)
+  {
+    size_t allocationSize = (size + sizeof(Header));
+
+    if (_offset + allocationSize &lt;= _size)
+    {
+      return nullptr;
+    }
+
+    void* ptr = (_data + _offset);
+    Header* header = (Header*)ptr;
+    header-&gt;size = allocationSize;
+
+    void* ptr = address + sizeof(Header);
+    _offset += allocationSize;
+    return ptr;
+  }
+
+  void Deallocate(void* ptr)
+  {
+    Header* header = (Header*)((uintptr_t)ptr - sizeof(Header));
+    _offset -= header-&gt;size;
+  }
+};</code></pre><h1 id="b20efdf6-050f-4643-a758-6e0a7794d125" class="">Stack Allocator (with LIFO)</h1><p id="c2560fc5-6125-4597-a218-6c0bc6a8eb42" class="">An improvement of the stack allocator is to allow the last block of allocated memory to be deallocated. This is the <strong>LIFO</strong> (last-in, first-out) principle.</p><p id="357f02b6-6e39-4f74-ba8e-50a2bb687dc2" class="">The previous offset needs to be stored in the header.</p><p id="6380890e-f6dc-41cc-a887-bef10c8982f4" class="">Out of order deallocations can be prevented by storing the previous offset in the allocator as well.</p><p id="7ff186f1-4b01-4f4a-9fc8-d3b2ab9b563b" class="">During deallocation, we compare the previous offset from the header with the offset in the allocator, asserting that they are the same.</p><hr id="81ecbb5c-2eb3-42a7-a0e1-daaa819eb22f"/><p id="6713bb17-93ba-4de2-92c1-936e7fccbffc" class="">✔Allows deallocations in reverse-order.</p><p id="23bad03d-6dcd-4dec-9886-48d5bf02d9e4" class="">✔Prevents out of order deallocations.</p><p id="0683fbf2-c3d6-47c0-842f-45286db333b1" class="">❌Requires an additional field in the header structure.</p><p id="20d8b025-1ca7-4276-831a-7fe5a4df9d95" class="">❌Must deallocate in reverse-order.</p><h2 id="2e3529b4-ff54-4ab3-97a5-33ffb2e9d01c" class="">Structure</h2><p id="c044538d-49c1-4a64-b85d-cdd025ceae03" class="">A <strong>start</strong> pointer to the start of the memory arena.</p><p id="a71db1cb-2346-4fc0-b1df-ed089f7c8875" class="">An <strong>offset</strong> pointer to the start of the free memory.</p><p id="5a24eac0-d123-48c5-850b-e612fef6440d" class="">A previous offset pointer to the start of the free memory before the last allocation.</p><p id="ac6b26ec-71b0-482f-98cd-80cfec7914bd" class="">A header before each allocation that contains a previous offset.</p><h2 id="5cda3615-53ad-474f-bdc7-10bd0ff11c7a" class="">Implementation</h2><p id="42b14d5b-9b36-45d4-9d22-10ff8d708a82" class="">The <strong>previous offset</strong> is stored in the allocator.</p><p id="e96d0160-653b-4c69-8ed5-d67f2028f0cb" class="">The <strong>Header</strong> structure also stores the <strong>previous offset</strong>.</p><p id="313f55eb-a280-4969-915e-3637c5f81253" class="">Out of order deallocation is prevented by checking the <strong>previous offset</strong> from the <strong>Header</strong> of the block to deallocate with the <strong>previous offset</strong> of the allocator.</p><pre id="3cf5bb5c-407a-4b87-bfef-31114347d044" class="code"><code>struct StackAllocator
+{
+  struct Header
+  {
+    std::uint32_t size;
+    std::uint32_t previousOffset;
+  };
+
+  void* _data;
+  size_t _size;
+  uint32_t _offset;
+  uint32_t _previousOffset;
+
+  void Create(void* data, size_t size)
+  {
+    _data = data;
+    _size = size
+    _offset = 0;
+  }
+
+  void Destroy()
+  {
+    _offset = 0;
+  }
+
+  void* Allocate(std::size_t size)
+  {
+    size_t allocationSize = size + sizeof(Header);
+
+    if (_offset + allocationSize &lt;= _size)
+    {
+      return nullptr;
+    }
+
+    void* ptr = (_data + _offset);
+    Header* header = (Header*)ptr;
+    header-&gt;size = allocationSize;
+    header-&gt;previousOffset = _previousOffset;
+
+    void* ptr = address + sizeof(Header);
+    _previousOffset = _offset;
+    _offset += allocationSize;
+    return ptr;
+  }
+
+  void Deallocate(void* ptr)
+  {
+    Header* header = (Header*)((uintptr_t)ptr - sizeof(Header));
+    uint32_t previousOffset = (_offset - header-&gt;size);
+    if (previousOffset != _previousOffset)
+    {
+      return;
+    }
+
+    _offset = _previousOffset;
+    _previousOffset = header-&gt;previousOffset;
+  }
+};</code></pre><h1 id="5a5defbf-ce9f-4bb0-9d1b-1b358cf22d5f" class="">Scoped Stack Allocator</h1><p id="8b10110b-528e-4d6c-b5fd-705ae3658ba5" class="">The <strong>scoped stack allocator</strong> works with a backend linear allocator.</p><p id="fa47a9f4-165c-4a68-8b89-2bebfa5eb7f8" class="">The allocator stores a finalizer block of data to be able to call the destructor of the allocated objects before winding out the memory.</p><p id="168aba2e-e7f8-422d-a006-966694728e45" class="">✅Supports POD and non-POD types.</p><h3 id="df578a75-1b22-4e5e-8bce-782ea13d4823" class="">Structure</h3><p id="4f7fe170-ab55-49bd-9fdc-cf047eba3771" class="">A reference to a <strong>rewind point</strong>.</p><p id="b6f8a497-56f0-4b88-8c79-e728b1e63a86" class="">A singly-linked list of <strong>finalizers</strong>.</p><pre id="8c11475d-1fdf-4390-8cf7-1fc8f53fc01a" class="code"><code>class ScopeStack
+{
+private:
+  LinearAllocator&amp; _allocator;
+  void* _rewindPoint;
+  Finalizer* _finalizers;
+};</code></pre><p id="ea8a0f5a-c750-4806-ad29-5a0df259c6f1" class="">The finalizer structure contains a pointer to the next node and a function pointer to call the destructors on the allocated objects.</p><pre id="aee82c9a-e262-499c-a2eb-d24e0281d6da" class="code"><code>struct Finalizer
+{
+  Finalizer* next;
+  void (*dtor)(void* ptr);
+};</code></pre><p id="9f111fc5-5cee-40d3-97ed-66c6e2cf3f9e" class="">The function pointer stores the address of a templated function.</p><pre id="7dece0db-3e1f-42d9-835e-eb690cc3594d" class="code"><code>template &lt;typename T&gt;
+void Destructor(void* ptr)
+{
+  static_cast&lt;T*&gt;(ptr)-&gt;~T();
+}</code></pre><h3 id="ea80afc0-e649-48ad-b9be-56f6492d7466" class="">Allocation</h3><p id="853850f7-2c0c-47ff-92ae-430168cbc9ea" class="">When a POD is allocated, we just forward the allocation to the backend allocator.</p><p id="e5e0a4c5-d2e7-4543-b99a-471939160fcc" class="">When a non-POD is allocated, we adjust the requested size to account for the finalizer structure and store a function pointer to the destructor, and set the head of the finalizer list to the new finalizer item.</p><pre id="672605db-cfda-4fe2-b46b-78e1906f1a24" class="code"><code>Finalizer* AllocateWithFinalizer(size_t size)
+{
+  return (Finalizer*)_allocator.Allocate(size + AlignedSize(sizeof(Finalizer)));
+}
+
+void* ObjectFromFinalizer(Finalizer* finalizer)
+{
+  return (finalizer + AlignedSize(sizeof(Finalizer));
+}
+
+template &lt;typename T&gt;
+T* Allocate()
+{
+  Finalizer* finalizer = AllocateWithFinalizer(sizeof(T));
+  T* ptr  = new (ObjectFromFinalizer(finalizer)) T;
+
+  finalizer-&gt;dtor = &amp;Destructor&lt;T&gt;;
+  finalizer-&gt;next = finalizer;
+  _finalizers = finalizer;
+
+  return ptr;
+}</code></pre><h3 id="aa923205-544a-4a93-8b62-45f5007f7198" class="">Deallocation</h3><p id="dda32aa2-00ba-4e45-904f-963bce0a508d" class="">When a scope is released, the finalizer chain is iterated to call every destructor in reverse-order.</p><p id="ea734580-4664-464d-adfb-e8aad5888268" class="">The deallocation is then forwarded to the backend allocator.</p><pre id="27b40f67-dc55-4c29-92cf-eed96b033c80" class="code"><code>~ScopeStack()
+{
+  for (Finalizer* finalizer = _finalizers; ; finalizer = finalizer-&gt;next)
+  {
+    (*finalizer-&gt;dtor)(ObjectFromFinalizer(finalizer));
+  }
+  
+  _allocator.Deallocate(_rewindPoint);
+}</code></pre><h1 id="a6db14b4-9a66-4628-ac7f-24d5d9be14d6" class="">Double-Ended Stack Allocator</h1><p id="98593da6-024a-4afd-9a79-87b0c05dbcde" class="">The <strong>double-ended stack allocator</strong> is a <strong>LIFO stack allocator</strong> that can allocate from both ends of the stack.</p><p id="41f7c7d7-c32f-435d-9905-b427f1580a55" class="">The allocator contains a <strong>start</strong> pointer to the top of the stack, an <strong>end</strong> pointer to the bottom of the stack, and corresponding offset pointers.</p><hr id="884a99dd-91ea-4853-b062-6c01e57737ae"/><p id="402e45b1-5c36-44a9-b7cb-19ec11361434" class="">✔❌Similar to LIFO stack allocator.</p><p id="c77e9af2-3557-49ac-8a20-d5e1cffa5761" class="">✔The top and bottom of the stack can be used independently.</p><p id="60b15fb2-3302-4cae-a152-6069654f8e77" class="">❌Requires explicit allocations and deallocations from the top or bottom of the stack.</p><h2 id="07518f64-ab01-4bea-b9d4-2b836b3f6d61" class="">Use cases</h2><ul id="f3ed5fa5-815b-4b4b-a24e-6218ef583457" class="bulleted-list"><li>Level loading<ul id="2a62af50-72cd-47e7-bc93-ff763eba98da" class="bulleted-list"><li>Permanent data allocated at the top.</li></ul><ul id="95fd7730-056c-418e-8fae-1aea213d24fd" class="bulleted-list"><li>Temporary data allocated at the bottom.</li></ul></li></ul><h2 id="05ea5414-0d1a-4270-a2c9-18fd0c233b2f" class="">Structure</h2><p id="fd625e54-cf22-4b07-9ad5-2695cc417112" class="">A <strong>start</strong> pointer to the top of the memory arena (allocating from the top).</p><p id="9c6d7678-dde3-4ee4-b973-a064fd825214" class="">An <strong>start offset</strong> pointer to the current top of the stack (allocating from the top).</p><p id="197bb33c-2415-449d-8702-23da66fc438b" class="">An <strong>end </strong>pointer to the top of the memory arena (allocating from the bottom).</p><p id="3a463d82-2e23-46b5-8739-ec051e26ac43" class="">An <strong>end offset</strong> pointer to the current top of the stack (allocating from the bottom).</p><p id="8e2ca9ba-564a-46ed-8927-b596b01428f7" class="">A header before each allocation.</p><h3 id="76387714-6a46-4fe0-b2a5-ecae02c6171e" class="">Allocation</h3><p id="9709f6c6-5e0e-43da-9f11-de8e24e74850" class="">Allocations are explicitly requested from the top or bottom of the stack.</p><h3 id="d1c22100-a0f8-41ac-b3a4-f65f52f26d7b" class="">Deallocation</h3><p id="8f1b30fe-5842-49ea-83dc-cdfc6def2ee6" class="">Deallocations are also explicitly requested from the top or bottom of the stack.</p><h1 id="cd5838be-1964-4ae2-bf85-cc7d41794ecd" class="">Pool Allocator</h1><p id="be3bf9d4-cda7-4b35-92ff-836f46fc6eb5" class="">The <strong>pool allocator</strong> divides its memory arena into chunks (or <em>pools/slots</em>) of identical size and keeps track of the free chunks.</p><p id="dffa1ca0-b8a6-4dd4-b48c-9ba376258ffc" class="">When a block of memory is allocated, a pointer to a free chunk is returned.</p><p id="027628e9-2ee8-4a37-83fc-b928c275ecf7" class="">When a block of memory is deallocated, the corresponding chunk is released and added to the list of free chunks.</p><hr id="64b16582-64ea-4abe-8eb0-7f36a9500c38"/><p id="c3ae6d68-f536-4f9c-8897-eacce569e0a6" class="">✔Deterministic runtime cost (pointer exchange).</p><p id="41b37884-fb18-49e9-a3d1-080e154f785d" class="">✔No fragmentation (can reuse free chunks).</p><p id="f824007b-fb41-445b-8a20-451a66d35bc8" class="">✔️No wasted space.</p><p id="6068141d-e814-413e-9c2e-4ae07aceead6" class="">✔️Does not require any additional data (free list).</p><p id="f9a2ec7a-f9a5-4ccd-87c3-82d0562f2a18" class="">✔Can be made thread-safe.</p><p id="d954b1fa-c006-4ba2-973a-aef45e4583ea" class="">✔Allocations and deallocations can be performed in random order.</p><p id="57268992-0337-4759-8860-788394b692fe" class="">❌The size of allocations is fixed.</p><p id="f71a089b-61fa-47c0-a490-891b9d2acad2" class="">❌The size of allocations must be smaller than the size of a chunk.</p><p id="ff679906-83d5-4f1d-aa85-fcdd4c2a5865" class="">❌Allocations are not contiguous in memory.</p><p id="53c246c1-0e2d-48bf-b9c8-738902a90511" class="">ℹThe linked list is not sorted. Its order its determined by the the allocations and deallocations.</p><h2 id="67ad8a5a-80ca-4794-8938-dcc60a70afbb" class="">Usage</h2><ul id="27974ffc-2685-48d4-b8c0-c09821fb7a46" class="bulleted-list"><li>Fixed-size.</li></ul><ul id="6492c6e5-d165-4476-8b9c-f34075971c76" class="bulleted-list"><li>Same lifetime.</li></ul><ul id="2c32358a-6936-421d-bacc-0bab12fd0f1a" class="bulleted-list"><li>Random order of allocations and deallocations.</li></ul><h2 id="973f41a6-c3d9-486c-8a0f-8d4b10e5a965" class="">Use cases</h2><ul id="dfeb30ee-5da1-49ce-9e7e-de397da32d22" class="bulleted-list"><li>Object pools such as particles or projectiles.<ul id="f8e08763-6b18-4af4-9197-58dd2adb1577" class="bulleted-list"><li>Maximum number of instances and fixed size for each particle.</li></ul><ul id="f352add3-85f0-4de9-a559-a6526ff78eb0" class="bulleted-list"><li>For example, for a maximum number of 256 particles, each particle having a size of 32 bytes, the pool allocator allocates 256*32 = 8192 bytes once divided into chunks of 32 bytes.</li></ul></li></ul><h2 id="9be9801f-7e07-4ede-90fb-0068fbad7c14" class="">Structure</h2><p id="818a94cf-d0a0-4aee-81fc-ea136f6c2d48" class="">The allocator keep tracks of the free chunks in a list.</p><p id="c26d23ca-afad-4281-b89f-e3c1c0a74439" class="">The number of chunks is determined by: <code>arena size / chunk size</code>.</p><p id="8cb7fa12-94c4-496f-8db6-b3328cac3b2f" class="">A <strong>head</strong> pointer to the first free chunk.</p><p id="7101dbed-738a-4709-9cc1-cf8c4a1c3fc6" class="">A header at the beginning of each chunk stores a pointer to the <strong>next</strong> free chunk.</p><p id="8b831f39-275b-410a-ad39-a123878bbe28" class="">The list of free chunks is stored as a <em>free list</em> (or <em>intrusive list</em>).</p><p id="c27949a5-dc01-4327-b93d-639ce1402a3b" class="">A <a href="http://en.wikipedia.org/wiki/Free_list">free list</a> is a data structure that internally stores a linked list inside the allocated memory.</p><p id="83367c77-edc2-4c36-83fe-4cddccdeb2d0" class="">The list of free chunks is stored in-place without the need for an additional data structure.</p><p id="65d1756d-482d-455b-8e8a-8ffb3973d350" class="">⚠The size of a chunk must be at least the size of a node in the linked list.</p><h2 id="4f5132be-bf62-4a7c-8995-d3401e34fe92" class="">Allocation</h2><blockquote id="7dad33f3-61ed-4768-853d-fe75595330a4" class="">Complexity: O(1)</blockquote><p id="366ec4b8-e3f4-4da2-9a5f-1dc944c85788" class="">Pops the first free chunk of memory from the linked list (the first node).</p><h2 id="6dcefec0-6266-49af-937e-ff23008bf857" class="">Deallocation</h2><blockquote id="0508286f-a3ce-4b3b-8379-62750105e1af" class="">Complexity: O(1)</blockquote><p id="5d17ec45-b5f6-45ad-ada3-f45c51496bf8" class="">Pushes the deallocated chunk as the first node in the linked list.</p><h2 id="4936a0f7-e341-4bbf-a5c6-1cb835cea1f9" class="">Implementation</h2><p id="d3567b62-ae6f-437e-b03a-5f3b0bd0fb27" class="">The Node structure contains a pointer to the <strong>next node</strong>.</p><p id="b87a7fc6-bb38-45ce-92d2-5199fa614382" class="">When the pool is created, all the chunks are pushed to the list of free nodes. The <strong>head node</strong> is set to the first chunk.</p><p id="e4b6bce2-0c6d-45d1-ab01-c326cc10c162" class="">When the pool is destroyed, the same operation is performed.</p><p id="03807fe9-c081-4d22-b1f5-8113eae5cb63" class="">When allocating memory, the pointer to the <strong>head node</strong> is the address of the free chunk of memory that is returned. The <strong>next node</strong> of that chunk becomes the new <strong>head node</strong>.</p><p id="ef39e9e2-37b1-4b45-b18d-6ea41f42e510" class="">If the <strong>head node</strong> is null, then the pool has no free memory.</p><p id="088a558c-e720-47e0-b72e-e6b32a90bd4f" class="">When deallocating memory, the pointer to the block of memory becomes the new <strong>head node</strong> with its <strong>next node</strong> set to the previous <strong>head node</strong>.</p><pre id="8a235e68-6f66-45be-b285-8099c91556f0" class="code"><code>struct Pool
+{
+  struct Node
+  {
+    Node* next;
+  };
+
+  std::uint8_t* _data;
+  std::size_t _size;
+  std::size_t _chunkSize;
+  Node* _headNode;
+
+  void Create(std::uint8_t* data, std::size_t size, std::size_t chunkSize)
+  {
+    _data = data;
+    _size = size
+    _chunkSize = chunkSize;
+    _headNode = nullptr;
+
+    Destroy();
+  }
+
+  void Destroy()
+  {
+    std::size_t chunkCount = (_size / _chunkSize);
+
+    for (auto index = 0; index &lt; chunkCount; index++)
+    {
+      void* ptr = &amp;_data[index * _chunkSize];
+      Node* node = reinterpret_cast&lt;Node*&gt;(ptr);
+
+      node-&gt;next = _headNode;
+      _headNode = node;
+    }
+  }
+
+  void* Allocate(std::size_t size)
+  {
+    Node* node = _headNode;
+    if (node == nullptr)
+    {
+      return nullptr;
+    }
+
+    _headNode = _headNode-&gt;next;
+    return reinterpret_cast&lt;void*&gt;(node);
+  }
+
+  void Deallocate(void* ptr)
+  {
+    Node* node = reinterpret_cast&lt;Node*&gt;(ptr);
+    node-&gt;next = _headNode;
+    _headNode = node;
+  }
+};</code></pre><h1 id="cb47efe0-a568-48d9-94cc-81ceae0daec3" class="">Chunk Allocator</h1><p id="0d841d15-e9a4-4603-971e-cbdc4d017cbe" class="">The <strong>chunk allocator</strong> (or <em>slab</em>/<em>multipool allocator</em>) manages multiple pools. Each pool is divided in different chunk sizes.</p><p id="35372200-d52c-4899-9b22-2a13cc7301ca" class="">When a block of memory is allocated, the allocator selects the appropriate pool with the smallest chunk size that matches the requested size.</p><hr id="47fe71a0-ed5a-4569-8e69-8edd8ecd8f57"/><p id="2d490214-fdec-488c-8c08-6bb3e6f66254" class="">✔Deterministic runtime cost (pointer exchange).</p><p id="456f1031-28a3-4b6d-afd8-b6acf995467c" class="">✔No fragmentation (can reuse free chunks).</p><p id="4541c053-e768-49c5-b55a-59fbeecfd0a9" class="">✔The waste of memory can be controlled.</p><p id="90809752-7fef-4140-bd5d-389f4b4489de" class="">✔️Does not require any additional data (free list).</p><p id="94275890-55c3-4dfd-8eb2-11b2d2c79ae1" class="">✔Can be made thread-safe.</p><p id="41ea978b-ff3f-40b9-bc9f-3cd0bcbc4f5c" class="">✔Allocations and deallocations can be performed in random order.</p><p id="f2600111-fc38-4ba2-b241-c1b010fd6803" class="">❌Allocations are not contiguous in memory.</p><p id="b2f8c348-3dca-434d-a51d-2ebb020a8a44" class="">❌The efficiency of the allocator depends on the correct setup of pools and chunk sizes.</p><p id="fe82ea4a-0867-4c3e-8a10-a647690ceaf1" class="">ℹA typical implementation is to use exponential sizes power-of-two for the chunks.</p><h2 id="78a8f5fc-4ded-47d9-9e40-4b98644fe480" class="">Usage</h2><ul id="fc37cbfe-eec6-4ae6-a233-3969fcd846bd" class="bulleted-list"><li>Repeatedly allocate and deallocate blocks of memory of distinct sizes.</li></ul><ul id="c00b7d5a-516a-44cd-8bcd-0307ca8a236f" class="bulleted-list"><li>Different sets of fixed-size allocations.</li></ul><ul id="de3bf9cb-c988-40af-b54d-98e00b0d0972" class="bulleted-list"><li>Thread-safe,</li></ul><h2 id="edd5ea24-b006-4466-9d17-f4cb75532318" class="">Use cases</h2><ul id="5b19d067-47b3-4d50-ae27-5aaffa1e9b05" class="bulleted-list"><li>Scene streaming.</li></ul><h1 id="3150c91c-473e-49ce-a7f1-a26419e2a45f" class="">Free List Allocator</h1><p id="7a64debc-4999-43e9-a285-a240367ddbce" class="">The <strong>free list allocator</strong> allows allocations and deallocations in any order.</p><p id="76977ed1-e0c8-42b2-b3ec-c9942740a02d" class="">✔Can allocate and deallocate in any order.</p><p id="bda675a6-63e9-494d-a625-2865eb361c2e" class="">❌Lower performances.</p><p id="fd517f14-7566-4dd1-a822-890acbd9cb0a" class="">❌Poor memory locality.</p><p id="202357cc-6f97-49d5-b1d4-18481da35548" class="">❌Contension.</p><p id="05265e7f-fa52-4973-8b98-5a5e506c1f32" class="">There are two common implementations: a linked list and a red black tree.</p><h2 id="25637009-571e-4376-930e-71c06a601847" class="">Linked List Structure</h2><p id="8ee0c2d3-11cd-4ce6-aea0-051a11ea7bf6" class="">The allocator stores the start address of each free contiguous block in memory and its size.</p><p id="b2f7a28f-7543-44d6-930c-40d979699ff5" class="">The free blocks of memory are sorted by address.</p><p id="4e18d935-e0e3-48de-af7c-3168361e2d42" class="">❌Allocations and deallocations iterate the linked list.</p><h3 id="0f209181-7083-498a-a04a-269bc04ba828" class="">Allocation</h3><blockquote id="534b916e-4e43-453e-ab23-45b4e6b205e9" class="">Complexity: O(N)</blockquote><p id="834aa11a-4465-4835-946a-ec334e4ddb6f" class="">Searches in the linked list for a block where the data can fit.</p><p id="0471962a-4e7b-40f2-a615-85a15ba89f3a" class="">There are two strategies to find a block of memory:</p><ul id="a53e14ae-e688-4774-8069-37e6539a1864" class="bulleted-list"><li>first-fit: finds the first block where the memory fits.</li></ul><ul id="55053fec-ca1f-4771-8735-5ca04dc3ebbf" class="bulleted-list"><li>best-fit: finds the smallest block where the memory fits.</li></ul><p id="f7aaafdb-eb67-4dc8-8456-ebacb2e5c5c3" class="">Removes the block from the linked list.</p><p id="d8b61b61-330d-418e-acf7-ba1f46815c8b" class="">Places an allocation header before the data.</p><h3 id="cd1df5b9-2c54-4bb6-96a3-d973bb380b77" class="">Deallocation</h3><blockquote id="4926dd78-8245-4fc9-8d65-ab7a573c5897" class="">Complexity: O(N)</blockquote><p id="35a7b639-2fd1-4daa-a2d3-f732573c3488" class="">Reads the allocated size from the header.</p><p id="488c9a0b-0e12-47c7-ae69-a87a8bed61d4" class="">Inserts the block into the sorted linked list.</p><p id="4f17b1ff-2fa7-4c36-aed0-5d8cfd90a7cf" class="">Merges the contiguous memory blocks together (<em>coalescence</em>).</p><h3 id="956a98a1-d310-4101-9c3f-86e691a2ea20" class="">Red-Black Tree Structure</h3><p id="2f14e350-b939-4db4-85f2-3c78613a944e" class="">A <a href="https://en.wikipedia.org/wiki/Red%E2%80%93black_tree">red-black tree</a> is a binary search tree where every nodes is either red or black to keep the tree balanced during insertions and deletions.</p><p id="65a26735-4338-4be2-a68e-206f2cf6de0e" class="">Each node stores a bit to indicate whether it is red or black.</p><p id="62a889c9-0b95-4f03-9c26-d7687e09eeb0" class="">Each node stores its parent node and its previous and next sibling nodes.</p><p id="3911aab3-e412-4058-ad4c-f657d16a2775" class="">The tree data is stored inside the free memory blocks.</p><p id="897e10cd-8e5e-428c-a672-03f3f70c0e73" class="">✔Allocations and deallocations do not iterate.</p><p id="fe830209-0328-44d5-8248-7a3a25b7d764" class="">✔Best-fit algorithm for allocations.</p><p id="eb5f0ffb-6294-431c-ab76-ce4926dea971" class="">✔Reduced fragmentation</p><p id="0e77aa7f-d9f0-4991-9407-fe49f7dbae78" class="">✔Increased performances.</p><p id="0982e617-deea-401f-ac85-7542af2c98f6" class="">❌A sorted doubly linked list is required for coalescence operations.</p><h1 id="124fdde3-73c2-4acb-a0fa-e4ba91937184" class="">Buddy Allocator</h1><p id="fa6a2562-df77-42da-8fe3-14a3b4b084a3" class="">
+</p><p id="da180182-02a9-48d1-a023-5518e7625c15" class="">The buddy allocator divides memory into partitions.
+Each block is subdivided into two smaller blocks.</p><p id="69c1d979-6a85-4a38-adf9-77941870b404" class="">✅No fragmentation.</p><p id="bef846c2-f7ed-469d-bb49-5fb39d3aeb0a" class="">✅Can compact memory.</p><p id="565fecbc-d98f-43d2-92b3-40d4ff1c0414" class="">❌Internal fragmentation because of the fixed-size memory blocks.</p><h2 id="81608428-8200-4088-b866-c4ce2c84d5e7" class="">Structure</h2><p id="f2306cf9-0cd6-47a8-a4aa-8c9727a66072" class="">The buddy allocator is typically implemented using a binary tree to represent used or unused split memory blocks.</p><h1 id="b74596ab-0f82-40f5-9498-bfbd9b71ec17" class="">Ring Allocator</h1><p id="52b18533-4528-4208-bf67-dce9fa3cd0a6" class="">The ring allocator behaves like a queue if allocations are released in the same order as they were created. This is the <strong>FIFO</strong> (first-in, first-out) principle.</p><p id="aae0feb2-1199-4fbb-804a-57a4eee115d8" class="">There is two behaviors when the queue is full:</p><ul id="21ae1a89-7d78-42f2-90f1-05e18a5291ba" class="bulleted-list"><li>Overwrite old data.</li></ul><ul id="91d14120-88a4-4a3e-801e-d72fffb2b5d9" class="bulleted-list"><li>Fail allocating new data.</li></ul><h2 id="185fb132-1927-46e9-9511-a0277ff87591" class="">Structure</h2><p id="d3adf89c-79b7-4d30-97ea-abd4b9bbb232" class="">A <strong>start </strong>pointer to the beginning of the memory.</p><p id="76bd0c47-3160-4625-ab14-adb7dbcb1116" class="">An <strong>end</strong> pointer to the end of the memory.</p><h2 id="788fd31d-eb12-4b4a-bbeb-3ef97c3c0511" class="">Allocation</h2><p id="46a423fc-7806-491b-a386-6fb2b5427e83" class="">If the allocator is not full, increase the <strong>start</strong> pointer.</p><p id="5e37c0d8-7481-4cf4-b4a2-ea387c86ffde" class="">If the allocator is full, increase the <strong>start</strong> and <strong>end</strong> pointers.</p><h2 id="1ad8937b-26df-44e7-b945-fa36f859c15f" class="">Dellocation</h2><p id="94038559-d84a-4842-a070-fe489d78d29e" class="">Increase the <strong>end</strong> pointer.</p><h1 id="da4aad95-988f-479c-8872-a33f5509eff7" class="">Growing Allocator</h1><p id="a2c71be2-ac6f-4158-9c19-23c718d81f5d" class="">A <strong>growing allocator</strong> is used as a backend for other allocators.</p><p id="c38eb923-d865-424f-b9aa-dc8a59345b2d" class="">It allocates memory from the system when needed.</p><p id="4391dcca-c2dd-4728-a6ed-6d924285e85e" class="">A growing allocator using virtual memory allocates at least at the granularity of a page.</p><p id="4d5fc40d-c84f-443d-b67d-fcf561cccdba" class="">The allocator can be setup to grow at a higher granularity to reduce the number of switch to kernel mode.</p><p id="f74d526f-5736-460b-ab3d-8b62da88b29b" class="">When memory is deallocated, there two possible behaviors:</p><ul id="1d12d0a5-2121-492a-a3f9-b02c8b991daf" class="bulleted-list"><li>Release the physical memory: better for large allocations because we want to recover the memory for other allocations.</li></ul><ul id="75d23f28-6057-46cb-8d2f-58df09b13257" class="bulleted-list"><li>Keep the physical memory allocated: better for small allocations to avoid performances issues with allocations around page boundaries.</li></ul><p id="874ee5f6-e8a3-4250-8f04-ecbeeff8113f" class="">A possible implementation, is to delegate the release of the physical memory to the user that can request the pages of virtual memory to be released at the appropriate time.</p><h1 id="29a60370-c963-4d0b-8944-9342251f4808" class="">Sequential Allocator</h1><p id="e4aa28c5-64c8-479c-9a6a-1b0166b734d6" class="">The <strong>sequential allocator</strong> is an allocator that uses other allocators as backend allocators and selects the allocators sequentially depending on their available memory and the requested allocation size.</p><p id="a123d2bc-6e08-4460-b4e3-5df8bd776079" class="">For example, a typically implementation is to have two backend allocators. The first allocator is a static allocator with a fixed memory arena, and the second allocator is a growable allocator using the heap. The static allocator until it has no available memory, in which case the growable allocator is used.</p><p id="f159a840-0764-4894-9fd6-316e17d4933e" class="">Another alternative, is to implement an allocator with multiple backends, and determine which backend to use depending on the size of the allocations.</p><h1 id="942704da-d7d0-4c2a-85ed-f4579fb111cb" class="">TLS Allocator</h1><p id="6cabb3ac-614d-4db3-ba13-f015b0c7c4cb" class="">The Thread Local Storage (TLS) is a dedicated storage area that can only be accessed by one thread.</p><p id="8890dc75-45bd-445c-b94a-88713e9ed4a4" class="">TLS access does not require any locks or atomics.</p><p id="148b5660-a47f-462a-9122-50fbc341ed53" class="">The <strong>TLS allocator</strong> is a lock-less allocator that is dedicated to a thread.</p><p id="7aab288f-c89d-4771-9db0-f730bbebbc29" class="">It&#x27;s implemented with a TLS variable and a backend allocator. The backend allocator is typically a stack allocator.</p><p id="92ededcf-52cb-49d7-88ee-7314b0951bfb" class="">✔Lock-less allocator.</p><p id="3434a50b-9d3e-4c33-aefe-7b1992a1b2b0" class="">✔Can be used implicitly instead of a regular stack allocator.</p><hr id="c80a9e1d-6ab1-449f-b560-016c3630b836"/><p id="f986e35c-ce25-4e9d-83f6-188902c4ad7e" class="">The TempAllocatorScope structure is defined to make use of the TLS allocator, and the memory arena is reset in the destructor.</p><pre id="13e6f8b8-1188-46ee-a847-3d35cfadca21" class="code"><code>template&lt;typename ALLOCATOR&gt;
+thread_local ALLOCATOR* tlsLinearAllocator = nullptr;
+
+template&lt;typename ALLOCATOR&gt;
+struct TempAllocatorScope
+{
+private:
+	std::size_t _size;
+
+public:
+	TempAllocatorScope() :
+		_size(tlsLinearAllocator-&gt;GetSize())
+	{}
+
+	~TempAllocatorScope()
+	{
+		tlsLinearAllocator-&gt;Reset(m_Space);
+	}
+};</code></pre><h1 id="a32dd349-9907-40c4-a78b-e1ceb2c597e0" class="">Small Allocator</h1><pre id="82e496f0-c880-49d4-924a-26dd7199c830" class="code"><code>template&lt;SizeType InlineCapacity = 0&gt;
+class SmallAllocator
+{
+private:
+  u8 StackMemory[InlineCapacity] _stack;
+  IAllocator* _allocator;
+
+public:
+  SmallAllocator(IAllocator* allocator) { ... }
+
+  void Allocate()
+  {
+    if !_stack.Allocate()
+      _allocator-&gt;Allocate();
+  }
+
+  ...
+};</code></pre><h1 id="c537651d-8174-4be0-bd60-9c400e059d69" class="">Interfaces</h1><p id="2332c56f-7af1-47fc-aa67-875aa7bb6914" class="">There are three common interfaces to define allocators.</p><ul id="897d5cb7-8585-4056-839b-c796c69d02f2" class="bulleted-list"><li>As a set of functions</li></ul><ul id="a4b66499-1d2e-4fb8-bfd3-ce0642169551" class="bulleted-list"><li>As a template parameter</li></ul><ul id="ebc04f7f-3475-4738-9823-acc4102eebe7" class="bulleted-list"><li>Aa an object reference</li></ul><h2 id="40f9eb68-906d-403b-9974-d148fb0f8373" class="">Functions</h2><p id="02ae1b87-398c-4683-9d66-d853e9cf7a3e" class="">Stateful functions such as <code>malloc()</code> and <code>free()</code>.</p><p id="6a72950d-bb3d-45f1-ab02-7602cf795503" class="">❌Does not support allocator objects.</p><h2 id="9082348e-c955-4109-a533-5024f6565979" class="">Template</h2><p id="7adc16fa-3e06-48d0-abd8-3d268ff0426d" class="">A template parameter such as the STL allocator.</p><p id="fb61ee15-df74-42d1-8ad2-0ddc0aa76b52" class="">✔The allocator type is available by the compiler.</p><p id="f1f12c27-272f-48a5-8f9c-3bb532478db5" class="">❌A user of allocators must be a template class.</p><p id="f6d4f8f5-d0b4-4bab-b8ed-0dc7a328b983" class="">❌Different allocator usages generate different C++ types of client objects.</p><h2 id="24a007f5-d5fc-447d-b74c-4c9fb7ca557a" class="">Object</h2><p id="e8541c9b-fd05-45e7-965a-02f59416fb07" class="">A pure abstract class passed by reference.</p><p id="a19c870c-2cd3-4ab2-b016-4de06b5963fe" class="">✔A user of allocators does not need to be a template class.</p><p id="94679935-55af-45dc-aca2-24707fae8fbe" class="">✔Different allocator usages do not affect the C++ types of client objects.</p><p id="b56cc20d-ea8b-45e1-aa87-57bdd4e7ae7b" class="">❌A user must keep a reference to an allocator address.</p><p id="2a6a40d4-c6f0-4c50-80b0-ecb7ac600746" class="">❌Allocators must be accessed through virtual functions.</p><h1 id="d5345e6f-d616-473f-84a1-0869ade3be8e" class="">Implementations</h1><h2 id="ac342a0a-305c-4cf0-82d5-3ff7c9858b0d" class="">Template</h2><h3 id="8a5f020a-4b07-4d07-a573-d5023e89e18f" class="">Allocator</h3><p id="89e03e61-51b9-469a-88d9-40411e940e99" class="">Standard allocator used as a template parameter.</p><p id="12fa4cfb-d26c-4e20-8d93-7f954a8440cb" class="">The allocator is a concrete type with no base class.</p><pre id="03fed8a9-6560-4fd0-8d4c-41e76536e3de" class="code"><code>class Allocator
+{
+public:
+    void* Allocate(std::size_t size)
+    {
+        return std::malloc(size);
+    }
+
+    void Deallocate(void* address)
+    {
+        return std::free(address);
+    }
+};</code></pre><h3 id="f718ae48-1215-4154-8796-9f15e50b1fef" class="">Usage</h3><pre id="57b1c737-e884-402e-9367-745afc8e1e19" class="code"><code>template &lt;typename Allocator&gt;
+class Client
+{
+private:
+    Allocator _allocator;
+
+public:
+    Client(Allocator&amp; allocator) : _allocator(allocator)
+    {
+    ...
+    }
+};
+
+void main()
+{
+    auto allocator = Allocator();
+    auto client = Client&lt;Allocator&gt;(allocator);
+    ...
+}</code></pre><h2 id="69c3a572-ff77-409f-8cf9-69d75c68dbcc" class="">Object</h2><p id="5599faec-d93d-48d6-b84f-aae37175fe55" class="">The allocator is used as a reference.</p><h3 id="2f3dc2a0-864d-4774-bcb4-6dcf59e10d38" class="">Allocator</h3><p id="e9ade7e4-df58-48e2-adc9-585a7f216e23" class="">The allocator is defined as a pure abstract class.</p><pre id="b6f462bf-2705-434f-b361-a5db38983cc2" class="code"><code>class IAllocator
+{
+protected:
+    IAllocator() = default;
+
+public:
+    virtual void* Allocate(std::size_t size) = delete;
+
+    virtual void Deallocate(void* address) = delete;
+};</code></pre><p id="b805f5c1-d8cd-4097-96f8-829b4fc8a6bf" class="">Implement an allocator as a derived class.</p><pre id="92e5c220-9847-48e6-bdd9-5d7c8f7cb0eb" class="code"><code>class Allocator : public IAllocator
+{
+public:
+    inline void* Allocate(std::size_t size) override
+    {
+        return std::malloc(size);
+    }
+
+    inline void Deallocate(void* address) override
+    {
+        return std::free(address);
+    }
+};</code></pre><h3 id="33f46a5d-1e77-4605-b988-73bea53152df" class="">Usage</h3><pre id="57ba8053-687c-4337-bf89-0802e5d3d25b" class="code"><code>class Client
+{
+private:
+    IAllocator _allocator;
+
+public:
+    Client(IAllocator&amp; allocator) : _allocator(allocator)
+    {
+    ...
+    }
+};
+
+void main()
+{
+    auto allocator = Allocator();
+    auto client = Client(allocator);
+    ...
+}</code></pre><h2 id="606bc6bb-14c9-4a04-b77d-b40155b0e4b2" class="">Local allocator with backend allocator</h2><h3 id="e5576f52-a6d0-4a63-9f6d-fb0cf36ff87c" class="">Allocator</h3><p id="9a9ba9dc-5838-4d7d-815a-950e46b5eb3d" class="">The local allocator allocates an arena of memory at initialization from a backend allocator and releases the memory at destruction.</p><p id="5604691e-5670-4576-9b2b-77ca49d36ab7" class="">The <code>Allocate()</code> and <code>Deallocate()</code> methods can keep track of allocations using different implementations such as a list of allocated blocks or a memory header injected before the allocated data.</p><pre id="381905db-f83a-439b-b350-60f3b531282a" class="code"><code>class LocalAllocator
+{
+private:
+    IAllocator _allocator;
+    void* _data;
+    std::size_t _size;
+
+public:
+    LocalAllocator(IAllocator&amp; allocator, std::size_t size) :
+        _allocator(allocator),
+    {
+        _data = _allocator.Allocate(size)
+    }
+
+    ~LocalAllocator()
+    {
+        _allocator.Deallocate(_data)
+    }
+
+    void* Allocate(std::size_t size)
+    {
+        ...
+    }
+
+    void Deallocate(void* address)
+    {
+        ...
+    }
+};</code></pre><h3 id="5283a0af-b247-4a6d-88b6-1e0ac0fa800d" class="">Usage</h3><p id="c00beacf-e600-4a1c-b6c5-4cda856e98c0" class="">ℹDeleting the arrays is not necessary as the local allocator will release the memory arena when going out of scope.</p><pre id="08eabe0e-54ef-4e78-83b5-d0a1b077607d" class="code"><code>void main()
+{
+    auto globalAllocator = Allocator();
+    auto localAllocator = LocalAllocator(globalAllocator, 2048);
+
+    int* intValues = static_cast&lt;int*&gt;localAllocator.Allocate(sizeof&lt;int&gt; * 10)
+    float* floatValues = static_cast&lt;float*&gt;localAllocator.Allocate(sizeof&lt;float&gt; * 10)
+}</code></pre><h2 id="fb42aec2-6949-4af2-a564-b3239267c549" class="">Local allocator with stack memory</h2><h3 id="981c8f91-e7dc-460d-9a90-01d2b3edd3c4" class="">Allocator</h3><p id="8e9cf128-7d00-44a3-a608-a629853ac55a" class="">The local allocator creates an arena of memory at initialization from a backing memory.</p><pre id="8b102e4d-015e-4de6-af97-ca9f89eb7d3b" class="code"><code>class LocalAllocator
+{
+private:
+  void* _data;
+  std::size_t _size;
+
+public:
+  LocalAllocator(void* data, std::size_t size) :
+    _data(data),
+    _size(size),
+  {
+  }
+
+  ~LocalAllocator()
+  {
+  }
+
+  void* Allocate(std::size_t size)
+  {
+    ...
+  }
+
+  void Deallocate(void* address)
+  {
+    ...
+  }
+};</code></pre><h3 id="99fdb959-dfe3-4a93-b118-b8cbdc4ac61d" class="">Usage</h3><pre id="d7105771-80fd-4114-806d-8887c29ae526" class="code"><code>void main()
+{
+    std::uint8*_t buffer[256];
+    auto localAllocator = LocalAllocator(buffer, sizeof(buffer));
+
+    int* intValues = static_cast&lt;int*&gt;localAllocator.Allocate(sizeof&lt;int&gt; * 10)
+    float* floatValues = static_cast&lt;float*&gt;localAllocator.Allocate(sizeof&lt;float&gt; * 10)
+}</code></pre></div></article></body></html>

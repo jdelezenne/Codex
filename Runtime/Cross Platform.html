@@ -1,0 +1,634 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Cross-Platform</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="a3fbb4db-7445-4f14-93fb-1f8a13fc4bf3" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📱</span></div><h1 class="page-title">Cross-Platform</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th>Created</th><td><time>@Aug 03, 2019 9:33 PM</time></td></tr><tr class="property-row property-row-multi_select"><th>Tags</th><td></td></tr></tbody></table></header><div class="page-body"><h1 id="4e6769c2-f8ac-443e-a8d2-d7c04e35b538" class="">Overview</h1><p id="81e8bd9d-e11c-4d15-a46e-26226b45ebcb" class="">A game engine needs to be designed as a cross-platform application.</p><p id="73afae6b-9953-4c8b-b6dd-223cce21f41b" class="">Even when a game is only targeting a single platform, a platform-abstraction from the game-specific code can help isolate platform-specific issues.</p><h1 id="27f990e2-8509-454a-870b-b1b47d486372" class="">Platforms</h1><p id="6ae44879-6874-4f4b-be5e-e229b8f32043" class="">There are many platforms that a game engine should be supporting in the current ecosystem.</p><ul id="4f6ec4e8-fb62-4f53-8eff-46480223d8eb" class="bulleted-list"><li>Microsoft Windows (Desktop and UWP)</li></ul><ul id="b6b26cb0-2de6-4fe1-9ded-610f540f64cc" class="bulleted-list"><li>Apple macOS</li></ul><ul id="6a0839eb-62fb-46a7-8e97-e7305ccf2d51" class="bulleted-list"><li>Linux (Ubuntu is the most popular distribution)</li></ul><ul id="72f5dd01-6a3c-47b4-afd9-09249582bc0e" class="bulleted-list"><li>Apple iOS (includes iPhone, iPad, tvOS)</li></ul><ul id="9501d65d-4412-48de-9cb9-c731ec2dac26" class="bulleted-list"><li>Android</li></ul><ul id="490165f2-c500-444c-aee9-1481bf5147cd" class="bulleted-list"><li>Microsoft Xbox One and Xbox One X</li></ul><ul id="5c95dad8-f603-4749-899a-6a08c0dc9971" class="bulleted-list"><li>Sony PlayStation 4</li></ul><ul id="9e076f66-bf1a-41ab-9b74-426c588b7be2" class="bulleted-list"><li>Nintendo Switch</li></ul><ul id="1c3566e8-0275-4472-bfb3-7eedb4d5c2b5" class="bulleted-list"><li>Nintendo 3DS</li></ul><h1 id="ca5d98bc-c08f-468e-a5ee-cd81e40f8f70" class="">Operating System</h1><p id="7f891ca9-d2b5-48d2-803e-ad148f0db0c8" class="">On Desktop platforms, the operating system shares the hardware resources with multiple applications running at the same time.</p><p id="c1341787-06c8-4fe2-b6da-dc2d45d0e03b" class="">On Mobile platforms, the operating system can suspend and resume applications at any time depending on the available resources.</p><p id="4f8c6492-3890-4a0e-99dc-522e01061170" class="">On Console platforms, the operating system is provided as a thin layer that provides additional features for the user such as downloading or sharing content.</p><h1 id="a08c9df7-e864-4b67-80b2-788d3f140f01" class="">Platform Abstraction</h1><p id="2b881cbf-ef96-4fc3-96f1-45feb0c56b4d" class="">A game should run on multiple platforms, and therefore requires platform abstraction.</p><p id="71285489-5f9a-4623-9bca-c4d2302e5cb9" class="">There are many goals and benefits of platform abstraction:</p><ul id="962ea446-8c0a-4538-9364-fab08b9322b7" class="bulleted-list"><li>Code reuse for all target platforms.</li></ul><ul id="df587e77-9250-46be-a89a-a86be28d2e40" class="bulleted-list"><li>Separate platform-independent code from platform-dependent code.</li></ul><ul id="e1ce4b21-7986-48a3-9522-eb24131a1dd9" class="bulleted-list"><li>Parallelize the effort of implementing common features on target platforms.</li></ul><ul id="6048d904-74a8-468a-beae-377c05d0afa6" class="bulleted-list"><li>Distinguish issues as being platform-dependent or platform-independent.</li></ul><p id="1b7255c4-449d-4e0c-b377-390f83e31dd0" class="">A platform abstraction architecture consists of three layers.</p><h2 id="55f438b3-4a2f-4fdd-a0cb-8dc34ad26af1" class="">Platform layer</h2><p id="ce944796-c881-4c84-9b21-5bed14f255de" class="">Lowest layer in the architecture.</p><p id="7b47f694-2ab9-48f9-8de9-984d6f012fdd" class="">Platform-dependent.</p><p id="e919dced-511e-4ee9-9b77-73cff0b75792" class="">Interacts directly with the target system (operating system, hardware, drivers).</p><h2 id="2ed51f67-b220-4be1-bcf9-c3ab9263e1dc" class="">Abstraction layer</h2><p id="fe5751c0-ac2d-4b9b-8900-1469338daf32" class="">Middle layer in the architecture.</p><p id="7ecb1e06-98e9-431c-a5a5-9cfd19ee32f2" class="">Never makes system calls.</p><p id="7c84c000-9d2a-43a8-8786-5132f0ba6796" class="">Interfaces directly with the platform layer.</p><h2 id="a0ace283-2361-4252-9e50-3a9a8806afe7" class="">Application layer</h2><p id="9727ae37-22d1-4b98-9e2d-da2b57c3ed70" class="">Top layer in the architecture.</p><p id="ece6de90-d9fc-42e4-8e39-21d71f0abeaa" class="">Interfaces directly with the abstraction layer.</p><h1 id="c0984339-7afc-4ed9-ab53-3ff265b9a016" class="">Abstraction Architecture</h1><p id="0a4613f0-0aa7-4ea3-bcee-0b50dc4cef30" class="">The abstraction layer provides interfaces without any platform-dependent types.</p><p id="14c148c2-988b-449e-b750-4e149110ba6d" class="">There are two strategies to implement the abstraction layer.</p><ul id="8fcb949a-be37-4044-bc3a-9486346e821a" class="bulleted-list"><li>Provide different implementations in different source files, selected by the build system or using preprocessor directives.</li></ul><ul id="0915491f-0d0b-4838-9350-c149f01f6cc8" class="bulleted-list"><li>Implement the interface as a pure abstract class and provide different implementations using a factory.</li></ul><p id="3f2bbef8-986f-4a07-bdca-7b68f099d4a4" class="">The first strategy works well with low-level functionality like memory, timing, threading, concurrency, ...</p><p id="06a97dfd-f475-4bcb-9b24-0a68f52dd046" class="">The second strategy works well with high-level systems such as graphics, input, audio, ...</p><p id="a43fdd55-4869-4c42-900c-781b973cfe71" class="">For example, with all the supported graphic device implementations available at run-time, it&#x27;s possible to provide, a command-line or setting in the application to switch between different graphic devices.</p><h3 id="86183444-5ba6-4b2a-86ec-10c3298837dc" class="">Compile-time Implementation</h3><p id="ca897e11-4a0b-46fe-96f8-dd52d3339e21" class="">For example, the <code>MemorySystem</code> is implemented in the abstraction layer and declares an <code>Allocate</code> method.</p><pre id="9ca6a00c-ee46-402f-be8d-628a90a76599" class="code"><code>// MemorySystem.h
+class MemorySystem
+{
+    void* Allocate(size_t size);
+    ...
+};</code></pre><p id="1061e030-b1bb-49e1-88c8-9e592491a920" class="">The method is implemented is distinct .cpp files for each platform, and the method is resolved at linking.</p><pre id="59db3a7a-f414-4efe-aea4-ead28b597f7f" class="code"><code>// MemoryWindows.cpp
+void* MemorySystem::Allocate(size_t size)
+{
+    return VirtualAlloc(...);
+}
+
+// MemorySystemMacOS.cpp
+void* MemorySystem::Allocate(size_t size)
+{
+    return mmap(...);
+}</code></pre><h3 id="dafc8fb4-61e6-4695-aafd-efa0f4c47870" class="">Compile-time Factory</h3><pre id="66f2d293-e1bc-41f3-9972-838258056567" class="code"><code>// GraphicSystem.h
+GraphicDevice* CreateGraphicDevice();</code></pre><pre id="bb013139-7c44-48b9-8213-b0d1274f6c3c" class="code"><code>// GraphicSystem.cpp
+GraphicDevice* GraphicSystem::CreateGraphicDevice()
+{
+#if defined(DIRECT3D11)
+    return new Direct3D11Device();
+#elif defined(DIRECT3D12)
+    return new Direct3D12Device();
+#elif defined(OPENGL)
+    return new OpenGLDevice();
+#else
+    assert(&quot;Unsupported platform!&quot;)
+    return nullptr;
+#endif
+}</code></pre><h3 id="e01a4652-f7c2-428e-917c-61e27b1848e7" class="">Run-time Factory</h3><pre id="e2dd7be2-d356-476f-a49f-deeabc2c1f7f" class="code"><code>// GraphicDevice.h
+class GraphicDevice
+{
+    GraphicDevice() = delete;
+    virtual HardwareBuffer* CreateTexture() = 0;
+}
+
+// GraphicSystem.h
+GraphicDevice* CreateGraphicDevice();</code></pre><pre id="11bfa6da-1eab-455a-8409-a03c7d269839" class="code"><code>// Direct3D12Device.cpp
+class Direct3D12Device : GraphicDevice
+{
+    Direct3D12Device() {}
+    virtual HardwareBuffer* CreateTexture() override
+    {
+        return new Direct3D12HardwareBuffer();
+    }
+}
+
+// OpenGLDevice.cpp
+class OpenGLDevice : GraphicDevice
+{
+    OpenGLDevice() {}
+    virtual HardwareBuffer* CreateTexture() override
+    {
+        return new OpenGLDeviceHardwareBuffer();
+    }
+}</code></pre><pre id="0a4eacb1-21c1-4955-9815-cbbf34801d05" class="code"><code>// GraphicSystem.cpp
+GraphicDevice* GraphicSystem::CreateGraphicDevice()
+{
+#if defined(WINDOWS) || defined(XBOX)
+		if (_deviceType == DIRECT3D11)
+		    return new Direct3D11Device();
+		if (_deviceType == DIRECT3D12)
+		    return new Direct3D12Device();
+#elif defined(WINDOWS) || defined(MACOS)
+		if (_deviceType == OPENGL)
+		    return new OpenGLDevice();
+#endif
+    assert(&quot;Unsupported platform!&quot;)
+    return nullptr;
+}</code></pre></div></article></body></html>

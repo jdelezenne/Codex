@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CMake</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="681851c9-506b-4e23-a224-18f97e20cc1a" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🔨</span></div><h1 class="page-title">CMake</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th>Category</th><td><span class="selected-value">Build</span></td></tr></tbody></table></header><div class="page-body"><nav id="f6d378b0-d576-49f9-be48-adf77979c67e" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a0556d99-3cad-4e09-8718-024688ab1630">Overview</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9afb492c-ac91-4bac-b7ef-8191a14896a2">Information</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#29c99f7a-0cca-41b9-b727-5eb2400a2cea">Principle</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#383e8258-ce73-4726-ba1c-bbfd709b4b3e">Configure</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c87756e3-6243-4fe9-a814-2e0cec785a5b">Generate</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#61e6e6d9-0200-485d-8855-30ccdb438fcf">Build</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#774be580-a635-4856-a4df-fca6e241be01">Organization</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ecdbeda8-cf75-4072-ae77-46b694254799">Directories</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#95075415-bf43-4867-94ba-5188bdf685b3">Modules</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#60f33d77-f80e-4fe1-b9ba-3ba6cba6e169">Scripts</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a195cb8a-d556-4c35-a203-748b6b061c35">Language</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1cf5a329-0284-43f0-8677-a3a79d10809d">Commands</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#188ae99d-ba2a-434b-9811-b240220238f4">Variables</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7923db56-9a67-48cf-a9ba-fc6c7f5fcb10">Built-in variables</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7225a5bd-c456-4c85-9f83-20f8f7e9a493">Functions and Macros</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#609ba323-b851-4b63-8f36-860405b026c3">Files</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#302ea975-4ac7-478e-b763-7304ac466e61">Best practices</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7e9bde24-1fcc-4366-8959-4fe9a84f27e5">Makefile</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a8e0413c-d9fd-4ac9-a214-49e3bcd4252c">Targets</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#120ad8e4-48bb-4500-9c47-37a449778940">Packages</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cade9bad-73dc-4fb9-9c42-637a7c17de51">Running CMake</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5233b314-467f-44b6-b4cc-33204e90ac82">Command-Line</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#42e32a8e-f147-4704-b5f3-0285e3f5e1b2">GUI</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3f834bd8-0e53-417b-9f6a-a93644472b00">Visual Studio</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#d20817f1-85a4-475e-87ea-981f480830b5">References</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5248978e-a35d-4bbc-b858-31b365ce7345">Tutorials</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#fc8bc3d4-e61c-4c67-806b-6c0b937e76a4">Basic</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9a5c09b0-9190-4955-a483-1f1cb9a85872">Root</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#00d1156f-e858-4804-b605-ca37ffb0c320">Libraries</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#87013adc-145c-43df-8068-ce3a17107eb5">Visual C++</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b85b69e9-5b91-422f-b586-d4e386fb8f2d">Folders</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4f2be49a-c388-4f1d-90dc-6011ac6d7699">References</a></div></nav><h1 id="a0556d99-3cad-4e09-8718-024688ab1630" class="">Overview</h1><p id="f2ea7dae-2302-4725-878f-5f47cd464559" class="">CMake is not a build system but a tool for managing the build process.</p><p id="f437fc1a-dfec-4b52-831c-74990c117703" class="">CMake can generate project files for different platforms and toolchains.</p><p id="9512bf39-d770-411c-bc5b-8427969a8255" class="">CMake can run platform-specific commands to build targets (executables and libraries).</p><p id="a7199711-4a32-4228-b144-61fee37ac8b6" class="">Since CMake 3.0, CMake is also known as <em>Modern CMake </em>and has been completely redesigned with a focus on targets and dependencies.</p><h1 id="9afb492c-ac91-4bac-b7ef-8191a14896a2" class="">Information</h1><p id="1365be46-5aa2-4393-808c-09b21264daf9" class="">Website: <a href="https://cmake.org/">https://cmake.org/</a></p><p id="556fd4cf-01f3-4886-ab79-1cf0db03d4a4" class="">Latest Release: 3.14</p><p id="86d475fd-acf4-4789-8cf0-6e3ccc72a40c" class="">Download: <a href="https://cmake.org/download/">https://cmake.org/download/</a></p><p id="1f6e1915-ea60-4d0d-a45b-c8716dbf3b32" class="">Documentation: <a href="https://cmake.org/cmake/help/latest/index.html">https://cmake.org/cmake/help/latest/index.html</a></p><h1 id="29c99f7a-0cca-41b9-b727-5eb2400a2cea" class="">Principle</h1><p id="065c2924-f564-4235-b44c-5f1c29f339e0" class="">The principle of cmake is to generate the project files for a specific platform using a custom language in order to create a target.</p><p id="41de5b91-1b1d-4b17-bde5-80ac1ebb9d7e" class="">A target is either an executable or a library and the cmake commands describe the requirements to build and use targets and setup their dependencies.</p><p id="9e2050f4-4bb2-45d7-9651-253fc470bfbd" class=""><code>CMakeLists.txt</code> files are added in a directory hierarchy to control the build process. They contain a list of commands in the cmake language to control the build system.</p><p id="28d12336-d960-49f9-910c-8e14559eb497" class="">cmake has two main steps: configure and generate.</p><h2 id="383e8258-ce73-4726-ba1c-bbfd709b4b3e" class="">Configure</h2><p id="90a34e19-c84e-4646-9118-4c9057a6b763" class="">Parse the CMakeLists.txt files in the current folder to generate a CMakeCache.txt in the build folder.</p><p id="bbf4957a-6b4d-4390-9db3-60840c2549ec" class="">cmake automatically detect platform and compiler features. The generated file can be inspected to see the exact configuration that cmake uses to setup the project.</p><h2 id="c87756e3-6243-4fe9-a814-2e0cec785a5b" class="">Generate</h2><p id="3a47b4bd-f6a9-4cd5-9e19-cd3e2b04fad4" class="">Generate the project files in the build folder using a specific generator and the CMakeCache.txt from the configure step.</p><h2 id="61e6e6d9-0200-485d-8855-30ccdb438fcf" class="">Build</h2><p id="4f7bee9e-5a02-4d94-9ea0-d30d13aabf51" class="">cmake can also build the generated project.</p><h1 id="774be580-a635-4856-a4df-fca6e241be01" class="">Organization</h1><h2 id="ecdbeda8-cf75-4072-ae77-46b694254799" class="">Directories</h2><p id="6056c4dc-ac66-4c98-b754-d88e637d9913" class="">Directory that contains a CMakeLists.txt file are entry points for the build system. Subdirectories that also contain a CMakeLists.txt file can be added to the build by calling the <code>add_subdirectory()</code> command.</p><h2 id="95075415-bf43-4867-94ba-5188bdf685b3" class="">Modules</h2><p id="7fab9bd7-c916-4bfb-89de-7e621742379b" class="">Modules files can be added to the build system by calling the <code>include()</code> command.</p><p id="789455fc-db6a-4498-a023-cec21667be74" class="">Modules have the <code>.cmake</code> extension. They are located using the <code>CMAKE_MODULE_PATH</code> variable.</p><h2 id="60f33d77-f80e-4fe1-b9ba-3ba6cba6e169" class="">Scripts</h2><p id="cca0916f-702e-4ced-8ae5-2034ad2e8703" class="">cmake can execute commands without generating project files using the <code>-P</code> option with a script file name. Some commands are not available when running cmake in script mode.</p><p id="f3981254-af02-40ca-bf7e-67f350a88f19" class="">For example, if you write a script file called <code>script.cmake</code>, you can run it with the command:</p><pre id="2afb146a-b564-4fc6-8717-2b97e764bf2a" class="code"><code>cmake -P script.cmake</code></pre><h1 id="a195cb8a-d556-4c35-a203-748b6b061c35" class="">Language</h1><h2 id="1cf5a329-0284-43f0-8677-a3a79d10809d" class="">Commands</h2><p id="53988872-3e6c-41b1-b7a7-a1c610cedeef" class="">The cmake language is based on commands and every statement is a command.</p><ul id="fbd0c4c4-953e-4ea0-a533-a47e5dce51cf" class="bulleted-list"><li>Commands are written with a command name (case insensitive) and parenthesis. </li></ul><ul id="b7cacf38-2513-4964-b571-5c8949777ee7" class="bulleted-list"><li>Commands can have input parameters (some  are optional).</li></ul><ul id="996c76d7-7bfa-49a3-9aab-0be48f907cf0" class="bulleted-list"><li>Parameters are separated with spaces.</li></ul><ul id="b1f6855e-658f-46de-a8ca-fc7576f1a9bc" class="bulleted-list"><li>Commands have no return value.</li></ul><ul id="8d2c8513-fee3-428d-9066-953a35ffa80e" class="bulleted-list"><li>Commands are written on separate lines.</li></ul><ul id="f89ccee2-85b3-406b-8423-a7c9834243c0" class="bulleted-list"><li>Comments start with <code>#</code>.<ul id="c06fa021-854e-4bb6-9178-dd2bd1437de3" class="bulleted-list"><li>A comment can be appended after a command.</li></ul><ul id="bd123dc8-f46a-4177-a085-661c41a16376" class="bulleted-list"><li>Multi-line comments are supported and can be nested.</li></ul></li></ul><ul id="8d9e7475-45dc-4d97-ac30-ae1a6ace09fa" class="bulleted-list"><li>Flow control and operations on variables are also based on commands.</li></ul><p id="ae5cba9e-0b40-47c1-abb1-b74bd90419e4" class="">To print a message to the standard output, call <code><a href="https://cmake.org/cmake/help/latest/command/message.html">message()</a></code>.</p><pre id="aa472ffe-388a-418a-be5d-442a5f3da33e" class="code"><code>message(&quot;Hello World.&quot;) #prints a message</code></pre><h2 id="188ae99d-ba2a-434b-9811-b240220238f4" class="">Variables</h2><p id="30f76e7f-3f78-40ee-9a2f-ecc83e3d7be2" class="">Every variable is a string.</p><p id="f1006abd-5a33-4aaa-a9e6-b9489fe4f539" class="">Lists are also strings with items separated with the <code>;</code> character.</p><p id="956f4097-d468-4616-b90c-c4ff7359a558" class="">A variable reference has the form <code>${&lt;variable&gt;}</code>. For example the variables <code>NAME</code> is referenced with <code>${NAME}</code>.</p><pre id="8c67080a-4bd1-4064-872e-8e54ec4c029f" class="code"><code>message(&quot;Hello ${NAME}.&quot;)</code></pre><p id="7a926b0a-cc7a-4f44-b017-65a71d490192" class="">Variables can be set in the command-line with the <code>-D</code> options immediately followed by the variable name, an equal sign and the value. The <code>-D</code> options must be placed before the <code>-P</code> option.</p><pre id="c4657d87-4e88-45f8-85a4-9c49b9f44078" class="code"><code>cmake -DNAME=World -P script.cmake</code></pre><p id="5e3d16b1-ea38-4185-9bad-87a880be00fc" class="">Variables can be manipulated in scripts using commands as well.</p><p id="64339098-f164-4ae7-827e-ea18db31904e" class="">Variables are defined in a specific scope.</p><p id="6757f649-048f-4829-b525-042c00eef45e" class="">A variable is set with the <code><a href="https://cmake.org/cmake/help/latest/command/set.html#command:set">set</a></code> command. To set a variable from a parent scope, add the <code>PARENT_SCOPE</code> specifier.</p><p id="49fc3708-622b-4a74-b41d-74dcdbe4e433" class="">A variable can be removed with the <a href="https://cmake.org/cmake/help/latest/command/unset.html#command:unset"><code>unset</code></a> command.</p><pre id="702ff362-b6fe-44d3-87f8-06360499dc93" class="code"><code>set(NAME &quot;World&quot;)
+message(&quot;Hello ${NAME}.&quot;)
+unset(NAME)</code></pre><h2 id="7923db56-9a67-48cf-a9ba-fc6c7f5fcb10" class="">Built-in variables</h2><p id="e4658e74-c150-4863-9ed2-9d3e1875f6d0" class="">cmake provides <a href="https://cmake.org/cmake/help/latest/manual/cmake-variables.7.html#variables-that-describe-the-system">built-in variables</a> related to the project workspace and current platform.</p><pre id="a0740bca-9e4c-4103-aaaf-42d95c339f53" class="code"><code>if(WIN32)
+    message(&quot;Running on Windows.&quot;)
+endif()</code></pre><p id="60851f7e-4702-4120-878e-f5add8ffc165" class="">System variables are booleans set to true if CMake is running on the target system.</p><ul id="e1e8cd3f-e6ac-498c-849c-3183d3173f34" class="bulleted-list"><li>WIN32: Windows x86 or x64</li></ul><ul id="f1266cf6-c684-4c96-aad7-d9c0fb1ef804" class="bulleted-list"><li>APPLE: macOS, iOS, tvOS or watchOS</li></ul><h2 id="7225a5bd-c456-4c85-9f83-20f8f7e9a493" class="">Functions and Macros</h2><p id="18abe22b-fae5-447d-9b7b-89a26815b1bf" class="">Custom functions are defined with the <code><a href="https://cmake.org/cmake/help/latest/command/function.html">function()</a></code> and <code><a href="https://cmake.org/cmake/help/latest/command/endfunction.html">endfunction()</a></code> commands.</p><p id="12bbb85c-4c0b-4352-8271-d91861bcf4b2" class="">Functions create a new scope for variables.</p><pre id="0872711c-c846-486c-9e10-5de855b31d55" class="code"><code>function(&lt;name&gt; [&lt;arg1&gt; ...])
+  ...
+endfunction()</code></pre><p id="d23dcc69-f291-4e02-a8c4-8b605203fff4" class="">Custom macros are identical to functions but they do not create a new scope. They are defined with the <code><a href="https://cmake.org/cmake/help/v3.0/command/macro.html">macro()</a></code> and <code><a href="https://cmake.org/cmake/help/v3.0/command/endmacro.html">endmacro()</a></code> commands.</p><h2 id="609ba323-b851-4b63-8f36-860405b026c3" class="">Files</h2><p id="6e4fd3cd-abeb-4ffb-83e5-7c3bb8a83c2a" class="">cmake can include other script files with the <code><a href="https://cmake.org/cmake/help/latest/command/include.html">include</a></code> command.</p><p id="6c94c5ec-2180-4b8c-accd-53aee125b8f8" class="">The script files are included in the current scope.</p><p id="b2591462-e427-453b-976f-6c56f8bcd8be" class="">cmake can import other projects with the <code><a href="https://cmake.org/cmake/help/latest/command/find_package.html">find_package</a></code> command.</p><p id="a44cea1e-d994-4ff1-824b-38314bf806e2" class="">cmake can add a subfolder to the build with the <code><a href="https://cmake.org/cmake/help/latest/command/add_subdirectory.html">add_subdirectory</a></code> command.</p><p id="1058d2d4-b535-4b08-ade8-c029a252196f" class="">cmake will look for a <code>CMakeLists.txt</code> file in the specified folder and create a new scope.</p><h2 id="302ea975-4ac7-478e-b763-7304ac466e61" class="">Best practices</h2><p id="9d30225a-8e37-4f0d-9ba7-457a0325c884" class="">These commands affect every targets and should be avoided:</p><ul id="de51ac64-c002-4cd2-8f36-a229172b95dc" class="bulleted-list"><li>include_directories()</li></ul><ul id="eb5e93a0-e014-4594-920a-930cf3d34f7d" class="bulleted-list"><li>link_directories()</li></ul><ul id="8c9a5df4-b798-49ed-8a57-5c1d91de4df9" class="bulleted-list"><li>link_libraries()</li></ul><ul id="2c0a10fd-303e-42c8-9c45-7c7558333368" class="bulleted-list"><li>add_definitions()</li></ul><ul id="49019a79-f66d-432b-9ee4-96e566ebeb2e" class="bulleted-list"><li>add_dependencies()</li></ul><ul id="4e51bf88-110a-403b-bc8c-7291cfafdf40" class="bulleted-list"><li>add_compile_options()</li></ul><p id="c87dbca4-3663-476b-8880-91573252da11" class="">When referencing a path such as the target_include_directories() command, do not use a parent path.</p><h1 id="7e9bde24-1fcc-4366-8959-4fe9a84f27e5" class="">Makefile</h1><p id="4a68169c-5cab-49b2-a552-8892bb96d1cb" class="">The role of the makefiles is to define the targets to build. There should be at least one target.</p><p id="beaad795-23b8-4086-b521-ee116ddff446" class="">A root <code>CMakeLists.txt</code> file must contain at least two commands.</p><ul id="dcb4c370-a007-420a-befb-53a2a6beb16f" class="bulleted-list"><li>The <code><a href="https://cmake.org/cmake/help/latest/command/cmake_minimum_required.html">cmake_minimum_required</a></code> command sets the minimum required version of cmake for the project.</li></ul><ul id="8572e236-9f3c-4613-b103-abe8081b0f02" class="bulleted-list"><li>An executable or library target.<ul id="d72c7fb7-badb-4180-bfc9-a8bf4ffe321a" class="bulleted-list"><li>The <code><a href="https://cmake.org/cmake/help/latest/command/add_executable.html">add_executable</a></code> command adds an executable target to be built from the source files.</li></ul><ul id="42efdb72-588a-469e-8685-6fd1f598ec6d" class="bulleted-list"><li>The <a href="https://cmake.org/cmake/help/latest/command/add_library.html"><code>add_library</code></a> command adds a library target to be built from the source files.</li></ul></li></ul><h2 id="a8e0413c-d9fd-4ac9-a214-49e3bcd4252c" class="">Targets</h2><p id="b2bcd6a2-905d-48a2-a363-aa9fbb1e7bd2" class="">Commands related to target requirements have a <code>target_</code> prefix. They have an optional specifier to indicate the kind of the requirement that is described.</p><ul id="22c8b392-84af-41bd-8289-17052caae830" class="bulleted-list"><li><code>PRIVATE</code>: build requirement</li></ul><ul id="1736bc11-68ef-4fde-929c-1a394c55bcb1" class="bulleted-list"><li><code>INTERFACE</code>: usage requirement</li></ul><ul id="6562c781-b5f8-4ce2-943c-b39a592fa04a" class="bulleted-list"><li><code>PUBLIC</code>: build and usage requirement</li></ul><h2 id="120ad8e4-48bb-4500-9c47-37a449778940" class="">Packages</h2><p id="04d67aa6-7713-4269-9006-99cc350204f2" class="">CMake is able to load settings for external projects (or package) with the <a href="https://cmake.org/cmake/help/latest/command/find_package.html"><code>find_package</code></a> command.</p><p id="a76671f1-a72a-4afa-888d-dac760594f10" class="">CMake searches for a file called <code>Find&lt;package&gt;.cmake</code> in the <code>CMAKE_MODULE_PATH</code> folder.</p><p id="d9c671f2-c752-412d-9f12-1b6b388b4e13" class="">If the package is found, cmake create <a href="https://cmake.org/cmake/help/latest/prop_tgt/IMPORTED.html">imported targets</a> that you can use in your own target dependencies. cmake will also set two variables:</p><ul id="95e48c2c-16d4-40a7-89d0-aea4c6758e29" class="bulleted-list"><li><code>&lt;package&gt;_INCLUDE_DIRS</code>: the include paths</li></ul><ul id="d84a4be4-05a5-4859-8e36-1e91fc3e497b" class="bulleted-list"><li><code>&lt;package&gt;_LIBRARIES</code>: the shared libraries</li></ul><h1 id="cade9bad-73dc-4fb9-9c42-637a7c17de51" class="">Running CMake</h1><p id="105d3a90-432e-4b7c-9c7d-8d4de4264afd" class="">There are different methods to run cmake.</p><ul id="57c7f0a0-fcac-4af4-a07e-42ee8cf01cf9" class="bulleted-list"><li>Command-Line. cmake is a command-line tool that can be run to generate the project files and build the executables.</li></ul><ul id="ed683897-a69b-4554-ac5e-d323f11e532c" class="bulleted-list"><li>GUI: cmake is installed with a GUI program where you can specify additional variables and setup the generator, toolset and platform.</li></ul><ul id="e41dc424-5b88-493d-8242-dd28ca6a9f2f" class="bulleted-list"><li>Visual Studio: cmake is integrated with Visual Studio. A folder can be opened directly by Visual Studio without the need to generate a solution and project files.</li></ul><h2 id="5233b314-467f-44b6-b4cc-33204e90ac82" class="">Command-Line</h2><p id="b43e03e5-a82f-4a7c-a0be-5a88c1818292" class="">cmake builds the project in the current folder and the first parameter is the path to the root CMakeFiles.txt file. </p><p id="e56de8e6-18b0-4a1f-8560-82a3af1f1db2" class="">Before running cmake, we create a new <code>build</code> subfolder where the project will be built.</p><p id="bc07fb16-0de1-4a64-80db-194e94b2f05a" class="">We run cmake from the build folder and specify <code>..</code> to indicate that the root CMakeFiles.txt file is located in the parent folder.</p><p id="11719f69-836d-43c6-a066-65b21793c9ba" class="">Optionally, we provide the -G and -A parameters.</p><p id="36013b58-9f1e-4b92-b459-c020d68d88fb" class="">-G specifies the build system generator. For example: <code>-G &quot;Visual Studio 16 2019&quot;</code> or <code>-G &quot;Xcode&quot;</code></p><p id="a97b3ae5-3061-43f6-9fe4-c4405bc2772b" class="">-A specifies the platform name. For example: <code>-A x64</code></p><p id="56149825-a513-4bde-aed3-d20b9b11fb57" class="">Finally, we run cmake.</p><pre id="c29ef9b2-f7f1-4469-b675-0f761f286217" class="code"><code>mkdir build
+cd build
+cmake -G &quot;Visual Studio 16 2019&quot; -A x64 ..</code></pre><p id="a383ed8d-0443-4e56-b2a0-df0e51f20a44" class="">cmake generates a  <code>.sln</code> Visual Studio solution file and several <code>.vcxproj</code> project files.</p><p id="e061187d-0c56-487a-a877-65b9f00bcae7" class="">cmake also generates <code>ALL_BUILD</code> and <code>ZERO_CHECK</code> projects. They are included in the solution file but can be ignored.</p><p id="59ae5cb6-d210-414e-b0c0-3ef9575f7f36" class="">We can open the solution file in Visual Studio to build and run the project.</p><p id="3a25906b-6bc2-4029-9ad7-94fe50657416" class="">Alternatively, we can compile the project by calling cmake with the <code>--build</code> parameter and <code>.</code> to indicate the current folder (build).</p><pre id="289d5f47-20ee-4ffa-8740-6305b0b7f605" class="code"><code>cmake --build .</code></pre><p id="04513161-fc60-4b96-8b96-413ed45c966b" class="">On Windows, cmake will build the <code>build\Debug\HelloWorldProject.exe</code> executable file.</p><h2 id="42e32a8e-f147-4704-b5f3-0285e3f5e1b2" class="">GUI</h2><p id="b6003edb-33fb-4a39-b307-7b9168797ba4" class="">The cmake GUI can be used instead of the command-line.</p><p id="b31df3e2-be3f-4a42-ae8b-9b3f28305f3c" class="">We specify the project folders in the GUI.</p><ul id="53f5074d-463a-45b7-8e82-39ee7acd1532" class="bulleted-list"><li>Where is the source code: the root folder of the project.</li></ul><ul id="b145c454-00fd-46fb-b265-582e370a2485" class="bulleted-list"><li>Where to build the binaries: the <code>build</code> subfolder.</li></ul><p id="3b568c3e-1cd0-4134-913a-dcb7ca79b9a6" class="">When clicking on <code>Configure</code> for the first time, cmake asks for the generator and platform.</p><p id="2f848579-56bf-45b6-9ca1-4476bc57b1b6" class="">We specify <code>Visual Studio 16 2019</code> for the generator and <code>x64</code> for the platform.</p><figure id="189cc23e-820b-4bec-9fbe-328691c60d28" class="image"><a href="CMake/Untitled.png"><img style="width:1004px" src="CMake/Untitled.png"/></a></figure><p id="6c783ed9-16ff-43e7-8706-b8cf0e5fe332" class="">We click on <code>Generate</code> and the project files are generated.</p><figure id="7198ddf6-fdab-40e9-8600-68c5f4b7083a" class="image"><a href="CMake/Untitled 1.png"><img style="width:1746px" src="CMake/Untitled 1.png"/></a></figure><h2 id="3f834bd8-0e53-417b-9f6a-a93644472b00" class="">Visual Studio</h2><p id="f1338056-52f4-4bb1-b053-7f84a2a8095c" class="">Visual Studio 2017 and 2019 supports cmake.</p><p id="6de6f547-c319-4386-9181-66cd38c74df9" class="">When installing Visual Studio, you need to include the <strong>Visual C++ Tools for CMake</strong> components in the <strong>Desktop development with C++</strong> workload.</p><figure id="f7629123-1e6f-41e4-bd2d-bc69674a8ec7" class="image"><a href="CMake/Untitled 2.png"><img style="width:489px" src="CMake/Untitled 2.png"/></a></figure><p id="fd1ff0e6-aacc-42fb-8593-209e8ed91054" class="">To open a project folder that contains a root CMakeLists.txt file.</p><p id="51894157-c1ca-4dd8-8194-e775672b38c3" class=""><strong>From Visual Studio</strong></p><ul id="5e206ac6-fa96-4680-92d2-818f067690cb" class="bulleted-list"><li>Open Visual Studio and choose <code>Continue without code</code> in the welcome window.</li></ul><ul id="4dac5efe-4885-49b1-8be5-fb658b7406bd" class="bulleted-list"><li>Click on <code>File/Open/CMake...</code> and select the root CMakeFiles.txt file or</li></ul><ul id="4ec5034d-2312-48f9-943f-aa892c9b07d0" class="bulleted-list"><li>Click on <code>File/Open/Folder...</code> and select the folder that contains the root CMakeFiles.txt file</li></ul><p id="5331d5a5-7a00-4002-9826-e5e80b901282" class=""><strong>From the Explorer</strong></p><ul id="7cc4824b-f548-4a6f-b4c9-feb5fcc8517a" class="bulleted-list"><li>Right click on the project folder that contains the root CMakeFiles.txt file, and click on <code>Open in Visual Studio</code>.</li></ul><p id="5dbe0c49-23c5-4ad3-adb8-a9b57b94594f" class="">Visual Studio detects the cmake project, and can generate the project files for us.</p><p id="fdba6add-d12f-49be-a60c-a4a7e9731b94" class="">The CMakeCache.txt file can be opened by clicking on <code>Project/CMake Cache/View CMakeCache.txt</code>.</p><p id="780a2148-6f36-4a1f-8cf3-5e414830332d" class="">By default, Visual Studio uses the Ninja generator.</p><p id="298150bb-8f27-4d29-9a85-76068c744195" class="">The solution explorer displays contains the source files and CMake files.</p><p id="a37ae1e5-8af3-4b89-833d-ded9428fc957" class="">The build and run commands work as expected.</p><p id="d3931318-59c1-46ce-89f2-0479f8518ce7" class="">Visual Studio 2019 introduces the <strong>CMake Settings editor</strong>.</p><p id="ad8b3846-2e04-4ac3-83c5-2f4f5c724160" class="">The configuration manager is replaced by the CMake Settings editor.</p><p id="362fa668-31ad-4a81-9ecb-829489ec1d1c" class="">Visual Studio generates a <code>CMakeSettings.json</code> file in the root folder and the changes in the editor are saved into this file.</p><figure id="6f54edd0-41b1-4ab2-91bb-2eddd8d6a7b3" class="image"><a href="CMake/Untitled 3.png"><img style="width:1692px" src="CMake/Untitled 3.png"/></a></figure><p id="e6ff793e-4858-4294-a6d2-639d203d243f" class="">We can specify project configurations that will be saved in the json file.</p><h3 id="d20817f1-85a4-475e-87ea-981f480830b5" class="">References</h3><ul id="2b816c29-0400-4df8-97b7-86bceb60b739" class="bulleted-list"><li>CMake projects in Visual Studio, <a href="https://docs.microsoft.com/en-us/cpp/build/cmake-projects-in-visual-studio?view=vs-2019">https://docs.microsoft.com/en-us/cpp/build/cmake-projects-in-visual-studio?view=vs-2019</a></li></ul><ul id="7b4622df-40eb-488a-83bd-8805f5dd4e38" class="bulleted-list"><li>CMake in Visual Studio 2017, <a href="https://www.3dgep.com/cmake-visual-studio-2017/">https://www.3dgep.com/cmake-visual-studio-2017/</a></li></ul><h1 id="5248978e-a35d-4bbc-b858-31b365ce7345" class="">Tutorials</h1><h2 id="fc8bc3d4-e61c-4c67-806b-6c0b937e76a4" class="">Basic</h2><p id="0db75a74-40d9-44fc-ac4a-7458c9807a34" class="">In a new empty folder, we create a simple C++ source file called <code>main.cpp</code>.</p><pre id="39a36710-b345-4323-bd0e-dbafd9865685" class="code"><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+int main()
+{
+    cout &lt;&lt; &quot;Hello World.&quot; &lt;&lt; endl;
+    return 0;
+}</code></pre><p id="098dd523-63e2-4940-b9c7-2dea9c8d5e30" class="">In the same folder, we create an empty <code>CMakeLists.txt</code> file.</p><p id="88301a25-b7e5-444a-9de7-2886bfb55178" class="">This file contains the commands run by cmake to build the project.</p><p id="31c5035f-aa6d-4562-b3c8-3a71818a7159" class="">In this first example, we only need three commands.</p><p id="bbdbcb76-4f5c-4bbc-bd79-aaf3a0623a31" class="">The first command is <code><a href="https://cmake.org/cmake/help/latest/command/cmake_minimum_required.html">cmake_minimum_required</a></code> to set the minimum required version of cmake for the project. We specify the version 3.8 which is also used by default with Visual Studio 2019.</p><pre id="0aaf9a27-57c2-437f-ade6-103767dc302a" class="code"><code>cmake_minimum_required(VERSION 3.8)</code></pre><p id="ecad8463-536f-44eb-b338-310091f84e91" class="">We call <code><a href="https://cmake.org/cmake/help/latest/command/project.html">project</a></code> to specify the name of the project. The generate project files will use the name provided in this command. We use <code>HelloWorldProject</code>. </p><pre id="e520316a-2d61-465f-b342-d6fca073e803" class="code"><code>project(HelloWorldProject)</code></pre><p id="13e34cdb-7660-4051-9649-ba12aec8d9e2" class="">We call <code><a href="https://cmake.org/cmake/help/latest/command/add_executable.html">add_executable</a></code> to add an executable target to be built from the source files.</p><p id="0a431a79-a288-4e64-a0aa-323cc40d8f97" class="">The first parameter is the name of the project. We use the project name <code>HelloWorldProject</code>. </p><ul id="0f3c6ca9-c6e9-4d08-8356-9c5050d844ba" class="bulleted-list"><li>On Windows, it is the name of the .exe executable file</li></ul><ul id="363ac99b-1ccb-48c2-a5c8-ab538c368eda" class="bulleted-list"><li>On macOS and iOS, it is the name of the application bundle</li></ul><p id="1c6d53e0-aa9d-4359-a524-141e2bfa49cd" class="">The second parameter is the list of source files. In this simple example, there is only one source file: <strong>main.cpp</strong>.</p><pre id="180f533f-40b0-4198-8bb4-8e47c8c18a1b" class="code"><code>add_executable(HelloWorldProject &quot;main.cpp&quot;)</code></pre><p id="f93fcf15-9ad8-4b21-adf2-4384e4794675" class="">The complete CMakeLists.txt file.</p><pre id="4921d50b-61cb-4844-adf9-2dba9c0344b6" class="code"><code>cmake_minimum_required(VERSION 3.8)
+
+project(HelloWorldProject)
+
+add_executable(HelloWorldProject &quot;main.cpp&quot;)</code></pre><h2 id="9a5c09b0-9190-4955-a483-1f1cb9a85872" class="">Root</h2><p id="77156345-c097-40f6-b41a-089ac8c2218e" class="">There are built-in variables that we will reference many times.</p><ul id="b95bf369-35d5-469c-9509-c2fdb2218dd3" class="bulleted-list"><li><code><a href="https://cmake.org/cmake/help/latest/variable/CMAKE_CURRENT_SOURCE_DIR.html">CMAKE_CURRENT_SOURCE_DIR</a></code> is the path to the current source directory.</li></ul><p id="2f5f1902-c315-4e97-b2b7-a28a14d7398a" class="">There are several built-in variables that should be set.</p><ul id="a16cff93-da9f-4300-b82b-5629152847ce" class="bulleted-list"><li><code><a href="https://cmake.org/cmake/help/latest/variable/CMAKE_CXX_STANDARD.html">CMAKE_CXX_STANDARD</a></code> set the value for <a href="https://cmake.org/cmake/help/latest/prop_tgt/CXX_STANDARD.html"><code>CXX_STANDARD</code></a> of every targets.
+We want to use some of the modern C++ features but to ensure cross-platform support, we constraint the sources to use C++ 14.</li></ul><pre id="6580d168-e7fc-424e-9933-42e0065c6df1" class="code"><code>set(CMAKE_CXX_STANDARD 14)</code></pre><ul id="4d3d601d-e201-4195-9e80-323e92722a5a" class="bulleted-list"><li><code><a href="https://cmake.org/cmake/help/latest/variable/CMAKE_CXX_STANDARD_REQUIRED.html">CMAKE_CXX_STANDARD_REQUIRED</a></code> set the value for <code><a href="https://cmake.org/cmake/help/latest/prop_tgt/CXX_STANDARD_REQUIRED.html">CXX_STANDARD_REQUIRED</a></code> of every targets.
+We want the <a href="https://cmake.org/cmake/help/latest/prop_tgt/CXX_STANDARD.html"><code>CXX_STANDARD</code></a> property to be a requirement.</li></ul><pre id="e6b72da5-f13f-4626-93c3-8fe11a51d4c1" class="code"><code>set(CMAKE_CXX_STANDARD_REQUIRED ON)</code></pre><ul id="53319dc9-3d93-4cdb-b29e-2d84ede0949e" class="bulleted-list"><li><code><a href="https://cmake.org/cmake/help/latest/variable/CMAKE_MODULE_PATH.html">CMAKE_MODULE_PATH</a></code> is a list of directories specifying a search path for CMake modules to be loaded using the <code><a href="https://cmake.org/cmake/help/latest/command/include.html">include()</a></code> command.
+We create a subfolder called <code>cmake </code>where we will add additional .cmake files.
+To add this subfolder to cmake, we append the new subfolder to the existing list.</li></ul><pre id="9247cdaf-0b7d-4a2a-aa34-3cc1911ca397" class="code"><code>set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)</code></pre><ul id="91327368-6df6-47e7-ad2a-4f1e804cfaa2" class="bulleted-list"><li>By default the temporary and final binaries are built inside the <code>build</code> folder.
+To specify a different folder, we set three variables<ul id="d74d7112-d87f-490d-888e-edb66e0d791e" class="bulleted-list"><li><code><a href="https://cmake.org/cmake/help/latest/variable/CMAKE_RUNTIME_OUTPUT_DIRECTORY.html">CMAKE_RUNTIME_OUTPUT_DIRECTORY</a></code> is the directory containing the runtime output artifacts (.exe and .dll files on Windows).</li></ul><ul id="feea78a9-4a79-492f-bd1f-3e2abf12b0c0" class="bulleted-list"><li><code><a href="https://cmake.org/cmake/help/latest/variable/CMAKE_LIBRARY_OUTPUT_DIRECTORY.html">CMAKE_LIBRARY_OUTPUT_DIRECTORY</a></code> is the directory containing the library output artifacts (.dll files on Windows).</li></ul><ul id="01c8c655-4961-4788-a57b-e2674f83b0c9" class="bulleted-list"><li><code><a href="https://cmake.org/cmake/help/latest/variable/CMAKE_ARCHIVE_OUTPUT_DIRECTORY.html">CMAKE_ARCHIVE_OUTPUT_DIRECTORY</a></code> is the directory containing the archive output artifacts (.lib files on Windows).</li></ul></li></ul><pre id="0a382948-1eb1-403b-8420-66b2a558a354" class="code"><code>set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)</code></pre><p id="68a14309-2ae8-47b6-9035-7d4df280d50e" class="">The source files are created in a folder hierarchy inside the <code>src</code> subfolder.</p><p id="e766caa5-be24-4c0e-98a2-f1c3bb725ad9" class="">The <code>src</code> folder contains another CMakeLists.txt file. We include it in the build by calling <code><a href="https://cmake.org/cmake/help/latest/command/add_subdirectory.html">add_subdirectory()</a></code>.</p><pre id="80bd749c-aabb-4a37-bb23-9658bf152224" class="code"><code>add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)</code></pre><ul id="46981f78-f8ea-4998-ae16-e0a572f7faf6" class="bulleted-list"><li><code><a href="https://cmake.org/cmake/help/latest/variable/CMAKE_DEBUG_POSTFIX.html">CMAKE_DEBUG_POSTFIX</a></code> is a string that can be appended to the debug binaries. It allows both debug and release binaries to exist in the same folder.</li></ul><pre id="63b64eb4-4030-4cf9-9919-fbf2fe3069d8" class="code"><code>set(CMAKE_DEBUG_POSTFIX &quot;_d&quot;)</code></pre><ul id="ec4c7b91-6481-4f68-bc70-16cd9d0bfa64" class="bulleted-list"><li><code><a href="https://cmake.org/cmake/help/git-stage/variable/CMAKE_SUPPRESS_REGENERATION.html">CMAKE_SUPPRESS_REGENERATION</a></code> can be set to <code>ON</code> to prevent cmake from generating the <code>ZERO_CHECK</code> project.</li></ul><pre id="bd8307bc-641d-422c-b69f-7b47f6cb104b" class="code"><code>set(CMAKE_SUPPRESS_REGENERATION ON)</code></pre><ul id="4223aeed-9ed8-4037-85ed-e782dafb035c" class="bulleted-list"><li><code><a href="https://cmake.org/cmake/help/latest/variable/BUILD_SHARED_LIBS.html">BUILD_SHARED_LIBS</a></code> is boolean that indicates whether the libraries in the build system are built as static or shared libraries.</li></ul><h2 id="00d1156f-e858-4804-b605-ca37ffb0c320" class="">Libraries</h2><p id="545aee64-eddc-49e0-8715-6316e743083e" class="">A project is typically composed of several libraries.</p><p id="5b8066a1-b14a-48ff-b19c-9fe48f573fb8" class="">To add a library to the build, call the <code><a href="https://cmake.org/cmake/help/latest/command/add_library.html">add_library()</a></code> command.</p><ul id="7b089bee-26e1-49d9-890b-580449561117" class="bulleted-list"><li>The first parameter is the name of the library.</li></ul><ul id="38a17de6-12f4-4381-b38d-991c11541ede" class="bulleted-list"><li>The type of library should not be specified here (static or dynamic library).</li></ul><ul id="a32c4d0a-dfd7-4744-b508-0bc7690ab81b" class="bulleted-list"><li>The list of source files follows.</li></ul><pre id="ed4a7647-a709-4c00-985c-02a570b39a0b" class="code"><code>add_library(my_library [source1] [source2 ...])</code></pre><p id="6801bd61-ef58-4459-bd2c-5f302e411972" class="">The list of source files can be added manually but it does not scale well.</p><pre id="2de98218-3783-4db7-9a29-87844bfeba5e" class="code"><code>set(SOURCES
+    &quot;src/ui/ui.cpp&quot;
+    ...
+)
+set(HEADERS
+    &quot;include/ui/ui.h&quot;
+    ...
+)
+
+assign_source_group(${SOURCES})
+assign_source_group(${HEADERS})
+
+add_library(my_library ${SOURCES} ${HEADERS})</code></pre><p id="e6b0d9d4-837f-47fb-a556-1cf6949cc197" class="">An alternative is to perform a directory lookup that matches source files extensions (<code>.cpp</code>, <code>.h</code>) using the <code><a href="https://cmake.org/cmake/help/latest/command/file.html">file()</a></code> command. The <code>GLOB_RECURSE</code> mode traverses all the subdirectories and match the files.</p><blockquote id="d5e36c56-9664-44b3-afe1-1bf5b296d6b7" class="">On macOS, <code>.mm</code> files should also be added to the source files.</blockquote><pre id="34bdb95b-5824-437e-99e8-7d8ef21e7948" class="code"><code>file(GLOB_RECURSE SOURCES
+    &quot;${CMAKE_CURRENT_SOURCE_DIR}/*.cpp&quot;
+    &quot;${CMAKE_CURRENT_SOURCE_DIR}/*.h&quot;
+)
+
+add_library(my_library ${SOURCES})</code></pre><p id="ee155683-ea3e-4710-a3da-51f75f464cfe" class="">When creating a library we call additional commands to specify:</p><ul id="508f59d9-6f7f-4dde-a876-c8d0e20dd15e" class="bulleted-list"><li>Include directories with <code><a href="https://cmake.org/cmake/help/latest/command/target_include_directories.html">target_include_directories()</a></code>. The specified folder will be added to the include folder of the clients of the library. Useful to distinguish public and private interfaces.</li></ul><ul id="603cb434-7c8f-4fff-a767-75851928d2c6" class="bulleted-list"><li>Library dependencies with <code><a href="https://cmake.org/cmake/help/latest/command/target_link_libraries.html">target_link_libraries()</a></code>. The specified libraries are dependencies.</li></ul><ul id="21dd8057-9114-4908-bb02-c606163bd185" class="bulleted-list"><li>Compiler flags with <code><a href="https://cmake.org/cmake/help/latest/command/target_compile_options.html">target_compile_options()</a></code>. The flags will be constrained to this library when using the <code>PRIVATE</code> specifier.
+Alternatively, the <code><a href="https://cmake.org/cmake/help/latest/variable/CMAKE_LANG_FLAGS.html">CMAKE_CXX_FLAGS</a></code> variable can be set, but is is not recommended as it affects every targets.
+Flags depend on the platform and toolsets so there should be some logic to determine the appropriate flags on each supported platform.</li></ul><pre id="04f84c4a-55a1-4ca3-bca5-c39a1b8b169b" class="code"><code>add_library(my_library …)
+
+target_include_directories(my_library PUBLIC &quot;include&quot;)
+target_link_libraries(my_library PUBLIC other_library)
+
+if(MSVC)
+    target_compile_options(Math PRIVATE /W4 /WX)
+else()
+    target_compile_options(Math PRIVATE -Werror -Wall -Wextra)
+endif()</code></pre><h3 id="87013adc-145c-43df-8068-ce3a17107eb5" class="">Visual C++</h3><p id="55f5272d-c0dd-4d56-9d8b-b9064a01ee70" class="">On Windows with Visual C++, cmake sets the <code>CMAKE_CXX_FLAGS</code> to <code>/W3</code> to force the warning level to 3 (the default setting of Visual Studio).</p><p id="a3d92209-22b8-4426-98de-cc518c5b3240" class="">When setting a different warning level using the <code>target_compile_options()</code> command, Visual Studio will output a warning.</p><figure id="43de064b-9f34-482c-9afe-5d9580641159" class="image"><a href="CMake/Untitled 4.png"><img style="width:469px" src="CMake/Untitled 4.png"/></a></figure><p id="ad9452fb-f8b0-491a-b9e8-acfaa9a7313f" class="">A solution is to remove the flag from the <code>CMAKE_CXX_FLAGS</code> variable.</p><pre id="0ae9ee70-1a06-4133-a30c-538a4642f5c2" class="code"><code>if(MSVC)
+    if(CMAKE_CXX_FLAGS MATCHES &quot;/W[0-4]&quot;)
+        string(REGEX REPLACE &quot;/W[0-4]&quot; &quot;&quot; CMAKE_CXX_FLAGS &quot;${CMAKE_CXX_FLAGS}&quot;)
+    endif()
+endif()</code></pre><h2 id="b85b69e9-5b91-422f-b586-d4e386fb8f2d" class="">Folders</h2><p id="33761e94-74b9-4328-967b-f4877764b713" class="">Visual Studio and Xcode support folder hierarchies to organize source files, but by default cmake includes every source files in a flat structure. </p><p id="f0d0eeca-daa8-4bbd-8496-971ef2898f2d" class="">Source files can be organized in folders in the generated project files by setting the <code><a href="https://cmake.org/cmake/help/latest/prop_gbl/USE_FOLDERS.html">USE_FOLDERS</a></code> global property to <code>ON</code>.</p><pre id="1cf0971c-9392-43b9-a864-77642f463ad2" class="code"><code>set_property(GLOBAL PROPERTY USE_FOLDERS ON)</code></pre><p id="047291f3-aaea-4091-ae49-0fd905ce4476" class="">When adding source files in a library, call the <code><a href="https://cmake.org/cmake/help/v3.0/command/source_group.html">source_group()</a></code> command to also add the source to the corresponding group.</p><pre id="9e2e6b3e-f752-4e71-b5de-c379b09c5432" class="code"><code>file(GLOB_RECURSE SOURCES
+    &quot;${CMAKE_CURRENT_SOURCE_DIR}/ui/*.cpp&quot;
+    &quot;${CMAKE_CURRENT_SOURCE_DIR}/ui/*.h&quot;
+)
+
+source_group(&quot;ui&quot; FILES ${SOURCES})
+
+add_library(UI ${SOURCES})</code></pre><p id="32e10525-2c7d-4373-84e6-067988245ed5" class="">If the library has source files in subdirectories, this method will not be sufficient to create the corresponding groups.</p><p id="05191f89-6be1-4684-8341-5253bb78cae0" class="">The <code><a href="https://cmake.org/cmake/help/latest/command/get_filename_component.html">get_filename_component()</a></code> command can be used to  extract the name of each subdirectory and create the corresponding groups for cmake.</p><pre id="92ed2ddf-98c5-4418-864e-dc4e2932deee" class="code"><code>foreach(SOURCE IN ITEMS ${SOURCES})
+    get_filename_component(SOURCE_PATH &quot;${SOURCE}&quot; PATH)
+    string(REPLACE &quot;${CMAKE_CURRENT_SOURCE_DIR}&quot; &quot;&quot; GROUP_PATH &quot;${SOURCE_PATH}&quot;)
+    string(REPLACE &quot;/&quot; &quot;\\&quot; GROUP_PATH &quot;${GROUP_PATH}&quot;)
+    source_group(&quot;${GROUP_PATH}&quot; FILES &quot;${SOURCE}&quot;)
+endforeach()</code></pre><h1 id="4f2be49a-c388-4f1d-90dc-6011ac6d7699" class="">References</h1><ul id="9ad148d1-56f5-466b-96b2-adaaa6bbe4ca" class="bulleted-list"><li>CMake in Visual Studio 2017, <a href="http://3dgep.com/">3dgep.com</a>, <a href="https://www.3dgep.com/cmake-visual-studio-2017/">https://www.3dgep.com/cmake-visual-studio-2017/</a></li></ul><ul id="dc7cf449-4824-4118-a896-ba5683920b70" class="bulleted-list"><li>C++Now 2017: Daniel Pfeifer “Effective CMake&quot;, <a href="https://www.youtube.com/watch?v=bsXLMQ6WgIk">https://www.youtube.com/watch?v=bsXLMQ6WgIk</a></li></ul><ul id="abba2067-d26f-4448-a8f2-0df9a88df525" class="bulleted-list"><li>CppCon 2017: Mathieu Ropert “Using Modern CMake Patterns to Enforce a Good Modular Design”, <a href="https://www.youtube.com/watch?v=eC9-iRN2b04">https://www.youtube.com/watch?v=eC9-iRN2b04</a></li></ul></div></article></body></html>

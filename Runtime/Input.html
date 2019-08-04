@@ -1,0 +1,566 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Input</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="a086d749-6715-4a1a-972b-21776cc3cc1a" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">⌨</span></div><h1 class="page-title">Input</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th>Created</th><td><time>@Jun 09, 2019 11:00 PM</time></td></tr><tr class="property-row property-row-multi_select"><th>Tags</th><td></td></tr></tbody></table></header><div class="page-body"><h1 id="0931d0f0-f8c2-416e-991f-5d7adbd4094a" class="">Goals</h1><ul id="5b97b587-376a-479b-a03a-7bfbdbe4be50" class="bulleted-list"><li>Abstraction of platform-dependent details</li></ul><ul id="d57297ad-a572-475f-9bb8-bc38a0801292" class="bulleted-list"><li>Low overhead</li></ul><ul id="9371459e-bdb7-48c5-90dd-6514c7921dad" class="bulleted-list"><li>Supports physical devices<ul id="63dcdb57-8281-4046-b977-5710724e6e4a" class="bulleted-list"><li>Read keyboard device</li></ul><ul id="9e24af45-2cb9-4e66-a204-e68a330cdb95" class="bulleted-list"><li>Read mouse device</li></ul><ul id="8480fdad-ab7a-4e5c-806e-20e6814a716f" class="bulleted-list"><li>Read multiple GamePad devices</li></ul><ul id="30097250-8a4c-45ba-a0d0-005b7056f48b" class="bulleted-list"><li>Support connection/disconnection</li></ul><ul id="46e01ef5-9f77-4174-a976-d09b7e460602" class="bulleted-list"><li>Polling: provide previous/current states</li></ul><ul id="710d575a-d4e7-426b-95d6-3122580a5414" class="bulleted-list"><li>Event: handle changes of state</li></ul></li></ul><ul id="4a33f928-626c-4ce1-89f5-47231e231660" class="bulleted-list"><li>Supports logical devices<ul id="fbf977bd-ae7d-47e4-ab14-7a8e3b379466" class="bulleted-list"><li>Key and button sequences</li></ul><ul id="3c463c10-328b-4b80-b9ca-c7096ae46dae" class="bulleted-list"><li>Input mappings and chords</li></ul></li></ul><h1 id="abf07c2b-1a4b-47e3-a0c0-0f204dc27e0e" class="">API</h1><p id="f8c1c1b7-010b-4f82-b285-009ac0c9e41c" class="">On Windows, keyboard and mouse is supported through <strong>Raw Input</strong>.</p><p id="01cd31d9-f904-451d-84cc-8f8b67c864b5" class="">On Windows and Xbox One, GamePads are supported through <strong>XInput</strong>.</p><h1 id="ef158230-adaf-4650-95a6-5bfcd577cdbe" class="">Overview</h1><p id="5b8e0344-33cd-4d89-b98c-a412f18a7a35" class="">The data from a keyboard comes in the form of <strong>scan codes</strong>.</p><p id="787f9657-6d22-4400-8362-5832b889d421" class="">A scan code is a number, or sequence of numbers, assigned to each key on the keyboard.</p><p id="6e05d436-5efe-431f-b536-1e08abfb390d" class="">There are several sets of scan codes on different hardware. Most scan codes are from the PC compatible keyboards (PS/2) and the USB keyboards.</p><p id="128974a3-ef72-4dbd-9202-6762200cde5c" class="">The scan codes are translated into <strong>virtual key codes</strong> by the operating system.</p><p id="610aeedf-2bd4-4f6a-ac79-4a1139682bea" class="">⚠Some virtual key codes do not map directly to a physical key. For example the default Enter key and the Enter key from the number pad share the same virtual key code on some systems but correspond to different physical keys with distinct scan codes.</p><h1 id="19ee208d-7268-4242-819a-a33a24ea001c" class="">Platforms</h1><h2 id="f50c0381-4ee1-40c5-9d67-144cac5b5196" class="">Windows</h2><p id="c1143dea-9451-4e75-8a72-f3648169d933" class="">On Windows, there are many APIs for handling input.</p><h3 id="db0d5f27-3692-4c4c-a5c7-d871023080c1" class="">DirectInput</h3><p id="08baa030-a345-4f00-9a9d-267b0e3eeb2a" class=""><a href="https://docs.microsoft.com/en-us/previous-versions/windows/desktop/ee416842">DirectInput</a> is part of the Microsoft DirectX API.</p><p id="b631a4b6-ab1f-4e45-833d-a08fc8d1f5e0" class="">It is used mainly to handle input from joysticks and game controllers.</p><p id="f854d32e-ee2c-4994-bd91-c11b0cd1b99d" class="">⚠Microsoft does not recommended it for handling input from the mouse and keyboard.</p><p id="3cf860b6-adfa-406a-836c-2a22264fadb9" class="">⚠The DirectInput API is now legacy in favor of the XInput API for handling the Xbox 360 controller.</p><p id="f478657f-691e-4074-b31a-f25b70943edc" class="">✔Support for joysticks with custom setup of axis and buttons.</p><p id="7052683a-5f12-48f1-881e-a323608a3758" class="">✔Support for retrieving data from input devices when the application is in the background.</p><p id="2a620bf2-4a98-4b04-8e4d-a4573a822615" class="">❌No support for the vibration functionality of the Xbox 360 controller.</p><p id="1a3916e0-8e16-4166-82e6-012532dc6581" class="">❌No support for keymaps other than US-English.</p><p id="2387d50e-b015-489a-9ede-80ece7299d63" class="">❌No support for Input Method Editors (IME).</p><p id="a4bdcef9-2141-428c-86f5-01b9ceb8deed" class="">❌No support for capital letters.</p><p id="f47073eb-0ab3-490e-b188-07da72a5edf6" class="">❌No support for getting mouse position in pixel coordinates.</p><h3 id="f15f2a77-9370-4efa-abfe-dae2a5eb8f0f" class="">XInput</h3><p id="62006570-9ea6-46eb-bcdb-3c00c9d7f88b" class="">The <a href="https://docs.microsoft.com/en-us/windows/desktop/xinput/xinput-game-controller-apis-portal">XInput Game Controller APIs</a> enables applications to receive input from the Xbox 360 controller.</p><p id="eea0fd74-8e53-47a4-a09a-f62baedf074f" class="">✔Support for the Xbox 360 controller.</p><p id="83682a4c-22f4-4d70-a910-5c7f9c8db3e9" class="">✔Support for the vibration functionality of the Xbox 360 controller.</p><p id="8ac14037-43a6-43a0-b83d-b0ae9ea5172e" class="">✔Supports up to four controllers connected at the same time.</p><p id="acfab841-5ab7-4eaf-94e8-4efc9eac81b6" class="">✔Same API on Windows and Xbox 360.</p><p id="ad208ec5-9028-4d30-9b79-a23f44b670ea" class="">✔Support for retrieving data from input devices when the application is in the background.</p><p id="134687b5-5bf6-4d8b-8d3a-f9606627ba98" class="">❌No support for custom joysticks.</p><hr id="cf474e6b-7836-4a02-971c-512c4935776d"/><div id="1c33709c-47a0-488e-a2ad-b7809469f925" class="column-list"><div id="5162e69c-e48b-438b-9139-52ead3a460ee" style="width:68.75%" class="column"><p id="213ee4cd-c779-415e-8c49-bc47fc91f565" class="">The Xbox 360 Controller has:</p><ul id="3ed6964f-f529-4866-84e4-4173ff2aae39" class="bulleted-list"><li>two analog directional sticks, each with a digital button</li></ul><ul id="2ba32ffe-8155-4eb9-83d0-08789cd09cc6" class="bulleted-list"><li>two analog triggers</li></ul><ul id="53923f03-24f0-4d5b-ae9a-49d543d7656d" class="bulleted-list"><li>a digital directional pad with four directions</li></ul><ul id="5d68bb0d-25ee-4187-ad7a-f24397e4af32" class="bulleted-list"><li>eight digital buttons</li></ul><ul id="ce62409b-b217-42f8-b287-1a48dba3c1e6" class="bulleted-list"><li>two vibration motors</li></ul></div><div id="0d811fc2-2432-4a6a-aee9-b1b49d9e52a3" style="width:31.249999999999993%" class="column"><figure id="bc26756c-dcdc-40fb-afa6-554d521a86b5" class="image"><a href="Input/Untitled.png"><img style="width:288px" src="Input/Untitled.png"/></a></figure></div></div><p id="7100c542-89df-4fc6-bf68-d2e7a8b6fee4" class="">The states of each of these inputs are returned in the <a href="https://docs.microsoft.com/en-us/windows/desktop/api/XInput/ns-xinput-_xinput_gamepad"><code>XINPUT_GAMEPAD</code></a> structure when the <a href="https://docs.microsoft.com/en-us/windows/desktop/api/XInput/nf-xinput-xinputgetstate"><code>XInputGetState()</code></a> function is called.</p><p id="03e0d97e-903a-4559-99c8-43385c9705cd" class="">The speeds of the vibration motors are specified in the <a href="https://docs.microsoft.com/en-us/windows/desktop/api/XInput/ns-xinput-_xinput_vibration"><code>XINPUT_VIBRATION</code></a> structure that is passed to the <a href="https://docs.microsoft.com/en-us/windows/desktop/api/XInput/nf-xinput-xinputsetstate"><code>XInputSetState()</code></a> function.</p><h3 id="eb70e3ff-e51c-4f99-b49e-e2876b84d999" class="">Windows.Devices.Input</h3><p id="4245455a-8d0d-440f-bfb1-216681d15c8d" class="">The WinRT API supports keyboard and mouse devices.</p><p id="8b9bc0e9-c3d3-40f5-b825-9a69aaf5c80b" class="">✔Same API on Windows 10 and Windows Runtime.</p><p id="3568c1aa-2bad-4b3c-834a-4f743ed2286e" class="">⚠On Windows 10, it requires calling <a href="https://docs.microsoft.com/en-us/uwp/api/windows.foundation"><code>Windows::Foundation::Initialize()</code></a> to initialize WinRT.
+On Universal Windows Platform (UWP), the Windows Runtime is already initialized.</p><p id="61b87776-0a80-4977-ac9a-ae890b96be19" class="">ℹThe <code><a href="https://docs.microsoft.com/en-us/cpp/cppcx/wrl/roinitializewrapper-class">RoInitializeWrapper</a></code> wrapper class can perform the initialization of WinRT.</p><h3 id="13ac309e-d02a-4aba-85cb-4f5896d751c3" class="">Windows.Gaming.Input</h3><p id="366eca5b-3c03-4f8b-9cf5-890c3fc744e4" class="">The WinRT API supports Xbox 360 and Xbox One controllers.</p><p id="ee9fb1cd-de25-421e-81eb-6c11d4754df3" class="">✔Support for the Xbox One controller.</p><p id="845fc585-d4d2-4330-9a06-3a24ff10905a" class="">✔Support for custom controllers such as arcade sticks, flight sticks and racing wheels.</p><p id="6dfe33ee-4bdb-40fd-b5ff-ad9ec38f61ed" class="">✔Same API on Windows 10 and Windows Runtime.</p><h3 id="274c7e14-7a79-472c-be1e-5e1989a5e9b4" class="">Windows Messages</h3><p id="458e83fc-0c04-49fe-8ee2-047565f91006" class="">Windows applications run inside a message loop.</p><p id="52fa1810-1632-4955-b5dc-6a037918bc36" class="">In the message loop, the system will send messages for mouse and keyboard events.</p><p id="9fde9404-6436-438a-861a-d387f5b59ba9" class="">To receive character codes, an application must call the <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-translatemessage"><code>TranslateMessage()</code></a> function in its message loop.</p><ul id="6677a3ee-185a-4649-83db-e7436e6daf49" class="bulleted-list"><li>The <a href="https://docs.microsoft.com/en-us/windows/desktop/inputdev/wm-keydown"><code>WM_KEYDOWN</code></a> message is sent when a key is pressed.</li></ul><ul id="bc5ea1de-06a9-440a-b773-a1706dd336ec" class="bulleted-list"><li>The <a href="https://docs.microsoft.com/en-us/windows/desktop/inputdev/wm-keyup"><code>WM_KEYUP</code></a> message is sent when a key is released.</li></ul><ul id="81a2537e-04e6-46c0-bf70-abe30fd3a310" class="bulleted-list"><li>The <a href="https://docs.microsoft.com/en-us/windows/desktop/inputdev/wm-char"><code>WM_CHAR</code></a> message is sent when a key is pressed with the character code of the key.</li></ul><ul id="792cb671-6d4c-4d46-9229-63af24673fd4" class="bulleted-list"><li>The <a href="https://docs.microsoft.com/en-us/windows/desktop/inputdev/wm-lbuttondown"><code>WM_LBUTTONDOWN</code></a>, <a href="https://docs.microsoft.com/en-us/windows/desktop/inputdev/wm-rbuttondown"><code>WM_RBUTTONDOWN</code></a> and <a href="https://docs.microsoft.com/en-us/windows/desktop/inputdev/wm-mbuttondown"><code>WM_MBUTTONDOWN</code></a> messages are sent when the user respectively presses the left, right or middle mouse button</li></ul><ul id="729fce92-2616-471b-8e1b-7fb29a5a166a" class="bulleted-list"><li>The <a href="https://docs.microsoft.com/en-us/windows/desktop/inputdev/wm-lbuttonup"><code>WM_LBUTTONUP</code></a>, <a href="https://docs.microsoft.com/en-us/windows/desktop/inputdev/wm-rbuttonup"><code>WM_RBUTTONUP</code></a> and <a href="https://docs.microsoft.com/en-us/windows/desktop/inputdev/wm-mbuttonup"><code>WM_MBUTTONUP</code></a> messages are sent when the user respectively releases the left, right or middle mouse button</li></ul><ul id="963c756e-0a76-4038-8ab3-e6b16f82f29d" class="bulleted-list"><li>The <a href="https://docs.microsoft.com/en-us/windows/desktop/inputdev/wm-mousehwheel"><code>WM_MOUSEHWHEEL</code></a> message is sent when the mouse&#x27;s scroll wheel is moved.</li></ul><p id="76947490-204f-4970-9818-307310f7559a" class="">✔Support for IME.</p><p id="7ba26a51-86ed-4356-9f6a-e00fdb4a12b1" class="">⚠Windows will only send input messages to the application if its window is active.</p><p id="34b32cc4-2a1c-4a3e-baef-d504d6a49eff" class="">⚠Windows will only send keyboard messages to the application if the windows has the keyboard focus.</p><p id="48d5789b-cc2a-4a6a-8dbe-0ad2deda8340" class="">⚠Windows will only send mouse messages to the application if the cursor is in the client area of the window.</p><p id="0f23b1d4-b814-491a-989e-ba9101d3e3fc" class="">❌Keyboard handling is slow.</p><p id="e76f02c4-4fef-4eff-b92c-fc3c12be3609" class="">❌There are no messages for handling joysticks and game controllers.</p><h3 id="62e3fda0-99d6-47fe-81bf-9621387a7732" class="">Keyboard API</h3><p id="efcbb643-327d-4274-93c2-8b8bd6d995d8" class="">The <a href="https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getkeyboardstate"><code>GetKeyboardState()</code></a> function retrieves the status of every keys.</p><p id="84b6c2f4-5ef1-4dff-8d49-69a6bfe83232" class="">The <a href="https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getkeystate"><code>GetKeyState()</code></a> function retrieves the status of a specific key (up, down, or toggled).</p><p id="8845a568-978c-4b31-bfc1-a5ca443b939b" class="">❌Cannot retrieves the status of the keys if the application&#x27;s window is not active.</p><p id="37afbb47-8810-4351-ae69-5bdb70594f8c" class="">✔The <a href="https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getasynckeystate"><code>GetAsyncKeyState()</code></a> functions retrieves the status of a specific key, even while in the background.</p><h3 id="ec0bdb21-b73c-415f-b999-7fdbbf23e3db" class="">Raw Input</h3><p id="b7b37c95-73b4-49bd-8c1a-f82e4f3a9a0e" class="">The <a href="https://docs.microsoft.com/en-us/windows/desktop/inputdev/raw-input"><strong>Raw Input</strong></a> API (or generic input) retrieves the data directly from the device.</p><p id="505308c2-873b-4653-bfc7-b3a7ba4d575e" class="">To receive raw input from a device, an application must register the device with <a href="https://msdn.microsoft.com/en-us/library/ms645600(v=VS.85).aspx"><code>RegisterRawInputDevices()</code></a> and a filled array of <a href="https://msdn.microsoft.com/en-us/library/ms645565(v=VS.85).aspx"><code>RAWINPUTDEVICE</code></a> structures.</p><p id="119e17cf-f301-4e6c-9089-b5174ad08277" class="">There are two ways to read the raw data: unbuffered (standard) and buffered.</p><ul id="38367799-34a8-471c-af66-4fef597d2f4a" class="bulleted-list"><li>The unbuffered method gets the raw data one <a href="https://docs.microsoft.com/en-us/windows/desktop/api/winuser/ns-winuser-tagrawinput"><code>RAWINPUT</code></a> structure at a time by calling <a href="https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getrawinputdata"><code>GetRawInputData()</code></a> when receiving the <a href="https://docs.microsoft.com/en-us/windows/desktop/inputdev/wm-input"><code>WM_INPUT</code></a> message.</li></ul><ul id="a752bf9a-f940-4d35-9fea-e207f57fd6d0" class="bulleted-list"><li>The buffered method gets an array of <a href="https://docs.microsoft.com/en-us/windows/desktop/api/winuser/ns-winuser-tagrawinput"><code>RAWINPUT</code></a> structures at a time by calling <a href="https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getrawinputbuffer"><code>GetRawInputBuffer()</code></a>.</li></ul><p id="5890bc6a-f42d-4517-92ee-32f0cfa9ec9d" class="">✔Support for devices that can produce large amounts of raw input.</p><p id="e613d434-6d97-474e-9a9a-b1579e3c1982" class="">✔An application can receive data when it is in the foreground and when it is in the background.</p><p id="06ca0019-e8f2-40b8-b298-4ddf86156540" class="">❌Does not handle joysticks and game controllers.</p><p id="021f1dad-c48b-454b-b56b-f52e41703c88" class="">⚠To distinguish between some keys (such as left and right shift keys), the <a href="https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-mapvirtualkeya"><code>MapVirtualKey()</code></a> function needs to be called with the corresponding scan code.</p><h2 id="2634676a-7368-4aec-956b-8aaad9dd3676" class="">macOS</h2><h3 id="33d45de3-af1a-45a7-9a49-8eb48098fcc6" class="">IOKit</h3><p id="bf1b9a8a-20f9-4fd5-8511-1bc8063a2358" class="">The <a href="https://developer.apple.com/documentation/iokit">I/O Kit framework</a> is used for handling keyboard, mouse, and joystick input.</p><p id="79c21ffb-47a7-4ace-b1a4-9af7ee12ac80" class="">✔Supports most game controllers.</p><p id="d037f8ff-67e9-4cf5-9fab-a7c948f7e916" class="">❌Only supports Objective-C and Swift.</p><h3 id="fd62950d-2742-4eca-b135-6a91610e38b4" class="">Game Controller</h3><p id="8ba96eec-6b18-4f83-bebb-f06c951797b5" class="">The <a href="https://developer.apple.com/documentation/gamecontroller"><strong>Game Controller</strong></a><a href="https://developer.apple.com/documentation/gamecontroller"> framework</a> is used to receive input data from game controllers.</p><p id="06a04ad6-cc6d-4ef9-9d4b-cd022ab230f3" class="">There are two methods to receive input data:</p><ul id="995399d2-e5a8-4ae2-adb0-661dd585e671" class="bulleted-list"><li>poll the current values of controls.</li></ul><ul id="2f2d815b-ec42-4fc8-aad9-9dc24dcc232f" class="bulleted-list"><li>add handlers to be called when control values change.</li></ul><p id="e8c28d01-cf6d-4101-a795-c662987a5d4b" class="">✔Supports some game controller that are not compatible with IOKit.</p><p id="b5e2438d-1b4e-4c98-b730-7e1a7bc50b88" class="">❌Only supports Objective-C and Swift.</p><h2 id="5aa7799f-1f5b-4f80-b38e-928165f3dc0b" class="">Xbox 360</h2><h3 id="83a08b67-4cda-4de7-a244-1f4029ebd7a4" class="">XInput</h3><p id="77a38c36-e3d7-49e0-923b-8299593fc85a" class=""><strong>XInput</strong> supports the Xbox 360 controller.</p><p id="5010174a-f5b7-4afd-bc2f-ff18901b265b" class="">✔Same API on Windows and Xbox 360.</p><h3 id="cf149b71-02a9-4e4e-98b2-f46c40b5abf3" class="">XInput2</h3><p id="0cf5147c-b230-4af9-bd1e-c4a77bdf5cd2" class=""><strong>XInput2</strong> support a greater variety of game controllers than XInput.</p><p id="abecc055-0ad2-4c39-8750-f2b0fbf92fcf" class="">❌Only supported on Xbox 360.</p><h2 id="96a75d58-a891-4766-9152-59e63b74be1f" class="">Xbox One</h2><h3 id="fd5840cb-f118-4e21-8be4-720970b8730a" class="">Keyboard and Mouse APIs (Windows.Devices.Input)</h3><p id="66b7753e-87e4-44ab-82ee-17d7ec1321e5" class="">The Xbox One supports keyboard and mouse devices with the Keyboard API and Mouse API.</p><p id="b847b3c1-3125-4450-9dc6-6298fbf0990c" class="">✔Same API on UWP and Xbox One.</p><h3 id="8486c7f7-3985-470c-b516-1a0a91c218f4" class="">Gamepad API (Windows.Xbox.Input)</h3><p id="502110d3-ca52-442c-b116-9e271e27cec0" class="">The Gamepad API supports Xbox One controllers.</p><p id="5b18c9ab-d416-4255-846b-ad0aad5a56f8" class="">❌Only supported on Xbox One.</p></div></article></body></html>

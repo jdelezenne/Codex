@@ -1,0 +1,619 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>SIMD</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4e4aca2c-f1a9-4c93-ac3b-2d1beca4cc57" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🔢</span></div><h1 class="page-title">SIMD</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th>Created</th><td><time>@Jun 23, 2019 11:42 AM</time></td></tr><tr class="property-row property-row-multi_select"><th>Tags</th><td></td></tr></tbody></table></header><div class="page-body"><nav id="a0af97cd-1443-4974-83d6-c30432b5297e" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#456d986b-f60c-4edd-9f28-59d25de0a4ab">Overview</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#044f42ae-a65e-4546-af19-7fcf9edb95ee">Alignment</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5eb85751-890d-44a3-8f67-95e6b72f50c3">Calling Conventions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#11b5b7b4-f77b-41d1-b174-381071c6227d">Platforms</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#89eeb27f-953d-4bea-9572-41182f3362f6">Microsoft</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#5bbc2858-b6b3-4b00-8f0a-70f31bd5d5d8">Xbox</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#eff6a12f-896a-45b5-9433-c4f548f54678">Windows</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#c017cdc4-4a44-46a6-94f6-d838617e7b88">Windows and Xbox 360</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#a84f9b51-5494-4915-b147-310498eebd2f">Windows and Xbox One</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#1972aa0c-161f-4e6a-9aa1-54796428776c">Vectors</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#89265df4-52e8-44d4-b865-586c4b18a547">Matrices</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#efb57dbc-ccfb-4121-91ca-bff0fadc3224">Best Practices</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b0ccd393-1748-40b3-a346-171e4513b394">Intrinsics</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#40bbb8db-d886-4a65-af57-8012b0e979f6">SSE</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#1f943e5e-cab3-4e3a-a27b-e2df38222f0a">Declaration</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#e4cf287a-459d-45b2-848d-a4bc03346885">Accessors</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#caee207c-cd01-49c5-ad22-f5a9d0ada339">Binary operations</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#719b2092-bde6-4e98-8b72-4bc62a7dfa21">Unary operations</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#0d03c4b0-3381-49da-96d0-6d1add1c8d9e">Function calls</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4545994e-fdf9-4219-8374-616fecc3176c">NEON</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2d679c42-8952-4f8e-b5c9-17e9efe66be6">Portability</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#80dfcab2-29ce-4d04-b4b7-0c6fb423a50e">Optimizations</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a5840fb4-f39f-4281-aef2-8430aaf637de">Partial Loads</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#223aa02f-f7ba-4047-b552-08e8570f3285">Generic to SIMD</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#37615cd9-2340-471a-8509-9d77b4588dbf">Alignment</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d145af2d-f178-48fb-b0f8-57ef7c5f2dd7">Accessors and operators</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#20da9c48-ec99-45da-82c3-cf6db9285224">Pointers parameters</a></div></nav><hr id="a6bda19d-2f99-4916-b0b3-537e07254686"/><h1 id="456d986b-f60c-4edd-9f28-59d25de0a4ab" class="">Overview</h1><blockquote id="9805aa0d-5755-41fa-9250-cd822ca343d7" class="">SIMD (Single instruction, multiple data)</blockquote><p id="9fcf45bd-0910-44b9-8f6a-46b8bbe0666f" class=""><a href="https://en.wikipedia.org/wiki/SIMD">SIMD</a> exploits data level parallelism with dedicated instructions to perform the same operation on multiple floating-point values simultaneously.</p><ul id="6f2cf313-9b46-4771-a744-0a5d1faf463f" class="bulleted-list"><li>SIMD is useful to speed up floating point computations.</li></ul><ul id="4957201c-8b32-4c88-bfec-18dd38cb5915" class="bulleted-list"><li>SIMD instructions are platform-dependent and the APIs do not match.</li></ul><h1 id="044f42ae-a65e-4546-af19-7fcf9edb95ee" class="">Alignment</h1><p id="836c4358-efd0-4231-bdc9-906b51130d26" class="">SIMD types should be 16-bytes aligned. Some intrinsicts support operations with unaligned types but with a performance cost.</p><h1 id="5eb85751-890d-44a3-8f67-95e6b72f50c3" class="">Calling Conventions</h1><p id="17e3834a-bc34-44b4-9328-185534ae9fa1" class="">There are different calling requirements depending on the target platform.</p><p id="953bf2a2-fbfd-4f87-95fe-29c3e129192c" class="">On Xbox 360, Xbox One and Windows, the SIMD type require the <a href="https://docs.microsoft.com/en-us/cpp/cpp/fastcall"><code>__fastcall</code></a> calling convention.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9d9e72e5-3519-4a96-a121-7d9c8d192d5e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The <code>__fastcall</code> calling convention specifies that arguments to functions are to be passed in registers.</div></figure><h1 id="11b5b7b4-f77b-41d1-b174-381071c6227d" class="">Platforms</h1><h2 id="89eeb27f-953d-4bea-9572-41182f3362f6" class="">Microsoft</h2><h3 id="5bbc2858-b6b3-4b00-8f0a-70f31bd5d5d8" class="">Xbox</h3><p id="a7b68857-bd04-45e0-bd77-ee2a29563bd5" class="">Microsoft provides the <strong>Xbox Math Library</strong> on Xbox.</p><p id="f3a51ccf-8e8e-497d-8da7-2c14a1836f9f" class="">The library is implemented in <code>Xboxmath.h</code>.</p><h3 id="eff6a12f-896a-45b5-9433-c4f548f54678" class="">Windows</h3><p id="d44b757f-3640-411c-a178-f74440f15124" class="">In earlier versions of DirectX, Microsoft provided the <strong>D3DX 9</strong> and <strong>D3DX 10</strong> math libraries.</p><p id="1e889f17-1b95-44f7-9ed1-45421e3af585" class="">The library is available on Xbox 360, but its use is discouraged.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4b86afea-efe7-4df3-9805-d708e0e6fb9d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The libraries are now deprecated.</div></figure><p id="9d15e485-d055-4381-b5a8-891115114ad7" class="">The main types are <code>XMVECTOR2</code>, <code>XMVECTOR3</code>, <code>XMVECTOR4</code>, <code>D3DXMATRIXA16</code>, <code>D3DXQUATERNION</code>, and <code>D3DXCOLOR</code>.</p><h3 id="c017cdc4-4a44-46a6-94f6-d838617e7b88" class="">Windows and Xbox 360</h3><p id="4fded125-a02d-49d8-b354-ddbe932a753e" class="">Microsoft provides the <strong>XNA Math</strong> library on Windows and Xbox 360.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c096afd8-ef2b-4653-bba9-3dfc0c707fe5"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The library is deprecated on Windows.</div></figure><p id="5b684d62-4688-45bb-b176-37245d7cfd35" class="">The library supports:</p><ul id="8e953fe9-f4c3-4cd4-97f5-45a07e19a6c3" class="bulleted-list"><li>A generic implementation without intrinsics.</li></ul><ul id="29e1893e-3078-44db-8a00-f22953aba77d" class="bulleted-list"><li><strong>SSE/SSE2</strong> intrinsics on Windows.</li></ul><ul id="9872b373-4c23-4249-ac5d-2f6792d3a956" class="bulleted-list"><li><strong>VMX128</strong> intrinsics on the Xbox 360.</li></ul><p id="6db192fa-1207-4ca6-a9c0-1a344d6b8f02" class="">The library is implemented in <code>Xnamath.h</code>.</p><p id="ef9453ae-7453-475d-a42d-621085da3893" class="">The main types are <code>XMVECTOR</code> and <code>XMMATRIX</code>. They are 16-byte aligned.</p><ul id="379c3997-d0de-4390-b5c4-027a58af9449" class="bulleted-list"><li><code>XMVECTOR</code> wraps a SIMD register.</li></ul><ul id="fe0b583c-dfb0-4e01-8e85-69dff9402bf8" class="bulleted-list"><li><code>XMMATRIX</code> wraps four SIMD registers.</li></ul><p id="5b29c853-f2b4-498b-8a00-fe7a042b9205" class=""><code>XMVECTOR</code> is an opaque data structure. The components cannot be accessed directly.</p><h3 id="a84f9b51-5494-4915-b147-310498eebd2f" class="">Windows and Xbox One</h3><p id="8c7ea4de-f03f-4a09-912d-e70179f36427" class="">Microsoft provides the <a href="https://docs.microsoft.com/en-us/windows/desktop/dxmath/directxmath-portal"><strong>DirectXMath</strong></a> library on Windows and Xbox One.</p><ul id="1cb6fd94-5abe-498d-8824-f64ed6054aad" class="bulleted-list"><li>C++11.</li></ul><ul id="a7880631-7977-400d-a48b-ca835dbb7cb3" class="bulleted-list"><li>Colors.</li></ul><ul id="7664ab50-7400-44c0-99e2-3541fc575cef" class="bulleted-list"><li>Bounding volumes.</li></ul><p id="40b702f1-42f0-4c2f-b556-1ed4a6ddf7b6" class="">The library supports:</p><ul id="ddc5b0b4-be92-472c-adda-ef993cb65c20" class="bulleted-list"><li>A generic implementation without intrinsics.</li></ul><ul id="3f885626-ce29-4d83-963e-bd1abe5920db" class="bulleted-list"><li><strong>SSE/SSE2</strong> intrinsics on Windows and Xbox One.</li></ul><ul id="e3d3d4b5-0904-4a7d-baf6-92e010ecf3ef" class="bulleted-list"><li><strong>NEON</strong> intrinsics on Windows RT (ARM).</li></ul><p id="287770fa-8891-4480-8486-23a2b9e1514c" class="">The library is implemented in <code>DirectXMath.h</code> and <code>DirectXPackedVector.h</code>.</p><p id="5d50a26d-5b0e-4165-9a55-371916c3c173" class="">The main types are <code>XMVECTOR</code> and <code>XMMATRIX</code>.</p><ul id="444aa4aa-967d-4575-9dda-6f957b235290" class="bulleted-list"><li>Opaque data structures.</li></ul><ul id="3680d4b0-a71e-4e95-8fe2-a39701da02c5" class="bulleted-list"><li>16-byte aligned.</li></ul><p id="2ec4e304-6c85-4a30-b5fc-12dd8fb7f011" class="">Conversion between scalar and vector forms is inefficient, and should only be done when required.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="757caad9-0fd0-4ee1-86ec-f48bea58e843"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">For portability, initializer lists should not be used with these types.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f9535022-df37-405a-b1fb-d0e1b15aefce"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">The components cannot be accessed directly.</div></figure><p id="477d2bf6-27a5-4887-a950-bce5a124e990" class="">The library contains additional types in which the components can be accessed directly.</p><ul id="c7bef177-7e51-416f-8653-e1d1f19494ef" class="bulleted-list"><li>Unaligned: <code>XMFLOAT3</code>, <code>XMFLOAT4</code>, <code>XMFLOAT4X3</code>, <code>XMFLOAT4X4</code>.</li></ul><ul id="ad1051f5-faa1-449a-ae18-3987a7e103cd" class="bulleted-list"><li>Aligned: <code>XMFLOAT3A</code>, <code>XMFLOAT4A</code>, <code>XMFLOAT4X3A</code>, <code>XMFLOAT4X4A</code>.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6142d86e-5f3d-4fe8-a7cd-07bc6989e25c"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">They are implemented as C structs with <code>float</code> members.</div></figure><p id="872a2fe3-1d23-4759-a4ab-ec3aff802b1d" class="">The library uses row-major matrices, row vectors, and pre-multiplication.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="253d7ab5-74d0-4423-b800-bb6a244c796a"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">HLSL shaders default to column-major matrices.</div></figure><h3 id="1972aa0c-161f-4e6a-9aa1-54796428776c" class="">Vectors</h3><p id="da43b568-2a44-4afc-9264-44faa296dcc5" class=""><code>XMVECTOR</code> wraps a SIMD register.</p><h3 id="89265df4-52e8-44d4-b865-586c4b18a547" class="">Matrices</h3><p id="25becab0-e2dc-4b7c-80a1-8006b4bc3f88" class=""><code>XMMATRIX</code> wraps four SIMD registers.</p><p id="68cd0ad6-6e85-4711-8126-db296667cb57" class="">Matrix operations are suffixed with <code>LH</code> or <code>RH</code> to work with either left-handed or right-handed view coordinates.</p><h3 id="efb57dbc-ccfb-4121-91ca-bff0fadc3224" class="">Best Practices</h3><ul id="1edd55ff-4b78-4ca9-8054-c178baaf8264" class="bulleted-list"><li>On Windows, enable <code>/fp:fast</code>.</li></ul><ul id="05596eb3-cd1e-4feb-8119-0566e94d7c3e" class="bulleted-list"><li>The <code>XMVerifyCPUSupport</code> function should be called at startup to check for processor support.</li></ul><ul id="563e0788-4712-4fac-a28a-6a9c3e23f6b6" class="bulleted-list"><li>The library provides aligned and unaligned versions of types and memory operations. The aligned versions are more efficient.</li></ul><ul id="c1745ffe-c87d-497c-937c-f5e6784c5bfd" class="bulleted-list"><li>Many functions have an equivalent function with a <code>Ptr</code> suffix. These functions are more efficient than the non-pointer versions. For example, <code>XMVectorGetX</code> and <code>XMVectorGetXPtr</code>.</li></ul><ul id="ccabbeba-3f4f-48ee-8c03-7c6ab1c18a9e" class="bulleted-list"><li>Many functions have an equivalent function with a <code>Est</code> suffix. These functions trade accuracy for improved performance. For example, <code>XMVector3Normalize</code> and <code>XMVector3NormalizeEst</code>.</li></ul><h1 id="b0ccd393-1748-40b3-a346-171e4513b394" class="">Intrinsics</h1><h2 id="40bbb8db-d886-4a65-af57-8012b0e979f6" class="">SSE</h2><h3 id="1f943e5e-cab3-4e3a-a27b-e2df38222f0a" class="">Declaration</h3><p id="9d795cb2-8feb-474d-b1d3-45afe8d17d28" class="">The main header is <code>&lt;xmmintrin.h&gt;</code>.</p><p id="6759e202-8b2c-4edd-9b8e-3eee6925fbe1" class="">It provides the <code>__m128</code> type and the <code>_mm_XXX()</code> functions.</p><p id="03f82a92-c759-4478-be99-48dfaea31d96" class="">To define a 3D vector, instead of using three X/Y/Z single-precision floating-point components, we store packed single-precision floating-point elements as a <code>__m128</code> value.</p><p id="988a2577-d054-4045-b960-710019110532" class="">⚠The structure must not have any other members to ensure that the <code>vectorcall</code> calling convention will work and use of as many registers as possible to pass function arguments.</p><pre id="7f5fb474-4fb0-475b-baf4-f421b20e105c" class="code"><code>struct Vector3
+{
+    __m128 m;
+};</code></pre><p id="beb685ba-15f7-4275-855d-85a6a956b543" class="">In the constructor, we call <a href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/#text=_mm_set_ps"><code>_mm_set_ps</code></a> to set the <code>__m128</code> value from supplied values.</p><pre id="384e7f7d-96a6-4c5e-9a33-0060cca38aaf" class="code"><code>inline explicit Vector3(float x, float y, float z)
+{
+    m = _mm_set_ps(z, z, y, x);
+}</code></pre><h3 id="e4cf287a-459d-45b2-848d-a4bc03346885" class="">Accessors</h3><p id="72892f1d-2a2d-49f6-9a6e-c861af565909" class="">The <code>__m128</code> type does not provide direct access to the X/Y/Z components, so it&#x27;s necessary to implement wrapper functions.</p><p id="bd9a1654-7d06-4645-b3a2-879347523236" class="">To obtain the X component, we call <a href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/#text=_mm_cvtss_f32"><code>_mm_cvtss_f32</code></a> to get a copy of the lower element.</p><p id="3d492888-76d5-4460-b044-1c516b37e065" class="">To obtain the Y and Z components, we first call <a href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/#text=_mm_shuffle_ps"><code>_mm_shuffle_ps</code></a> to shuffle the elements using a mask with the <code>_MM_SHUFFLE</code> macro, set to 1 (for the Y component) and to 2 (for the Z component).</p><pre id="d0815934-5cc0-4553-a1cf-86aac211e299" class="code"><code>inline float x() const { return _mm_cvtss_f32(m); }
+inline float y() const { return _mm_cvtss_f32(_mm_shuffle_ps(m, m, _MM_SHUFFLE(1, 1, 1, 1))); }
+inline float z() const { return _mm_cvtss_f32(_mm_shuffle_ps(m, m, _MM_SHUFFLE(2, 2, 2, 2))); }</code></pre><p id="620961fd-8706-4e32-87ce-753d6a231ee4" class="">⚠It&#x27;s discouraged to access the X/Y/Z components using an indexer on the <code>m128_f32</code> member as it will be slower au cause memory spill.</p><pre id="ea1c6316-c337-420f-bd18-707caed03ce9" class="code"><code>inline float operator[] (size_t i) const { return m.m128_f32[i]; };
+inline float&amp; operator[] (size_t i) { return m.m128_f32[i]; };</code></pre><p id="dfad9902-93fa-420e-b012-8e9674a75cf0" class="">To set the X component, we call <a href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/#text=_mm_set_ss"><code>_mm_set_ss</code></a> and <a href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/#text=_mm_move_ss"><code>_mm_move_ss</code></a> to defined a new <code>__m128</code> value in which the X component is overridden and the Y and Z components are moved.</p><p id="0a9583b3-f430-48e7-99ae-7215b02cafe1" class="">To set the Y and Z components, we then call <code>_mm_shuffle_ps</code> to shuffle the elements on a temporary value and finally call <code>_mm_move_ss</code> again.</p><p id="c404b68a-0a94-4659-b36d-bd5df32c3748" class="">⚠It&#x27;s discouraged to provide direct write accessors the X/Y/Z components as it will cause more loads/stores.</p><h3 id="caee207c-cd01-49c5-ad22-f5a9d0ada339" class="">Binary operations</h3><p id="f76f69bf-892b-4fed-87bd-97d6ab0b2552" class="">Binary operations are implemented as dedicated functions that take another <code>__m128</code> value.</p><ul id="cf5b0ec1-432e-41c3-8317-2b3954a5e025" class="bulleted-list"><li>Addition: <a href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/#text=_mm_add_ps"><code>_mm_add_ps</code></a></li></ul><ul id="dbdc838a-371a-41a8-a156-4d0300fdade1" class="bulleted-list"><li>Subtraction: <a href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/#text=_mm_sub_ps"><code>_mm_sub_ps</code></a></li></ul><ul id="ae220281-9e3d-42b5-8d4a-39922c9392d1" class="bulleted-list"><li>Multiplication: <a href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/#text=_mm_mul_ps"><code>_mm_mul_ps</code></a></li></ul><ul id="fc19160b-c66a-4681-9368-c69bc50a2817" class="bulleted-list"><li>Division: <a href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/#text=_mm_div_ps"><code>_mm_div_ps</code></a></li></ul><pre id="f1a6ade0-d677-45aa-917d-f086e97d0f17" class="code"><code>inline Vector3 operator+ (Vector3 a, Vector3 b) { a.m = _mm_add_ps(a.m, b.m); return a; }
+inline Vector3 operator- (Vector3 a, Vector3 b) { a.m = _mm_sub_ps(a.m, b.m); return a; }
+inline Vector3 operator* (Vector3 a, Vector3 b) { a.m = _mm_mul_ps(a.m, b.m); return a; }
+inline Vector3 operator/ (Vector3 a, Vector3 b) { a.m = _mm_div_ps(a.m, b.m); return a; }</code></pre><p id="b5fadfc1-769c-4eb3-bfc6-559b3429b9c4" class="">Binary operations in which the other operand is a single floating-point value are implemented with the same functions where another <code>__m128</code> value is computed using <a href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/#text=_mm_set1_ps"><code>_mm_set1_ps</code></a>.</p><pre id="52bc30ac-a294-466f-961b-39a6dbab902e" class="code"><code>inline Vector3 operator* (Vector3 a, float b) { a.m = _mm_mul_ps(a.m, _mm_set1_ps(b)); return a; }
+inline Vector3 operator/ (Vector3 a, float b) { a.m = _mm_div_ps(a.m, _mm_set1_ps(b)); return a; }
+inline Vector3 operator* (float a, Vector3 b) { b.m = _mm_mul_ps(_mm_set1_ps(a), b.m); return b; }
+inline Vector3 operator/ (float a, Vector3 b) { b.m = _mm_div_ps(_mm_set1_ps(a), b.m); return b; }</code></pre><h3 id="719b2092-bde6-4e98-8b72-4bc62a7dfa21" class="">Unary operations</h3><p id="21952a0c-8fbe-4d98-8de1-a45594cdda2e" class="">To negate a vector, we compute the difference between the zero value and the current value. A <code>__m128</code> value with all elements set to zero is created with <a href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/#text=_mm_setzero_ps"><code>_mm_setzero_ps</code></a>.</p><pre id="a5d623b0-713c-4e73-9782-563586b0af5b" class="code"><code>inline Vector3 operator- (Vector3 value) { return Vector3(_mm_setzero_ps()) - value; }</code></pre><h3 id="0d03c4b0-3381-49da-96d0-6d1add1c8d9e" class="">Function calls</h3><p id="70ee9571-17f8-4e45-9c08-e8397fe42b5c" class="">As math types such as vectors and matrices can be quite large, they are typically passed by reference.</p><pre id="3d2e8e2f-b747-4066-ad41-d3a4cc3129dd" class="code"><code>void Translate(const Vector3&amp; value);</code></pre><p id="bc20bad9-a598-4ce6-a905-bc5e3cc4e827" class="">When working with SiMD types, we want to use the <code>vectorcall</code> calling convention, and pass the parameters by value. The values stay in the XMM0-XMM3 registers and there&#x27;s no copy.</p><pre id="a8064a2d-5a20-4a9a-b051-da23fd44e377" class="code"><code>void Translate(Vector3 value);</code></pre><h2 id="4545994e-fdf9-4219-8374-616fecc3176c" class="">NEON</h2><h1 id="2d679c42-8952-4f8e-b5c9-17e9efe66be6" class="">Portability</h1><ul id="ef0ba2c4-edfe-4e5f-bee5-f7d6729d5659" class="bulleted-list"><li>Each platform supports a different instruction set.</li></ul><ul id="28040c15-6681-4113-9787-cc4efd7f10b1" class="bulleted-list"><li>Each platform uses different types.</li></ul><ul id="79987de4-d3b0-494e-b0f6-5109a149866e" class="bulleted-list"><li>Some platforms require SIMD types to be passed by value, others by reference.</li></ul><p id="ce7f694e-15fb-42ba-ad15-82454d3f0b67" class="">Define an alias for each platform.</p><pre id="fdba29ed-90a5-4f6c-8388-69379632959e" class="code"><code>#if SIMD_SSE
+  using Simd128Type = __m128;
+#elif SIMD_NEON
+  using Simd128Type = float32x4_t;
+#elif SIMD_AVX
+  using Simd128Type = __vector4;
+...
+#endif</code></pre><p id="86e56f70-55cc-4c55-9177-7f45ca04ecc8" class="">Define another alias for each platform argument requirement.</p><pre id="4dc71f43-0428-47e9-a96e-8823f0ed5e6a" class="code"><code>#if SIMD_BYVALUE
+  using Simd128TypeArg = Simd128Type;
+#elif SIMD_BYREF
+  using Simd128TypeArg = Simd128Type&amp;;
+#endif</code></pre><p id="a00a833c-52c8-485a-8fdb-374fd147a241" class="">Then, when defining the common interface for SIMD operations, we use these aliases.</p><pre id="309625cf-78a5-4b40-b37e-5f2f96f0cad3" class="code"><code>Simd128Type Add(Simd128TypeArg a, Simd128TypeArg b);</code></pre><p id="a4243493-c2dc-4e7c-9f56-e7225544b5f5" class="">The implementation of each platform&#x27;s SIMD operations is written in different header files.</p><p id="dcfbb8fe-e9f9-491b-98a2-b2eedede3612" class="">For example, for the <em>add</em> operation with SSE:</p><pre id="4a39da91-8b29-46e8-ad9e-55ec1ee1b9fa" class="code"><code>namespace Simd
+{
+  inline Simd128Type Vector3Add(Simd128TypeArg vector1, Simd128TypeArg vector2)
+  {
+    return _mm_add_ps(vector1, vector2);
+  }
+}
+</code></pre><p id="82bc4598-aa17-4b15-91b3-68910ee5e532" class="">The internal math structures are aligned and contain their corresponding SIMD type.</p><pre id="325e06f4-1baa-427a-b262-6e104245bc57" class="code"><code>struct alignas(16) Vector3Type
+{
+  Simd128Type _v;
+};</code></pre><p id="a2b7649a-bcae-4166-bdae-9b7792473a88" class="">The math operations are implemented as wrappers.</p><pre id="53e29fa4-62e4-4d9d-b06c-9f9bdd913954" class="code"><code>inline void Vector3Add(Vector3Type* result, const Vector3Type&amp; vector1, const Vector3Type&amp; vector2)
+{
+  result-&gt;_v = Simd::Vector3Add(vector1._v, vector2._v);
+}
+</code></pre><p id="be1a8ec7-528e-4b3a-8a5c-3d2237226fbd" class="">The math types used in the game code include their corresponding internal math structure.</p><pre id="28314533-3614-4953-8bcd-23fb82645031" class="code"><code>class Vector3
+{
+  Vector3Type _v;
+  ...
+};</code></pre><p id="44bf4c9a-7166-451b-82ed-e90d2b6606d6" class="">When we implement the operations, we use the common interface.</p><pre id="5209f372-0b6c-40ed-85b9-bf4070a2dfd0" class="code"><code>inline Vector3 Vector3::operator+(const Vector3&amp; value) const
+{
+  Vector3 result;
+  Vector3Add(&amp;result, *this, value);
+  return result;
+}</code></pre><h1 id="80dfcab2-29ce-4d04-b4b7-0c6fb423a50e" class="">Optimizations</h1><h2 id="a5840fb4-f39f-4281-aef2-8430aaf637de" class="">Partial Loads</h2><p id="04532dcf-414a-4dbf-956e-cab92860283d" class="">In some platforms (such as VMX128), functions that initialize fewer than 4 components leave the remaining component uninitialized.</p><p id="2b482039-e7ae-45b0-8f63-b100d3d20cb3" class="">Other platforms (such as SSE) always intialize the 4 components by setting the remaining components to 0.</p><h2 id="223aa02f-f7ba-4047-b552-08e8570f3285" class="">Generic to SIMD</h2><p id="5d7c4057-514e-4783-920a-cacbb7d365ea" class="">A naive implementation of SIMD is to replace the generic implementation of math types such as Vector3 using SIMD registers.</p><pre id="926d36f3-8f00-439e-906d-f656af260127" class="code"><code>struct Vector3
+{
+  SimdType _v;
+};</code></pre><p id="da0ebf5c-0429-4d09-b909-51671e5319dd" class="">However, SIMD is most efficient when operating on many components.</p><ul id="5cd8deb3-d6ab-4153-a78d-3feaee56ccfd" class="bulleted-list"><li>Wastes 25% of the performance by not using a float in common operations.</li></ul><ul id="67403a5a-d6ef-4703-b794-612461e47f7d" class="bulleted-list"><li>Requires a lot of swizzling in common algorithms (for example in a cross product operation).</li></ul><p id="ee2fb242-8e48-4b3b-b186-3dc4a57b33f1" class="">Instead, each Vector3 components should be stored in distinct SIMD float4, and the operations should be performed on four objects at the same time.</p><pre id="1d8814d5-b752-4bbd-af30-7ec0a0555c7a" class="code"><code>SimdVector3 inputs[4];
+SimdVector3 outputs[4];
+SimdOperation(inputs, outputs);</code></pre><h2 id="37615cd9-2340-471a-8509-9d77b4588dbf" class="">Alignment</h2><p id="a24d0177-1c3d-415a-a2a4-8dcb2aac2d38" class="">SIMD types should be 16-bytes aligned, using compiler directives or aligned memory allocators.</p><p id="2a422a21-4419-4be3-b821-5970f211a043" class="">SIMD operations are more efficient with aligned types.</p><h2 id="d145af2d-f178-48fb-b0f8-57ef7c5f2dd7" class="">Accessors and operators</h2><p id="bc4aa418-396d-4483-93ef-6e87b0f5c74e" class="">Avoid accessing individual components through accessors or operator overloads.</p><p id="6639330b-9cae-42ab-8db2-0cad55c51205" class="">It requires moving from the SIMD registers to the scalar ones and back again.</p><h2 id="20da9c48-ec99-45da-82c3-cf6db9285224" class="">Pointers parameters</h2><p id="46324a6e-d994-4a93-a929-7bee6145e682" class="">Pointer operations are more efficient than the non-pointer operations to load data directly from memory to the SIMD registers.</p></div></article></body></html>

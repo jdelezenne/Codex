@@ -1,0 +1,565 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>SIMD</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="88ba6e0a-4841-4cf7-aa49-9d99f4b0dd1f" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🔢</span></div><h1 class="page-title">SIMD</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th>Created</th><td><time>@Jun 27, 2019 12:25 PM</time></td></tr><tr class="property-row property-row-multi_select"><th>Tags</th><td></td></tr></tbody></table></header><div class="page-body"><h1 id="2845f83b-33e7-45d5-9df9-7c0186df32f6" class="">Overview</h1><p id="06a2c982-f85d-454b-b52d-2f9d8154bbfa" class="">Single Instruction, Multiple Data (SIMD) is a set of instructions to perform vectorized computations.</p><h1 id="9052d377-7afc-44c9-8348-fc3fc34fc411" class="">MMX</h1><ul id="c0b51f60-0e0e-4aec-82dc-5d54c5051a37" class="bulleted-list"><li>Introduced in 1997.</li></ul><ul id="b8783cf3-3be6-40e4-8a8e-cbbd8ec7787a" class="bulleted-list"><li>57 instructions.</li></ul><ul id="4b917353-d4f1-406a-802d-fdf29ecf6e50" class="bulleted-list"><li>2-operand instructions.</li></ul><ul id="8e45b9d8-2a3b-4342-b210-920be23c6615" class="bulleted-list"><li>8 registers: MM0–MM7.<ul id="1a8a8f7a-c915-4b65-a528-6a8965655d39" class="bulleted-list"><li>64-bit registers.</li></ul></li></ul><hr id="8dd5cc5a-b197-4600-88de-ac74d2308124"/><p id="53fd20a6-c2b3-4b6e-b822-e22b817f542a" class="">A single instruction can be applied to:</p><ul id="88a683b6-6c5c-43ec-95ea-bfa277088d9f" class="bulleted-list"><li>one 64-bit integer or</li></ul><ul id="899045fe-bbc0-4f5e-a017-f4ebbb62e2e6" class="bulleted-list"><li>two 32-bit integers or</li></ul><ul id="fe1e903f-b3be-47dc-8751-c2c9c9aa3c1f" class="bulleted-list"><li>four 16-bit integers or</li></ul><ul id="d16e5532-792e-44ce-8b28-c41f141343dc" class="bulleted-list"><li>eight 8-bit integers.</li></ul><hr id="64e572cb-4aae-46a2-9a15-11e810e3ba08"/><p id="ac5ce1f4-2eef-47e1-9fcc-b51f373eac80" class="">Issues:</p><ul id="92ad1034-6571-4136-9dfa-7c060d880e5a" class="bulleted-list"><li>Re-used existing x87 floating point registers.<ul id="497d29f8-c2dd-4790-8e24-bbc7a22b99b6" class="bulleted-list"><li>Unable to work on both floating point and SIMD data at the same time.</li></ul></li></ul><ul id="fb052218-5d09-4e38-83fc-e1e25f73c94c" class="bulleted-list"><li>Only supported operations on integers.</li></ul><h1 id="793fe8f9-0078-448c-a614-03e073d94d77" class="">SSE</h1><blockquote id="94e9f161-622c-4d43-ac20-159227770bbb" class="">Streaming SIMD Extensions</blockquote><ul id="78a2bfd1-98e7-4ae5-8077-1057f5b78698" class="bulleted-list"><li>Introduced in 1999.</li></ul><ul id="c1df6085-b26e-44a7-87e2-cdb730cb5e25" class="bulleted-list"><li>70 instructions.</li></ul><ul id="119d4f80-33fc-4fb4-b7ec-a71ba484d24b" class="bulleted-list"><li>8 new registers: XMM0–XMM7<ul id="b0a5ab55-7b7c-4215-bb60-2ba880939efb" class="bulleted-list"><li>128-bit registers.</li></ul><ul id="5c6f87b5-7e5f-4975-8142-8953d9b00ddb" class="bulleted-list"><li>four 32-bit single-precision floating point numbers.</li></ul></li></ul><hr id="8a3a191c-a401-4177-af20-eb8cd6b40e16"/><p id="5ebf4ee0-0fdf-45ab-887a-1f5a72942897" class="">A single instruction can be applied to:</p><ul id="32137318-9eb5-48fb-8c95-20dff1a33a3b" class="bulleted-list"><li>two 64-bit double-precision floating point numbers or</li></ul><ul id="3e2d553c-03b8-4907-aab9-675e737c5128" class="bulleted-list"><li>two 64-bit integers or</li></ul><ul id="d07da13f-0fe5-4b29-94cb-dda1fdfdc462" class="bulleted-list"><li>four 32-bit integers or</li></ul><ul id="6f1b3acc-57b2-4632-91f3-21047f7a29c4" class="bulleted-list"><li>eight 16-bit short integers or</li></ul><ul id="fd5da68a-8997-4834-9e4e-fea115a16994" class="bulleted-list"><li>sixteen 8-bit bytes.</li></ul><h1 id="a3e3a20f-45e5-446c-b1a1-e246b5aa0809" class="">SSE2</h1><ul id="6aaa3610-1dc8-4058-b660-d53f50d40578" class="bulleted-list"><li>Introduced in 2000.</li></ul><ul id="aa50c2e3-8586-4d0a-bb92-c80d5b69fb43" class="bulleted-list"><li>144 instructions.</li></ul><ul id="b4f268df-f06c-4b18-8eba-15a360e03c53" class="bulleted-list"><li>8 registers: XMM0–XMM7<ul id="0b22fe93-d12e-4e17-9fb3-0be369f00648" class="bulleted-list"><li>16 registers in x86-64 mode: XMM0–XMM15.</li></ul><ul id="ac8a15cc-46fc-45c0-a709-c2da110d032b" class="bulleted-list"><li>128-bit registers.</li></ul><ul id="f65f198b-a126-470b-be6d-28ae6cac3b9d" class="bulleted-list"><li>Double-precision floating point operations.</li></ul></li></ul><ul id="3cfe42a5-7085-4980-af0a-31fd4e4bd60b" class="bulleted-list"><li>MMX integer operations on 128-bit XMM registers.</li></ul><hr id="4a437199-eb60-43a6-a438-77ae282f380a"/><p id="f23118da-4256-4b2f-9ce4-274c9cec5abf" class="">Advantages:</p><ul id="1ac92ce1-290a-462d-9ab3-09bd259ecc81" class="bulleted-list"><li>MMX and x87 register do not alias one another.</li></ul><p id="f62103a6-febb-47fb-ac40-1723fcea4d80" class="">Issues:</p><ul id="73fa01ac-b3ac-43ff-887a-2b6805227b9d" class="bulleted-list"><li>Slow access to data in memory not aligned to a 16-byte boundary.</li></ul><h1 id="eaf8a782-7c33-4620-a905-38c25a5b3974" class="">SSE3</h1><ul id="c0514f47-4f07-4f63-8488-2e7c7a263193" class="bulleted-list"><li>Introduced in 2004.</li></ul><ul id="2e637979-a626-4418-91f0-03847c37f043" class="bulleted-list"><li>13 new instructions over SS2.</li></ul><hr id="f17ff1d8-84d0-4ebb-b02b-dd50f5535592"/><p id="d2785ec6-cdd8-4b2b-a301-4a360f25ad6f" class="">Advantages:</p><ul id="d8733a54-46fe-4c6e-a752-0c1c018ebd8a" class="bulleted-list"><li>Unaligned load instructions are faster.</li></ul><ul id="5f12578c-fdf1-4f8b-a97a-ce7ad5b4c205" class="bulleted-list"><li>Horizontal instructions to speed up the several DSP and 3D operations.</li></ul><h1 id="bf616d12-b172-47f7-b8dc-b5fe596eec6f" class="">SSE4</h1><ul id="ed1b167b-601f-4199-b5c3-b9ebfb29d76e" class="bulleted-list"><li>Introduced in 2006.</li></ul><ul id="0a282c43-730d-4a02-bae4-8d4f7b8856fe" class="bulleted-list"><li>54 instructions.</li></ul><hr id="e90ba568-3711-42c1-a4ec-a6cf8d77292f"/><p id="2c9dc685-cdbd-499d-9ac9-6f02696f686f" class="">Advantages:</p><ul id="cc464d5a-5762-4393-9001-a8a88cafe8cd" class="bulleted-list"><li>Unaligned load instructions are as fast as aligned versions.</li></ul><ul id="a4068517-f252-425c-aa1f-69d04c7bfa5a" class="bulleted-list"><li>Dot product instruction.</li></ul><ul id="e5e3cc29-c709-40b6-9353-dde13cb08f57" class="bulleted-list"><li>Additional integer instructions.</li></ul><h1 id="dfe9b444-7bc0-435d-b0e9-85911f43463a" class="">AVX</h1><blockquote id="8c9698ae-40fc-4027-b0ca-0cd18dd506d0" class="">Advanced Vector Extensions (AVX)</blockquote><ul id="74e8acb3-93f3-4a80-8d80-e6f14e69447b" class="bulleted-list"><li>Introduced in 2008.</li></ul><ul id="12968de7-e75b-4316-aaf2-b43e9e831eff" class="bulleted-list"><li>8 registers.<ul id="84186c34-cdb9-4034-9702-db292f31d689" class="bulleted-list"><li>Renamed XMM0–XMM7 to YMM0–YMM7.</li></ul><ul id="9d901242-ca3d-4a47-ac99-cc6dcda14d57" class="bulleted-list"><li>16 registers in x86-64 mode: YMM0–YMM15.</li></ul><ul id="0e2fd683-1e82-4e93-b72c-f1c621139be5" class="bulleted-list"><li>256-bit registers.</li></ul></li></ul><ul id="8e1052c6-422d-45de-ab28-55f45ca10523" class="bulleted-list"><li>3-operand instructions.</li></ul><hr id="4ac2cf96-2eb7-416f-8060-f93258ae1567"/><p id="7be4902c-ed63-4d9f-b444-6de543274e2a" class="">A single instruction can be applied to:</p><ul id="94eb6942-649a-416e-b926-76119f302f91" class="bulleted-list"><li>eight 32-bit single-precision floating point numbers or</li></ul><ul id="74dbb76f-2b84-4b25-b841-bc83b3662aaf" class="bulleted-list"><li>four 64-bit double-precision floating point numbers.</li></ul><hr id="0f1ac771-48c6-4a36-ac24-e2aacdd313f9"/><p id="de3f2034-5153-48af-9ee9-ca04d2635629" class="">Advantages:</p><ul id="98a5e502-a8c4-45b8-83da-a6a7bfd01e7f" class="bulleted-list"><li>Supports 128-bit and 256-bit SIMD in AVX-128 mode.</li></ul><h1 id="f6546dd6-21c0-4844-8e3b-ad44947b59a4" class="">AVX2</h1><ul id="b30b302d-e886-42cd-84c3-6df7c7c34694" class="bulleted-list"><li>Introduced in 2013.</li></ul><ul id="6522dd14-cc0f-4a02-aca0-dce9e09500be" class="bulleted-list"><li>Fused Multiply-Accumulate (FMA) instructions.</li></ul><ul id="f449aec5-1207-4651-a80c-4cc6529aa759" class="bulleted-list"><li>3-operand FMA (FMA3) instructions.</li></ul><h1 id="303e836c-4ca5-4876-9894-f59f7385a3b9" class="">AVX-512 (or AVX3)</h1><ul id="6a20a9ff-1f4b-4979-a1ea-754de4f24910" class="bulleted-list"><li>Introduced in 2013.</li></ul><ul id="54cc340d-6ae6-4eda-a099-da50d5cbc053" class="bulleted-list"><li>512-bit registers.</li></ul><ul id="5342a221-2936-404d-b40b-4821c9a3ae82" class="bulleted-list"><li>32 registers in x86-64 mode: ZMM0-ZMM31.</li></ul><ul id="27f95532-8f02-4725-8f59-b91fc27f33f0" class="bulleted-list"><li>4-operand instructions.</li></ul></div></article></body></html>

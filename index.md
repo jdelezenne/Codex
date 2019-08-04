@@ -31,12 +31,12 @@ The advantage of building a wiki instead of a blog is that the information can b
 
 A retrospective on the different versions of DirectX.
 
-[DirectX](https://www.notion.so/juliendelezenne/DirectX-bbf599dbca4e47b38325b3955a547644){:target="_blank"}
+[DirectX](History/DirectX.html){:target="_blank"}
 
 
 A review of the different implementations of SIMD.
 
-[SIMD](https://www.notion.so/juliendelezenne/SIMD-88ba6e0a48414cf7aa499d99f4b0dd1f){:target="_blank"}
+[SIMD](History/SIMD.html){:target="_blank"}
 
 
 # 💻 Hardware
@@ -48,20 +48,27 @@ An overview of the architecture of a computer system and its fundamental compone
 
 A review of the CPU's cache memory, and best practices.
 
-🚅[Cache Memory](Hardware/Cache-Memory.html){:target="_blank"}
+🚅[Cache Memory](Hardware/Cache Memory.html){:target="_blank"}
 
 
 To debug programs compiled for an Intel x86 architecture, some fundamental knowledge of the processor and its instructions is necessary.
 
-[Intel x86](Hardware/Intel-x86.html){:target="_blank"}
+[Intel x86](Hardware/Intel x86.html){:target="_blank"}
 
 # 🖥 Software
 
 ## System
 
+Every programming language provides fundamental data types.
+
+🔢[Numeric Types](software/Numeric Types.html){:target="_blank"}
+
+🔟[Endianness](software/Endianness.html){:target="_blank"}
+
+
 The code translation process that includes the compilation and linking of source code to a binary executable.
 
-🔤[Code Translation](Software/Code-Translation.html){:target="_blank"}
+🔤[Code Translation](Software/Code Translation.html){:target="_blank"}
 
 
 The storage of a program's executable on different plaforms.
@@ -73,121 +80,120 @@ A program uses a portion of heap memory known as the stack.
 
 [📚 Stack](Software/Stack.html){:target="_blank"}
 
-
-A review if the different kind of memory, and the best practices for writing efficient programs.
-
-🗄[Memory](Software/Code-Translation.html){:target="_blank"}
-
-
-A review of different allocation strategies and their use in a game engine.
-
-⛓[Memory Allocators](https://www.notion.so/juliendelezenne/Allocators-efa67ff35a314cb48e36a13f038a419e){:target="_blank"}
-
-
-An overview of multithreading and platform-dependent functionalities.
-
-🔀[Multithreading](https://www.notion.so/juliendelezenne/Multithreading-6081d956dabc43ad95c57aa9eaced001){:target="_blank"}
-
-
-A review of best practices that are mostly platform-independent.
-
-👑[Best Practices](https://www.notion.so/juliendelezenne/Best-Practices-88d916f234f5446ead5ceafca9a4aadd){:target="_blank"}
-
-## Data
-
-Every programming language provides fundamental data types.
-
-🔢[Numeric Types](https://www.notion.so/juliendelezenne/Numeric-Types-d562f84c7ea645d690e6bbf2bf361923){:target="_blank"}
-
-
-An overview of the fundamental container types and their usage.
-
-📦[Collections](https://www.notion.so/juliendelezenne/Collections-e53f4fbd8fd3472f9f94a9c40d19d45e){:target="_blank"}
-
 ## C++ {#cpp}
-
-Fundamental information on C++ and best practices.
-
-🌀[C++](https://www.notion.so/juliendelezenne/C-2d458c79f87e4488ba7693fbdf87c1d7){:target="_blank"}
-
 
 C++ does not support Bit Flags as a fundamental type. There are different methods to implement this functionality.
 
-🚩[Bit Flags](https://www.notion.so/juliendelezenne/Bit-Flags-b6f54688b0684f539bf11149fd8c4cd9){:target="_blank"}
+🚩[Bit Flags](Software/Bit Flags.html){:target="_blank"}
 
 
 There are different methods to handle errors in C++.
 
-⚠️[Error Handling](https://www.notion.so/juliendelezenne/Errors-5ae5a4ffe58049359821c5534a93cf26){:target="_blank"}
+⚠️[Error Handling](Software/Error Handling.html){:target="_blank"}
+
+
+C++ and best practices.
+
+🌀[C++ Best Practices](Software/C++ Best Practices.html){:target="_blank"}
 
 ## C# {#csharp}
 
 Fundamental information on C# and best practices.
 
-🌀[C#](https://www.notion.so/juliendelezenne/C-01e5331648d04f6aa4ac8ef4db270f4d){:target="_blank"}
+🌀[C#](Software/C#.html){:target="_blank"}
+
+🌀[C# Best Practices](Software/C# Best Practices.html){:target="_blank"}
 
 
 Information on the internals of .NET.
 
-👾[.NET Internals](https://www.notion.so/juliendelezenne/NET-Internals-6616e2341a31419f9bc686d7b7bd0ba9){:target="_blank"}
+👾[.NET Internals](Software/.NET Internals.html){:target="_blank"}
+
+
+A review of best practices that are mostly platform-independent.
+
+👑[Best Practices](Software/Best Practices.html){:target="_blank"}
+
+
+An overview of multithreading and platform-dependent functionalities.
+
+🔀[Multithreading](Software/Multithreading.html){:target="_blank"}
 
 ## 🧱 Build
 
 A review of build systems and build tools.
 
-🔨[Build Systems](https://www.notion.so/juliendelezenne/Build-System-d66da054a959417096d99d4bf9922afd){:target="_blank"}
+🔨[Build Systems](Software/Build Systems.html){:target="_blank"}
 
 
 CMake is one of the most popular open-source cross-platform build toolset, and it can be used for game development with a minimal set up.
 
-[CMake](https://www.notion.so/juliendelezenne/CMake-681851c9506b4e23a22418f97e20cc1a){:target="_blank"}
+🔨[CMake](Software/CMake.html){:target="_blank"}
+
+# Core
+
+A review of SIMD on different platforms, and best practices on their usage.
+
+[SIMD](Core/SIMD.html){:target="_blank"}
+
+
+A review if the different kind of memory, and the best practices for writing efficient programs.
+
+🗄[Memory](Core/Memory.html){:target="_blank"}
+
+
+A review of different allocation strategies and their use in a game engine.
+
+⛓[Memory Allocators](Software/Memory Allocators.html){:target="_blank"}
+
+
+An overview of the fundamental container types and their usage.
+
+📦[Collections](Core/Collections.html){:target="_blank"}
+
+
+Different strategies to implement a reflection system in C++.
+
+🔖[Reflection](Core/Reflection.html){:target="_blank"}
+
+
+Different strategies to serialize and deserialize data in C++.
+
+💾[Serialization](Core/Serialization.html){:target="_blank"}
+
+
+Best practices on implementing loading and saving in a game engine.
+
+🗂[Storage](Core/Storage.html){:target="_blank"}
+
 
 # 🧮 Mathematics
 
 The principles of trigonometry that are necessary for graphics programming.
 
-📐[Trigonometry](https://www.notion.so/juliendelezenne/Trigonometry-911029bf6ea64c9baf2925474d65dcd1){:target="_blank"}
+📐[Trigonometry](Core/Trigonometry.html){:target="_blank"}
 
 # 🎮 Game Runtime
 
 An overview of the recommended project configurations for a game engine.
 
-🛠[Project Configuration](https://www.notion.so/juliendelezenne/Project-Configuration-e7446f013e894d08bfbe3e334ac7fe96){:target="_blank"}
+🛠[Project Configuration](Runtime/Project Configuration.html){:target="_blank"}
 
 Strategies to provide a platform abstraction for the low-level functionality of the engine.
 
-[Cross-Platform](https://www.notion.so/juliendelezenne/Cross-Platform-a3fbb4db74454f1493fb1f8a13fc4bf3){:target="_blank"}
+[Cross-Platform](Runtime/Cross-Platform.html){:target="_blank"}
 
 
 Overview of platform-independant and platform-spefic features for the low-level functionality of the engine.
 
-[Platforms](https://www.notion.so/juliendelezenne/Platforms-52958043b11647faa3f5aaf33a322c6c){:target="_blank"}
+[Platforms](Runtime/Platforms.html){:target="_blank"}
 
-
-A review of SIMD on different platforms, and best practices on their usage.
-
-[SIMD](https://www.notion.so/juliendelezenne/SIMD-4e4aca2cf1a94c93ac3b2d1beca4cc57){:target="_blank"}
-
-
-Different strategies to implement a reflection system in C++.
-
-🔖[Reflection](https://www.notion.so/juliendelezenne/Reflection-01c7a4c0143a4881afadaec6fbef5fc6){:target="_blank"}
-
-
-Different strategies to serialize and deserialize data in C++.
-
-💾[Serialization](https://www.notion.so/juliendelezenne/Serialization-54ffe6fffac0497aa30bfc99ab447bf8){:target="_blank"}
-
-
-Best practices on implementing loading and saving in a game engine.
-
-🗂[Storage](https://www.notion.so/juliendelezenne/Storage-3d27f6623a6946efa078299f4b17fe40){:target="_blank"}
 
 # 🎨 Game Editor
 
 A review of popular version control systems, and how they can be integrated into a game pipeline.
 
-🏷[Version Control](https://www.notion.so/juliendelezenne/Version-Control-be7595ca455d412fbac8c67a7f1698da){:target="_blank"}
+🏷[Version Control](Editor/Version Control.html){:target="_blank"}
 
 # 🎓 Tutorials
 

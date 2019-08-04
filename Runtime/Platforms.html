@@ -1,0 +1,646 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Platforms</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="52958043-b116-47fa-a3f5-aaf33a322c6c" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">💻</span></div><h1 class="page-title">Platforms</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th>Created</th><td><time>@May 28, 2019 1:42 PM</time></td></tr><tr class="property-row property-row-multi_select"><th>Tags</th><td></td></tr></tbody></table></header><div class="page-body"><h1 id="f2537516-73a0-4b9c-bd1c-b1bb320fea77" class="">Overview</h1><p id="d63b74af-78e4-4c02-b3cf-9bdc5ba99002" class="">The low-level of a game runtime relies on many platform-specific functionalities.</p><p id="17414fb2-5610-454a-93fc-827b4ebd6c62" class="">Some of these features are implemented in the Standard C++ Library (STL).</p><p id="a39250f7-3318-4950-84ad-392aa64bbab1" class="">On some platforms, some functionality is provided by the POSIX library or the GNU C Library.</p><p id="d30bad33-1424-408b-8f2a-ddfb511dee18" class="">Sometimes, none of these implementations fit the requirements, and it is necessary to access the platform&#x27;s API directly.</p><h1 id="08b81464-93b4-4b02-9a31-e3928ff4507e" class="">Standard C++ Library (STL)</h1><p id="f85a7b20-34c9-4fb3-b6e2-8220cabcd889" class="">The standard C++ library was initially created before the standardization of the C++ language.</p><p id="8882243b-2d28-48da-bfe2-ef7fe7a33400" class="">✔️</p><ul id="c4c534a4-3a77-46c0-a573-b775a7c1e310" class="bulleted-list"><li>Contains many fundamental functionality such as containers and algorithms.</li></ul><ul id="45e5c240-6809-4abe-a7dd-0c3ddfb46685" class="bulleted-list"><li>Provided on every platforms.</li></ul><p id="6520fe66-4354-49d6-83f5-2c7e65eb8051" class="">❌</p><ul id="230b651b-038a-43c1-927b-8645c7e8781f" class="bulleted-list"><li>The implementation of the library is platform-specific. There can be variations in the implementation that can affect the user code (for example, with memory allocation).</li></ul><ul id="9fb3b70c-eb67-4f65-a7ea-96c722a6a3b1" class="bulleted-list"><li>The library is difficult to debug with complex template types.</li></ul><ul id="079e76b5-41e5-4725-887d-b988ba51f371" class="bulleted-list"><li>Some features are not friendly to implementing real-time systems like a game engine.</li></ul><h2 id="554f15d6-6d0a-4ae6-a455-a85b1cb507e1" class="">Containers</h2><p id="85d296a1-129a-4661-a13f-055e2cb9f6aa" class="">The STL containers are implemented for generic-purposes, and most game engines implement custom containers instead.</p><h2 id="accaf8f2-4990-4af8-aa0d-2ba37fd5f354" class="">Strings</h2><p id="fc93c936-6abb-4781-b377-5facf22018b2" class="">The <code>std::string</code> is useful to perform string operations, but in practice they are very limited at runtime.</p><p id="5d4e05e9-d203-41bd-925b-569a2e590ef6" class="">The <code>std::string_view</code> class is more useful as it provide a read-only reference to a string.</p><p id="7245fd49-095c-482c-be9e-d80abfa48eb7" class="">It can be when a string is used as an input parameter.</p><h2 id="05c3ad68-691a-4ee6-aa89-8a1becedfa25" class="">Allocator</h2><p id="5435d156-40cb-406c-8afc-1d28a9f5b597" class="">The <a href="https://en.cppreference.com/w/cpp/memory/allocator"><code>std::allocator</code></a> class is intended to be used as a template argument for containers.</p><p id="8adfa1c5-97d1-4e7b-9e2d-f000fbc8eb60" class="">As it is not possible to store state data, the only practical use of a custom allocator based on <code>std::allocator</code>, is to override the allocation to another global allocator.</p><h2 id="f633821c-a566-4d36-8ac6-a4ea236bac9f" class="">Algorithms</h2><p id="ab5306d2-061d-4f9f-86f2-d9750816e2cc" class="">The <code>algorithm</code> header file provides many functions that are useful for doing iterations, sorting, searches, ...</p><p id="d008a42d-7502-4f31-ac34-7f1b28f72406" class="">If you implement custom containers, be sure to provide the <code>begin</code> and <code>end</code> methods to return iterators that can be used with the STL algorithms (and the range-based for loop).</p><h2 id="2cac48d0-e135-4340-aebe-a7da41a7fdb8" class="">Exceptions</h2><p id="afbbac56-be09-4abf-87a4-52226d948ff4" class="">Exception handling is not recommended in the runtime.</p><p id="b5cf438d-0889-4b11-8694-34dcb02e2c28" class="">However, it can still be useful in a limited scope, such as when running scripts, or in the editor build of the runtime.</p><p id="a13d4bfa-6711-40a3-aaa9-85c695419612" class="">A custom type of exception can be defined by deriving from <code>std::exception</code>.</p><h3 id="9e32951f-b314-40e2-a3c3-b8d74941f36e" class="">Windows</h3><p id="c07d1c92-b185-41b3-aaed-e4bad72e27f5" class="">For debugging a new type of exception:</p><ul id="55ff67fa-342b-480e-88b0-dc123875d56e" class="bulleted-list"><li>Enable the checkbox next to <code>std::exception</code> in the Visual Studio &quot;Exception Settings&quot; dialog (Debug → Windows → Exception Settings).</li></ul><ul id="e0fdcacc-c6ff-4ba4-a508-b422cd82cc31" class="bulleted-list"><li>Select &quot;C++ Exceptions&quot;, click the + button, and type the type name (including its namespace) to add the new exception.</li></ul><h1 id="e603413c-9885-4e52-a6ab-577c5d10228d" class="">CPU Features Detection</h1><p id="fb86d431-9f00-4afd-90ea-9f640d2b1f8f" class="">It&#x27;s useful to determine the CPU on the target system to run the most optimized code path, and provide specific functionality (such as SIMD).</p><p id="b9f9ca67-3233-498d-a9c3-b2c6db282906" class="">On x86, the <a href="https://en.wikipedia.org/wiki/CPUID"><code>CPUID</code></a> instruction can be used to get information about the supported features and the CPU type.</p><h2 id="a960112b-38c6-418c-82f2-a6a461f92cae" class="">Microsoft</h2><p id="ad71a270-da1b-44f8-a170-865769248fbe" class="">The <a href="https://docs.microsoft.com/en-us/cpp/intrinsics/cpuid-cpuidex"><code>__cpuid</code></a> intrinsic can be used to generate the instruction.</p><p id="58d76390-9486-4604-a8d4-8326a3d3d528" class="">This intrinsic stores the supported features and CPU information in the <code>cpuInfo</code> array.</p><pre id="b4e35134-53b0-4c55-91ee-68429f3b916b" class="code"><code>void __cpuid(
+   int cpuInfo[4],
+   int function_id
+);</code></pre><ul id="cce8174b-94dc-4e63-839b-e956b7e166e2" class="bulleted-list"><li><code>cpuInfo</code> – An array of 4 integers that contains the information about the CPU.
+The array is filled with the values of the EAX, EBX, ECX, and EDX registers.</li></ul><ul id="435caa2a-8e20-491e-95a2-a2a2b742ffe0" class="bulleted-list"><li><code>function_id</code> – Specifies the information to retrieve.</li></ul><h3 id="33f4a95e-2233-43f8-a2a5-e53a8538de18" class="">Usage</h3><p id="94c65409-1069-4c13-8df2-255320a5817f" class="">You first call <code>cpuid</code> with <code>function_id</code> set to 0, to get the number of the IDs.</p><pre id="21b570fc-c050-462d-8e75-7d0c48d69a72" class="code"><code>int cpuInfo[4];
+
+__cpuid(cpuInfo, 0);
+
+// Number if IDs
+int idCount = cpuInfo[0];
+
+if (idCount &gt;= 1)
+{
+    // Detect the features
+    ...
+}</code></pre><p id="5ae8caa4-8c94-477e-b41f-b7dcb59e0149" class="">To obtain the vendor&#x27;s name, you obtain three separate strings.</p><p id="ee9fa2fe-5172-4117-a5b0-aa9cd0c37512" class="">The vendor string is stored in EBX, EDX, and ECX in that order.</p><pre id="e1abd985-ca47-46f2-8364-84b25ba9f165" class="code"><code>char vendorData[32] = {};
+*reinterpret_cast&lt;int*&gt;(vendorData) = cpuInfo[1];
+*reinterpret_cast&lt;int*&gt;(vendorData + 4) = cpuInfo[3];
+*reinterpret_cast&lt;int*&gt;(vendorData + 8) = cpuInfo[2];
+
+std::string vendor = vendorData;</code></pre><p id="cba8c58d-4141-4282-b368-1275a33ee1f1" class="">You can then compare the vendor with predefined strings.</p><pre id="cf79a648-b782-4eb2-b195-94a9716b3b40" class="code"><code>if (vendor == &quot;GenuineIntel&quot;)
+{
+    IsIntel = true;
+}
+else if (vendor == &quot;AuthenticAMD&quot;)
+{
+    IsAMD = true;
+}</code></pre><p id="792efbe0-1470-4332-886b-c3ac89b63d97" class="">To detect the SIMD support, you use bit flags with the registers that contain the feature sets.</p><p id="26b8b4e6-d172-4b15-a788-c3eab8216181" class="">Here are the most important features to detect:</p><pre id="efcc7aa1-e3d2-4e2e-bd20-ac8c043bfe0b" class="code"><code>__cpuid(cpuInfo, 1);
+int cpuInfo2 = cpuInfo[2];
+int cpuInfo3 = cpuInfo[3];
+
+// SSE
+IsSSE2 = (cpuInfo3 &amp; 25) != 0;
+
+// SSE2
+IsSSE2 = (cpuInfo3 &amp; 26) != 0;
+
+// SSE 3.x
+IsSSE3 = ((cpuInfo2 &amp; (1 &lt;&lt; 0)) != 0);
+IsSSE3x = ((cpuInfo2 &amp; (1 &lt;&lt; 9)) != 0);
+
+// SSE 4.x
+IsSSE41 = ((cpuInfo2 &amp; (1 &lt;&lt; 19)) != 0);
+IsSSE42 = ((cpuInfo2 &amp; (1 &lt;&lt; 20)) != 0);
+
+// AVX
+IsAVX = ((cpuInfo2 &amp; (1 &lt;&lt; 28)) != 0);
+
+// F16C (half-precision)
+IsFP16C = ((cpuInfo2 &amp; (1 &lt;&lt; 29)) != 0);
+
+// FMA3
+IsFMA = ((cpuInfo2 &amp; (1 &lt;&lt; 12)) != 0);</code></pre><p id="1cfaa337-f2be-4539-b2d6-1ce5869d03cf" class="">If the number of IDs is higher than 7, you can check for extended features.</p><pre id="5af90814-a0ff-4299-856e-7f9aa5522682" class="code"><code>if (idCount &gt;= 7)
+{
+    __cpuid(cpuInfo, 7);
+    int cpuInfo1 = cpuInfo[1];
+
+    // AVX2
+    IsAVX2 = ((cpuInfo1 &amp; (1 &lt;&lt; 5)) != 0);
+
+    // AVX-512
+    IsAVX512 = ((cpuInfo1 &amp; (1 &lt;&lt; 16)) != 0);
+}</code></pre><h2 id="d1e21f5f-ac18-46b1-8974-d9591e6a4910" class="">Apple</h2><p id="bd70e084-688a-4019-93c3-0afd2f95d76f" class="">The <a href="https://developer.apple.com/documentation/kernel/1580462-cpuid_info"><code>cpuid_info</code></a> function returns a pointer to a <code>i386_cpu_info_t</code> structure.</p><pre id="70dbdc25-bc06-4ca8-a19b-d495a6ec6272" class="code"><code>i386_cpu_info_t * cpuid_info(void);</code></pre><h1 id="a421cf9c-1157-4cfe-8f0d-0786ad749051" class="">Byte Swapping</h1><p id="3c80ba1e-ae0f-4141-9c1c-3a6ab4408c7d" class="">Most platform have either intrinsic functions or macro functions to perform byte swaps with integers.</p><p id="63ff1478-1a97-4961-b830-4301bcb7a89d" class="">They can be more efficient than custom functions.</p><h2 id="8d2d8f8f-0ecd-44fa-9c04-4ef40a7be631" class=""><a href="https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/byteswap-uint64-byteswap-ulong-byteswap-ushort">Microsoft (CRT)</a></h2><pre id="dde1bf6e-f8b2-47c3-bd0e-86d486e1a20f" class="code"><code>#include &lt;stdlib.h&gt;
+
+unsigned short _byteswap_ushort(unsigned short val);
+unsigned long _byteswap_ulong(unsigned long val);
+unsigned __int64 _byteswap_uint64(unsigned __int64 val);</code></pre><h2 id="91bcfdb0-5e4c-40e7-9792-28d627fecdef" class=""><a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/content/wdm/nf-wdm-rtlushortbyteswap">Microsoft (RTL)</a></h2><pre id="07d8b4f5-2e64-4d21-afcf-8b51a30e1d49" class="code"><code>#include &lt;rtl.h&gt;
+
+NTSYSAPI USHORT RtlUshortByteSwap(USHORT Source);
+NTSYSAPI ULONG RtlUlongByteSwap(ULONG Source);
+NTSYSAPI ULONGLONG RtlUlonglongByteSwap(ULONGLONG Source);</code></pre><h2 id="9438dbb7-3ec8-420b-a200-072d51dde3b7" class="">Apple</h2><pre id="4588ac75-88db-43f3-a200-114a24fb571a" class="code"><code>#include &lt;libkern/OSByteOrder.h&gt;
+
+OSSwapInt16(x);
+OSSwapInt32(x);
+OSSwapInt64(x);</code></pre><h2 id="5dbe249f-e410-4c07-aabc-88a7e5dcef4c" class=""><a href="http://man7.org/linux/man-pages/man3/bswap.3.html">Linux</a></h2><pre id="bde8d489-7377-4a0f-a26b-46d27c9060d1" class="code"><code>#include &lt;byteswap.h&gt;
+
+bswap_16(x);
+bswap_32(x);
+bswap_64(x);</code></pre><h2 id="6676cc28-4786-4b25-96c4-359b9b4a121b" class=""><a href="https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html">Android</a></h2><pre id="feaed7e8-ad0c-4db7-a714-b4848f91d769" class="code"><code>uint16_t __builtin_bswap16(uint16_t x);
+uint32_t __builtin_bswap32(uint32_t x);
+uint64_t __builtin_bswap64(uint64_t x);</code></pre><h1 id="26bdc6a3-0800-410b-99e6-387922139cf5" class="">Miscellaneous</h1><h2 id="681e6d1d-2155-402e-acd3-9c65f3ffaa3c" class="">Windows</h2><h3 id="7b26af4b-8571-43f3-8dad-ec06461094ed" class="">Alignment</h3><p id="0d835af7-7b61-4f10-8bb2-756bf1b608bb" class="">On 64-bit Windows, memory allocations are 16-byte aligned by default.</p><p id="3541c42c-88bc-4277-a57b-1252ffd531ec" class="">On 32 bit Windows, memory allocations are 8-byte aligned by default.</p><h3 id="534af372-9525-4932-ba74-5c2be51e1d18" class="">Calling Convention</h3><p id="30f0b18d-cff7-43f8-9782-190d74cd17a6" class="">The standard is <code>__fastcall</code>, which passes values on the stack.</p><p id="11f7ebd8-fc03-43b0-9ac0-7121243be58c" class="">With SIMD types, the <code>__vectorcall</code> calling convention can pass up to six <code>__m128</code> values as arguments to a function in SIMD registers.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f801894c-8933-491b-927e-c345c984ff68"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Because of limitations with <code>__vectorcall</code>, it is recommended to only pass <code>__m128</code> values by reference in constructors.</div></figure><h3 id="567ea5da-24e1-4aa9-a6e4-b38793f34ad0" class="">min/max</h3><p id="6cf8d536-7499-4887-a53d-a6b5e8849ebe" class="">The Windows header define macros for <code>min</code> and <code>max</code> that can conflict with the standard functions in the <code>std</code> namespace.</p><pre id="3387b073-f4fb-4ca6-a79f-df357fb164b4" class="code"><code>error C2589: &#x27;::&#x27; : illegal token on right side of &#x27;::&#x27;</code></pre><p id="959b7040-0675-4042-b89f-3a42b7bc514b" class="">To prevent windows from defining these macros, declare the <code>NOMINMAX</code> symbol prior to including <code>windows.h</code>.</p><pre id="32d5b22e-5be5-4b1f-9899-97a28b9090dd" class="code"><code>#define NOMINMAX
+#include &lt;windows.h&gt;</code></pre><h2 id="f3e00f24-c9a5-4764-8908-c38e039d5685" class="">UWP</h2><p id="5db9f2f1-63c9-459c-8e92-46c6cf9a0f19" class="">Reduce the WinRT code to a minimum.</p><p id="a2434838-0088-4552-934d-4cbb293ef437" class="">For example, the references to <code>Windows::UI::CoreWindow</code> and <code>Platform::String</code>.</p><h2 id="32b64740-9b7e-47bb-bfbf-e118e04e3c36" class="">macOS</h2><p id="c016d7c7-87ac-44df-bc07-37ebbd5afd0f" class="">Reduce the Objective-C and Coco-dependent code to a minimum.</p><p id="3ebce96d-b73e-42f1-a3b3-4067e307d8f7" class="">For example, convert <code>NSString</code> to <code>std::wstring</code>.</p><h1 id="240ab373-e5f2-4c3a-8c83-be0cb91ee6dd" class="">References</h1><h2 id="c70b98c6-58eb-4069-8b97-636c6fb188fd" class="">CPUID</h2><ul id="9d6405e5-4127-42a9-a7c1-629be23d0082" class="bulleted-list"><li>Getting Hardware Information, Microsoft Docs, <a href="https://docs.microsoft.com/en-us/windows/desktop/SysInfo/getting-hardware-information">https://docs.microsoft.com/en-us/windows/desktop/SysInfo/getting-hardware-information</a></li></ul><ul id="08589026-df4f-4df6-879a-fb8396da94d3" class="bulleted-list"><li>CPUSets for game development, Microsoft Docs, <a href="https://docs.microsoft.com/en-us/windows/uwp/xbox-apps/cpusets-games">https://docs.microsoft.com/en-us/windows/uwp/xbox-apps/cpusets-games</a></li></ul></div></article></body></html>

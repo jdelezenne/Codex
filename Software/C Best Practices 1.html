@@ -1,0 +1,617 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>C# Best Practices</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="20fcfeb5-7d4c-448e-a00c-7e98fb46fb60" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">👑</span></div><h1 class="page-title">C# Best Practices</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th>Category</th><td><span class="selected-value">C#</span></td></tr></tbody></table></header><div class="page-body"><nav id="1edcc966-9a64-433d-a645-0f94fb12098f" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#bc5aed0b-1a91-432d-bd3d-13fd9c217996">General</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e20baea3-5244-4f48-97db-f83398bbcf7d">const vs readonly</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#84e68ace-2b2f-45b0-8dc2-8c93e5473333">Union</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f776035e-e537-430a-90d8-d7cc8b6a96e4">Factory methods</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f8027728-9023-4ee3-aa6e-f5c83924c85c">Array covariance</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#03bb201d-cd76-444a-9e3d-a7f04a026720">Allocations</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#92d402ad-f188-4de4-ad3a-81d9e944b08e">Object reuse</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ef451cc1-47a1-40d9-a9df-b8e240d8e0d0">String operations</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#39e24feb-676e-4acb-8c6a-a97a542438e3">Parameters</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7dee5c01-0593-46da-a53b-1b11778c7cd4">Boxing</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a0f52e35-b13f-4443-9759-1c119238f1a2">Lambdas</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#57707b95-4b08-43c1-aa01-11d95cb97c10">LINQ</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b8c892ca-d20b-4f7d-bbe3-68ddb4a84c57">Iterators</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#913b637e-58a7-4c92-9759-648b88f3feba">async await</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#99047abd-dd8c-4194-83d3-cc220dfa2d3d">Reference Semantics</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#22a61f05-5123-4ea6-b92b-7cc9425b80a0">in parameters</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d8ed18eb-9703-40a8-bdc7-93bffb835cd1">ref return</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#726274d1-6b63-44d4-bbda-580e74e87bcd">readonly struct</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1a7d6e21-0fa1-4b78-8fcb-eab181a55780">ref stuct</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#bcca24ce-26d3-4104-afc4-f80223f625b9">Span</a></div></nav><hr id="d087c48d-9716-40df-b620-f1ba4f495659"/><h1 id="bc5aed0b-1a91-432d-bd3d-13fd9c217996" class="">General</h1><h2 id="e20baea3-5244-4f48-97db-f83398bbcf7d" class="">const vs readonly</h2><p id="f76eb235-fc9b-4a82-a9a2-6b30e627aae3" class="">Const variables are replaced by their values during compilation.</p><p id="2a9b5190-0f6f-457b-868b-83763f69aca6" class="">Readonly variables are not replcaed during compilation.</p><h2 id="84e68ace-2b2f-45b0-8dc2-8c93e5473333" class="">Union</h2><p id="b58e6da5-596f-47e4-b02c-c7a1cf72bb97" class="">In C++, <code>union</code> is a special data type that allows storing different data types in the same memory location.</p><p id="b74b56d7-7590-4b5f-a225-c03a018424f0" class="">It&#x27;s possible to have a similar data structure using the <code>StructLayout</code> attribute set to <code>LayoutKind.Explicit</code> and explicitly provide the offset of each field with the <code>FieldOffset</code> attribute.</p><pre id="13a5866a-ccbf-4080-8ab1-a886dad53a4b" class="code"><code>[StructLayout(LayoutKind.Explicit)]
+struct ByteArray
+{
+	[FieldOffset(0)]
+	public byte Byte1;
+	[FieldOffset(1)]
+	public byte Byte2;
+	[FieldOffset(2)]
+	public byte Byte3;
+	[FieldOffset(3)]
+	public byte Byte4;
+
+	[FieldOffset(0)]
+	public int Int;
+}</code></pre><h2 id="f776035e-e537-430a-90d8-d7cc8b6a96e4" class="">Factory methods</h2><p id="23629f42-fe53-4805-8d21-2e6dedea2c02" class="">When creating a new instance of a type through a generic method, the creation of the instance is performed using reflection with <code>Activator.CreateInstance</code>.</p><p id="42d3e6e0-c1ca-414b-8c77-26778ccd2804" class="">⚠The performance of <code>Activator.CreateInstance</code> are very poor compared to a regular creation because it uses reflection to find the constructor of the type.</p><p id="c197aa85-ae32-466a-adf3-6fcaeb92373d" class="">If an exception is throw in the constructor of the type, the excption will be wrapped inside a <code>TargetInvocationException</code> exception.</p><p id="2a8b91e7-a5c8-4218-b681-f0cb065914cf" class="">⚠This is problematic for the caller of the factory method that doesn&#x27;t not expect this exception to be thrown.</p><p id="fe75dc13-2ef7-4b7d-a942-e01ca33a1ef9" class="">It&#x27;s possible to catch this exception in the factory method, and throw the inner exception in a way that does not alter the exception&#x27;s stack track using <code>ExceptionDispatchInfo.Capture</code> and <code>ExceptionDispatchInfo.Throw</code>.</p><pre id="c1a484f8-526f-4fa3-ab54-ecf5e871de80" class="code"><code>public static T Create&lt;T&gt;() where T : new()
+{
+    try
+    {
+        return new T();
+    }
+    catch (TargetInvocationException ex)
+    {
+        var edi = ExceptionDispatchInfo.Capture(ex.InnerException);
+        edi.Throw();
+        throw;
+    }
+}</code></pre><h2 id="f8027728-9023-4ee3-aa6e-f5c83924c85c" class="">Array covariance</h2><p id="e73ef0df-7b39-469d-976b-b0805b80bedb" class="">Array covariance is a reference conversion.</p><p id="db64aab0-cad7-45c4-8eed-486b647e2631" class="">It allows the conversion of reference array types when assigning an array of type <code>T</code> to an array of type <code>object</code> or any other base type of <code>T</code>.</p><p id="f8fb4149-ee19-4029-93d2-7f8b704c72bc" class="">It doesn&#x27;t allow the conversion of value types, even if the value types have an implicit or explicit conversion.</p><pre id="027f1e2a-ef69-41cd-9da1-9f9ae827ef85" class="code"><code>string[] strings = new[] { &quot;1&quot;, &quot;2&quot;, &quot;3&quot; };
+object[] objects = strings;</code></pre><p id="cb65ec63-f099-4d09-8b78-6ef5ae4b5652" class="">If the <code>objects</code> variable is used for reading the data from the array, the conversion is type safe.</p><p id="d3a32e2e-ba9d-44a7-8319-be82449afbf5" class="">If the array is modified, the CLR performs expensives validations and a run-time error can occur if the argument is of an incompatible type.</p><pre id="aee927c5-c4ce-4488-99e4-7fb106bef03d" class="code"><code>objects[0] = 42; //run-time error</code></pre><p id="9dacdae8-a6eb-4674-b879-31ee83fb90cf" class="">The type safety for arrays of reference types during writes can be avoided by using a wrapper array of value types.</p><pre id="784bf7ed-acc9-4ddd-8963-2e97d4d188df" class="code"><code>public struct ObjectWrapper
+{
+    public readonly object Instance;
+    public ObjectWrapper(object instance)
+    {
+        Instance = instance;
+    }
+}
+
+private const int ArraySize = 100;
+private object[] _objects = new object[ArraySize];
+private ObjectWrapper[] _wrappers = new ObjectWrapper[ArraySize];
+private ObjectWrapper _wrapperInstanace = new ObjectWrapper(new object());
+ 
+public void DoArrayCovariance()
+{
+    for (int i = 0; i &lt; _objects.Length; i++)
+    {
+        _wrappers[i] = _wrapperInstanace;
+    }
+}</code></pre><h1 id="03bb201d-cd76-444a-9e3d-a7f04a026720" class="">Allocations</h1><h2 id="92d402ad-f188-4de4-ad3a-81d9e944b08e" class="">Object reuse</h2><ul id="208bc5bd-e86b-48c7-8e87-8f1ee93ca921" class="bulleted-list"><li>When passing collections as parameters, pass an existing instance instead of allocating a new one.</li></ul><ul id="edc13d39-5a09-42e9-a553-619fc1032ad9" class="bulleted-list"><li>Implement object pooling</li></ul><h2 id="ef451cc1-47a1-40d9-a9df-b8e240d8e0d0" class="">String operations</h2><p id="18391647-50d1-406f-9b8d-0fb29db13e08" class="">String operations allocate a new string on the heap.
+When performing multiple operations, such as concatenations, several intermediate strings are allocated.</p><p id="62ca5a90-e5fe-4ab1-8b50-f1fcc5f04697" class="">Prefer using <code>StringBuilder</code> to concatenate strings without allocating for each string operation.
+<code>StringBuilder</code> works with a buffer to perform multiple string operations and allocates the string after the sequence of operations is completed.</p><h2 id="39e24feb-676e-4acb-8c6a-a97a542438e3" class="">Parameters</h2><p id="929c966d-4b3e-4ca1-9c4e-a1f9f065e18a" class="">When using <code>params</code> arguments, the compile allocates an array.
+When there are no parameters, the compiler references <code>Array.Empty</code>, but on older versions, an empty array is allocated.</p><h2 id="7dee5c01-0593-46da-a53b-1b11778c7cd4" class="">Boxing</h2><p id="5ddbd923-1bf7-433c-b0e0-39d6bcc4bdfe" class="">When passing a value type to a method expecting a reference type, boxing occurs.
+Boxing allocates a new object on the heap that contains a copy of the value type.</p><h2 id="a0f52e35-b13f-4443-9759-1c119238f1a2" class="">Lambdas</h2><p id="41f60103-889a-4c5c-9690-52f7a65f7700" class="">The compiler rewrites lambdas by capturing local variables into a class.</p><h2 id="57707b95-4b08-43c1-aa01-11d95cb97c10" class="">LINQ</h2><p id="b0f2c7ed-8b68-4bc4-8ceb-f58f70c7201d" class="">LINQ static methods allocate the <code>Enumerator</code> class.</p><h2 id="b8c892ca-d20b-4f7d-bbe3-68ddb4a84c57" class="">Iterators</h2><p id="f3064f45-37be-4b43-8e31-1dd934c165d3" class="">Using <code>yield return</code> generates a state machine and allocates an enumerator.</p><h2 id="913b637e-58a7-4c92-9759-648b88f3feba" class="">async await</h2><p id="5eb7008e-3c1e-4aeb-84e9-9dfec15aa5a0" class="">Using <code>async await</code> also generates a state machine and allocates an enumerator.
+It also allocates for handling the <code>Task</code>.</p><p id="375c1350-1a5e-43d3-8ae0-9129d6fbe426" class="">Prefer using <code>ValueTask</code> for the common scenario of a synchronous return value.</p><h1 id="99047abd-dd8c-4194-83d3-cc220dfa2d3d" class="">Reference Semantics</h1><p id="70f773d0-6284-4b8d-b3ef-45fb8d8faf95" class="">Since C# 7, reference semantics with value types were introduced.</p><p id="26974627-d664-4e5f-b4a4-ea9d06afcc9f" class="">They allow value types to be used like reference types.</p><h2 id="22a61f05-5123-4ea6-b92b-7cc9425b80a0" class="">in parameters</h2><p id="6047fc01-6306-437e-8b8b-fcacfad15563" class="">A value type passed as a <code>in</code> parameter is passed by reference.</p><h2 id="d8ed18eb-9703-40a8-bdc7-93bffb835cd1" class="">ref return</h2><p id="fa0b42ff-e83e-42ee-a968-4b4ccaa66c57" class="">Using <code>ref return</code> returns a value type by reference.</p><p id="1d423030-66cb-452f-92ce-4c2ca7acea87" class="">The caller should store the value in a <code>ref local</code> variable.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="700455db-f475-4dd3-9ec2-d7a14a5994b2"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Using <code>var</code> will not add the <code>ref</code> modifier.</div></figure><h2 id="726274d1-6b63-44d4-bbda-580e74e87bcd" class="">readonly struct</h2><p id="be7f8ccd-e328-4b16-8e75-a8c705fad636" class="">A <code>readonly struct</code> is immutable. The compiler passes its value by reference.</p><h2 id="1a7d6e21-0fa1-4b78-8fcb-eab181a55780" class="">ref stuct</h2><p id="5fc64c68-56bb-4acf-b235-939aa39e7ced" class="">A <code>ref struct</code> can only be allocated on the stack.</p><p id="7e1dacad-fa48-4875-8a28-543d757ec027" class="">It cannot be contained in a reference type.</p><h1 id="bcca24ce-26d3-4104-afc4-f80223f625b9" class="">Span</h1><p id="3fca51ee-3fa4-45cc-8085-453c1c41a742" class="">Use the <code>Span&lt;T&gt;</code> and <code>ReadOnlySpan&lt;T&gt;</code> when working with contiguous blocks of memory.</p><p id="1b261d86-bb38-46d9-9ada-4cd78e09b770" class=""><code>Span&lt;T&gt;</code> is a <code>ref struct</code> that can only be allocated on the stack.</p></div></article></body></html>

@@ -1,0 +1,591 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>.NET Internals</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="6616e234-1a31-419f-9bc6-86d7b7bd0ba9" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">👾</span></div><h1 class="page-title">.NET Internals</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th>Category</th><td><span class="selected-value">C#</span></td></tr></tbody></table></header><div class="page-body"><h1 id="782bfc65-94c8-43de-a4b0-d1ef33886f44" class="">Overview</h1><p id="64e445c7-89f8-49a1-bae9-8858b6c38fc0" class="">This document provides information on the internals of .NET gathered from Microsoft blogs, documentations, and the .NET Core source code.</p><h2 id="ac5b133a-0652-42b9-aae8-8dfaca6d6386" class="">Initialization</h2><p id="57523de8-7e1b-4fc5-a944-8e4c45e93e75" class="">The entry point of a .NET applications is located in the <strong>Execution Engine</strong> (EE) in <code>mscoree.dll</code>.</p><p id="f9f4beeb-1b78-4f16-ab9d-17d114a084c9" class="">After checking the metadata of the executable, the correct .NET runtime is loaded.</p><p id="aa16ac85-b809-4107-84eb-649270e7cc17" class="">The actual execution starts in the <a href="https://docs.microsoft.com/en-us/dotnet/framework/unmanaged-api/hosting/corexemain-function"><code>_CorExeMain</code></a> function, which initializes the CLR and begins execution in the managed entry point in the executable.</p><h2 id="f5474e4a-5f5a-4aab-a6df-b321159adb13" class="">Garbage Collector</h2><p id="cf871f4a-429e-4f90-bde6-286ea04df929" class="">To reduce memory fragmentation, the GC regularly compacts the heap by moving objects in memory.</p><p id="ffefc32d-9a0b-4052-b3d5-ba8251cf995f" class="">The GC divides objects up into small and large objects.</p><p id="4a96a5d1-f14c-41f6-99d4-ecef1c988489" class="">Small objects are allocated on the heap and large objects are allocated on the <strong>Large Object Heap</strong> (LOH).</p><h3 id="fd0a0930-cced-42be-a709-7818279d6ccf" class="">LOH</h3><p id="ffcb5032-98fc-41be-bfae-69a9ee6aaced" class="">The LOH is used for allocating memory for large objects.</p><p id="c303663f-07e0-4ef9-98e6-7fa9d2481aaa" class="">A large object is greater than or equal to 85,000 bytes.</p><p id="6adea801-7869-4fad-ab43-c3bdd22feac1" class="">Typically, larges arrays are allocated on the LOH.</p><p id="c4be9dd8-f739-405f-84e4-7e2a32a9635e" class="">Because of the performance impact of copying large blocks of memory, the GC does not compact the LOH by default. The GC performs a sweep by creating a list of freed memory locations for future allocations.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="75669246-d12c-486e-adc4-d6b4388e59c4"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">The behavior of the GC can be changed by setting the <a href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.gcsettings.largeobjectheapcompactionmode"><code>LargeObjectHeapCompactionMode</code></a> property to <code><a href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.gclargeobjectheapcompactionmode">GCLargeObjectHeapCompactionMode.CompactOnce</a></code> to indicate whether the GC should compact the LOH during the next garbage collection.</div></figure><h1 id="3388c27c-5ef8-40ce-a2b4-b3a4b9cc8e67" class="">Marshalling</h1><p id="eeeb6fab-15d9-444f-9bb3-922901f39eb8" class="">There are two techniques for calling into the CLR from managed code.</p><ul id="9ec73e3b-dccb-4797-9f07-54dfee62227e" class="bulleted-list"><li>FCall</li></ul><ul id="7ec7f52f-da4c-40f6-a795-f74b7f21725c" class="bulleted-list"><li>QCall</li></ul><h2 id="c72a6ab5-a0db-4007-9c19-44c9ef0da4c2" class="">FCall</h2><p id="a14f6fc6-2f9d-4491-97c1-07ab549e0fe4" class="">FCall calls directly into the CLR code.</p><p id="a1e35d0b-642d-4ff4-bcbb-3d820992cfde" class="">Identified as <code>extern</code> methods with the <code>MethodImplOptions.InternalCall</code> attribute.</p><h2 id="dd273508-25ad-4a60-a01c-dbc14f3f040a" class="">QCall</h2><p id="8071cca7-6da3-465c-8320-34008a21068d" class="">QCall calls into the CLR via the P/Invoke.</p><h1 id="6fba88cc-4f6a-4484-8f9e-28619658bd30" class="">Memory</h1><h2 id="617406cf-800f-4220-9365-8537c2400ed1" class="">Heap Memory</h2><h3 id="50ba0b68-3dca-4754-a940-5f4ee01612e4" class="">Objects and Value types</h3><p id="4b4e83d0-a8c3-4536-81db-16b982ee03cf" class="">The <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/new-operator"><code>new</code></a> operator creates objects or value types and invoke constructors.</p><p id="f5861224-d7ff-476b-b342-ae661abfabec" class="">The <code>new</code> operator is translated into the <a href="https://docs.microsoft.com/en-us/dotnet/api/system.reflection.emit.opcodes.newobj"><code>newobj</code></a> CIL instruction.</p><pre id="31e1a5cb-3cfd-4eb9-a27f-7180913ff89c" class="code"><code>newobj ctor</code></pre><p id="8204d998-15d1-4aed-8e37-a6ea35bf1d82" class="">The <code>newobj</code> instruction allocates an uninitialized object or value type and calls the constructor method  <code>ctor</code>.</p><p id="8d3c4724-dda2-48ad-b06e-1d65b66d7da8" class="">The allocation process is as follow:</p><ul id="70a67a50-6823-42df-981b-51f51d5293a0" class="bulleted-list"><li>Allocates a new instance of the class associated with the provided constructor.</li></ul><ul id="316290d7-b0aa-4201-a90c-d9d4a6715743" class="bulleted-list"><li>Initializes all the fields in the new instance to zero or null references.</li></ul><ul id="c93336d4-2c80-4491-b83d-9ea13369bd67" class="bulleted-list"><li>Calls the constructor with the provided arguments and the newly created instance.</li></ul><ul id="c8203e56-82a4-4b66-98ae-e32e349fe6c4" class="bulleted-list"><li>The initialized object reference is pushed on the stack.</li></ul><h3 id="cb877c78-79bd-4943-8ccc-36994fc27392" class="">Arrays</h3><p id="0c9cbf4f-2d6b-4c5f-8a3c-d5db8e3cd0d9" class="">The <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/new-operator"><code>new</code></a> operator is also used to creates arrays.</p><p id="0cae9c19-fc3d-4db1-bb5d-966ba64218bb" class="">With one-dimensional arrays, the <code>new</code> operator is translated into the <a href="https://docs.microsoft.com/en-us/dotnet/api/system.reflection.emit.opcodes.newarr"><code>newarr</code></a> CIL instruction.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3e35fea9-7d5a-4daa-a579-ac8091f6af18"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Nonzero-based one-dimensional arrays and multidimensional arrays are created using <code>newobj</code>.</div></figure><h3 id="4d98af0a-ea61-4c39-9223-fdcc86bb3eb9" class="">Stack Memory</h3><p id="5b7912ac-2001-4f06-a870-aa0e9be2af6a" class="">The <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/stackalloc"><code>stackalloc</code></a> operator allocates a block of memory on the stack.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b0ec695c-863b-40f1-8b8b-ad2e4869c708"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">It can only be used with value types.</div></figure><p id="df1656f0-4961-4462-aa86-bbde36b9bd65" class="">The <code>stackalloc</code> operator is translated into the <a href="https://docs.microsoft.com/en-us/dotnet/api/system.reflection.emit.opcodes.localloc"><code>localloc</code></a> CIL instruction.</p><pre id="bff71c0a-94f3-4dba-9743-721a758600fc" class="code"><code>localloc</code></pre><p id="45245f7c-1a5a-49de-a66f-c5f235068e42" class="">The <code>localloc</code> instruction allocates memory from the heap.</p><h1 id="efe18d2d-1ef9-401b-9197-87ae4a0aeac9" class="">Memory Layout</h1><p id="083917ff-d60b-4f60-9aae-9533f4e83216" class="">Managed pointers are aligned on 4-byte or 8-byte address boundaries depending on the platform.</p><figure id="60f325d6-a109-4f37-ad83-4e1f634395d8" class="image"><a href="NET Internals/Untitled.png"><img style="width:640px" src="NET Internals/Untitled.png"/></a></figure><h2 id="6e94939e-7e17-4389-b684-7f2b2b736051" class="">Type Size</h2><p id="6157c0c5-546b-4448-8f01-e45737bff9b5" class="">A type that does not contain any data member has a size of 1 byte.</p><div id="201a972e-c9f6-400f-900a-fd66e11f220b" class="column-list"><div id="27e55f55-699f-4c97-9362-2d0f7740e5d0" style="width:50%" class="column"><pre id="0a443353-3378-4b1d-a712-6bd66fd1f919" class="code"><code>[StructLayout(LayoutKind.Sequential)]
+struct MyStruct
+{
+    int value;
+}</code></pre><p id="434dc47c-12ed-42e8-b2e8-fb075219f7ef" class="">The size of <code>MyStruct</code> is 4 bytes.</p></div><div id="2c69e360-a405-43a3-b497-e092eb0eeedc" style="width:50%" class="column"><pre id="590bd06d-69a3-4970-afcc-c38ebc5a2a4b" class="code"><code>[StructLayout(LayoutKind.Sequential)]
+struct MyStruct
+{
+}</code></pre><p id="cfe3de71-9091-440d-8ae1-ec321caada6a" class="">The size of <code>MyStruct</code> is 1 byte.</p></div></div><h2 id="9afe1839-084a-4d7f-820b-00fdffc05ab8" class="">Value Types</h2><p id="e2af4418-c138-4eb6-93d4-db08f54fb8a5" class="">A value type contains the values of the fields without any object header.</p><h2 id="558501fe-c13a-4c8d-a83f-57a8084915c2" class="">Reference Types</h2><pre id="555533f4-7fc8-4942-8aed-7009cf108843" class="code"><code>+----------------------+
+|      Instance        |
++----------------------+
+| Object Header        |
+| Method Table Address |
+| Field1               |
+| ...                  |
+| FieldN               |
++----------------------+</code></pre><p id="4b75d7ca-3b91-4a15-b2f8-2a738691084e" class="">A reference type contains a pointer (4 or 8 bytes) to the <strong>Method Table</strong> (MT) that contains type information (shared per type).</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e5a1b061-bb87-4579-afe1-dc727fd25591"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">The CLR uses the lowest bit of the Method Table pointer as a flag indicating during garbage collection that the object is reachable and should not be collected.</div></figure><p id="c0e857b8-90a8-4488-a2d8-eb517ffddf1b" class="">Before the pointer to the Method Table, the reference type contains an <strong>Object Header</strong> (4 or 8 bytes).</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="aa58ef5d-ffcd-49c8-aaba-15cb475882e2"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">The most significant byte of the Object Header is either used to store multiple values (<em>thin lock</em>) or as a <strong>Sync Block Index</strong> that is used by the CLR to access additional data in the <strong>Sync Block Table</strong> (<em>fat lock</em>). This mecanism allows any reference type to be used with the <code>lock</code> statement efficiently.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="276dc1fb-8a29-4e90-a4b7-ac319fec9fe2"><div style="font-size:1.5em"><span class="icon">❓</span></div><div style="width:100%">The Object Header is stored before the actual address of the reference type for unknown reasons.</div></figure><p id="4197fb19-03ef-489e-a9b3-4957b7abe699" class="">The pointer to the Method Table is followed by the values of the fields.</p><p id="3ae7ecab-5686-40c9-9dad-5b7ae26f99a9" class="">If the object has a finalizer, the reference type also contains a pointer to the finalizer chain link (4 or 8 bytes) at the end of the object.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7fada99d-99e8-4c58-b723-505afe221b25"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">An empty class has a size of 1 byte from the user perspective, but an actual size of 12 bytes on 32-bit platforms and 24 bytes on 64-bit platforms (taking into account the alignment).</div></figure><h2 id="b6b00665-b98c-4c06-b164-1d0ba45614f1" class="">Special types</h2><p id="d5d251c1-d2a9-497f-b350-c9166349a0bf" class="">Strings and Arrays have special implementations.</p><ul id="20a460e1-3c6e-4bb3-b625-56d5f75c6424" class="bulleted-list"><li>They are implemented in managed and native code.</li></ul><ul id="85cd77da-6ca7-428c-b4d3-cd722652651e" class="bulleted-list"><li>They memory layout in managed and native is identical.</li></ul><ul id="7cf0055b-26b7-42dc-a686-57d63301dfe2" class="bulleted-list"><li>Their size is not fixed among different instances.</li></ul><h2 id="27d602d8-fb79-4d05-be9c-1b0075b3a862" class="">Arrays</h2><p id="22b94682-dde3-40fa-91c1-982610641c03" class="">Arrays are represented by the <code>System.Array</code> type.</p><ul id="8666b57b-6848-4f5e-9151-a02164dbc781" class="bulleted-list"><li><code>Array</code> implements <code>IList</code></li></ul><ul id="d2f467b4-0c3c-4fad-a554-64f2e1848a73" class="bulleted-list"><li><code>T[]</code> implements <code>IList&lt;T&gt;</code> (<code>SZArray</code> internally)</li></ul><p id="61ebf731-5504-4078-b936-661ddbe960d8" class="">Value type arrays point to an integer (4 bytes) that stores the size of the array. The value is followed by the items in the array stored inline.</p><p id="b96ac9bb-9453-4682-8b27-a0dafc11ee1e" class="">Reference type arrays store the size of the array after the Method Table (for bounds checking).</p><p id="daf8d838-1adb-47df-ba73-7992a099e1ef" class="">The size of the array is followed by object references of each items in the array.</p><p id="cc0c3098-a37c-4d2e-914b-a58c35c03730" class="">For multi-dimension arrays the length of each dimension is stored instead.</p><h2 id="7de7ac10-56f6-452d-8d10-a7fce68bcf8a" class="">String</h2><p id="6e11d5d1-b582-4de6-938c-f1583849698f" class="">A string is stored starting with an integer (4 bytes) that represents the length of the string, followed by the characters of the string in-place.</p><figure id="2e7efa05-d131-46d5-a6ae-33f534c12cb5" class="image"><a href="NET Internals/Untitled 1.png"><img style="width:675px" src="NET Internals/Untitled 1.png"/></a></figure><p id="da576036-b053-410c-8ba0-1f5da85fac23" class="">✔Memory locality: no pointer lookup is required to access the string data.</p><h1 id="a0a55b7e-553b-4731-ab86-f202ce0e4d12" class="">Types</h1><h2 id="3143f12b-5bb8-4b72-9f10-2bb1a88f350c" class="">Value types</h2><p id="b266f236-18ab-4ea3-bb93-ada42c6dd366" class="">Value types are represented by the <code>System.ValueType</code> type.</p><p id="85c32dd9-604f-4002-9167-b84ddc65e719" class="">Instance methods from value types have a different signature. The implicit <code>this</code> is inserted as a parameter passed by reference in the method.</p><pre id="4d5dec2f-77f9-4f99-b46a-1657f7a35ebc" class="code"><code>void MyMethod( [ref MyStruct this], int myArg)</code></pre><h2 id="a5750997-779d-48cb-945c-73c74e418a7f" class="">Object types</h2><p id="deea4583-bedf-4f8f-98d3-eeae35a2fd1e" class="">Object types are represented by the <code>System.Object</code> type.</p><p id="045299a9-0026-4d7e-84a2-25fe0a9cacc7" class="">Instance methods from object types have a different signature. The implicit <code>this</code> is inserted as the first parameter of the method.</p><pre id="f1359093-5e6a-42f3-9167-c0796bcb9226" class="code"><code>void MyMethod( [ MyClass this], int myArg)</code></pre><h1 id="d31b0c14-880e-4beb-8a45-63eb0f0e3ee9" class="">Metadata</h1><h2 id="2d824a22-6833-47fe-aa99-28af6cf5cce5" class="">Constructor</h2><p id="e87f5eb2-6cdb-4a07-8422-804b81d06ca0" class="">A constructor is labeled as <code>.ctor</code> in the metadata.</p><h2 id="3909d1bc-3a72-4b4f-baaa-09959f755cf3" class="">Static Constructor</h2><p id="694bc654-9bcb-4ba6-848d-4504bc49546c" class="">A static constructor is labeled as <code>.cctor</code> in the metadata.</p><p id="f685e38d-ca7d-40fe-b027-30441d3d5d7f" class="">The <a href="https://docs.microsoft.com/en-us/dotnet/api/system.reflection.typeattributes"><code>BeforeFieldInit</code></a> flag indicates that the type benefits from lazy initialization.</p><p id="11d8853d-353a-4b43-b561-2d91a88d94d4" class="">The compiler automatically adds this attribute to any type thay does not contain a static constructor.</p><div id="a461ba02-4f55-4f38-8725-ca5f5b858c61" class="column-list"><div id="9b343f1d-8663-44b4-bb26-4dfaaa48ed80" style="width:50%" class="column"><pre id="def5c103-08e1-4d19-a69e-657916fcefcb" class="code"><code>class Test
+{
+    static object obj = new object();
+}</code></pre><p id="c202428e-4dc6-4da0-a873-4b50726f4a65" class="">Marked with the <code>BeforeFieldInit</code> flag</p></div><div id="396120ec-9b20-4d99-b247-e950bcf8aaee" style="width:50%" class="column"><pre id="4ba0e9a0-4930-4bd5-b1bd-867968956704" class="code"><code>class Test
+{
+    static object obj;
+
+    static Test()
+    {
+        obj = new object();
+    }
+}</code></pre><p id="15bca4f0-0ea8-4bc8-82d6-51118fa85fcd" class="">Not marked with the <code>BeforeFieldInit</code> flag</p></div></div><h1 id="4fe5b042-3880-4360-a1d8-b1336c816042" class="">Threading</h1><p id="6722734f-a261-452b-ba53-444f918a92f7" class="">The GC runs in its own background thread.</p><p id="e65f94a0-eeed-48c0-88be-9296226c4678" class="">.NET threads have two stacks: a user stack (1 MB) and a kernel stack (12 KB on 32-bit platforms or 24KB on 64-bit platforms).</p></div></article></body></html>
