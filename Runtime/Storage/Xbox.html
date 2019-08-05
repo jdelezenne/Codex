@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Serialization</title><style>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Xbox</title><style>
 /* webkit printing magic: print all background colors */
 html {
 	-webkit-print-color-adjust: exact;
@@ -562,31 +562,4 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="54ffe6ff-fac0-497a-a30b-fc99ab447bf8" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">💾</span></div><h1 class="page-title">Serialization</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th>Category</th><td><span class="selected-value">C++</span></td></tr></tbody></table></header><div class="page-body"><h1 id="e5c667dc-98ce-45b2-b9e4-2f77723c666e" class="">Overview</h1><p id="5d55f69a-33c6-4ec1-8cbf-64e41854c58b" class="">Serialization is the process of converting the state of an object into a format that can be stored and reconstructed later.</p><h1 id="b416db30-3238-4105-bc5b-cc0d0451c5c1" class="">Goal</h1><p id="5aa88736-015a-4d27-a770-f0405d5babc8" class="">Read and write a set of objects from and to memory.</p><h1 id="611fa825-8494-489e-80bc-84b3b79ccbad" class="">Serializer</h1><p id="c3a8b0e6-1f25-4959-8bf7-5c3ada964bd8" class="">The serializer is an interface for serializing data.</p><p id="6b194799-0bb7-44d2-9a0e-9a0b98888f75" class="">The format of the data in depends on the serializer implementation.</p><p id="b747db21-5159-47a2-951d-46f118171cfe" class="">Examples of serializers:</p><ul id="e55595fa-f164-4e04-9bc1-6af5df894e8c" class="bulleted-list"><li>Binary</li></ul><ul id="b5451874-b2ab-4b23-861c-30311e27bf77" class="bulleted-list"><li>JSON</li></ul><ul id="3cb6311d-b966-4c0d-acbd-d68c57982c7d" class="bulleted-list"><li>XML</li></ul><ul id="2d0fb052-82a2-42b3-8152-67be3b0ac83a" class="bulleted-list"><li>YAML</li></ul><h1 id="0894929f-0f35-450d-a17b-ce3f790255ba" class="">Code Generation</h1><p id="6a658b1d-81cf-4ec3-8bde-9cdac82a4061" class="">With a reflection system where code is generated to build type information, the serialization code can be generated as well.</p><h1 id="7b2c63f2-aa6e-42e1-b76c-2316320ae2ec" class="">Inheritance</h1><p id="7acd64b6-98d1-418f-b1b7-b37189fdd34a" class="">The inheritance approach:</p><ul id="49ec6764-6249-4fb9-9c0e-583306a2f8c7" class="bulleted-list"><li>Define a base type for serializable objects.</li></ul><ul id="5795970c-2bb1-4423-87e3-86605acd5b9c" class="bulleted-list"><li>Define a method that is overriden in serializable objects to implement the serialization of each members.</li></ul><pre id="23c478ba-60a4-4d5d-923a-99c7eeec686f" class="code"><code>class ISerializable
-{
-public:
-  virtual void Serialize(ISerializer* serializer) abstract;
-};
-
-class MyComponent : public ISerializable
-{
-private:
-  int _int;
-  float _float;
-  Color _color;
-
-public:
-  virtual void Serialize(ISerializer* serializer) override
-  {
-    serializer-&gt;Serialize(“int”, _int);
-    serializer-&gt;Serialize(“float”, _float);
-    serializer-&gt;Serialize(“color”, _color);
-  }
-};</code></pre><p id="99787648-2bcd-4740-9b06-581911fb231c" class="">✔</p><ul id="8cd2d5f2-5cd3-4bf4-8adc-4b3be49bdf52" class="bulleted-list"><li>Data introspection is easily implemented with a special <em>type serializer</em> that builds type information.</li></ul><ul id="46171e5c-0abe-4783-89b0-4c1f76569631" class="bulleted-list"><li>Data can be serialized and deserialized in the same method.</li></ul><p id="8b8736e3-c26f-491f-9c9d-045e58fc55d9" class="">❌</p><ul id="eddd6a95-6f14-4c24-adf4-baab2cfabc64" class="bulleted-list"><li>The serialization process is hidden in the method implementation.</li></ul><ul id="7aa690a5-406c-4fd7-abea-dac7a5fbaa95" class="bulleted-list"><li>Metadata has to specified in the serialize method which complxify the implementation or it has to be provided in a separate format (for default values, ranges...).</li></ul><ul id="eae9c9f1-bb08-4fcc-bfa7-2499f0633eb7" class="bulleted-list"><li>Serializable classes need to inherit from the serializable interface.</li></ul><ul id="4862359a-e7e7-452c-b6ed-1b6173200aa4" class="bulleted-list"><li>POD types have to handled separately.</li></ul><h1 id="9efb5914-d852-4b51-877d-df72c6a47df3" class="">Schema</h1><p id="0977aaf9-d87c-45bc-ae71-c8df2f99e796" class="">A different approach is to define a custom schema to describe the data.</p><ul id="c93c6beb-ea32-442e-978f-7d488dbe2e20" class="bulleted-list"><li>In development builds, the runtime reads a key-value store based on the schema. Backward and forward compatibility is easily supported.</li></ul><ul id="1581c783-f8c4-4c21-92d0-96de64f6a1e2" class="bulleted-list"><li>In final builds, the runtime reads a block of data. Backward and forward compatibility is not needed, and it is the most efficient solution.</li></ul><h1 id="489a42f1-da3a-4503-8a64-5b2da71d9b42" class="">Backward Compatibility</h1><p id="e16f29aa-c8e0-4942-a432-f88bf70ee4b5" class="">Backward compatibility is the ability of newer versions of a program to load data stored from older versions.</p><h2 id="25cd170d-2b53-4aa6-94b6-becf36931d21" class="">Version</h2><p id="153544f1-db8c-40aa-8349-bd8df1450e94" class="">You store a version number before the serialized data, and you check the current version to provide different code paths to deserialize the data.</p><p id="0a5f6b65-b6bc-40df-9fcd-60d5d8e12d5f" class="">The latest version number is generally defined in the code, and the serializer writes this value for the newly serialized data.</p><p id="75456a50-a5e9-4a8f-b249-2c4f5786ab41" class="">When the definition of the data changes, the version number is incremented.</p><pre id="11bff714-ecbf-46a3-8ae3-338f40c4202e" class="code"><code>if (version == 1)
-{
-    ...
-}
-else if (version == 2)
-{
-    ...
-}</code></pre><h1 id="1fbac43e-9145-47ce-9a3e-1dc042772243" class="">Forward Compatibility</h1><p id="94fd785b-fd01-4e71-9b14-baf8ea3c7fd7" class="">Forward compatibility is the ability of older versions of a program to load data stored from newer versions.</p><p id="de4c4eba-e121-4478-9129-1e9f1bafc308" class="">Versioning is impossible, as it&#x27;s impossible to predict the new changes related to newer versions.</p><ul id="22560c39-7406-4d28-9739-543c232aefeb" class="bulleted-list"><li>Ignore new elements.</li></ul></div></article></body></html>
+</style></head><body><article id="c2b41851-9bfc-4834-9adf-ab0aaecbd462" class="page sans"><header><h1 class="page-title">Xbox</h1></header><div class="page-body"><table class="collection-content"><thead><tr><th>Device</th><th>Read</th><th>Write</th></tr></thead><tbody><tr id="bf80b3db-3143-4e47-bdcb-5bdb8b690d13"><td class="cell-title"><a href="Xbox/Hard disk.html">Hard disk</a></td><td class="cell-3s[9">32 KB</td><td class="cell-&gt;6,t">16 KB</td></tr><tr id="e7731b69-a67e-4916-957f-cf9b20b18e62"><td class="cell-title"><a href="Xbox/Memory unit.html">Memory unit</a></td><td class="cell-3s[9">64 KB</td><td class="cell-&gt;6,t">16 KB</td></tr></tbody></table></div></article></body></html>

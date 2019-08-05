@@ -1,0 +1,579 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Lighting</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="48eecfdd-6a88-4319-81c9-3a794fe6f839" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">💡</span></div><h1 class="page-title">Lighting</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th>Created</th><td><time>@Mar 09, 2019 3:16 PM</time></td></tr><tr class="property-row property-row-multi_select"><th>Tags</th><td><span class="selected-value">graphics</span></td></tr></tbody></table></header><div class="page-body"><h1 id="f09689a8-7257-4bc8-8794-eb88cadc6ca4" class="">Overview</h1><p id="896eb92b-1369-461b-8af4-d586584bb421" class="">Lighting is the technique that models how light interacts with surfaces.</p><p id="3ce71641-20e4-4139-8731-44c08f1058d0" class="">Realistic lighting can be approximated using three terms to model different species of light that occur in a scene: ambient, diffuse, and specular color.</p><p id="7afd58b9-df9b-49c3-899d-263327f5dc19" class="">Th colors terms are blended between the light sources and the surface material and multiplied by an intensity. The intensity of each component is determined by the light equation.</p><blockquote id="6e8bccd4-4c14-447d-a649-113531a8bbbc" class="">color = ambient + diffuse + specular</blockquote><h1 id="6ab54f6a-a842-428e-a0ee-b81c76c1fd4c" class="">Light types</h1><h2 id="ff79dac3-b916-42fe-831b-ea28dbe46972" class="">Directional</h2><ul id="1b12ed93-70db-460a-b44a-74d66d5f5121" class="bulleted-list"><li>Assumes the light is coming uniformly from one direction.</li></ul><ul id="bd274b2a-675c-467d-80d6-834662b21826" class="bulleted-list"><li>Appears to illuminate all objects with equal intensity, as if it were at an infinite distance from the objects.</li></ul><ul id="dc525360-286b-4087-98a8-f43692d38aa9" class="bulleted-list"><li>Has a direction.</li></ul><ul id="77e4949c-c405-4b9e-926a-ef464e1d40ab" class="bulleted-list"><li>Do not have a position.</li></ul><p id="65cc3c11-31d8-40df-a4c8-908535ccc8e0" class="">A directional light intensity is defined by the angle between the reverse light direction and the surface normal.</p><p id="9a364508-ef61-444b-a042-c262525e1713" class="">A direction light is far enough away so that its rays can be considered to be hitting the surface of an object all in parallel, like the sun.</p><h2 id="2cc4c2bd-e96c-4b86-befd-1549d2a5cbc8" class="">Point</h2><ul id="5ee0ae69-8adb-4630-926f-e06aad294563" class="bulleted-list"><li>A point light source radiates light equally in all directions from its position.</li></ul><ul id="af1e072f-c325-4895-9729-010347da4d88" class="bulleted-list"><li>Has a position.</li></ul><ul id="e6c98f5a-3407-4005-a5f9-6b303ca007c7" class="bulleted-list"><li>Do not have a direction.</li></ul><ul id="c520b800-e7af-4f44-95d9-9ad1ea96195f" class="bulleted-list"><li>Characterized by an attention relative to its distance with the surface.</li></ul><p id="dbc100b1-eb93-4493-87f6-44dd623f8d03" class="">A point light intensity is defined by the angle between the direction from the vertex to the the light and the surface normal.</p><p id="30ac0952-8e6f-4a89-b4c2-8a2c4796d88d" class="">The calculation is typically done in world space, so the input vertex position is multiplied with the world transform in the vertex shader, and passed to the fragment shader.</p><h2 id="c57c1b20-9da2-443f-b026-cc859db8dbf6" class="">Spot</h2><ul id="c6202c57-0808-4b98-99b7-9f0cd89dc0dd" class="bulleted-list"><li>A spot light emits a cone of light. Only objects within the cone are illuminated.</li></ul><ul id="cfc3662b-aa55-4ffc-af44-16ae0962a9f9" class="bulleted-list"><li>Has a position.</li></ul><ul id="fbe996b2-0331-4cf6-9fe8-c7372064c188" class="bulleted-list"><li>Has a direction.</li></ul><ul id="449b5a4a-e111-40ea-8f3b-ae4610903a76" class="bulleted-list"><li>The cone produces light of two degrees of intensity:<ul id="25ad3d12-573d-4b0f-9149-8b28cafb3789" class="bulleted-list"><li>a central brightly lit section (the umbra) that acts as a point source.</li></ul><ul id="a859262a-ac4e-4b3c-8903-fb7e6c61e6d5" class="bulleted-list"><li>a surrounding dimly lit section (the penumbra) that merges with the surrounding deep shadow.</li></ul></li></ul><h2 id="6b81bded-0e8b-4364-bef8-011dddd42c7c" class="">Parallel Point</h2><ul id="3ded53b4-5b3b-499f-b4ab-d37635334df6" class="bulleted-list"><li>Has a position.</li></ul><ul id="a8a3790b-dcbd-4f88-aeb5-b4d2f6be1643" class="bulleted-list"><li>Has a direction.</li></ul><ul id="d503853a-9cc4-4a70-8a6e-eb958081359e" class="bulleted-list"><li>Behaves light a directional light but only lit the vertices that are on the side that faces the position of the light.</li></ul><h1 id="457bd238-b2fc-439f-8cb1-7bcb6cf083af" class="">Light terms</h1><h2 id="8204b16b-137c-4a2b-8d23-1f07c498c9d5" class="">Ambient</h2><p id="7e3cc6b7-0bc0-4b30-ab82-9072f937c885" class="">An ambient light describes a light source that illuminates everything in a scene, regardless of the orientation, position, and surface characteristics of the objects in the scene.</p><p id="8cac7a32-edc3-4911-8a20-a82d2f642635" class="">An ambient light is not characterized by a position or a direction.</p><p id="33dbd679-4ce2-4900-a975-6ec99735c158" class="">It is an approximation of indirect light (light that has bounced off other surfaces in the scene).</p><p id="7c5d8c87-61dd-41ea-aacd-1216da5e8644" class="">Ambient lighting prevents the parts of geometry that are not directly lit from being completely black.</p><p id="39b680fa-f301-4415-bf8f-df6e6bd01ae1" class="">Calculated from the product of a material ambient color and a light ambient color.</p><blockquote id="a7ea87ba-caed-4da5-abfb-b9817aadff2c" class="">Ambient = MaterialColor * LightColor</blockquote><h2 id="566aa907-b38b-4017-935e-4ad2a76ec073" class="">Diffuse</h2><p id="f68c3ca2-9631-4fca-a2a9-3dcb0e5c5802" class="">A diffuse color is the color of an object given by direct illumination.</p><p id="f9623747-1d7d-46ca-81e4-5546eb654023" class="">It represents the tendency of surfaces to reflect light equally in all directions.</p><p id="68a7ad91-f065-4c10-922b-69f614a452d7" class="">Diffuse light follows <a href="http://en.wikipedia.org/wiki/Lambert&#x27;s_cosine_law">Lambert’s cosine law</a>.</p><p id="63ee3081-edad-4d19-8b7b-c9730ced6cba" class="">The direction of the light is negated to obtain the proper direction vector.</p><p id="7aa3afe7-b9d3-4719-a088-9ab5d2da809b" class="">The intensity of the reflected light is directly proportional to the cosine of the angle between the normal of the surface and the direction of the light.</p><p id="42724a74-a42b-4eeb-a232-583da79b0cf4" class="">The normal direction and light direction vector are unit vectors, so the cosine is equal to the dot product between these vectors.</p><blockquote id="07f0678a-4339-4293-9e37-1bd2092921d2" class="">Diffuse = MaterialColor * LightColor * (NormalDirection . LightDirection)</blockquote><p id="2afd5fe5-9047-4261-b815-463be219a0a7" class="">A dot product can produce values in the [-1, 1] range. A negative value indicates that the face is oriented away from the light source and should not receive any contribution from it. Therefore, the result is restricted to the [0, 1] range.</p><p id="fb4ed36e-a0a6-48c3-8b7c-fa00be6f8ce8" class="">For point lights, the light attenuation is calculated.</p><p id="a014d6c6-3178-4ef1-a885-6e9ac0e76b4a" class="">For spot lights, the light attenuation and light falloff is calculated.</p><h2 id="9638ef85-c647-4089-b4fb-51783fb61133" class="">Specular</h2><p id="7003664c-4253-4271-a626-d5b35a91c9f0" class="">The specular color is the bright highlight of a shiny object.</p><p id="8a1b82c5-38f9-438f-b0db-621dc6c41d8e" class="">It represents the tendency of surfaces to reflect light in a particular direction rather than scatter it in all directions.</p><p id="7c152bf3-0d7e-46fb-80c2-6f802f227706" class="">The specular color is calculated using the direction to the viewer&#x27;s eye.</p><p id="473a74f5-e4a5-43a8-8001-3946bcbd9ff4" class="">The shininess is used to convert the specular highlight from a linear falloff to an exponential falloff. The shininess is quantified by a specular power value. Lower values are more matte and higher values are shinier.</p><p id="6a0888c8-7eb2-42f5-917d-cad80dcc030f" class="">Shininess is the opposite of roughness, which is a different representation of surfaces.</p><p id="e7a31fcf-defa-4bef-a74d-881e6367878a" class="">There are different lighting models to compute the specular term.</p><h3 id="57657aa5-33c8-4203-97a6-82d8eb9cba35" class="">Blinn-Phong</h3><p id="b6fe2995-0ed3-4299-9900-1dacbb5dd39f" class="">The Blinn-Phong specular term uses the vector that points <em>halfway</em> between the direction to the light source and the direction from which the surface is viewed.</p><blockquote id="2b759c72-97fd-43b6-9072-e1717ed7360b" class="">HalfwayDirection = (LightDirection + ViewDirection) / 2</blockquote><p id="ecd25d77-3f66-4cc0-ab4b-2d23e8075059" class="">A more stable calculation is to compute the halfway vector by normalizing the sum of light direction and view direction.</p><blockquote id="d03c554a-435a-45a6-831e-402d668fab75" class="">HalfwayDirection = normalize(LightDirection + ViewDirection)</blockquote><p id="96091207-29f4-4785-b209-3ad5d0afd935" class="">The intensity of the reflected light is directly proportional to the cosine of the angle between the normal direction and the halfway direction. As these are unity vectors, the value is computed using their dot product.</p><p id="e6a8da89-7bd1-4869-aef9-dc3cba73ee28" class="">A dot product can produce values in the [-1, 1] range. Therefore, the result is restricted to the [0, 1] range.</p><p id="15d3fe2f-4c6b-43e0-a5e1-8c211affbe2c" class="">An optimization is to replace the view direction by a unit direction on the z-axis to simulate points at a viewpoint infinitely distant on the z-axis.</p><p id="446e74b2-770b-45d4-af32-45c0df3d3de2" class="">Finally, the result is raised to the specular power value.</p><p id="84cc6c15-2680-4fee-80cd-702591080442" class="">For point lights, the light attenuation is calculated.</p><p id="4e4190d6-e2d7-4923-9c90-28bd2c25ab48" class="">For spot lights, the light attenuation and light falloff is calculated.</p><blockquote id="74e83e83-10d8-46d2-8367-63bc403579ef" class="">Specular = MaterialColor * LightColor * (NormalDirection . HalfwayDirection) ^ SpecularPower</blockquote><h1 id="81e582d5-da02-41c3-999c-b370b9479b30" class="">Light Attenuation over Distance</h1><p id="f894fc3c-ae36-4a16-a789-c125aa0640d8" class="">The light attenuation is determined from the distance between a light source and the vertex being lit.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="dceb0e47-7d3c-4d1b-8b90-885bce43bb90"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Point lights and spot lights have an attenuation factor, but not directional lights.</div></figure><p id="4db84989-43d6-4de8-af36-c11f7b991fa4" class="">If the distance is within the light&#x27;s range applies the following formula is used to calculate light attenuation over distance:</p><pre id="f43e9446-16b4-4286-8eb5-0db9c175c522" class="code"><code>A = 1 / (Attenuation0 + D * Attenuation1 + D*D * Attenuation2)</code></pre><p id="23ae10a0-e5a1-4ac3-b01b-372379a03140" class="">A is the calculated total attenuation and D is the distance from the light source to the vertex.
+Attenuation0, Attenuation1, and Attenuation2 are attenuation constants that act as coefficients in the formula to obtain a variety of attenuation curves.</p><h1 id="f79fb141-7bd5-4379-8ae2-b9077c20ea51" class="">Spot Light Falloff</h1><p id="7f188ded-ef83-4b88-9546-820f81a2577e" class="">Spot lights emit a cone of light that has two parts: a bright inner cone and an outer cone.</p><p id="6278b757-7e70-4824-a77e-84e323744a62" class="">Light is brightest in the inner cone and isn&#x27;t present outside the outer cone, with light intensity attenuating between the two areas.</p><p id="c2a5a708-9747-4d69-8e30-f55472476887" class="">This type of attenuation is commonly referred to as falloff.</p><hr id="a263aaa2-0a17-4290-afd3-0c58c4cfb0b5"/><p id="9996a9ad-db8c-47bd-9f39-537b522e1b25" class="">The falloff is calculated by the dot product of the spot light&#x27;s direction vector and the vector from the vertex to the light.</p><p id="11857793-ca65-41f1-9643-0c7563c8fde9" class="">This value is equal to the cosine of the angle between the two vectors, and serves as an indicator of the vertex&#x27;s position that can be compared to the light&#x27;s cone angles to determine where the vertex might lie in the inner or outer cones.</p><pre id="6d081090-2841-4e4d-9561-a8d89f2d24cf" class="code"><code>Cosine = (VertexToLightDirection . SpotLightDirection)</code></pre><p id="8be73412-75f8-488f-b7b4-a0a53f731274" class="">This value is compared to the cosine of the spotlight&#x27;s inner and outer cone angles.</p><ul id="997d87b8-c67f-4974-abbc-8c236b4db65e" class="bulleted-list"><li>If the value is less than or equal to the cosine of the outer cone angle, the vertex lies beyond the outer cone and receives no light.</li></ul><ul id="24512195-4fcb-44cb-92e9-b3b2f02623da" class="bulleted-list"><li>If the value is greater than the cosine of the inner cone angle, then the vertex is within the inner cone and receives the maximum amount of light.</li></ul><h1 id="f4f517ed-afe7-4c89-878a-7da1d901cd18" class="">Lighting Model</h1><p id="15b191c7-56e4-4d7c-a0cd-c1396b72feae" class="">We use an approximation consisting of three terms to model different species of light that occur in a scene: ambient, diffuse, and specular.</p><p id="9c7ccb16-6376-4cc8-843f-a7f835fc502c" class="">Th color component is blended between the light and the material and multiplied by a different intensity. The intensity of each component is determined by the light equation.</p><h2 id="11e10fbe-6eb1-4fb4-89d3-39fdcdfc4e42" class="">Phong</h2><p id="51698744-3f0a-4964-9020-67f49dbafd78" class="">The light calculations are done per pixel, in camera space.</p><p id="092e8e12-aa34-4225-a612-f1d91367e1c0" class="">In the vertex function, we convert the positions and directions into camera space.</p><h3 id="d6bad001-c3be-43b6-a181-97ec1e3746e1" class="">Vertex</h3><ul id="bbb24165-fb5b-4d78-b26c-f2ab7a83650b" class="bulleted-list"><li>Calculate the position of the object from the perspective of the camera</li></ul><pre id="963a88a9-0ebe-4d21-8f5c-b9a42c743ee0" class="code"><code><strong>float4</strong> position_model = <strong>float4</strong>(input_position, 1);
+position_model = modelViewProjection_transform * position_model;</code></pre><ul id="6c161588-b08c-45b1-92ac-cf0c40899278" class="bulleted-list"><li>Calculate the normal from the perspective of the camera</li></ul><pre id="72b9ae7f-b4fe-4b0e-9f95-59508ce2af77" class="code"><code><strong>float3</strong> normal_model = float4(input_normal, 0);
+normal_camera = (normalize(modelViewProjection_transform * normal_model.xyz);</code></pre><ul id="6054ef8e-031c-42dd-a09e-43ef6b7f1313" class="bulleted-list"><li>Calculate the view vector from the perspective of the camera</li></ul><pre id="509da1a7-fc5f-4f60-a814-5f4310690dab" class="code"><code><strong>float3</strong> position_camera = (modelView_transform * position_model).xyz;
+eyeDirection_camera = float3(0,0,0) - position_camera;</code></pre><ul id="311fd18f-9b60-4ed1-9b3c-d2cab69f6e2c" class="bulleted-list"><li>Calculate the direction of the light from the position of the camera</li></ul><pre id="fa0f164d-c4cc-4e67-871d-ef5d60459d0b" class="code"><code>float3 lightPosition_camera = (view_transform * float4(lightPosition, 1)).xyz;
+lightDirection_camera = lightPosition_camera + eyeDirection_camera</code></pre><h3 id="f274254b-f200-4c8e-a484-5fa05c8b8ae6" class="">Fragment</h3><ul id="fb25f236-a3e6-4390-a167-4fa40de9dea9" class="bulleted-list"><li>The ambient color is constant.</li></ul><pre id="737de4bd-0c7a-4ddc-93c3-4b39f2580c1b" class="code"><code><strong>float4</strong> ambientColor = materialAmbientColor;</code></pre><ul id="eca4dde6-245e-4b3c-932f-6eca109dc3f0" class="bulleted-list"><li>Calculate the diffuse color using the dot product between the surface normal and the light vector to estimate how much the surface is facing towards the light.</li></ul><pre id="83d89604-3543-412f-975d-7e47787f1954" class="code"><code><strong>float3</strong> n = normalize(normal_camera);
+float3 l = normalize(lightDirection_camera);
+float n_dot_l = saturate(dot(n, l));
+float4 diffuseColor = lightColor * n_dot_l * materialDiffuseColor;</code></pre><ul id="08c8fe0d-fd1a-49e2-9916-aefbb3c19689" class="bulleted-list"><li>Calculate the specular color using the dot product to calculate how close the reflection of the light is pointing towards the viewer.
+The angle is raised by the shininess factor to control the size of the highlight.</li></ul><pre id="ad5cbda1-1e8b-4c89-9e70-7ba7a6ac0aa5" class="code"><code><strong>float3</strong> e = normalize(eyeDirection_camera);
+float3 r = -l + 2 * n_dot_l * n;
+float e_dot_r = saturate(dot(e, r));
+float intensity = pow(e_dot_r, materialShininess);
+float4 specularColor = materialSpecularColor * lightColor * intensity;</code></pre><ul id="5d561de3-4902-45e7-a197-32c2176ff7cc" class="bulleted-list"><li>Combine the ambient, specular and diffuse colors to get the final color</li></ul><pre id="ff169f04-7c7c-433b-ac98-c537f2e524d5" class="code"><code>color = (ambientColor + diffuseColor + specularColor);</code></pre><h2 id="1d749cc1-d347-4ff3-ba76-dd838ce38543" class="">Deferred Lighting with Shadow Maps</h2><p id="2e4fe810-ea31-491e-bd51-46ba5825d26d" class="">Requires two passes, four color buffers (including two g-buffers), a depth buffer and a stencil buffer.</p><ul id="d069a330-b9da-4f9f-8ec4-07c154eeb009" class="bulleted-list"><li>A shadow pass draw the scene from the perspective of the directional light to the depth buffer to find out which pixel is occluded.</li></ul><ul id="419115a8-6873-4316-93bb-4260f8d7ae81" class="bulleted-list"><li>A deferred lighting pass to generate g-buffer attributes to apply the point light volume to find out which pixel is affected. Use the light accumulation to generate the final color in the frame buffer.</li></ul><h1 id="97930305-4949-486d-811d-14d4a6aed8db" class="">Reflection</h1><p id="e6a61e2d-8f95-47b1-ab8d-2946c9f6fe68" class="">Reflection occurs when light bounces off of a reflective surface.</p><p id="78c83374-4c47-4a87-bcfe-57c1c814b23a" class="">In a mirror reflection, all light bounces off at an angle equal to its incident angle.</p><p id="0ce4add6-e2ad-4fe5-b496-9d14522914af" class="">To simulate reflection, a cubic texture is sampled using the reflected vector as the texture coordinates.</p><h1 id="11bbf41f-274a-4c9e-b12b-b474e0ceaafa" class="">Refraction</h1><p id="c4b8274a-d617-4ea6-8b67-4ae62cda6e95" class="">Refraction occurs when light passes from one medium to another.</p><p id="a4ee2da2-3ae1-4562-9773-c924277e34d4" class="">The amount the light bends is proportional to the ratio between the indices of refraction of the two media it is passing between.</p><p id="87da7981-e1e6-490b-bd69-6f666f764871" class="">The index of refraction of a substance is a quantity that characterizes how much it slows down the propagation of light, relative to a vacuum.</p><p id="5a81db3b-cd8a-4a17-9546-bd2643cc23af" class="">Refraction follows the <em>Snell’s law</em> which states that the ratio of the sines of the incident and transmitted angles is equal to the inverse ratio of the indices of refraction of the media.</p><figure id="8ba532db-1bb2-42f9-85b9-d8634253082f" class="image"><a href="Lighting/untitled"><img style="width:81px" src="Lighting/untitled"/></a><figcaption>Snell&#x27;s law</figcaption></figure><h1 id="fc96cb73-81d9-458d-9208-c3221f96b99b" class="">Reflection &amp; Reflection</h1><ul id="66bb39f3-c1b9-4418-b97c-aead589789fb" class="bulleted-list"><li>The <em>normal</em> is perpendicular to the interface between the two media.</li></ul><ul id="d4cb3df8-bdb4-47fc-a06f-acaf41bac856" class="bulleted-list"><li>The <em>incident ray </em>is traveling toward the center of the image.</li></ul><ul id="50fba303-167d-4028-88ef-17e41167a816" class="bulleted-list"><li>The <em>reflected ray </em>is traveling away from the center of the image.</li></ul><ul id="db82c229-09d3-488c-bf60-c15a89636f76" class="bulleted-list"><li>The <em>refracted ray</em> is traveling away from the center of the image.</li></ul><figure id="abfa151c-d103-4955-b261-de08e1183f8e" class="image"><a href="https://docs-assets.developer.apple.com/published/873dab5946/3d9fec84-3dc4-41bc-b236-5174260c26d7.png"><img src="https://docs-assets.developer.apple.com/published/873dab5946/3d9fec84-3dc4-41bc-b236-5174260c26d7.png"/></a></figure><h1 id="21bddf5c-5a35-4943-bd3c-0704b2d10fc3" class="">Normal Mapping</h1><p id="64b323b6-1513-429d-9d24-99ec3f66831a" class="">Increase the apparent complexity of surfaces without using additional geometry.</p><p id="8ce5c6ce-65a0-46dd-98bb-aa417af4ff84" class="">Requires a normal  and orthonormal axes (tangent and bitangent) for each vertex.</p><p id="2151b722-21ad-4d58-bb5e-f95095e431cf" class="">These three axes are the tangent frame.</p><h1 id="e7b30ff2-d816-4cae-8e83-a09f5acf9044" class="">Image Based Lighting (IBL)</h1><ul id="0e9c1f16-3faa-4061-8977-50e37c930f9d" class="bulleted-list"><li>Compute the radiance of a scene in all directions using an irradiance cubemap.</li></ul><ul id="705d886f-4600-4ad8-be2d-b41a9c448d51" class="bulleted-list"><li>Sample from this cubemap to get the quantity of incoming light.</li></ul><h3 id="a659c27c-15d8-442a-99f0-3cba976d3b85" class="">Vertex</h3><p id="27f2f56b-6a86-4199-99f0-0fd7a41b5e1f" class="">Transform the position, normal and tangent vectors.</p><ul id="cc1cb855-9f5c-4a52-b971-cdda4d9da93c" class="bulleted-list"><li>Calculate the position of the object from the perspective of the camera</li></ul><pre id="10425373-8eb1-4d29-80c1-6f3a757c7d3a" class="code"><code>out.position = modelViewProjectionTransform * in.position;</code></pre><ul id="20bf09e3-bfb9-4548-9777-192687e07c6a" class="bulleted-list"><li>Calculate the normal and tangent from the perspective of the camera</li></ul><pre id="19299b81-471b-4a97-82c5-d7a6e86da302" class="code"><code>out.normal = normalTransform * in.normal;
+out.tangent = normalTransform * in.tangent;</code></pre><ul id="c546655f-f38d-45c3-94ed-07e8e86ad0c9" class="bulleted-list"><li>Calculate the bitangent as the cross product of the normal and tangent.</li></ul><pre id="4ad627c8-1ea1-473f-a0e2-bf195bc8f9c5" class="code"><code>out.bitangent = normalTransform * cross(in.normal, in.tangent);</code></pre><h1 id="f5b574ac-cc50-429b-b85b-6cd834f416e7" class="">Shadows</h1><h2 id="4b298392-492b-4e53-b9d6-56b513cda99b" class="">Shadow Buffer</h2><p id="f316b980-e6c2-4312-850f-0e9857daf9a4" class="">A shadow buffer is similar to a depth buffer.</p><p id="61efa328-e720-48a6-9e61-7d17841b7acf" class="">It stores depth information from the viewpoint of a light source instead of from the viewpoint of the camera.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d9cae73b-e38d-4987-a0ee-416483d05df2"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Using a larger shadow buffer create finer resolution shadows.</div></figure><ol id="7cb3ed73-65cc-42b0-ae85-7a7b3a768b80" class="numbered-list" start="1"><li>For each light, render to the shadow buffer:<ul id="cc7c72ed-d533-445b-a3b4-ca95d7b19b80" class="bulleted-list"><li>Disable all color writes.</li></ul><ul id="04ff5926-670e-421d-b6fb-78839681b65e" class="bulleted-list"><li>Set a viewport to the dimensions of the shadow buffer.</li></ul><ul id="1c3bc098-f681-4fa2-80fd-c17d64c9065e" class="bulleted-list"><li>Clear that viewport of depth information.</li></ul><ul id="bc074aa3-9db4-4589-b171-928cf884e3b2" class="bulleted-list"><li>Set up the views and projections from the light&#x27;s viewpoint.</li></ul><ul id="ac08d232-81df-47da-925f-d1352ab2957a" class="bulleted-list"><li>Render any objects in the scene that should be shadowed.</li></ul></li></ol><ol id="c3f9b7b0-75fb-4ec3-b93f-7ca6a94fb6d3" class="numbered-list" start="2"><li>Render the scene with shadows<ol id="2f9a86bf-aa33-479e-b2f2-9a1a7ad80cbe" class="numbered-list" start="1"><li>Enable all color writes.</li></ol><ol id="89eac1d9-a62a-493e-b11e-5202f6cbc270" class="numbered-list" start="2"><li>Reset the viewport dimensions</li></ol><ol id="37324136-a596-4c90-b74f-419c48d004ee" class="numbered-list" start="3"><li>Clear the viewport of color and depth informaiton.</li></ol><ol id="3c648925-b068-4a69-b462-3d55c80e83a7" class="numbered-list" start="4"><li>Set up the transformations.</li></ol><ol id="ca5741d2-bc3f-4f22-b7a8-0be11c224169" class="numbered-list" start="5"><li>Set the shadow buffer in a texture stage.</li></ol><ol id="67f9f08c-df08-44b3-8c46-60f651078c8c" class="numbered-list" start="6"><li>Render objects in the view frustum.</li></ol></li></ol><p id="bbdd8c7e-b428-4dae-93f3-e0a1801a91ae" class="">The shadow buffer works by comparing the z texture coordinate values with those values recorded in the shadow buffer.</p><p id="fa3472a1-6ef8-4608-afec-17c426e72006" class="">A point is shadowed if the shadow buffer value is greater than the z texture coordinate.</p></div></article></body></html>

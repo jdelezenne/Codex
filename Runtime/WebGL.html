@@ -1,0 +1,615 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>WebGL</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="16eeef87-e209-4c85-8e76-79648b56839d" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🌐</span></div><h1 class="page-title">WebGL</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th>Category</th><td><span class="selected-value">Platforms</span></td></tr></tbody></table></header><div class="page-body"><h1 id="6b6f0ccf-73aa-4d45-bfda-8cbe1fc14e89" class="">Overview</h1><blockquote id="e47a8bc0-6fa6-4d8e-8979-3878ba7ddef2" class="">WebGL (Web Graphics Library)</blockquote><p id="7d5a3a42-aa4f-480d-a6dc-a4865f6c7ffe" class="">WebGL is a JavaScript API for rendering real-time 3D and 2D graphics in a web browser.</p><ul id="060c32c4-085e-44b4-add1-723de83de3b0" class="bulleted-list"><li>WebGL 1.0 supports OpenGL ES 2.0.</li></ul><ul id="76fa88ea-26e9-433e-ad04-bf7e6f1f09e3" class="bulleted-list"><li>WebGL 2.0 supports OpenGL ES 3.0.</li></ul><p id="eb806d03-de2e-4b2d-82aa-b6354389390a" class="">WebGL rendering is done inside an HTML <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">canvas</a></code>.</p><p id="80c08a70-6a58-40c9-a90a-d39944d6515f" class="">A WebGL program is made of JavaScript code and <strong>GLSL</strong> shader code executed on a GPU.</p><h1 id="8299102e-9bab-4628-a0ae-cb5d2888695a" class="">GLSL</h1><blockquote id="9a91bfcc-d316-44d1-b686-1012dc048837" class="">GLSL (Graphics Library Shader Language)</blockquote><p id="50e6d01a-03df-43a5-a17a-98fe50760eb8" class="">Shader languages used by OpenGL and OpenGL ES to write vertex and fragment functions executed on a GPU.</p><h1 id="e95bf384-3ac9-4438-82fb-8eb0e4b12003" class="">Support</h1><h2 id="eddd69bb-4749-41c6-824e-e533dbd28730" class="">WebGL 1.0</h2><p id="e1acb141-8856-49cd-b1fd-7ea42b05c6bb" class=""><a href="https://caniuse.com/#feat=webgl">https://caniuse.com/#feat=webgl</a></p><ul id="22c630d6-7a1b-4bd7-9264-9aed39f277c4" class="bulleted-list"><li>Google Chrome 9+</li></ul><ul id="0e3bdc5e-ce56-4f83-935f-15610c75972a" class="bulleted-list"><li>Firefox 4+</li></ul><ul id="cf4c4ba3-b792-412e-a6eb-23dcfc9bdbda" class="bulleted-list"><li>Safari 5.1+</li></ul><ul id="067d5b75-5f9b-4f84-bcba-32080c45ecf5" class="bulleted-list"><li>Microsoft Edge</li></ul><ul id="1952a984-d4aa-46e1-83ef-380051023f1b" class="bulleted-list"><li>Internet Explorer 11</li></ul><ul id="e4232ce5-16a4-4568-8c35-349ddb16fbe4" class="bulleted-list"><li>Opera 15+</li></ul><h2 id="7872708f-4e07-4db9-812d-69e8c3664811" class="">WebGL 2.0</h2><p id="68a53910-f744-452c-baa3-b99157031785" class=""><a href="https://caniuse.com/#feat=webgl2">https://caniuse.com/#feat=webgl2</a></p><ul id="b23051da-920a-4f7f-aee8-37086f81fcc4" class="bulleted-list"><li>Google Chrome 56+</li></ul><ul id="72eb39e6-767c-4518-ae78-bca6fb1f0b80" class="bulleted-list"><li>Firefox 51+</li></ul><ul id="95e7188e-dd91-4c15-844a-631fd44c3158" class="bulleted-list"><li>Opera 43+</li></ul><h1 id="6106568d-7474-4bb2-8ced-c43a5659f998" class="">Loading</h1><p id="64e66fd2-be64-429c-8b9b-5268a7dd7249" class="">When running a local HTML file (<code><em>file:///</em></code>), loading files from the file system will fail with a security exception.</p><p id="39eb428c-f8b6-4960-a675-28b5ea7443df" class="">This is caused by the <em>same origin policy security restrictions </em>in the browsers.</p><p id="65832324-be45-44be-ba9d-dca48de191c9" class=""><a href="http://en.wikipedia.org/wiki/Same_origin_policy">http://en.wikipedia.org/wiki/Same_origin_policy</a></p><p id="45d56b9a-c3b1-40b2-8ee1-9354b5280d16" class="">There are several solutions:</p><ul id="1c478daf-5b89-4509-8b2f-c3d5d0b3ff6f" class="bulleted-list"><li>Set the browser to allow file access from files.</li></ul><ul id="749df227-e332-4bc8-aa52-e562206ee61a" class="bulleted-list"><li>Run the HTML file from a local web server.</li></ul><h2 id="75726f39-fc1e-4b98-8ba9-50512043448a" class="">Browser</h2><h3 id="fb1f6ef4-6121-489d-9ec8-89e8f57d32eb" class="">Windows</h3><pre id="5493c980-3d63-453b-a551-bd32aa549f22" class="code"><code>chrome.exe --allow-file-access-from-files</code></pre><h3 id="eb45228c-73ee-4b83-8b42-521701413ad6" class="">macOS</h3><pre id="957b92a5-e31b-4d26-863b-a438d534ee5b" class="code"><code>&quot;/Applications/Google Chrome.app/Contents/MacOS/Google Chrome&quot; --allow-file-access-from-files</code></pre><h2 id="f3c36aeb-d798-4c0d-847d-832aada5e280" class="">Local web server</h2><h3 id="751a8ada-4228-4b18-8884-93f26a507034" class="">NPM</h3><p id="abc4202f-e3fd-4a94-9e49-3888c6eec170" class="">The easiest way to run a local web server is to install <strong>Node.js</strong> using the <strong>npm</strong> package manager. </p><pre id="1ed388b0-a9db-454a-96a7-b5e683b4477b" class="code"><code>npm install http-server -g</code></pre><p id="8fde9a39-5840-4e6a-bd6b-71c984356921" class="">Then run <strong>http-server</strong> in a local directory.</p><pre id="c552e2af-514c-4379-893d-ba367570cbe5" class="code"><code>http-server . -p 8000</code></pre><h3 id="42b42fa4-c369-4349-88b4-13c243db8f64" class="">Chrome</h3><p id="5b905ce4-5c74-4f28-8bed-6a882a37da1e" class="">An alternative is to install a browser extension that hosts a local web server.</p><p id="26e74bb9-bdc6-4b46-a857-e2acccb26628" class=""><a href="https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb">https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb</a></p><h1 id="193e0547-af96-46e4-9c3f-23fa29746339" class="">Shaders</h1><h2 id="e8a91fff-091f-4693-87db-1b20d2304131" class="">Clip Space</h2><p id="b0d5e97e-d161-4ced-9059-89ddc3c5a0ae" class="">In OpenGL ES, the clip space for the Z axis is in the range [-1, 1].</p><h2 id="90d4c506-0245-4df5-9767-53023e681692" class="">Attributes</h2><p id="6caccb99-f4f3-4114-8e90-dea29dc6e0df" class="">Attributes are vertex data provided as input to the vertex shader function.</p><p id="87007988-f377-4179-8ae0-91b6bcedef32" class="">vec4 attributes default to [0, 0, 0, 1], which is a valid zero positions (w is set to 1).</p><p id="403feb10-a0a1-4afb-b164-6efff66c07a2" class="">A position attribute passed as a vec2 or vec3 will still be a valid position.</p><p id="d800ae4c-fbe0-4693-9617-ff5d6b03a942" class="">However, normals must ensure that w is set to 0.</p><h2 id="8fc93dee-70e8-460a-8dee-a20b7b272fe4" class="">Varyings</h2><p id="7f251311-2b9d-4e88-acaa-e2f3845b11f4" class="">Varyings are variables that are declared by the vertex shader and used to pass interpolated data from the vertex shader to the fragment shader.</p><h2 id="db55faff-9bc2-41ef-9d05-ad8cb6114d80" class="">Uniforms</h2><p id="b36bdf81-2e75-43d2-9379-4686e17e8146" class="">Uniforms are variables set by the JavaScript code and are available to both the vertex and fragment shaders.</p><h2 id="163f08f1-4387-46e8-a8c8-07deb52afe2f" class="">Data Types</h2><ul id="2be3d655-be1a-4b51-a3de-3638fcb1b07f" class="bulleted-list"><li>Vectors: vec2, vec3, vec4.</li></ul><ul id="068e721e-4c49-4af2-a992-329776014d08" class="bulleted-list"><li>Matrices: mat4.</li></ul><h2 id="2c6ace82-e513-4b34-89ab-7a1406702a3a" class="">Vertex Shader</h2><p id="2c1133a2-447d-4be6-8667-f2696f3d1544" class="">The responsibility of the vertex shader is to transform input vertices.</p><p id="c1512705-3b39-447f-bb47-f9b60cc98098" class=""><code>gl_Position</code> is a special variable that must be set by the vertex shader with the transformed vertex position.</p><h2 id="9c1877e6-7115-45f0-8a9f-a419348a77d8" class="">Fragment Shader</h2><p id="3dbe15c3-3cfa-4685-9903-61e9b7baa62f" class="">The responsibility of the fragment shader is to determine the color of the pixels.</p><p id="00f1441a-4451-4e43-a9d0-beec6953cd12" class=""><code>gl_FragColor</code> is a special variable that must be set by the fragment shader with the pixel&#x27;s color.</p><h1 id="f34b2da8-9ce9-4c11-8810-9fde2b8d20eb" class="">Memory</h1><p id="3408587b-3d4f-43ef-b43c-53fa4d0062e8" class="">Hardware memory needs to be released explicitly.</p><ul id="1c57555e-0c79-48c3-9eba-883301f759a1" class="bulleted-list"><li>Vertex and index buffers</li></ul><ul id="7255a98f-d68d-442a-ae2d-c0daf26c0adb" class="bulleted-list"><li>Uniforms</li></ul><ul id="21f8593d-57e9-45d8-8aa8-89c8e3be3133" class="bulleted-list"><li>Textures</li></ul><ul id="070c778e-dcda-4d8c-a9f8-24f0f290a98a" class="bulleted-list"><li>Render targets</li></ul><ul id="34d973ed-49ae-44d5-b7dc-d51e48769f64" class="bulleted-list"><li>Shader programs</li></ul><h1 id="32f08850-2f21-4f62-8d12-599389659e88" class="">Tutorial</h1><h2 id="17431d9a-4230-42d3-9519-275e93aea20b" class="">Initialization</h2><ul id="1db16e84-bf2f-4933-b800-f72fcbed8cdc" class="bulleted-list"><li>Create an HTML with a canvas.</li></ul><ul id="1510bc9d-c922-4b30-bf04-35342b7a6efc" class="bulleted-list"><li>Get the WebGL drawing context from the canvas.</li></ul><ul id="860e70d1-5d1d-44fa-9bb9-cc0d04abb91f" class="bulleted-list"><li>Validate that WebGL is supported.</li></ul><ul id="e5787b65-5f15-4e5d-8a7b-3b34b46309d6" class="bulleted-list"><li>Start the render loop.</li></ul><p id="40a04223-7d6b-4437-b595-b715868d38a0" class="">
+</p><p id="29b20ff9-8e7c-4885-ba85-5a832fff0926" class="">Create an empty HTML page with an empty <code>body</code> tag.</p><pre id="495db194-c1cc-4546-839c-5b4be9598ba1" class="code"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre><p id="db6cc1a7-c386-4f5e-971d-4bd8aa0f23f1" class="">Add a <code>canvas</code> tag inside the <code>body</code> tag with a an ID.</p><p id="e182eaa0-5e71-4c13-b180-a43b8f0be2aa" class="">Add an empty <code>script</code> tag for the JavaScript code.</p><pre id="cc0512c1-3413-405e-bef7-0d3ea7fb946b" class="code"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;canvas id=&quot;canvas&quot;&gt;&lt;/canvas&gt;
+        &lt;script&gt;
+				&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre><p id="06512f64-5ad1-439a-9908-98e7b5e5874f" class="">In the <code>script</code> tag, initialize WebGL by getting the <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">canvas</a></code> from its ID in the document using <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById">getElementById(id)</a></code>. Alternatively, look up the canvas with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector">querySelector(selectors)</a></code>.</p><pre id="a6fa2cdd-2e2c-4f4e-a120-3f91e0b1eadb" class="code"><code>const canvas = document.getElementById(&quot;canvas&quot;);</code></pre><p id="82ae571f-6ff8-4f8c-936f-cc17cb75b2f8" class="">Get the drawing context for WebGL from the canvas by calling the <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext">getContext(contextType)</a></code> function with the &quot;<strong>webgl</strong>&quot; or &quot;<strong>experimental-webgl</strong>&quot; identifier.</p><p id="cb72d538-af5f-4c48-b278-c09a83fa2c2b" class=""><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext">https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext</a></p><pre id="3e6964ed-2841-4b6a-a32d-9b53c33616b0" class="code"><code>const gl = canvas.getContext(&quot;webgl&quot;);</code></pre><p id="8bba22ab-670c-4af3-8f37-434ddcf8521a" class="">Validate that the drawing context implements the <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext">WebGLRenderingContext</a></code> interface for WebGL 1.0.</p><pre id="486b69a5-fe61-4b56-94ba-c26ee9c7a58c" class="code"><code>if (!gl || !(gl instanceof WebGLRenderingContext)) {
+  alert(&quot;Unable to initialize WebGL.&quot;);
+  return;
+}</code></pre><p id="08c73953-9fb6-45e2-b689-b9c5ee4bda29" class="">After the WebGL initialization, we define a custom function, that registers itself as a callback with WebGL to render the next frame.</p><p id="f23cf115-8523-4f58-8471-6ee44818d11a" class="">To render the following frame, the callback function calls <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">requestAnimationFrame(callback)</a></code> on the window with a reference to itself to setup a render loop.</p><pre id="d29cd5ce-ff0e-4356-bab7-bf15e9a9b7a8" class="code"><code>function render() {
+	requestAnimationFrame(render);
+}
+
+requestAnimationFrame(render);</code></pre><h2 id="d3c6296b-0b24-4a8a-b862-29a3d97f65b8" class="">Shader</h2><ul id="7b915fc7-0918-4ab5-a871-e56c51db2b39" class="bulleted-list"><li>Create a shader program</li></ul><ul id="7d0d00d4-5a75-471c-93ba-6014e664065b" class="bulleted-list"><li>Create a vertex and fragment function from shader source code.</li></ul><ul id="4f906b76-1f42-4e69-b66c-78c8464c5128" class="bulleted-list"><li>Compile the shader functions.</li></ul><ul id="a9d7e3b9-a480-49e3-8fcc-a8c7c171eaac" class="bulleted-list"><li>Attach the vertex and fragment functions to the shader program.</li></ul><ul id="ac290c19-39b5-4db6-b235-d65da5720d77" class="bulleted-list"><li>Link the shader program.</li></ul><ul id="fe07d9ae-a1c6-4ab9-9255-5f6963957df1" class="bulleted-list"><li>Retrieve the attributes and uniforms locations from the shader program.</li></ul><p id="7f73269b-765c-43ca-b604-5371c669def5" class="">
+</p><p id="ebcfecec-b937-42d8-ad3b-fbac631033a1" class="">The shader code can be written directly in JavaScript code as a string literal.</p><p id="c157cf05-273a-4d44-9272-2f91c48590a0" class="">The back-tick character (`) can be used to write multiline string literals.</p><p id="20123464-c347-4147-a87f-80338010f7f5" class=""><code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLProgram">WebGLProgram</a></code> represents a shader program made of a vertex and a fragment shader function.</p><p id="9fbc4f0a-7d5b-481e-8a2c-ecc18f6aba14" class=""><code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLShader">WebGLShader</a></code> represents a vertex or a fragment shader function.</p><h3 id="943c887b-3d67-47d0-ab7c-4399b2f655b8" class="">Create a shader function</h3><p id="185f9a96-8611-45d4-845e-f74278881bab" class="">For both the vertex shader and fragment shader sources, we create a corresponding shader function.</p><ul id="a686df21-8412-437f-896e-fb5e1398e79a" class="bulleted-list"><li>Create a shader with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/createShader">createShader(type)</a></code> with type <code>VERTEX_SHADER </code>or <code>FRAGMENT_SHADER</code> type.</li></ul><ul id="288a94ac-fed5-42a7-8388-cd48940f90f5" class="bulleted-list"><li>Provide the source string for the shader with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/shaderSource">shaderSource(source)</a></code>.</li></ul><ul id="257ad446-ca9f-407d-aa85-c2a9eaa6a023" class="bulleted-list"><li>Compile the shader into binary data with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/compileShader">compileShader(shader)</a></code>.</li></ul><ul id="c5b2169e-b8f1-4ecb-ab1b-a0667dda11f5" class="bulleted-list"><li>Verify that the shader was successfully compiled by calling <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getShaderParameter">getShaderParameter(shader, pname)</a></code> with the <code>COMPILE_STATUS</code> value. The return value is a boolean that indicates the status of the compilation.</li></ul><ul id="e16b4d18-6105-48e3-9201-40ba29152136" class="bulleted-list"><li>If the compilation has failed, the <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getShaderInfoLog">getShaderInfoLog(shader)</a></code> function returns the information about the compilation.</li></ul><h3 id="936fd272-3611-4eb2-ae38-b0d548f3516f" class="">Create a shader program</h3><ul id="fe0f3441-93f3-40a5-9206-42e1635a29e4" class="bulleted-list"><li>Create a shader program with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/createProgram">createProgram()</a></code>.</li></ul><ul id="b2d832e8-13f8-419c-9793-bc97b80a84b6" class="bulleted-list"><li>Attach the vertex shader and fragment shader functions to the program with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/attachShader">attachShader(program, shader)</a></code>.</li></ul><ul id="9d09b019-aa59-48dc-bfbe-2291e6328998" class="bulleted-list"><li>Link the shader program with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/linkProgram">linkProgram(program)</a></code>.</li></ul><ul id="a063cb59-897e-4e7e-ac3d-5e9ab2371b32" class="bulleted-list"><li>Verify that the shader program was successfully linked by calling <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getProgramParameter">getProgramParameter(program, pname)</a></code> with the <code>LINK_STATUS</code> value. The return value is a boolean that indicates the status of the link.</li></ul><ul id="db810d7d-b223-4bee-a688-8fca1889d944" class="bulleted-list"><li>If the compilation has failed, the <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getProgramInfoLog">getProgramInfoLog(program)</a></code> function returns the information about the link.</li></ul><h3 id="5c9452d0-a11b-4449-b6fd-32e091b02755" class="">Get the location of shader attributes</h3><p id="693ec60f-37e4-4fc0-bcbd-ce58b0977206" class="">The input data for the vertex function is stored in <em>attributes</em>. The location of attributes in a shader program is represents as an <em>int</em> number.</p><p id="5a0fd546-87c9-4ab3-a6c7-5474942e0ef0" class="">The constant data for the vertex and fragment functions is stored in <em>uniforms</em>. The location of a uniform variable in a shader program is represented by <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLUniformLocation">WebGLUniformLocation</a></code>.</p><ul id="645ea9c1-c398-4c9f-a424-54ab22562ed4" class="bulleted-list"><li>Get the location of attributes by name with the <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getAttribLocation">getAttribLocation(program, name)</a></code> function.</li></ul><ul id="adb5be6f-1eb8-46d4-9f0c-591cad2bc208" class="bulleted-list"><li>Get the location of uniforms by name with the <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getUniformLocation">getUniformLocation(program, name)</a></code> function.</li></ul><h2 id="d79abda3-d225-419d-9a4c-465a9fe00be7" class="">Buffers</h2><ul id="1f9e3c8a-a0a5-4cd0-912b-e0a2de4f49b1" class="bulleted-list"><li>Create buffers.</li></ul><ul id="babd66d3-1c3d-41fe-8707-340479f5e925" class="bulleted-list"><li>Copy vertex and index data to the buffers.</li></ul><p id="5e4aede0-6068-4055-9f6e-d08772287111" class="">
+</p><p id="d5775881-b1db-4e55-a43c-77441f71f574" class="">A memory buffer on the GPU is represented by <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLBuffer">WebGLBuffer</a></code>.</p><p id="d4094a0e-ad16-4b17-9e85-37df8f46d9f9" class="">A buffer can store vertices, indices, textures and other data.</p><h3 id="7cadd9a7-2af2-4353-b8f6-8ae44d5efe6d" class="">Create a vertex buffer</h3><ul id="fae6c94c-422b-4fe8-b736-1ca4c69007c2" class="bulleted-list"><li>Create a hardware buffer with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/createBuffer">createBuffer()</a></code>.</li></ul><ul id="2efc697d-ee4d-4b5e-adb1-e80b5ff62dca" class="bulleted-list"><li>Bind the buffer with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/bindBuffer">bindBuffer(target, buffer)</a></code>.
+Specify <code>ARRAY_BUFFER</code> for the <strong>target</strong> parameter to indicate that the buffer contains vertices.</li></ul><ul id="990f7577-8fa1-4d3b-bb3b-6f31920a83d0" class="bulleted-list"><li>Create the buffer data store with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/bufferData">bufferData(target, srcData, usage)</a></code>.
+Specify an array of position values for the <strong>srcData</strong> parameter. Typically, an array of float3 or float4 values (<code>Float32Array</code>).
+Specify <code>STATIC_DRAW</code> for the <strong>usage</strong> parameter to indicate that the content of the buffer will not change.</li></ul><h3 id="84719945-136f-4b5b-b7b2-baf646a99ac4" class="">Create an index buffer</h3><ul id="3f3494ac-2030-4f3a-9a5e-094ad1e32013" class="bulleted-list"><li>Create a hardware buffer with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/createBuffer">createBuffer()</a></code>.</li></ul><ul id="c4d520c5-6f7b-4555-9540-fa5da225b036" class="bulleted-list"><li>Bind the vertex buffer with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/bindBuffer">bindBuffer(target, buffer)</a></code>.
+Specify <code>ELEMENT_ARRAY_BUFFER</code> for the <strong>target</strong> parameter to indicate that the buffer contains indices.</li></ul><ul id="86e4d75b-252b-41b7-af3e-77279ea85073" class="bulleted-list"><li>Create the buffer data store with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/bufferData">bufferData(target, srcData, usage)</a></code>.
+Specify an array of index values for the <strong>srcData</strong> parameter. Typically, an array of uint16 (<code>Uint16Array</code>) or uint32 values (<code>Uint32Array</code>).
+Specify <code>STATIC_DRAW</code> for the <strong>usage</strong> parameter to indicate that the content of the buffer will not change.</li></ul><h3 id="a7a3300b-cd32-4f84-ad1d-ac0c8aec1e8a" class="">Render the scene</h3><ul id="c851a7fe-4f27-48cf-aca3-546fc03305e9" class="bulleted-list"><li>Resize the canvas to match the display size.</li></ul><ul id="c811b425-d881-44f8-ba74-c472a6c17406" class="bulleted-list"><li>Setup the viewport dimensions</li></ul><ul id="57a9646f-a684-4b81-aa47-1a42f3740b43" class="bulleted-list"><li>Clear the frame buffer and depth buffer.</li></ul><ul id="cb217d73-cce4-44a2-8988-04bbd34b3e00" class="bulleted-list"><li>Setup the render states.<ul id="e0f782af-3934-49c9-9102-f3a6650fe69b" class="bulleted-list"><li>Face orientation, culling, depth, blending... </li></ul><ul id="82a855ad-cf66-457e-bea9-29977773a43d" class="bulleted-list"><li>Buffers</li></ul><ul id="9de44327-1185-48fb-bd73-d43d912df18a" class="bulleted-list"><li>Uniforms and samplers</li></ul><ul id="924f53a2-191c-4f67-9aeb-c13f974bc7dd" class="bulleted-list"><li>Textures</li></ul><ul id="c74390b2-837c-4e15-9d73-e91265cb2406" class="bulleted-list"><li>Shader program</li></ul></li></ul><ul id="e48a9f14-c0a9-4abc-9fb5-6de1f0e2fbb7" class="bulleted-list"><li>Draw the primitives</li></ul><p id="b0c47a77-4484-4f79-98aa-bfe24df50f1e" class="">Before rendering a scene, we resize the canvas if necessary</p><ul id="91c8d464-bac4-499b-b588-9957c2550b27" class="bulleted-list"><li>Update <code>gl.canvas.width</code> and <code>gl.canvas.height</code>.</li></ul><p id="ed4bfa80-c472-4e29-a336-984cac15aea1" class="">To render a scene, we set the render states and draw the primitives.</p><ul id="e67bd7e1-be5e-4f54-a203-a199dfec376a" class="bulleted-list"><li>Set the viewport with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/viewport">viewport(x, y, width, height)</a></code>.
+To cover the entire canvas, set the <strong>x</strong> and <strong>y</strong> parameters to <strong>0</strong> and <strong>width</strong> and <strong>height</strong> to <code>gl.canvas.width</code> and <code>gl.canvas.width</code>.</li></ul><ul id="5d680adf-2598-4474-8047-41607c1dcf51" class="bulleted-list"><li>Clear the frame buffer with a color value.<ul id="2548d995-2b7d-4f3a-8317-11d89e0aa22a" class="bulleted-list"><li>First set the clear color with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/clearColor">clearColor(red, green, blue, alpha)</a></code>.</li></ul><ul id="cc2968e3-d423-4b6c-988a-87962b7bd872" class="bulleted-list"><li>Then clear the frame buffer with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/clear">clear(mask)</a></code> and the <strong>mask</strong> parameter set to <code>COLOR_BUFFER_BIT</code>.</li></ul></li></ul><ul id="1d35ebc2-0630-4793-8bd9-1e206589873c" class="bulleted-list"><li>Bind the buffers with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/bindBuffer">bindBuffer(target, buffer)</a></code>.</li></ul><ul id="e05256e7-d641-4d3f-acfe-af3bffe32a75" class="bulleted-list"><li>Bind the vertex buffer to the corresponding vertex attribute with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/vertexAttribPointer">vertexAttribPointer(index, size, type, normalized, stride, offset)</a></code>.
+The <strong>index</strong> parameter is the corresponding attribute location in the shader.
+The <strong>size</strong> parameter is the number of components in the vertex buffer (ie 3 for vec3 values).
+The <strong>type</strong> parameter is set to <code>FLOAT</code> for floating-point values.
+The <strong>normalized</strong> parameter is typically set to <strong>false</strong> to keep the data unchanged.
+The <strong>stride</strong> and <strong>offset</strong> parameters are set to <strong>0</strong> for a vertex buffer that contains a single type of data; otherwise the appropriate layout is specified.</li></ul><ul id="c8b01b0b-4b83-48c2-b61c-9105dfe8e9f1" class="bulleted-list"><li>Enable the vertex attribute with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/enableVertexAttribArray">enableVertexAttribArray(index)</a></code>.</li></ul><ul id="75c3e0a1-21be-4a51-a32b-08da20539924" class="bulleted-list"><li>Set the shader program with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/useProgram">useProgram(program)</a></code>.</li></ul><p id="801c98e6-cdfe-4289-84cc-e78ab773638b" class="">Whether an index buffer is set in the render states, primitives are drawn using a different function.</p><h3 id="d0659c62-32d9-4f46-bef4-47d9878ce0c0" class="">Draw primitives</h3><ul id="2d3ecd93-9090-4ca2-8946-1b2af5a8ab22" class="bulleted-list"><li>Draw the primitives with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawArrays">drawArrays(mode, first, count)</a></code>.
+<strong>mode</strong> is typically set to <code>TRIANGLES</code>, <code>TRIANGLE_FAN</code> or <code>TRIANGLE_STRIP</code>.
+<strong>first</strong> is the index of the first of the first vertex in the vertex buffer.
+<strong>count</strong> is the number of vertices to draw in the vertex buffer.</li></ul><h3 id="d5035245-2bf8-48ad-8b25-deab704ef41e" class="">Draw indexed primitives</h3><ul id="67ed0aa5-5de9-4052-b050-b964d68cbe6a" class="bulleted-list"><li>Draw the primitives with <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawElements">drawElements(mode, count, type, offset)</a></code>.
+<strong>mode</strong> is typically set to <code>TRIANGLES</code>, <code>TRIANGLE_FAN</code> or <code>TRIANGLE_STRIP</code>.
+<strong>count</strong> is the number of vertices to draw in the vertex buffer.
+<strong>type</strong> is set to <code>UNSIGNED_SHORT</code> for uint16 values or <code>UNSIGNED_INT</code> for uint32 values.
+<strong>offset</strong> is the byte offset in the index buffer.</li></ul><h1 id="0f077011-226b-4796-b8ce-431148f136ea" class="">Validation</h1><p id="6e2550dd-0f47-45f9-9f62-0fc63984ebd3" class="">To check if the browser supports WebGL, create a canvas and try to obtain a drawing context with the <code>getContext</code> function.</p><p id="0cd51452-bb53-4e9e-b328-134f302e6e3e" class=""><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext">https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext</a></p><ul id="e4d07029-556f-454d-9881-e5a3138f2d08" class="bulleted-list"><li>WebGL 1.0<ul id="4d2ba7eb-e5c5-4087-bf5f-57c0eae0ef39" class="bulleted-list"><li>Obtain the <strong>webgl</strong> or <strong>experimental-webgl</strong> context.</li></ul><ul id="1abc96a2-81db-4fe1-8d8e-646563a98250" class="bulleted-list"><li>The context should implement the <code>WebGLRenderingContext</code> interface
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext">https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext</a></li></ul></li></ul><pre id="e4dc94bd-1134-41bc-ac3e-026634f4d231" class="code"><code>isWebGLAvailable: function () {
+  var canvas = document.createElement(&quot;canvas&quot;);
+	var gl = canvas.getContext(&quot;webgl&quot;) || canvas.getContext(&quot;experimental-webgl&quot;);
+  return (gl &amp;&amp; gl instanceof WebGLRenderingContext);
+}</code></pre><ul id="c96e8f2d-3fc9-4e00-a678-3f4804a1c0b6" class="bulleted-list"><li>WebGL 2.0<ul id="af63bab7-f8ee-4bed-bc45-cc35e69bc53b" class="bulleted-list"><li>Obtain the <strong>webgl2</strong> context.</li></ul><ul id="d445dd30-08bd-4686-b8a2-9d60ead392b8" class="bulleted-list"><li>The context should implement the <code>WebGL2RenderingContext</code> interface
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL2RenderingContext">https://developer.mozilla.org/en-US/docs/Web/API/WebGL2RenderingContext</a></li></ul></li></ul><pre id="a11eb2a7-217c-4c4b-ad47-5b591e679e53" class="code"><code>isWebGL2Available: function () {
+  var canvas = document.createElement(&quot;canvas&quot;);
+	var gl = canvas.getContext(&quot;webgl2&quot;);
+  return (gl &amp;&amp; gl instanceof WebGLRenderingContext);
+}</code></pre><p id="cf200f92-0048-4075-b071-2275ced3b387" class="">Reference</p><ul id="ef0e2755-fba9-4ae8-bf53-d6797660704d" class="bulleted-list"><li>Mr.doob, <a href="https://github.com/mrdoob/three.js/blob/master/examples/js/WebGL.js">https://github.com/mrdoob/three.js/blob/master/examples/js/WebGL.js</a></li></ul><h1 id="2cbc41ca-fd93-4fd2-9e24-bec69a0d9fce" class="">Best Practices</h1><h2 id="2a44ee36-72d4-41bb-b689-3843589c346d" class="">Resources</h2><ul id="d55ab215-256c-4e74-a53d-7ab73323c966" class="bulleted-list"><li>Offline:<ul id="f66d3e7f-b601-4a70-8003-e5577c306ffe" class="bulleted-list"><li>Generate mipmaps.</li></ul></li></ul><ul id="8430a429-c5ca-4bbd-b64a-185145aed707" class="bulleted-list"><li>At initialization and loading only:<ul id="58f947b7-323c-4bdc-9573-99c7e1946768" class="bulleted-list"><li>Create shaders, buffers and textures.</li></ul><ul id="2bc56119-0060-44e1-b435-daf69477aacb" class="bulleted-list"><li>Retrieve shader attributes and uniforms locations.</li></ul></li></ul><ul id="96533a92-35c4-49f9-888c-6750bec5d7d8" class="bulleted-list"><li>Create static buffers by default.</li></ul><ul id="42d9f9ed-a483-46cd-9412-50321c0b6321" class="bulleted-list"><li>Create interleaved vertex buffers.</li></ul><h2 id="b7f7a10d-2e1d-43cb-b425-47a51a685ac5" class="">Rendering</h2><ul id="91407127-531a-4d37-93bc-40a29431939c" class="bulleted-list"><li>Reduce memory usage.<ul id="66e4cfd9-f273-45a9-bda8-7905284a4078" class="bulleted-list"><li>Large meshes should use index buffers.</li></ul><ul id="cb210f51-1281-4e02-be93-30985a90e8cf" class="bulleted-list"><li>Do not copy vertex attributes that are not used in the shaders.</li></ul><ul id="8a81cb21-7cc5-48ce-83c9-7a5ab3dcf8b1" class="bulleted-list"><li>Use compressed textures formats.</li></ul></li></ul><ul id="995e45ff-9d46-4537-99c8-67bcad091bae" class="bulleted-list"><li>Reduce render states changes.<ul id="a93cd767-285c-48e2-9342-cdcb3ccc5979" class="bulleted-list"><li>Sort primitives by materials.</li></ul><ul id="10f7d519-c15e-4709-9609-86a7622257c7" class="bulleted-list"><li>Set up instancing.</li></ul><ul id="4def7ded-e265-4b6e-9380-bdac2692dcaf" class="bulleted-list"><li>Pass uniforms data as arrays instead of values.</li></ul></li></ul></div></article></body></html>

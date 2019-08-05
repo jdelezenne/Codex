@@ -1,0 +1,662 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Assets</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="77defeb7-43cf-48fe-9f43-7a0d69dc16c2" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🖼</span></div><h1 class="page-title">Assets</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th>Created</th><td><time>@Jun 16, 2019 10:47 AM</time></td></tr><tr class="property-row property-row-multi_select"><th>Tags</th><td></td></tr></tbody></table></header><div class="page-body"><h1 id="6b908036-aa4d-4dca-9b7f-765814b60538" class="">Overview</h1><p id="9ac77646-d27a-494b-b9e0-50948235ac68" class="">A game contains a very large number of assets.</p><p id="9de7d660-af0e-4a10-b8a4-9da1e1314f3b" class="">There are two category of assets.</p><ul id="7722ca45-561f-443d-9d16-5d08fbcc5066" class="bulleted-list"><li>External assets produced by a third-party application (mesh, texture, ...)</li></ul><ul id="86b6032f-3737-4670-b12a-4fea4a5798c6" class="bulleted-list"><li>Internal assets produced in the editor (scenes, entities, materials, settings, scripts, ...)</li></ul><p id="532cc045-6308-42fc-8c8b-276da1ceda85" class="">Assets have different form: texture, shader, material, script, ...</p><p id="cd0055ab-3443-4d13-af0f-b872450a2719" class="">Assets need some way of being referenced.</p><ul id="5f382048-c8e4-46b7-8a55-47cc3af24b11" class="bulleted-list"><li>External assets: a mesh references materials which in turn reference shaders and textures.</li></ul><ul id="8a339243-fe45-4a03-ae3b-9d553caec89d" class="bulleted-list"><li>Internal assets: an entity spawns other entities from a specific location.</li></ul><p id="f1a0734b-d442-4e68-9b76-19d7da305da2" class="">These references need to be resolved at runtime.</p><h1 id="5cb404ad-7253-43cf-898a-5e8fa6470d24" class="">Asset Names</h1><p id="5840344a-22fc-44de-b24f-e0c38a368645" class="">There are three ways to identify assets:</p><ul id="11c51465-1316-4f85-9fca-2af6aeb15c2e" class="bulleted-list"><li>Name</li></ul><ul id="25c829cf-3b34-4eee-b2ea-2b1ad4329041" class="bulleted-list"><li>Identifier</li></ul><ul id="92a11b31-5eb4-4ff7-85f7-f105d29cebeb" class="bulleted-list"><li>Combination</li></ul><h2 id="0177cba5-8d73-4cb6-bf3c-1922189ebf7d" class="">Names</h2><p id="0ab75f0a-a01f-4dc5-9d00-c039ce25b473" class="">Names reference assets by their role.</p><h3 id="9daa80e4-e178-498b-b873-5e613c1cc290" class="">File Path</h3><p id="1d20baa9-a5a9-4e68-802e-0643dd0155b3" class="">A name is a string associated with an asset that can be changed by the user.</p><p id="55124b1e-1fe4-4b24-a40d-de31e170f539" class="">Identifying external assets by name is the easiest method as the external assets are imported from the operating system&#x27;s file system which is already based on file names.</p><pre id="9050bbcb-b9c6-4bbb-9694-9c21896b7a49" class="code"><code>Models/Buildings/Hotel.fbx</code></pre><p id="c2500191-2536-40c0-ab43-9820a6e8cf31" class="">The file names should have a canonical path:</p><ul id="62598b7b-0431-4e6c-8eab-324b1da8c5e0" class="bulleted-list"><li>Only use relative paths</li></ul><ul id="28316de2-7da4-4950-958d-e6a2ae386506" class="bulleted-list"><li>Force to lower case</li></ul><ul id="6ea77174-c29c-4717-86dd-8d27bb43c1d0" class="bulleted-list"><li>Only use foward slashes only as directory separator</li></ul><ul id="542cb163-b3f1-4078-b2aa-924272589a7e" class="bulleted-list"><li>Do not allow dots</li></ul><h3 id="7263cd7b-5d90-426c-afe1-fcc9bf9997ef" class="">Display Name</h3><p id="3eacd91c-eccf-48f8-9bab-6555d2c93c75" class="">Internal assets can have a generated name (based on their type or context of creation).</p><p id="255c35d4-d551-4900-91c1-c03704a734a8" class="">The user can then rename the assets at will.</p><p id="ecc33351-a1e3-4118-8628-71c03b92ad79" class="">In the case of hierarchical assets, they can be identified with a unique assets path.</p><pre id="2eafb37c-ee46-4216-bf3a-ef5737949228" class="code"><code>NewScene/Environment/Trees/PalmTree[2]</code></pre><hr id="0a51971f-57c1-4521-b853-db52a27c7c95"/><p id="d3dc0e5a-a4d9-41c2-8f4c-83dd07e4f164" class="">✔Easy for users to identify assets.</p><p id="aa5e2e72-7aaa-4d4c-8076-108164af32b6" class="">✔Easy to implement.</p><p id="91f2bdb9-76e4-488e-aefb-58e103e951b9" class="">✔Late binding to assets. A referenced assets can be replaced by a new asset without updating the references.</p><p id="b1968506-d4f3-4e9f-9a03-596d35cf82e2" class="">❌Moving or renaming assets breaks references.</p><p id="84f1760f-6889-46d4-80b7-962427cb74a4" class="">❌Tedious to define a unique name for each asset.</p><p id="f2fb26a3-b635-4fd8-970a-46b5e0b9b34d" class="">❌String comparisons are expensive.</p><p id="40849f5a-3ed9-4c5e-93ba-1cfde6810416" class="">❌Generated names are confusing (ie. Box842).</p><h2 id="39d4be8b-bdf5-4c64-93bd-03bde3deb90c" class="">Identifiers</h2><h3 id="c11bc4e6-7946-40f8-83cb-6a2a9a0d4750" class="">Unique Identifier</h3><p id="5f66a1a9-0a28-4778-8b7d-3423bdef61b6" class="">Unique identifiers reference assets by their identity.</p><p id="56ec723c-170f-47b4-93f5-31b2109726ea" class="">A unique identifier is associated with an asset when it is created, and is never changed.</p><p id="cee79f3c-e7b4-4be2-b5c5-646aadad1bff" class="">There are two methods to associated a unique identifier with an asset:</p><ul id="db31b5d9-6b31-4e0a-8e92-6a6a99e146b7" class="bulleted-list"><li>The asset can be stored on disk using its identifier instead of a regular file name.</li></ul><ul id="a6468184-1e8b-4b10-ba1f-ec79b996cad7" class="bulleted-list"><li>The asset can have additional metadata in which its identifier is stored.</li></ul><pre id="f90793e6-9486-483c-b180-bab8794bdedc" class="code"><code>RFC 4122 UUID: 536bd1f9-699a-4bc8-b046-6224ea901d21</code></pre><h3 id="49afd6c6-a8f7-4f56-b484-1f92effdf07a" class="">Hash</h3><p id="f3e60fb9-b8db-40f1-b7a5-c498906a52f3" class="">Hashes reference assets by their content.</p><p id="ddf3a818-9744-4a5d-8d6e-c9849c32d208" class="">An alternative is to generate a hash from the content of an asset.</p><p id="bba9fdfe-31f6-417c-aa90-4b161c1106e2" class="">In that case, the assets is referenced by name at edit-time, and then using the computed hash at run-time.</p><pre id="12cf68e4-0032-4b91-ae46-6626868a60a0" class="code"><code>MD5: 50481dd8a9afdbfbb768378acb5c1c6b</code></pre><hr id="291235bd-924c-445b-ab7a-148f85c18b63"/><p id="01af79b1-9e3d-4bb7-8887-aac4a9f49fe5" class="">❌Difficult for users to identify assets.</p><p id="0758f8d7-8c18-4ecd-81f6-68563b7eed03" class="">❌Impossible to work with third-party applications.</p><h2 id="7b64a916-37bf-4e95-8607-cd639ec2a237" class="">Combination</h2><p id="a6ebc65b-30da-40ff-bca1-b3a0a6224f80" class="">A better solution is to associate a unique identifier with assets but work with assets using a <em>display name</em> during development which is stripped from the final game.</p><p id="00ff8f8d-6d4c-4eb3-94f0-b6114a188ba9" class="">Renaming assets is now a simple operation as the editor can fix the references automatically.</p><p id="0e584a12-8343-4444-9c37-870a619a4b87" class="">A reference to an asset would look like this.</p><pre id="1af18e8b-fa43-423e-92f7-c6dc8ca85820" class="code"><code>texture:
+{
+  path: &quot;textures/my_texture&quot;
+  id: &quot;5e1b607e-6fea-4e03-9946-15395e9c305d&quot;
+}</code></pre><h1 id="b444fdc9-1ce6-4fa9-9f6d-fad3292e2cbf" class="">Asset Identifiers</h1><p id="acbe6a61-cc88-4d00-8986-94e36a6d1124" class="">There are multiple method to compute unique identifiers for assets.</p><p id="d4335349-e1c2-44cb-91b9-ab10cff812c1" class="">A naive approch can create collisions: multiple strings with an identical hash value.</p><p id="447624c0-a95f-4a00-8d82-a5aac723d0e6" class="">Some are based on hash values. A hash value is a number calculated from the bits of the string using some algorithm to produce a fixed number of bits.</p><p id="554ecfce-14a4-453f-96b2-51d09cce6a3a" class="">Many common algorithms produce large numbers (more than 128-bits) such as SHA, MD5, ...</p><p id="732b11e0-344f-41e1-b1a4-a7a3535d7d4a" class="">Some algorithms produce 32-bit or 64-bit values but cansuch as: CRC-32, FNV-1a, ...</p><h2 id="2b434eca-47a6-4e46-973f-56f09e82532d" class="">FNV-1a hash</h2><p id="09a41d2b-bc81-4bf2-9db3-840c7489d945" class="">A <a href="http://isthe.com/chongo/tech/comp/fnv/">FNV-1a</a> hash can be computed from the asset name and an <em>offset</em> and <em>prime</em> values.</p><p id="5f01cf2f-d0c5-492b-98b4-b22e182f3bd6" class="">The <em>offset</em> and <em>prime</em> values can be compile-time constants.</p><p id="8cb2b9a7-592f-47cd-afdd-3c3a2ae2ea5b" class="">The algorithms can be implemented as a 32-bit or 64-bit hash function.</p><pre id="9a0b0e1e-08b3-41c8-bfe3-4f95d99719c6" class="code"><code>  static size_t CalculateFNV(const char* str, size_t offset, size_t prime)
+  {
+    size_t hash = offset;
+    while (*str != 0)
+    {
+      hash ^= *str++;
+      hash *= prime;
+    }
+ 
+    return hash;
+  }
+</code></pre><h1 id="b4b89256-c8e8-413a-b3c8-d317bdc21cc0" class="">Assets and code</h1><p id="81c3607e-56bc-48ef-983f-afe915640ece" class="">To be able to use assets in code, there are multiple methods.</p><h2 id="bd6d8c74-27c0-41d4-b820-0567d8d9ee81" class="">Look-ups</h2><h3 id="f9e450a5-a075-41c6-8132-c29401f52eaa" class="">Strings</h3><p id="621ec37b-c45e-410e-b6da-40fd39562688" class="">The most simple case is to look-up a resource based on a string, that represents its path or its name.</p><pre id="d27fd572-da13-4b7b-a78f-8735f3316175" class="code"><code>Texture* asset = TextureManager::FindTexture(&quot;my_texture&quot;);</code></pre><p id="8b61e97f-b781-4e43-a17e-5f15cb3ecf19" class="">Or in a more general way. </p><pre id="bb8e6e21-7009-4ab1-8af1-3673242a9344" class="code"><code>Asset* asset = AssetManager::Find(&quot;my_texture&quot;);</code></pre><p id="19e28496-4d4f-42d8-b525-528ffd325c71" class="">Whenever we have to find a certain resource based on a name, we could do one of the following:</p><ul id="7ade2582-15f7-4bd8-929f-e55c66b07b58" class="bulleted-list"><li>Store each resource’s name, and compare it with the name of the requested resource.</li></ul><ul id="61f14b68-e9db-40a9-b5a7-1482caf84f1e" class="bulleted-list"><li>Compute and store the hash of each resource’s name, and compare it with the hash of the requested resource’s name.</li></ul><p id="ecf2816f-09f5-43ad-9609-bbfc0e76e2f4" class="">To compare asset&#x27;s name, we can just perform a string comparison:</p><pre id="fd4635c9-815c-47a2-b1b4-e2d82c8b217f" class="code"><code>Asset* AssetManager::Find(const char* name)
+{
+  for (auto asset : _assets)
+    if (strcmp(asset-&gt;GetName(), name) == 0)
+      return asset;
+  return nullptr;
+}</code></pre><p id="9f36612e-e841-4690-b1e9-1795b13ff3f4" class="">There are a few problems with this method:</p><p id="0e3aa762-80f3-47fc-ae31-b06f6e37d9e2" class="">❌When an asset is renamed, the code still compiles but fails at runtime.</p><p id="5ae1f981-ef32-41c1-8c13-0b058dd5f927" class="">❌String take up a large amount of memory (especially with paths).</p><p id="54b316f0-b156-47bd-a34e-f20242f23cb5" class="">❌String comparisons are very slow.</p><p id="535f6f26-d52f-4dd0-aa14-4d0f249acd9b" class="">❌Cache trashing occurs because string have a variable-length.</p><h3 id="7738b41a-99de-4857-8284-0fe9119bc49f" class="">Hash</h3><p id="28898f6f-6f76-47bb-96b2-b178c7f20ddd" class="">Comparing hashes would be more performant and could initially be implemented as such:</p><pre id="f50992a0-ea7b-47d5-828c-c3f9fdc7ebf0" class="code"><code>Asset* AssetManager::Find(const char* name)
+{
+  size_t hash = CalculateHash(name);
+
+  for (auto asset : _assets)
+    if (asset-&gt;GetHash() == hash)
+      return asset;
+  return nullptr;
+}</code></pre><p id="ea28eb39-466e-43c3-8e2d-7d9daab74451" class="">❌The problem with this method is that in many cases, the name parameter will be constant in the game code, but the hash will be computer with every request.</p><h3 id="40d6142b-c015-461f-b594-30989975941e" class="">Hash values</h3><p id="9cab8763-6785-475a-8ee7-17245dc39366" class="">A basic solution is to look-up resources with hashes directly.</p><pre id="f615cb81-ebbb-4b22-8c1f-fc394c30e1f6" class="code"><code>Texture* asset = AssetManager::Find&lt;Texture&gt;(0x1234abcd);</code></pre><p id="b73fa163-a13a-4194-afe3-1346a4e9e984" class="">✔No runtime cost.</p><p id="f3662870-1d63-4813-a704-0bdb068b9caa" class="">❌Easy to make mistakes.</p><p id="f8bd25c0-1f6f-424d-9d21-41286f0a894f" class="">❌The code is hard to understand. Adding a comment is poor improvement as comments can be out of sync.</p><h3 id="546c75f6-ed2d-446f-a083-343c9b0f8b2a" class="">Macros</h3><p id="b3f19051-597a-48ad-9c75-a7ef78800da1" class="">An improvement over this method is to generate a header file with macros of all the assets in the game.</p><pre id="a359ca96-615e-4a6b-a3e4-560dac3b2390" class="code"><code>#pragma once
+
+#define ASSET_MYTEXTURE    0x1234abcd
+#define ASSET_OTHERTEXTURE 0x5678cdef</code></pre><p id="d449abda-ceee-4857-abe4-e359c474f3f0" class="">Instead of using the hash value directly, we can include the generated header and use the macro.</p><pre id="5ec01c15-cc60-4c69-8a04-769d7e9b26ca" class="code"><code>Texture* asset = AssetManager::Find&lt;Texture&gt;(ASSET_MYTEXTURE);</code></pre><p id="9779323b-179e-497e-9e62-8f940b212759" class="">✔When an asset is renamed the macro changes, and the compilation fails.</p><p id="92228380-2810-45f4-90de-602eef56f51e" class="">❌The header file has to be included everywhere a hash value is needed.</p><p id="fd69df26-8b52-450e-8706-842eca652eb7" class="">❌The header file has to be updated when new assets are added and many files need to be recompiled.</p><h3 id="94023185-aa8c-410b-b8f2-5304836ece79" class="">Static hashes</h3><p id="23fa862b-7c6c-40c6-bc0e-f926248650c8" class="">Instead, we can performs lookups using both the file name and its precomputed static hash inplace.</p><pre id="17f7c92e-85eb-47cc-a48e-fd961e426264" class="code"><code>Texture* asset = AssetManager::Find&lt;Texture&gt;(StaticHash(&quot;my_texture&quot;, 0x1234abcd));</code></pre><p id="e35f3b49-292c-44b5-b9a2-4aae55255ae4" class="">The <code>StaticHash()</code> function computes the hash value in debug and asserts if the computed value is different from the static hash value, to ensure that the code is safe.</p><p id="c16e19d4-198a-43e5-b3ef-0393d15f0149" class="">In release, the <code>StaticHash()</code> function ignores the file name which is then stripped from the code.</p><pre id="e9014dfa-bf44-44dc-bbc4-fae7900a4847" class="code"><code>#ifdef DEBUG
+  inline size_t StaticHash(const char* name, size_t value)
+  {
+    assert(CalculateHash(name) == value);
+    return value;
+  }
+#else
+  #define StaticHash(str, value) (value)
+#end</code></pre><p id="9e215ac6-a0fa-479a-b83d-8e72d93d7f59" class="">The pitfall of this technique is that if the asset is renamed, the omputed hash will be valid but the asset won&#x27;t be found.</p><h3 id="fffc8059-89ef-4056-bd6c-271188a72170" class="">Hash strings</h3><p id="c297bd66-7b61-4a33-bf6a-491c7c61d049" class="">Instead we can implement a <code>HashString</code> data structure that will compute the hash once for literal strings and store it.</p><p id="41a2d63a-60d7-44c8-a5b5-92fe6c918451" class="">We define two constructors:</p><ul id="16521a43-e886-45c6-97ae-d8ad7a7f51ce" class="bulleted-list"><li>A constructor that takes constant strings and compute a hash value every time.</li></ul><ul id="b363b6e7-eff4-476b-927c-94bb8ad0ef07" class="bulleted-list"><li>A constructor that only takes static strings and look-up the corresponding hash from the address of the string; otherwise only compute and store the hash value once.</li></ul><pre id="f20ac4a9-0e4f-43c5-a4d1-b92c19e4f9ab" class="code"><code>struct HashString
+{
+private:
+  static Set&lt;const char*, size_t&gt; _hashes;
+  size_t _hash;
+
+public:
+  HashString(const char* str)
+  {
+    _hash = ComputeHash(str);
+  }
+
+  template&lt;int N&gt;
+  HashString(char (&amp;str)[N])
+  {
+    _hash = str.Get(str);
+    if (!IsValidHash(_hash))
+    {
+      _hash = ComputeHash(str);
+      _hashes[str] = _hash;     
+    }
+  }
+
+  size_t Get() const { return _hash; }
+};</code></pre><p id="e0776498-8cc9-4562-a791-bbd34a1a1d6f" class="">This code will failed because the constuctor that takes a <code>const char*</code> will never be called.</p><p id="9eb36637-4d36-432a-bad4-6f93282b7f31" class="">We can fix it by defining a <code>ConstChar</code> wrapper structure on a <code>const char*</code>.</p><pre id="9b09b30c-9e60-410c-a84e-cd95ab7073fc" class="code"><code>struct ConstChar
+{
+private:
+  const char* _str;
+
+public:
+  ConstChar(const char* str) : _str(str) {}
+
+  const char* Get() const { return _str; }
+};
+</code></pre><p id="3e00f2aa-2ba1-4ac0-83ce-1d811f9788ab" class="">We can then modify the HashString constructor to use a <code>ConstChar</code> instead of a <code>const char*</code>.</p><pre id="fdcc06f6-0a1d-4b67-98e5-3056ed3a2c6f" class="code"><code>struct HashString
+{
+  ...
+
+  HashString(ConstChar str)
+  {
+    _hash = ComputeHash(str);
+  }
+
+  ...
+};</code></pre><p id="ac04daa3-8fcb-4bcc-8c98-7c0df15da43a" class="">The look-up function can now compare the hash values, and store the assets into a set for better performances.</p><pre id="94a463c3-76c1-48a5-95c8-04c256f1e1f8" class="code"><code>Asset* AssetManager::Find(HashString name)
+{
+  return _assets[name.Get()];
+}</code></pre><h3 id="7ac9b0c6-f15e-4dc1-b143-8b78a46a0703" class="">Static assert</h3><p id="f64fcf40-6800-412b-9944-ebb71f31d512" class="">The solution can be improved further by making the hash function and the StaticHash function <code>constexpr</code> functions. The assert can then be run at compile-time using <code>static_assert</code>.</p><pre id="40da3d88-a7c4-4fbf-b2ad-5449d4a295b4" class="code"><code>#ifdef DEBUG
+  constexpr size_t StaticHash(const char* name, size_t value)
+  {
+    static_assert(CalculateHash(name) == value);
+    return value;
+  }
+#else
+  #define StaticHash(str, value) (value)
+#end</code></pre><h3 id="682bc95a-c3c7-4183-9ccb-c85b8b0c71c5" class="">Postbuild step</h3><p id="6f5ccc2b-bdf0-4081-b5d7-a3018279738d" class="">A different solution from the static hash method is to use file names wrapped into a macro.</p><p id="0d715999-235e-4d50-bb78-2c6e41019174" class="">The macro is defined as an empty macro, but a postbuild step parses all the source code to replace its occurences with the calculated hash values.</p><pre id="ae07b572-649e-4da3-9699-12c626c6f957" class="code"><code>#define HASH()
+
+Texture* asset = AssetManager::Find&lt;Texture&gt;(HASH(&quot;my_texture&quot;));</code></pre><p id="36209c19-a2b8-450f-ab0d-cdd35ef46b14" class="">✔No runtime cost.</p><p id="4bc13712-3195-49d4-afbc-7067c35167f3" class="">❌Complexify the build process.</p><h3 id="dd353d07-f9dc-49f4-b605-43e5ac93f486" class="">Asset references</h3><p id="75548b59-a256-44ec-b39c-06896a2c432a" class="">Using asset references with the editor can circumvent the problem.</p><p id="cea59649-dcba-4d29-b76d-da332a921cc8" class="">Every asset reference is stored as a unique identifier but displayed in the editor using its display name.</p><p id="795d81af-5ae1-4209-a26c-d67a53753939" class="">When the game code needs an asset, it declares a serializable asset reference in its data structure that is set in the editor.</p><p id="cfe1b313-8771-4f18-96ef-f2b950050366" class="">When the game loads, the reference is deserialized and resolved. The game code just needs to check for invalid references, but doesn&#x27;t need to explicitly load the asset in code.</p></div></article></body></html>

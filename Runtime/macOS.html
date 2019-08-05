@@ -1,0 +1,634 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>macOS</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4f171cbb-95b8-46d4-8faf-8cec2405720d" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🍎</span></div><h1 class="page-title">macOS</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th>Category</th><td><span class="selected-value">Platforms</span></td></tr></tbody></table></header><div class="page-body"><h1 id="8e0a93a8-f345-43ce-b9aa-95ae2a45516c" class="">Overview</h1><p id="bfc56a11-085c-40a7-97df-e8c2d0069bb0" class="">macOS applications are built using the Cocoa API.</p><p id="286bbcf2-a952-4726-a94d-81e55ba7f11a" class="">Cocoa relies heavily on the late binding capabilities of Objective-C for many of its core technologies. Therefore, it&#x27;s more practical to use Objective-C or Swift.</p><p id="4e9d80d5-4932-454e-b7af-cd973640c0ff" class="">Swift has no C++ interoperability yet but Objective-C was designed to mix with C and C++. Therefore, we will use Objective-C to implement Cocoa-related functionalities.</p><h1 id="de63467b-1178-48b6-8a2f-b56fc63c59df" class="">Xcode and Clang</h1><h2 id="d852a040-b885-485b-99ce-b18d5c671095" class="">C++</h2><h3 id="ffa576e2-7bfa-47ce-8d9b-1d57307e1848" class="">noinline</h3><p id="59e061b9-5b64-4cf9-b108-37e70e731e69" class=""><a href="https://gcc.gnu.org/onlinedocs/gcc-4.4.5/gcc/Function-Attributes.html">https://gcc.gnu.org/onlinedocs/gcc-4.4.5/gcc/Function-Attributes.html</a></p><p id="cac85b1e-9282-4b35-8fb1-91bfb6576fbc" class="">The <strong>noinline</strong> attribute tells the compiler to never inline a particular member function.</p><pre id="bc79499b-6fba-4c1e-be0e-2efcfe102e26" class="code"><code>__attribute__((noinline))</code></pre><h3 id="da30a979-5c6a-4b75-8a5b-c63baa7de416" class="">always inline</h3><p id="627e4792-af18-44dd-bf2f-09dbafd326e7" class=""><a href="https://gcc.gnu.org/onlinedocs/gcc/Inline.html">https://gcc.gnu.org/onlinedocs/gcc/Inline.html</a></p><p id="06aa9702-86e1-49e6-a281-a49ed5043fd1" class=""><a href="https://gcc.gnu.org/onlinedocs/gcc-4.4.5/gcc/Function-Attributes.html">https://gcc.gnu.org/onlinedocs/gcc-4.4.5/gcc/Function-Attributes.html</a></p><p id="b413484f-8f02-4301-9d9f-69e426ee4a3e" class="">The <strong>always_inline </strong>attribute overrides the cost/benefit analysis and ensure the member function will be inlined.</p><pre id="83300501-7377-49e6-884c-984557622b2a" class="code"><code>__attribute__((always_inline))</code></pre><h3 id="f9c9ec5f-b5cf-450f-b4a7-399b2cff0148" class="">Predefined Macros</h3><p id="53ed736b-300d-476d-9179-ebd57cd5e4b7" class=""><a href="https://gcc.gnu.org/onlinedocs/gcc/Function-Names.html">https://gcc.gnu.org/onlinedocs/gcc/Function-Names.html</a></p><ul id="14128192-a025-43ce-8ca7-b3a3c25acaa8" class="bulleted-list"><li><strong>__FILE__</strong> is defined as a string literal that contains the name of the current source file.</li></ul><ul id="07ead74e-59e4-4662-af99-ba46a741a28c" class="bulleted-list"><li><strong>__LINE__</strong> is defined as the integer line number in the current source file.</li></ul><ul id="7227b863-89d9-4ce5-9f5f-9600713ff129" class="bulleted-list"><li>__FUNCTION__ is defined as a string literal that contains the undecorated name of the enclosing function.</li></ul><h1 id="d875cd94-d2c3-4f1e-b063-8b54becf5366" class="">Build</h1><ul id="61a90e72-be15-4b3d-9db3-b5869678a037" class="bulleted-list"><li>We build an <strong>Xcode</strong> project (xcodeproj) with Cmake.</li></ul><ul id="1d231647-4425-4d22-b64f-9ee393f88d18" class="bulleted-list"><li>We use the default <strong>Apple Clang</strong> compiler.</li></ul><ul id="28113f43-a922-4ffd-abb1-d9bf4834aedd" class="bulleted-list"><li>In the top <strong>CMakeLists.txt</strong> file, we need to link with the Cocoa framework.</li></ul><pre id="e7b848bd-c03e-48ab-9ff9-c09580b31b79" class="code"><code>target_link_libraries(Legend &quot;-framework Cocoa&quot;)</code></pre><h1 id="57df66de-6e3c-453e-abe2-bd7259c724e4" class="">Debugger</h1><p id="7ae3f2c3-ac9e-4e5c-b9ea-1c3cd687f7ea" class="">To generate a signal SIGSEGV, we can invoke an assembly interruption.</p><pre id="744a3b34-a058-40c1-915f-0604d65a6e1d" class="code"><code>__asm {int 3};
+__asm__(&quot;int3&quot;);</code></pre><p id="3af90b92-d662-4dc3-9a11-751b3939ec5c" class="">Alternatively, we can call the <strong>abort </strong>function from stdlib.
+<a href="http://www.cplusplus.com/reference/cstdlib/abort/">http://www.cplusplus.com/reference/cstdlib/abort/</a></p><pre id="992bdb84-8c22-4419-aa0e-983bcf17f116" class="code"><code>void abort(void);</code></pre><h1 id="89f5f9b0-4ba9-4326-9fa9-712195c81a7a" class="">Entry Point</h1><p id="2d90074e-2052-471b-a2a5-07d8a6c83783" class="">Most macOS applications are built using Xcode and NIB files and all the initialization code for AppKit is executed behind the scene.</p><pre id="4bfc57fc-6408-4911-bca2-1ed8b412db38" class="code"><code>void NSApplicationMain(int argc, char *argv[])
+{
+    [NSApplication sharedApplication];
+    [NSBundle loadNibNamed:@&quot;main&quot; owner:NSApp];
+    [NSApp run];
+}</code></pre><p id="c3886b5f-1a56-4f2e-ae54-4b35b030a962" class="">We will not use NIB files and write all the initialization in Objective-C++.</p><p id="902407f7-49bd-40d9-8569-ae90af55ec75" class="">It&#x27;s possible to mix Objective-C++ and C++ code in the same Objective-C++ file (mm).</p><p id="496218db-25b3-46d2-9a29-d54e1b1b3f52" class="">The entry point of the application is the <strong>main()</strong> C function.</p><pre id="11580b50-49b2-4910-ac98-49b953074ebf" class="code"><code>int main(int argc, const char* argv[])
+{
+}</code></pre><h2 id="bd579385-88da-4cdf-87e0-f6890b589453" class="">Initialization</h2><p id="448564d2-0f55-4b5c-a209-af0383b82bdd" class="">We need to handle the following initialization steps.</p><ul id="e0095158-d546-4b8d-8a7b-1134d6a2013b" class="bulleted-list"><li>Create a pool (<strong>NSAutoreleasePool</strong>).
+Cocoa uses a reference-counted memory management system.
+<a href="https://developer.apple.com/documentation/foundation/nsautoreleasepool">https://developer.apple.com/documentation/foundation/nsautoreleasepool</a></li></ul><pre id="7905e6a1-c6d9-4f13-8f40-c73b61ff7f92" class="code"><code>auto pool = [[NSAutoreleasePool alloc] init];</code></pre><ul id="b9c1c3ad-df15-47bc-b9dd-aedac2975cee" class="bulleted-list"><li>Create the application object (<strong>NSApplication</strong>).
+This object handles the main event loop and keeps track of the application window.
+<a href="https://developer.apple.com/documentation/appkit/nsapplication">https://developer.apple.com/documentation/appkit/nsapplication</a></li></ul><pre id="1bb6a65e-9488-4a87-8b8c-e951ab5e2b39" class="code"><code>auto application = [NSApplication sharedApplication];</code></pre><h2 id="cb875510-a39a-470c-a7df-b668ef66f8d8" class="">Application Delegate</h2><p id="d0a70757-5912-496c-99ec-e0713f4e2731" class="">Create and assign the application delegate (<strong>NSApplicationDelegate</strong>).
+<a href="https://developer.apple.com/documentation/appkit/nsapplicationdelegate">https://developer.apple.com/documentation/appkit/nsapplicationdelegate</a></p><p id="a3fe19b5-453d-4463-a380-8b4cf509c734" class="">Some methods are implemented to respond to events, such as initialization or shutdown.</p><pre id="697bb391-4d03-47fc-bca1-3d027a48abd5" class="code"><code>@interface ApplicationDelegate: NSObject&lt;NSApplicationDelegate&gt;
+
+@end
+
+@implementation ApplicationDelegate
+
+-(void)applicationWillFinishLaunching:(__unused NSNotification*)notification
+{
+}
+
+-(void)applicationDidFinishLaunching:(__unused NSNotification*)notification
+{
+}
+
+-(void)applicationWillTerminate:(__unused NSNotification*)notification
+{
+}
+
+-(BOOL)applicationShouldTerminateAfterLastWindowClosed:(__unused NSApplication*)sender
+{
+    return YES;
+}
+
+-(void)handleQuit:(__unused id)sender
+{
+    [[NSApplication sharedApplication] terminate:nil];
+}
+
+@end</code></pre><p id="735735f5-f586-4748-9c46-b280a8eeebae" class="">We then create and assign the delegate to the applicati.</p><pre id="594511a4-8da1-460f-93af-68015cbb702b" class="code"><code>[application setDelegate:[[[AppDelegate alloc] init] autorelease]];</code></pre><h2 id="e3405f5e-7f19-42b8-ae09-179df7bb03f9" class="">Window</h2><p id="48b77f90-8745-4ff6-b2e4-2a88e9b70ce9" class="">To create the main window, we need to create an instance of <strong>NSWindow</strong>.
+<a href="https://developer.apple.com/documentation/appkit/nswindow">https://developer.apple.com/documentation/appkit/nswindow</a></p><pre id="9d49e744-e441-4cba-a272-05b95df437d7" class="code"><code>auto window = [[NSWindow alloc] initWithContentRect:...];</code></pre><p id="e4f60afd-be7b-49fb-b397-7de2e4992ad4" class="">The <strong>initWithContentRect:styleMask:backing:defer</strong> method has two important parameters.
+<a href="https://developer.apple.com/documentation/appkit/nswindow/1419477-initwithcontentrect">https://developer.apple.com/documentation/appkit/nswindow/1419477-initwithcontentrect</a></p><ul id="8720adf1-4dbb-4992-84e6-ee266093ec1f" class="bulleted-list"><li><strong>contentRect</strong> is the origin and the size of the window. On macOS, the origin of the coordinate system is at the bottom-left corner of the screen. We define a custom width and height for the window and use the frame property of the NSScreen.mainScreen value to center the window on the screen.</li></ul><pre id="96192e86-99dd-48bf-a18c-00ac03ced343" class="code"><code>auto screenRect = [[NSScreen mainScreen] frame];
+auto windowRect = NSMakeRect((screenRect.size.width - Width) * 0.5,
+                             (screenRect.size.height - Height) * 0.5,
+                              Width,
+                              Height);</code></pre><ul id="6a881d6c-6078-4602-8ba9-bd8bfa025cfc" class="bulleted-list"><li><strong>style</strong> is the window&#x27;s style. We provide options for capabilities such as a title bar, a minimize and close button and optionally a resizable border.
+<a href="https://developer.apple.com/documentation/appkit/nswindowstylemask">https://developer.apple.com/documentation/appkit/nswindowstylemask</a></li></ul><pre id="9de086de-6766-45af-80a3-a46e2e4a12df" class="code"><code>styleMask: NSWindowStyleMaskTitled |
+           NSWindowStyleMaskClosable |
+           NSWindowStyleMaskMiniaturizable |
+           NSWindowStyleMaskResizable</code></pre><h2 id="a0b30157-c8ab-41bc-8cc3-fcfd24ea39c2" class="">Window Delegate</h2><p id="1aae1d2e-18d2-43d9-b168-634e929345d5" class="">We define and implement a custom window delegate (<strong>NSWindowDelegate</strong>).
+<a href="https://developer.apple.com/documentation/appkit/nswindowdelegate">https://developer.apple.com/documentation/appkit/nswindowdelegate</a></p><p id="f65d0832-efb3-49e3-99ff-2f7b23cfed0b" class="">Some methods are implemented to respond to events, such as window resizing or closing.</p><pre id="e18e7748-1f07-4104-9d09-c14f0a1af5ac" class="code"><code>@interface WindowDelegate: NSObject&lt;NSWindowDelegate&gt;
+
+@end
+
+@implementation WindowDelegate
+
+- (NSSize)windowWillResize:(NSWindow*)window
+                    toSize:(NSSize)frameSize
+{
+    return frameSize;
+}
+
+- (void)windowWillClose:(id)sender
+{
+}
+
+@end</code></pre><p id="dd8b2ee1-dcda-4e5f-9be1-648346fe8b9d" class="">We then create and assign the delegate to the window.</p><pre id="814fa758-0e0f-4537-98a6-1e9aada32347" class="code"><code>[window setDelegate:[[[WindowDelegate alloc] init] autorelease]];</code></pre><h2 id="7afa1413-fe7e-4440-b311-bf5c0a191445" class="">Main Loop</h2><p id="dfcd1585-1891-41e8-a70e-f56833b5f451" class="">Then, we start the main event loop of the application.</p><pre id="a5ef0554-00b5-4724-8416-c8dd3f0817f1" class="code"><code>[application run];</code></pre><h2 id="2d342c56-0238-4e1a-a773-70f0d3e96513" class="">Shutdown</h2><p id="e301d191-9cda-4db6-87fb-b35b2495f669" class="">Finally, when we leave the event loop and the applications is shutting down, we release the pool.</p><pre id="7858a625-2ded-4bcd-821d-966b4ffac514" class="code"><code>[pool release];</code></pre></div></article></body></html>

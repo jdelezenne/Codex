@@ -1,0 +1,685 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Time</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="30957a4c-c132-4af7-9dc1-ef4d4dcf0b20" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">⏰</span></div><h1 class="page-title">Time</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th>Created</th><td><time>@Feb 25, 2019 10:23 AM</time></td></tr><tr class="property-row property-row-multi_select"><th>Tags</th><td><span class="selected-value">core</span></td></tr></tbody></table></header><div class="page-body"><nav id="b3fe03d3-0f18-45a3-91f1-d69a45b68240" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#642cb5fb-0983-48bf-b3db-34ecfb5daf35">Overivew</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3924ec7d-733f-41a2-9adb-5416af11b4f6">Time Steps</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#89d3628d-672a-45bd-8141-a312785f6099">Fixed time step</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4e78ed3d-1dfd-4b26-9ae4-b5cc479ce0a2">Variable time step</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1d3af9ce-00f5-47e0-8433-ca197f94eb75"><strong>Frames per Seconds</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#570bbc7f-8996-40af-9d27-7f79c8d43ce3">Runtime Loop</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#306656f4-7835-46ba-8a79-9f38a70d23d4">Object Update</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#bb158c9e-4d64-4491-ba2c-8da005af240c">Basic Timing</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4a6a9fa8-e6c1-416d-81b9-f9db59cbbd15">Windows and Xbox</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#60f6273e-72a4-493f-8663-fa2d15ad0f62">GetTickCount, timeGetTime, GetSystemTime</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4022df85-6bf5-4ae1-9204-2422f9cd2257">Xbox 360</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ab4b2e18-18d2-4edf-b8fc-6ee4ae116379">High Precision Timing</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cb896587-d5b6-435b-bb54-abd4e9a1f17e">RDTSC</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#342cf061-1903-4ffe-9c17-69bb02d03893">Windows</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#dc9e0b0f-7a3d-4b24-90e0-5a2fd3312d38">Clang</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#06a3e8b8-8a2c-4f33-a5fe-c3dfb4652ccd">Assembly</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#86f85b1b-3d02-4c22-a5d1-b35aa58859e3">High-Resolution Timer (Windows and Xbox)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#fd2eae25-dec5-4d3c-a040-c7023dadd081">Apple</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5d8934ef-460e-4280-94e5-00df01641b0d">POSIX</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7bd3f619-432e-4960-8a30-f9c94e380538">std::chrono</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#a842a668-d0d6-4087-ad23-b6a15c610b51">Advantages</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#7304d0b7-9920-4b00-bdf6-97ab72755112">High resolution clock</a></div></nav><hr id="34a1889a-583b-4025-9661-d78f66ad33f5"/><h1 id="642cb5fb-0983-48bf-b3db-34ecfb5daf35" class="">Overivew</h1><p id="432d6c8d-c24c-406e-8276-c3056dab06d4" class="">The current time is obtained uaing operating system&#x27;s functions.</p><p id="ed82e4bd-0802-43ef-80da-06c0f8042d03" class="">The world time depends on the time step policy than can be changed during runtime.</p><ul id="09f2bfd5-6e59-4456-867b-c9442ceebd2b" class="bulleted-list"><li>Fixed or variable time steps</li></ul><ul id="2cf88076-502e-428e-9e14-6e9775dccf88" class="bulleted-list"><li>Slow-down or speed-up time</li></ul><ul id="94d720ef-eabd-4059-8439-791239feeb66" class="bulleted-list"><li>Throttling to save battery (maximum FPS)</li></ul><p id="df212ede-c98e-4255-b71b-efb0af566044" class="">The accumulated elapsed time should be represented by a double.</p><p id="99befb93-c22b-48f0-8447-64721bd269e4" class=""><a href="https://randomascii.wordpress.com/2012/02/13/dont-store-that-in-a-float/">https://randomascii.wordpress.com/2012/02/13/dont-store-that-in-a-float/</a></p><h1 id="3924ec7d-733f-41a2-9adb-5416af11b4f6" class="">Time Steps</h1><p id="db9f56ed-ead5-457b-ad44-90b5e7f09e98" class="">There are two possible time steps.</p><ul id="b86871fe-9238-445f-9e80-a2c88f4d0992" class="bulleted-list"><li>Fixed time step</li></ul><ul id="fd3b0d96-cce2-44ae-a21e-d5f4a69e660c" class="bulleted-list"><li>Variable time step</li></ul><h2 id="89d3628d-672a-45bd-8141-a312785f6099" class="">Fixed time step</h2><ul id="b76906e0-8199-47db-a315-9a2a66972903" class="bulleted-list"><li>The game feels better.</li></ul><ul id="a07121ea-b659-4c5b-97f5-0bdab0e3ba43" class="bulleted-list"><li>The gameplay is more deterministic.</li></ul><p id="65706fd0-8faa-4a0b-9627-68b5fb3703a0" class="">Some systems always use a fixed time step such as the physics system.</p><h2 id="4e78ed3d-1dfd-4b26-9ae4-b5cc479ce0a2" class="">Variable time step</h2><p id="df337781-5685-4dd8-b13b-41541577c54c" class="">Some games cannot have a fixed time step such as unconstrained sandbox games.</p><h1 id="1d3af9ce-00f5-47e0-8433-ca197f94eb75" class=""><strong>Frames per Seconds</strong></h1><p id="ca5d5d1f-c704-4b13-a354-df213e5dafab" class=""><strong>Frames per Seconds</strong> (FPS) represents the update and rendering speed. The number of images rendered per second. It is used to express the rate of a particular frame or the average performance over a duration.</p><p id="0ccfef28-d79c-4cdc-b21f-3c91f2a2c62b" class="">The <strong>Frequency</strong> is expressed in <strong>Hertz</strong> where 1 Frame per Second is equal to 1 Hertz (in hardware measurements such as the display rate of a monitor).</p><p id="a838efb2-adfe-4954-bda8-9140e7e59b32" class="">It&#x27;s better to express the frame rate in milliseconds to profile code.</p><h1 id="570bbc7f-8996-40af-9d27-7f79c8d43ce3" class="">Runtime Loop</h1><p id="56b45af7-4da4-49c8-953b-6f94df9d4a58" class="">Typically, game that run at a fixed time step are locked to 60 FPS or 30 FPS.</p><p id="39f30eda-63b4-40f4-9f51-84cf24494e0c" class="">60 FPS is about 16 milliseconds and 30 FPS is about 33 milliseconds.</p><p id="cfc22bad-2216-4050-b064-30f15a1cae0e" class="">The game code requires microseconds precision.</p><p id="9b74549b-714f-4221-870b-218ac11a3a92" class="">Each frame, we measure the time that has elapsed and use that to update the game.</p><pre id="4140bf9d-69ee-4f33-8be4-e0a0fc5c2544" class="code"><code>double deltaTime = GetElapsedTime();
+Update(deltaTime);</code></pre><h2 id="306656f4-7835-46ba-8a79-9f38a70d23d4" class="">Object Update</h2><p id="dea7fb87-516a-4922-8d6b-633f2717ce6a" class="">Calculation that occur over a period of time are typically multiplied by the elapsed time.</p><pre id="29e1e025-fe6f-4e6c-b19a-c8407a373a4f" class="code"><code>position = position + speed * deltaTime</code></pre><h1 id="bb158c9e-4d64-4491-ba2c-8da005af240c" class="">Basic Timing</h1><p id="6ed6c80c-2825-4a37-9df1-0dfd3340918b" class="">Some functions have been traditionally used to measure time intervals but they suffer from a low resolution and poor performances.</p><h2 id="4a6a9fa8-e6c1-416d-81b9-f9db59cbbd15" class="">Windows and Xbox</h2><h3 id="60f6273e-72a4-493f-8663-fa2d15ad0f62" class="">GetTickCount, timeGetTime, GetSystemTime</h3><p id="0c964d25-c9ae-4add-9567-15e539925479" class="">On Windows and Xbox, the <a href="https://docs.microsoft.com/en-us/windows/desktop/api/sysinfoapi/nf-sysinfoapi-gettickcount"><code>GetTickCount</code></a>, and <a href="https://www.notion.so/juliendelezenne/Time-30957a4cc1324af79dc1ef4d4dcf0b20https://www.notion.so/juliendelezenne/Time-30957a4cc1324af79dc1ef4d4dcf0b20"><code>GetSystemTime</code></a> functions retrieve the number of milliseconds that have elapsed since the system was started.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30cf0b02-0507-4917-8afb-750fbf7d6b75"><div style="font-size:1.5em"><span class="icon">☠</span></div><div style="width:100%">The elapsed time is stored as a 32-bit integer value and will wrap around to zero in a reasonably short amount of time.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f4a8c3a1-766c-41c5-a611-c7e7de928fa1"><div style="font-size:1.5em"><span class="icon">☠</span></div><div style="width:100%">The functions have a resolution of 10 to 16 milliseconds.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="723053cd-57c3-45cd-b0e2-16c372ac62bb"><div style="font-size:1.5em"><span class="icon">☠</span></div><div style="width:100%">On Windows, <a href="https://docs.microsoft.com/en-us/windows/desktop/api/timeapi/nf-timeapi-timegettime"><code>timeGetTime</code></a> suffers from the same limitations.
+<a href="https://docs.microsoft.com/en-us/windows/desktop/api/timeapi/nf-timeapi-timebeginperiod"><code>timeBeginPeriod</code></a> changes the minimum resolution of the timing functions but is not precise enough (~1 millisecond). It also increases the pressure on the kernel for thread scheduling.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fab4f5ce-837e-4d97-be44-eafd42746c8b"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">On Windows and Xbox One, the result of <a href="https://docs.microsoft.com/en-us/windows/desktop/api/sysinfoapi/nf-sysinfoapi-gettickcount64"><code>GetTickCount64</code></a> is stored as a 64-bit integer value, but also suffers from a poor resolution.</div></figure><h2 id="4022df85-6bf5-4ae1-9204-2422f9cd2257" class="">Xbox 360</h2><p id="21364a97-fb76-44d5-a050-6785e411e97f" class="">On PowerPC, the <a href="https://developer.xboxlive.com/en-us/xbox/development/documentation/software/Pages/ppc_mftb_sep13.aspx"><code>mftb</code></a> instruction returns the time base registers (TBL and TBU) combined as a 64-bit value.</p><p id="f667f0c3-254f-43ad-883a-76764197d18e" class="">Because of lag issues, it is recommended to use the 32-bit compiler intrinsic that returns the TBL register only.</p><pre id="aea82e63-9269-4c96-bdec-dc1833141062" class="code"><code>unsigned int __mftb32();</code></pre><h1 id="ab4b2e18-18d2-4edf-b8fc-6ee4ae116379" class="">High Precision Timing</h1><p id="77d1d102-4f63-40fe-9016-0ad4e2d7af9c" class="">❌Do not hard code the clock frequency.</p><p id="5eaf0228-530a-4e64-9643-66255656cc4a" class="">High precision timing is platform-specific and relies an reading the processor’s time stamp counter (TSC). It provides time stamps with a resolution of 1 microsecond or better.</p><p id="22d435da-cc43-46ee-99fa-dce1eb5e86dc" class="">There are multiple methods to obtain a reliable and efficient performance counter.</p><p id="40c681e8-86af-49f4-8249-58d1c73e6df2" class="">They have different guarantees about accuracy, precision, and consistency.</p><p id="2681cf4c-bfed-426f-9223-60db063f1026" class="">Some may skip, freeze, or continue to run when the title is paused in the debugger.</p><h2 id="cb896587-d5b6-435b-bb54-abd4e9a1f17e" class="">RDTSC</h2><p id="becd0fd2-fe2b-4211-bb16-94d1668df09e" class="">The <strong>rdtsc</strong> instruction is an acronym for <em>Read Time-Stamp Counter</em>.</p><p id="4295612a-5cea-4759-a4f1-5bdb9af0bb14" class="">The instruction is a reliable way to get the processor time stamp.</p><p id="54664ab4-d0a3-4c8e-8c0f-c58f3ce2e2fe" class="">The processor time stamp records the number of clock cycles since the last reset.</p><p id="a51b0b3d-53b7-46d5-8b48-eae339ffdeeb" class="">However, the synchronization across multiple cores is not guaranteed.</p><p id="00d1108d-e4a7-4505-ab83-184e647f9644" class="">The instruction returns a 64-bit unsigned integer representing a tick count.</p><p id="4c2e9c5a-66e9-4d28-918a-c0042f0a2608" class="">✔Very high resolution.</p><p id="405b3cae-9ed9-404d-a441-96c3620ec43c" class="">❌Some processors are unable to synchronize the clocks on each core to the same value.</p><p id="98bb0823-552b-4bed-862c-08328dbc284f" class="">❌Some processors will execute instructions out of order and it can result in incorrect cycle counts.</p><h3 id="342cf061-1903-4ffe-9c17-69bb02d03893" class="">Windows</h3><p id="23f25b44-8773-444e-a537-ef787393b841" class="">The <a href="https://docs.microsoft.com/en-us/cpp/intrinsics/rdtsc"><code>__rdtsc()</code></a> compiler intrinsic generates the <strong>rdtsc </strong>instruction.</p><pre id="721ca16c-82c6-4277-ae3c-1e964f7e49f6" class="code"><code>#include &lt;intrin.h&gt;
+
+uint64_t rdtsc()
+{
+    return __rdtsc();
+}</code></pre><h3 id="dc9e0b0f-7a3d-4b24-90e0-5a2fd3312d38" class="">Clang</h3><p id="44199f0b-534b-4a0c-a8ae-222804e69627" class="">The <a href="https://clang.llvm.org/docs/LanguageExtensions.html"><code>__builtin_readcyclecounter()</code></a> compiler intrinsic generates the <strong>rdtsc </strong>instruction on x86/x64 and ARM64.</p><h3 id="06a3e8b8-8a2c-4f33-a5fe-c3dfb4652ccd" class="">Assembly</h3><p id="64648ba8-6775-45d1-b3a1-f724b2b6c27f" class="">Alternatively, the <strong>rdtsc</strong> instruction can be called directly using assembly code.</p><p id="6017fece-d94b-4eb5-be5a-70a56e2b14d1" class="">The 64-bit result is stored in the EDX:EAX registers.</p><pre id="e093e71b-708f-4d1e-8282-7ce9d13b563e" class="code"><code>uint64_t rdtsc()
+{
+    uint32_t low, high;
+    __asm__ __volatile__ (&quot;rdtsc&quot; : &quot;=a&quot; (low), &quot;=d&quot; (high));
+    return ((uint64_t)high &lt;&lt; 32) | low;
+}</code></pre><h2 id="86f85b1b-3d02-4c22-a5d1-b35aa58859e3" class="">High-Resolution Timer (Windows and Xbox)</h2><p id="014321a1-ce22-4cf4-8f97-0fcd4f091b67" class="">The High-Resolution Timer functions can acquire a high-resolution time stamps or measure time intervals.</p><p id="e423efa0-9cfd-43fc-b883-0263a8964fcb" class="">The <a href="https://docs.microsoft.com/en-us/windows/desktop/api/profileapi/nf-profileapi-queryperformancefrequency"><code>QueryPerformanceFrequency()</code></a> function retrieves the frequency of the performance counter, in counts per second. It should be called once at startup only and the result should be cached. The frequency is stored as a <code>LARGE_INTEGER</code> structure.</p><p id="206c3332-c1b9-4e77-adca-7751db2ecadb" class="">The <a href="https://docs.microsoft.com/en-us/windows/desktop/api/profileapi/nf-profileapi-queryperformancecounter"><code>QueryPerformanceCounter()</code></a> function retrieves the current value of the performance counter.</p><p id="2e5d34c0-3f78-4057-bf61-649d3f016101" class="">It should be called before and after the activity to be timed.</p><p id="e78f6a5b-0d54-4f78-aa51-fc2e6d2529d5" class="">The elapsed number of ticks is computed by the difference between the two performance counters.</p><p id="7a7f0645-d2f0-4303-b0c5-71a3bd7a2fbc" class="">The value is then multiplied by 1000 and divided by the frequency to compute the elapsed time in milliseconds.</p><p id="1ac0317a-b183-4c65-8756-ac1ff7bbb029" class="">To prevent loss-of-precision, the value is converted into milliseconds before dividing by the frequency.</p><p id="c62eb8c2-1bd4-4449-9145-161f903addfa" class="">✔Very high resolution.</p><p id="6823d87b-55bf-4699-87ba-91b19111aa45" class="">✔Synchronize across all of the cores.</p><pre id="2c05bd38-2088-4bfb-9e7a-31ff6998b831" class="code"><code>#include &lt;windows.h&gt;
+
+class Timer
+{
+  LARGE_INTEGER frequency;
+  LARGE_INTEGER startTime;
+
+public:
+  Timer()
+  {
+    QueryPerformanceFrequency(&amp;frequency);
+    ResetElapsedTime();
+  }
+
+  void ResetElapsedTime()
+  {
+    QueryPerformanceCounter(&amp;startTime);
+  }
+
+  double GetElapsedTime() const
+  {
+    LARGE_INTEGER currentTime;
+    QueryPerformanceCounter(&amp;currentTime);
+
+    double timeDiff = (double)(currentTime.QuadPart - startTime.QuadPart);
+    return (timeDiff * 1000.0) / (double)frequency.QuadPart;
+  }
+};</code></pre><h2 id="fd2eae25-dec5-4d3c-a040-c7023dadd081" class="">Apple</h2><p id="1fcf1817-4a55-49bc-93c1-d1709aa2a7f5" class="">On macOS and iOS, the mach APIs provided a high precision counter.</p><p id="9b8d008a-71b5-4d2d-980a-abe6a315c464" class="">The <code>mach_timebase_info()</code> function retrieves a <code>mach_timebase_info_data_t</code> structure that contains the processor&#x27;s frequency in nanoseconds.</p><pre id="c357584e-67d6-4d7b-8783-33b957bde071" class="code"><code>struct mach_timebase_info
+{
+    uint32_t	numer;
+    uint32_t	denom;
+};</code></pre><p id="8e612666-00c0-4023-93b8-0ce2e814d0f4" class="">The frequency of the clock is computed as <code>(denom / numer) * 10^9</code>.</p><p id="9f54345d-db3f-4819-a03f-86afd99d8d11" class="">The <code>mach_absolute_time()</code> function retrieves the current value of the counter.</p><p id="441abb3f-c442-4a43-ba16-4e6e4530b712" class="">The elapsed time is computed by computing the delta time between two time points and multiplying by the frequency.</p><pre id="10ebd0b2-a6a1-4008-a81f-ddc5e0bd3c3a" class="code"><code>#include &lt;mach/mach_time.h&gt;
+
+class Timer
+{
+  double frequency;
+  uint64_t startTime;
+
+public:
+  Timer()
+  {
+    mach_timebase_info_data_t info;
+    mach_timebase_info(&amp;info);
+
+    frequency = ((double)info.denom / (double)info.numer) * 1000000000.0;
+    ResetElapsedTime();
+  }
+
+  void ResetElapsedTime()
+  {
+    startTime = mach_absolute_time();
+  }
+
+  double GetElapsedTime() const
+  {
+    uint64_t currentTime = mach_absolute_time();
+
+    return ((double)(currentTime - startTime) * frequency);
+  }
+};</code></pre><h2 id="5d8934ef-460e-4280-94e5-00df01641b0d" class="">POSIX</h2><p id="f32c3048-871d-43cb-ac88-d45f82e1f942" class="">On Linux, high precision timing is provided by POSIX functions.</p><p id="66c04ff8-c455-48f6-9d49-8740e6771aeb" class="">The <a href="http://man7.org/linux/man-pages/man3/clock_gettime.3.html"><code>clock_gettime()</code></a> function retrieves the time of the specified clock in a <code>timespec</code> structure.</p><p id="63da12bc-4f53-4ad5-bd02-dbfd3b42b1d8" class="">The <code>CLOCK_MONOTONIC</code> clock represents monotonic time since some unspecified starting point.</p><p id="7eeb3487-71a2-4798-b8f9-1d898eddba79" class="">The <code>timespec</code> structure contains a <code>tv_nsec</code> member that represents the time in nanoseconds.</p><pre id="adf1bce5-85b1-4ced-abd0-64bbfc947076" class="code"><code>#include &lt;time.h&gt;
+
+class Timer
+{
+  timespec startTime;
+
+public:
+  Timer()
+  {
+    ResetElapsedTime();
+  }
+
+  void ResetElapsedTime()
+  {
+    clock_gettime(CLOCK_MONOTONIC, &amp;startTime);
+  }
+
+  double GetElapsedTime() const
+  {
+    timespec currentTime;
+    clock_gettime(CLOCK_MONOTONIC, &amp;currentTime);
+
+    return ((double)(currentTime.tv_nsec - startTime.tv_nsec) * 1000000000.0);
+  }
+};</code></pre><h2 id="7bd3f619-432e-4960-8a30-f9c94e380538" class="">std::chrono</h2><p id="ba1b8b83-8720-4445-9b27-63b8136ef4a2" class="">The <code><a href="https://en.cppreference.com/w/cpp/chrono">chrono</a></code> library provides varying degrees of precision to track time.</p><p id="bb271e51-9d0e-4d12-b429-05abee30d23b" class="">ℹAvailable from C++11.</p><p id="26263413-81cf-4730-ac4f-5b74ae4ef64b" class="">The <code>chrono</code> library defines three main types:</p><ul id="22c4b27b-a78e-4f6a-99f6-5abfd38552d6" class="bulleted-list"><li>clock: starting point and tick rate</li></ul><ul id="67b37172-4e05-487a-b289-456648b762dc" class="bulleted-list"><li>time point: duration of time that has passed in a clock</li></ul><ul id="66fd7b23-192a-44ba-98f5-3244ec5d25d4" class="bulleted-list"><li>duration: span of time defined as a number of ticks</li></ul><h3 id="a842a668-d0d6-4087-ad23-b6a15c610b51" class="">Advantages</h3><p id="c4bf2864-bd8d-4ff1-be6e-3e13b0774f24" class="">✔Type safetey<div class="indented"><ul id="15ddc9a1-c034-4d87-865b-dba0153eeacc" class="bulleted-list"><li>Type safe time operations.</li></ul><ul id="b7f5bf6a-3b02-4cee-bf18-9541e6bad070" class="bulleted-list"><li>C++14 adds user literals for type safe immediate values.</li></ul></div></p><p id="ef627f4e-89f7-4000-8bf6-33e58ded4c56" class="">✔Conversions<div class="indented"><ul id="453116f7-44a4-4807-b9f7-e0cba1dd64f1" class="bulleted-list"><li>No implicit conversion with integer or float types.</li></ul><ul id="95f6c1c4-7816-4f4d-a2a1-d2a3fc79926e" class="bulleted-list"><li>Loss-less conversions between chrono types are implicit.</li></ul><ul id="e776928e-baac-4017-92c1-14f022a4fae6" class="bulleted-list"><li>Otherwise, requires a special cast.</li></ul></div></p><p id="d906e5c2-f6cc-46ea-bf1c-a300784191a2" class="">✔Performances<div class="indented"><ul id="1dccf781-56ec-4f42-95da-baa5a9afa912" class="bulleted-list"><li>Represented by a long long type by default.</li></ul><ul id="db0b6850-2b4f-4bce-8a14-6d7f686b2744" class="bulleted-list"><li>Can be replaced by a custom representation (ie. 32-bit type).</li></ul><ul id="0d79580e-a4bb-4b53-9101-dc8c94644265" class="bulleted-list"><li>Compile time checks.</li></ul><ul id="b14c2990-b68d-418b-950f-2fb076e331c0" class="bulleted-list"><li>No additional assembly code generated.</li></ul></div></p><h3 id="7304d0b7-9920-4b00-bdf6-97ab72755112" class="">High resolution clock</h3><p id="12742df0-215e-47d8-8d00-57b5776d0bc8" class=""><a href="https://en.cppreference.com/w/cpp/chrono/high_resolution_clock"><code>std::chrono::high_resolution_clock</code></a> represents the clock with the smallest tick period.</p><p id="d7d949df-c853-413d-9c40-d4c64b91c113" class="">⚠Earlier implementations in Visual Studio were not based on <code>QueryPerformanceCounter</code>, but it was fixed since Visual Studio 2015.</p><p id="58bf5b34-8c81-4801-a0f7-7ec790c7188b" class="">The <a href="https://en.cppreference.com/w/cpp/chrono/high_resolution_clock/now"><code>now()</code></a> function returns a time point representing the current point in time as a <a href="https://en.cppreference.com/w/cpp/chrono/time_point"><code>std::chrono::time_point</code></a> type.</p><pre id="5a7d4e0f-b1e5-4848-bec7-02c76d2e1f50" class="code"><code>#include &lt;chrono&gt;
+
+class Timer
+{
+  std::chrono::time_point&lt;std::chrono::high_resolution_clock&gt; startTime;
+
+public:
+  Timer()
+  {
+    ResetElapsedTime();
+  }
+
+  void ResetElapsedTime()
+  {
+    startTime = std::chrono::high_resolution_clock::now();
+  }
+
+  double GetElapsedTime() const
+  {
+    auto endTime = std::chrono::high_resolution_clock::now();
+    auto elapsedTime = endTime - startTime;
+
+    auto milliseconds = std::chrono::duration_cast&lt;std::chrono::milliseconds&gt;(elapsedTime);
+    return milliseconds.count();
+  }
+};</code></pre></div></article></body></html>

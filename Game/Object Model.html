@@ -1,0 +1,565 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Object Model</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="a34eb4b9-882b-42fc-b649-442d42fb68f0" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🌎</span></div><h1 class="page-title">Object Model</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th>Created</th><td><time>@May 13, 2019 12:08 PM</time></td></tr><tr class="property-row property-row-multi_select"><th>Tags</th><td></td></tr></tbody></table></header><div class="page-body"><h1 id="9de212a8-4fca-476b-ba47-69b97278792e" class="">Overview</h1><p id="38cdc23b-8777-41f7-aa36-e999d57aa61e" class="">An object model is similar to a business model in a regular application.</p><p id="37098e0b-4c4f-45a4-b8d0-363b20744fd4" class="">In games, the object model is a representation of the elements that participate in the game world.</p><p id="9c1ccd91-8f7f-48ff-9a8e-5215f62ced0f" class="">In some engines, the object model is restricted to the representation of visual objects in a scene.</p><p id="a266159a-f903-44ac-a67f-95c8d1000bca" class="">Other engine adopt a broader object model in which any data can be represented.</p><p id="b5a78180-997f-4e13-81ce-8192ef18b36e" class="">Typically, a scene is built as an aggregation of game objects, or entities.</p><h1 id="0e6d8a72-bef8-44d5-b104-755a59986836" class="">Editor and Runtime Models</h1><h2 id="aef8e2dc-d215-4bc2-ae93-376e39edc451" class="">Editor</h2><ul id="1efcf754-76ef-4211-adf1-1535d6efe689" class="bulleted-list"><li>Representation of a model of the world for designers<ul id="4972708b-c72c-4db1-804b-7bc3725237f8" class="bulleted-list"><li>Object-oriented</li></ul><ul id="44218642-6bab-4a8c-a498-ac2a85f8dd8d" class="bulleted-list"><li>Flexible</li></ul></li></ul><ul id="d9f1c81e-19a0-4a9b-95c1-a44f08c116cd" class="bulleted-list"><li>Designed as archetypes (templates, aspects, components, inheritance, ...)<ul id="ebfa1760-d03d-4d04-b4e8-7aba6981d13c" class="bulleted-list"><li>Can be introspected</li></ul><ul id="00908783-95fa-4d32-952f-cc65e526b07b" class="bulleted-list"><li>Have default properties at an instance or template level</li></ul></li></ul><h2 id="6ccc0753-1b16-452d-9bc2-3f6202fc3c03" class="">Runtime</h2><ul id="496ea976-3560-4da3-a01d-9b0f631a9ad9" class="bulleted-list"><li>Representation of an editor object</li></ul><ul id="e2cfe6cb-07b2-46a7-bf6a-c5f507c7a5f5" class="bulleted-list"><li>Optimized for performances<ul id="7b23882c-cbd4-47fe-922b-6cdb1a6b519c" class="bulleted-list"><li>Memory usage</li></ul><ul id="f617e4ee-1258-4074-8890-8268a6ba635f" class="bulleted-list"><li>Data access</li></ul><ul id="fe400084-6319-498c-90f7-767373fce332" class="bulleted-list"><li>Batching</li></ul></li></ul><hr id="4ed18614-fa27-4b2e-87c4-0179ec502f8e"/><p id="663f4d5b-9833-44c2-8234-a99918fb8698" class="">A one-to-one mapping between editor and runtime objects may not exist.</p><ul id="a5d640fb-6a41-4353-9eee-e4bf2223ce73" class="bulleted-list"><li>Editor objects can be design-time only (splines, regions, ...).</li></ul><ul id="c951b025-48ab-45c7-a826-badc90221e4f" class="bulleted-list"><li>An editor objects can be expanded into multiple runtime objects.</li></ul><ul id="fcb9eecd-dc2f-4ff6-9b50-f97c93c6bac9" class="bulleted-list"><li>“Array-of-structs” at design-time could become “struct-of-arrays” at run-time.</li></ul><h1 id="68a81674-feff-4450-98a9-3976d8395792" class="">Models</h1><h2 id="cf0c0375-23b9-4fb3-93c6-a5bf2446d63d" class="">Hierarchy System</h2><p id="06a4a2f7-4de1-4d75-866b-a666ff73b04c" class="">In the <strong>hierarchy system</strong>, the typical object-oriented design (OOD) of modeling data is used with objects in an inheritance hierarchy.</p><p id="53868917-e7e2-450e-9aed-06dada56bcdc" class="">At the root of the hierarchy, the <strong>entity</strong> type defines an abstract object.</p><p id="6a189134-35d0-4dcd-880c-b90ae6edb1da" class="">Derived types define more specific objects with additional data and behaviors.</p><p id="bb5488d5-6788-484e-839b-1a36ae585f1c" class="">ℹ️Also called <em>monolithic class hierarchy</em>.</p><p id="8e9f66b4-e725-40fd-8aa8-fdd0a9638373" class="">✔️Easy to map the concepts to a concrete hierarchy.</p><p id="83a6a13e-166b-466c-a4f9-f2e80f4833d2" class="">❌Poor flexibility.</p><p id="ab932cf2-9b04-4901-8d58-193ea0874b30" class="">❌Difficult to share functionality among objects.</p><p id="4bfcd215-d8c7-4450-8e35-6cd811b0651d" class="">❌Difficult to reason about the chain of hierarchy (ie Renderable derives from Animatable or the other way around).</p><p id="16c21b5c-d0f5-4d92-839e-bb5dd85fbbd2" class="">❌Common functionality tends to move up the hierarchy (root objects contain too much functionality and knowledge of the hierarchy).</p><p id="7af2bfc7-1846-4f52-a229-d3ad0b0c14ef" class="">❌Problem of multiple inheritance: multiple copies of the base class, multiple virtual table pointers.</p><h3 id="7520d680-64e8-4724-b5d1-fed917e5bd32" class="">Examples</h3><ul id="51b35c28-dff0-46ac-b9b2-eaf1812f975b" class="bulleted-list"><li>Unreal Engine 3</li></ul><ul id="89a2b0dd-9aee-4475-bbec-3a5425bbe8ea" class="bulleted-list"><li>CryEngine</li></ul><h2 id="8483b99d-81b4-495d-9558-080934600f0a" class="">Component System</h2><p id="e90276eb-eccc-4951-bdf6-0f0b100297d8" class="">In the <strong>component-based</strong> architecture, the entity object is a container of components.</p><p id="7a17cbe8-b898-4997-ace3-1fb76c4ceaa8" class="">Components provide custom data and behaviors.</p><p id="91e91178-9213-4c24-9ec1-38c88a9032ac" class="">As an entity contains multiple components, sharing of functionality is easy.</p><p id="9ae638de-b8d3-4dbd-9edf-cd12eb6031c9" class="">Allowing components to reference each other makes communication easy.</p><p id="2ea7ddcb-3513-439a-96ac-f15cbf560973" class="">✔️Easy to implement new behaviors.</p><p id="518f6b6d-3a1a-47e0-ba14-0162c61810b1" class="">✔️Easy to share functionality among objects.</p><p id="18bbf359-4fe2-49b9-b1ee-d9b1506fc77c" class="">❌Complex objects include many components and communication becomes difficult.</p><p id="0e60f98c-de63-4158-8c57-3440c0c5f748" class="">❌Implementation of behaviors is not efficient because of poor data locality.</p><h3 id="6875e5db-5c68-4aa6-bbc1-23fa51d3e506" class="">Variants</h3><p id="26a09099-e080-453a-bc66-1d2b408c0836" class=""><strong>Relashionship</strong></p><ul id="a2fa35de-93fd-40bb-b100-a302a82d5557" class="bulleted-list"><li>An entity has zero-or-one component of each type.</li></ul><ul id="dc4e563f-9dcd-4c2b-909b-1d3201a75ade" class="bulleted-list"><li>An entity has zero-or-many component of each type.</li></ul><ul id="a7ea4169-6131-46e1-a423-12b92bf303d9" class="bulleted-list"><li>A hybrid approach (some components support a zero-or-one relationship, and other a zero -or-many relationship).</li></ul><p id="5a419433-2246-4a84-8754-aa722eefeb4b" class=""><strong>Components</strong></p><ul id="7e804e98-b49b-4bf2-8ec5-5d4cd703b065" class="bulleted-list"><li>The entity knows about every component types.<ul id="561ef07a-8bff-4a2a-8057-faf136bce1a1" class="bulleted-list"><li>The entity can provide easy access to the components (<code>GetTransform</code>, <code>GetMeshComponent</code>, ...).</li></ul></li></ul><ul id="4876bb4b-1456-49c9-ad65-6ba50197d6fa" class="bulleted-list"><li>The entity doesn&#x27;t know about the component types.<ul id="1211a353-3c88-4bc8-ab40-4d9edfeea98e" class="bulleted-list"><li>The entity provide a generic access to the components (<code>GetComponent&lt;T&gt;</code>).</li></ul></li></ul><ul id="15600d74-de3e-4701-ae39-52a04e3ee2b8" class="bulleted-list"><li>A hybrid approach with common components known by the entity.</li></ul><h3 id="7c2fa130-a93b-49d3-bf6a-ad071bf6da2c" class="">Examples</h3><ul id="609c9d91-cf40-4745-8f53-8018b64d4df8" class="bulleted-list"><li>Unity</li></ul><h2 id="64ec10ec-3670-4b1a-a230-adf25a22da2d" class="">Hierarchy/Component Hybrid System</h2><p id="87ec9e41-c92f-4d76-b427-3993a44a568f" class="">A <strong>hybrid</strong> of the hierarchy and component systems.</p><p id="911b12d2-6483-4edb-93d3-a6ccaa1fac23" class="">✔️Can specialize some concepts in dedicated objects.</p><p id="cb56e77c-8294-439e-9e2e-5e461f5248bd" class="">❌Difficult to reason about the correct implementation (as a specialized object or a set of components).</p><h3 id="25d309c1-de6e-45b0-bf96-459d540054b3" class="">Examples</h3><ul id="db45bc37-7fdf-4260-bec2-592a8a30ad41" class="bulleted-list"><li>Unreal Engine 4</li></ul><h2 id="6c6089ed-3a69-477c-8220-24064459c40c" class="">Entity Component System</h2><p id="4f5bf6f3-e083-4df2-800a-d362f0318300" class="">An <strong>entity component system</strong> (or ECS) is a data-oriented design (DOD).</p><p id="9fdc3c28-a402-4267-ac01-8d67e0362e2d" class="">An entity is a simulation object that lives in some kind of simulation world.</p><p id="be9878f8-79ee-478f-a135-a7be60b7b591" class="">A component contains data of a certain type.</p><p id="5210d362-d24f-47a7-950c-65cbeeb7a1f3" class="">An entity contains multiple components.</p><p id="caefa684-d5be-4b98-9a75-25423437f63f" class="">A system is responsible for implementing the behavior of an entity containing a specific set of components.</p><p id="6451d498-fac7-4b14-a3ff-1300afbcccd4" class="">A system perform the update of the simulation in the world.</p><p id="04a5fe2e-628c-4143-bf6b-1ef6189ea80b" class="">The data layout of components is optimized by storing the component data in arrays, and identifying the relationship between entity and components using unique identifiers and hashed maps.</p><p id="1ce3aae2-1679-4466-9912-3f4743be5e48" class="">✔️Easy to share functionality among objects.</p><p id="e4bfeca0-a04d-40af-b154-736c87925dfc" class="">✔️Easy to optimized batch operations.</p><p id="8bfc53a1-b185-422a-a137-42844db5453d" class="">✔️Better performances with efficient memory layout and batching of operations.</p><p id="e5a5c068-54b6-4904-ace0-d939f1166397" class="">❌Implementation of behaviors is harder to reason about.</p><h3 id="013a407f-6361-40e6-b900-66cfcd98b13a" class="">Examples</h3><ul id="78d7c72d-7099-484b-a9b2-cff118db74bc" class="bulleted-list"><li>Stingray Engine</li></ul><ul id="c5e64026-2077-45cc-a7f7-0f86d7dec5b3" class="bulleted-list"><li>The Machinery</li></ul><ul id="eb68d888-348f-47d5-8fa6-386bbbaf2d6e" class="bulleted-list"><li>Unity (ECS)</li></ul><h2 id="c0679a2e-ee5b-4d0a-a5a4-e111889956bd" class="">Mix-in System</h2><p id="f201b737-eb3b-4c9c-838d-cd9cab497296" class="">A <strong>mix-in system</strong> is property centric.</p><p id="d9df25cb-3da1-4394-8222-36e0501b5ba1" class="">Multiple presets of data are defined and entities are created as a set of these presets.</p><h3 id="fb691c47-4f43-4247-9239-a815ab1de98e" class="">Examples</h3><ul id="690e76e5-d199-44b7-a214-6c5f5edac71c" class="bulleted-list"><li>Gamebryo LightSpeed</li></ul><h1 id="4ef3070e-2970-43a9-ad29-234c77fecea0" class="">Synchronization</h1><h2 id="1e881a2a-bacf-465d-92a6-1bff1ac7041f" class="">Brute Force</h2><p id="6f6718a7-bf76-4594-b647-d16be92201d5" class="">Iterate over all the entities and copy their state.</p><p id="aab1b5b9-af74-4df8-8478-6293f1e36f48" class="">Can be optimized with hierarchical dirty flags.</p><h2 id="98746ba1-d786-4dd7-be71-53fd5ce57e85" class="">Callbacks</h2><p id="76039ac7-14d2-4893-ba1c-b415780385c9" class="">Call a callback whenever an entity is changed to copy its state.</p><h2 id="6d4f2a79-0913-4eae-b07f-33e70c3b3dcd" class="">Deferred</h2><p id="6759191d-cdcd-4ed6-80a1-e0a29384852a" class="">Put the changed entities in a list.</p><p id="1e58f39b-eb8f-46e0-84b5-477620f9a585" class="">Process the list of changed entities and copy their state.</p></div></article></body></html>

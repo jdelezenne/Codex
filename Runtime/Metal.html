@@ -1,0 +1,607 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Metal</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="7fb49df5-cf06-4bbf-9ae6-9f27759162e0" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🔩</span></div><h1 class="page-title">Metal</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th>Category</th><td><span class="selected-value">Graphics</span></td></tr></tbody></table></header><div class="page-body"><h1 id="d38bcce6-4637-4414-9da3-7c599d7219f3" class="">Frameworks</h1><h2 id="8dc422e1-80de-4047-a2f6-2c38e63591f5" class="">Overview</h2><p id="8066e6d1-5840-4001-b7d3-31246eb56309" class="">Metal is a low-level graphics API with programmable vertex, fragment and compute shaders.</p><p id="3a5f4e04-362d-4eb9-a94d-1756ff0e7614" class="">Metal runs on iOS, macOS and tvOS.</p><blockquote id="eb67f201-943c-4270-88c5-145843bb9183" class="">Metal is not supported by the Xcode iOS simulator.</blockquote><h2 id="48bc7712-d149-468c-a599-6ac3c88c09f0" class="">Metal 1</h2><p id="37a192c6-d5ff-4997-a822-0bf7a1047595" class="">Metal was announced at WWDC 2014 for iOS and at WWDC 2015 for macOS and tvOS.</p><p id="b872e355-7ca8-4d7e-bd01-5d698726701c" class="">On an iOS device, Metal requires a A7 processor or later running at least iOS 8.
+On macOs, Metal requires a 2012 device or later running OS X El Capitan.</p><h2 id="7420a6c5-066e-454e-9cfa-60dcd1d5433e" class="">Metal 2</h2><p id="733fde82-5105-4efc-b17a-709a83e369b3" class="">Metal 2 was announced at WWDC 2017 for iOS 11, tvOS 11 and macOS High Sierra.</p><p id="8627e7b3-5d44-4ed7-8d13-bc2f02493998" class="">Metal 2 supports new features powered by the A11 processor such as imageblocks, tile shading and threadgroup sharing.</p><h2 id="92f14622-4997-410d-b047-e0dd99744baa" class="">MetalKit</h2><p id="7e292448-5a61-4594-b752-192673efc246" class="">MetalKit was announced at WWDC 2015.</p><p id="d2cbd434-3d30-493f-9604-a70004a5812e" class="">It&#x27;s an additional framework that helps setting up the Metal view for rendering.</p><ul id="242af5f9-680d-4401-823e-879e9ac203b0" class="bulleted-list"><li>View</li></ul><ul id="aaadb559-b67f-4403-a8f4-70e27ed0453d" class="bulleted-list"><li>Texture loader</li></ul><ul id="a054ec5e-2283-4c3e-af3e-e1b7355d1c46" class="bulleted-list"><li>Model I/O integration</li></ul><h3 id="6301f79f-1a91-41c9-960d-fb8662e50983" class="">View</h3><ul id="26a4b9d7-aa38-4523-a5e3-c372ec2fa115" class="bulleted-list"><li>Encapsulates a <code>CAMetalLayer </code>as the backing layer for the view.
+<a href="https://developer.apple.com/documentation/quartzcore/cametallayer">https://developer.apple.com/documentation/quartzcore/cametallayer</a></li></ul><ul id="81bbd19c-3662-4bfe-b160-8708b4ad557e" class="bulleted-list"><li>Manages the color attachments associated with the frame buffer.</li></ul><ul id="8ec89437-fd8f-4079-b3f2-f55228c38d2c" class="bulleted-list"><li>Handles the main loop with a fixed frame rate.</li></ul><h3 id="8e300000-e735-400f-9dad-568f255f7e61" class="">Texture loader</h3><p id="750a643c-8c0d-40b3-9189-3118c07f64f9" class="">The texture loader supports JPG, TIFF, and PNG formats. These formats are not recommended at runtime as they require a conversion to an hardware format. Additionally, JPG is a lossy format, and should be avoided.</p><p id="914f0963-89ce-432e-86f2-1fd031f93784" class="">MetalKit also supports PVR and KTX which can be directly copied into hardware memory.</p><p id="0811d751-ab4d-4f8f-a97a-0ba04cc34253" class="">The texture loader can generate mipmaps.</p><h3 id="601ba57c-c872-4866-9abc-fc2a8ebae64b" class="">Model I/O integration</h3><p id="397539a1-e15b-442b-a767-7df4e7de520d" class="">The model I/O integration supports ABC (Alembic), DAE (COLLADA), and OBJ (Wavefront) formats. MetalKit generates the appropriate vertex layout and vertex buffers. The mesh is divided into submeshes with optimized index buffers.</p><p id="9483d3e2-5d65-49cb-bc42-b8b7a684e646" class="">MetalKit can allocate hardware memory during loading but it requires conversion to hardware data.</p><h1 id="ab5fe721-ea70-48b3-8320-72c5411a9c1b" class="">Fundamentals</h1><p id="4ab79b47-b9d7-4d02-8166-40b474b19663" class="">Metal is a modern graphics API</p><ul id="df4d471f-6cf2-480a-8359-0e7f383579c7" class="bulleted-list"><li>Thin API</li></ul><ul id="0df16b0d-c45c-4a9d-a00e-d57234788fd7" class="bulleted-list"><li>Less expensive tasks</li></ul><ul id="bc9a3eed-83b0-4d4d-833c-4909ea0ef182" class="bulleted-list"><li>Explicit command submission</li></ul><ul id="a1f53f5a-8274-47d2-b5c4-aecc8f560444" class="bulleted-list"><li>Low CPU overhead</li></ul><p id="d7458ab1-3b44-4dd4-84d8-da95aa15f956" class="">The Metal API translates the API calls to the GPU hardware directly.</p><p id="081c0061-ee5b-4aff-9ecc-5cb94866d418" class="">During a draw call, the GPU starts rendering immediately as all the data has already been encoded on the hardware.</p><p id="b8f08d5f-0506-4a88-8cd6-0e4000c29185" class="">Metal is designed for:</p><ul id="799ad62a-64d0-4e33-b383-8ee4943daad5" class="bulleted-list"><li>Tile-based deferred-mode rendering</li></ul><ul id="3baf856a-4e56-4a31-b8a7-112f6900a53c" class="bulleted-list"><li>Discrete (macOS) and unified (iOS) memory systems</li></ul><h1 id="b9ad32d5-81b9-4592-9c49-8ba020b2220b" class="">Objects</h1><ul id="22879bfd-bd49-48f3-87fa-9be65ea45b1d" class="bulleted-list"><li>Device<ul id="d6255e73-1a37-497d-8fc5-a784f3747912" class="bulleted-list"><li>Represents the GPU</li></ul></li></ul><ul id="18664633-1485-4dcf-b569-4b4d9c3e6af9" class="bulleted-list"><li>Command Queue<ul id="ccbb7346-1298-4e4f-b2e4-0a22a5d357f7" class="bulleted-list"><li>Contains a sequence of command buffers</li></ul></li></ul><ul id="e9a312f5-22e0-492e-aee4-28210dfdd8c4" class="bulleted-list"><li>Command Buffer<ul id="f954803c-5c47-42f7-a17b-3d2a973fac1b" class="bulleted-list"><li>Contains GPU hardware commands</li></ul></li></ul><ul id="1661ef05-4b50-4c6b-a722-2d4c143f7fca" class="bulleted-list"><li>Command Encoder<ul id="d3a890b7-594b-4bd9-b0ab-f2d5348795af" class="bulleted-list"><li>Translates API commands into GPU hardware commands</li></ul></li></ul><ul id="2ae6b2ac-313e-4509-9c0c-53102c49fb55" class="bulleted-list"><li>States<ul id="a6ddc293-5999-489a-9458-db85cfa3fce4" class="bulleted-list"><li>Buffer configurations, blending, depth, samplers...</li></ul></li></ul><ul id="51aee00e-8b38-49be-b7e5-7095bdd3ee5b" class="bulleted-list"><li>Shaders<ul id="b75a3c02-6767-43f8-abab-5af73655f29f" class="bulleted-list"><li>Vertex, fragment and compute programs</li></ul></li></ul><ul id="ff09608d-aa67-40f2-8be0-0769430567fc" class="bulleted-list"><li>Resources<ul id="5ed7d2a7-dd13-4972-9618-df6bfeed42bb" class="bulleted-list"><li>Textures (formatted memory)</li></ul><ul id="5ec1df23-29c0-4d63-82ca-d3bafc4c49fb" class="bulleted-list"><li>Data buffers (vertices, indices, constants...)</li></ul></li></ul><h2 id="6d3d02f9-5c59-4891-bf81-aeac1e894295" class="">Command Queue</h2><p id="8f0d746a-770e-4a40-9796-fc578d5b14fc" class="">The command queue is created at startup. Typically there is only a single queue.</p><h2 id="3958454c-d0d6-4437-9b7a-5bf856446775" class="">Command Encoder</h2><p id="4ef24b62-6415-4035-b236-6011b70c58c2" class="">There are three types of command encoders, and they can be interleaved.</p><ul id="d8dca626-9a56-4af9-bf6e-da686126dbd6" class="bulleted-list"><li>Render<ul id="92c5ceea-dd53-4cec-873f-7a55d23aae57" class="bulleted-list"><li>Graphics rendering operations.</li></ul></li></ul><ul id="52ee55f8-676b-4ca9-ad8d-06bba94328c1" class="bulleted-list"><li>Compute<ul id="fa030e70-96b2-4aca-8009-1a4be12a65e1" class="bulleted-list"><li>Data parallel computations.</li></ul></li></ul><ul id="9a0e29bc-e0ac-4303-b8c1-b32569b4b96e" class="bulleted-list"><li>Blit<ul id="0d8c90c2-1350-49aa-a68b-17befbae8878" class="bulleted-list"><li>GPU-accelerated resource copy operations.</li></ul></li></ul><p id="b1725952-b5dc-424b-9d8e-34022bc77ac2" class="">States, shaders and resources are attached to command encoders.</p><p id="ad203ce6-e0f4-4ccf-ac1a-d0f29ff5f3d6" class="">There can be multiple command encoders at the same time, one for each pass.</p><p id="d94feabb-011a-4fea-b83c-a2520d262919" class="">Command encoders generate commands immediately.</p><p id="a7c7c691-389d-44fb-aa31-73ef6418b7ed" class="">Command encoders can run on different threads.</p><p id="1f8f43aa-8e0d-4410-b611-23cc92a2599b" class="">The order of their submission is still by the application.</p><h3 id="7c02b0d7-c520-4aba-ad2c-245ac596f4d0" class="">Render Command Encoder</h3><p id="ec2fc0f8-e167-4410-9d3b-4f757cd2e8da" class="">Encodes commands for a single rendering pass on a single render target.</p><h3 id="6f72fd66-6e23-4799-b950-e71181414e3d" class="">Compute Command Encoder</h3><p id="fc92e422-3b50-4b9c-bb5a-7a039477eee3" class="">Can be interleaved with render and blit commands.</p><p id="45420d47-af14-47de-814e-98377ce98a3b" class="">There are only two kind of states:</p><ul id="a77dd0cf-5595-4dcc-954d-a4e491798570" class="bulleted-list"><li>Compute state<ul id="c7a1ea56-c09f-4e8b-9ac5-3484efb5cc41" class="bulleted-list"><li>Compute function, workload configuration.</li></ul></li></ul><ul id="6a297115-ec5e-40db-b001-921330513ae9" class="bulleted-list"><li>Sampler<ul id="3e9a9058-10ce-4fdb-a7aa-0665156e24e8" class="bulleted-list"><li>Filter states, addressing modes.</li></ul></li></ul><h3 id="5b7328c1-eb88-419a-9f5c-debae7fd4f85" class="">Blit Command Encoder</h3><p id="f54e4831-7031-4eb3-bedb-01328d309f3f" class="">Asynchronous data copies of textures and data buffers.</p><p id="cebfad75-9c6b-4035-a6d3-98d74d5cc01c" class="">The blit command encoder can be used to generate mipmap levels with the <code>MTLBlitCommandEncoder.generateMipmaps(for:)</code> method.</p><p id="27170a4b-1ed6-4df3-8dad-935c7f679b5b" class=""><a href="https://developer.apple.com/documentation/metal/mtlblitcommandencoder/1400748-generatemipmaps">https://developer.apple.com/documentation/metal/mtlblitcommandencoder/1400748-generatemipmaps</a></p><h2 id="9cd38a05-5ddf-47b9-8a9e-31671ed481f5" class="">States</h2><p id="aad7d1ce-d8b0-4fac-ab9d-293fc1ddf9cb" class="">Expensive states are created using descriptors and cannot be changed.</p><ul id="a6886f24-5780-42b6-b4fb-52801f5feed5" class="bulleted-list"><li>Render target configurations</li></ul><ul id="1708ea56-e340-47c7-93ee-c086768cf94b" class="bulleted-list"><li>Depth and stencil configurations</li></ul><ul id="f0675836-b644-46e2-b710-58d5c37583f0" class="bulleted-list"><li>Shaders</li></ul><ul id="9c85b607-ff5b-4130-aae8-1372e97b4eaa" class="bulleted-list"><li>Blending</li></ul><p id="eb5a5317-9017-4672-b3c1-f0a09160f988" class="">Inexpensive states can be changed in the command encoder.</p><ul id="ed7140c8-db72-48d8-b977-b7609c63a6b4" class="bulleted-list"><li>Textures an data buffers specifications</li></ul><ul id="5ad98c42-a1d8-4b1e-b65b-0caee87af19a" class="bulleted-list"><li>Samplers</li></ul><ul id="fe22f426-90e3-4073-9b9c-694c9c1a3724" class="bulleted-list"><li>Cull mode, facing orientation, polygon mode, viewport...</li></ul><h2 id="ddbb3a12-6b72-4283-bb95-2c3111dc2f31" class="">Resources</h2><p id="8f0272a6-906f-41b5-9f52-50aec1da80e4" class="">The size and format of resources is fixed.</p><ul id="f769ad4e-4d15-484d-bb96-d602d0073ba6" class="bulleted-list"><li>The render target textures are fixed.</li></ul><ul id="94fbb7d3-b249-477e-a66d-9df414eecd77" class="bulleted-list"><li>The content of the data buffers and textures can be updated.</li></ul><p id="b6ebede0-5c46-4915-88e7-6b30af1f60d1" class="">The resource update model is designed for an unified memory system such as iOS.</p><p id="73e616fe-d87c-4efa-967a-a67322ed96d2" class="">On discrete memory systems such as macOS, the managed resource system handles the synchronization.</p><h3 id="10b96550-43d9-4dc3-bdfb-15554b402b78" class="">Storage mode</h3><p id="a23177f5-8bbe-423b-8957-ca7e16e84d8a" class="">On unified memory systems, the resources should be created with a shared storage mode.</p><p id="9eac1447-3ce1-4126-a541-4826a6b2003b" class="">By default, on macOS they are created with a managed storage mode.</p><p id="b0f64fd8-d404-4217-80e2-ca5ae1838483" class="">GPU-only resources such as render targets should use the private storage mode for better performances.</p><h3 id="fb90d65d-f58a-43b7-ad72-a409fa6b830a" class="">Usage</h3><p id="eeb2a58f-8d99-43ae-b25f-f4eca6f9111c" class="">When creating textures, the proper usage should be set.</p><p id="e4afb784-92b2-440c-96e3-83315c7f48a3" class="">By default, the usage is not optimized.</p><h3 id="859149cf-471a-4fc1-a8a0-481d164fec5c" class="">Texture compression</h3><ul id="ddb234cc-e128-411c-bd9f-2c7861524f5d" class="bulleted-list"><li>PVRT, ETC2, EAC (macOS, iOS).</li></ul><ul id="556c8e8f-3033-4b33-81c5-23a390422bf6" class="bulleted-list"><li>ASTC (iOS only).</li></ul><ul id="3c0f7f5a-e1e8-4149-aec1-ad7d212d3532" class="bulleted-list"><li>BC (macOS only).</li></ul><h1 id="fc7f7ec3-fa83-4a2d-81d0-ca2b07584f14" class="">Shader Language</h1><p id="8548d62a-41e8-4811-8486-230ad96cbeb2" class="">The Metal shading language is a unified language for vertex, fragment and compute shaders.</p><p id="9e24e5f3-076f-4769-b65c-5bad084e9095" class="">It&#x27;s based on C++11 and built from LLVM and clang.</p><h2 id="cdd7eadd-40d9-4896-85be-1932069fb24d" class="">Data types</h2><ul id="7aeb379c-0fce-4c42-89ef-fb7593013cc4" class="bulleted-list"><li>C++ data types: bool, char, int, float...</li></ul><ul id="f4265f7f-a50a-48e3-90f1-c788a793f299" class="bulleted-list"><li>Defined as SIMD types in <code>simd/simd.h</code>.</li></ul><ul id="d42cd108-624f-41db-aeb8-ba2f517f022a" class="bulleted-list"><li><code>half</code> is a 16-bit floating-point value (more efficient than float).</li></ul><ul id="5beba8bc-e830-4a6a-af46-cfacd2730a2d" class="bulleted-list"><li>Vectors: charN, intN, floatN, halfN...</li></ul><ul id="bde39f60-84fb-43f3-943a-48bfa5f0f66f" class="bulleted-list"><li>Matrices: charNxM, intNxM, floatNxM, halfNxM...</li></ul><ul id="49494cba-3e81-40b0-b99b-78848880e7b3" class="bulleted-list"><li>Atomic: atomic_int and atomic_uint (race-free operations).</li></ul><ul id="b300c426-ef6c-4bd4-9a96-d015f730c15a" class="bulleted-list"><li>Custom structs.</li></ul><h2 id="f59b01d4-d285-482a-a17c-45c2813263af" class="">Alignment</h2><p id="0c6d2fc7-999f-444f-bcad-c441aeceb564" class="">Structs are aligned at the size of the largest element in the struct.</p><p id="a939a596-67c0-4a1c-b1c2-ad7f25b07187" class="">There are packed vector types aligned at scalar type length.</p><p id="f6a09a79-001f-461b-baa6-cdd3f4b9a6c1" class="">However, the packed types are not efficient for CPU operations.</p><div id="affddd68-ae67-4772-9d1a-cc1d401d9a27" class="column-list"><div id="8edc3131-6fc3-4195-af12-6a3dba78ca2c" style="width:50%" class="column"><pre id="d159ab1d-02bb-472c-ab1c-ddf2fdbdaef6" class="code"><code>struct Vertex
+{
+  float4 a;
+  float2 b;
+  float  c;
+};</code></pre><p id="0a61c537-6ef4-49d7-878a-15f236c9b283" class="">Size of Vertex is 32 bytes
+(a is aligned at 16 bytes)</p></div><div id="a8c5b662-921c-4b19-ad69-eadd4568e33a" style="width:50%" class="column"><pre id="48c190ee-65bb-40f6-8ed0-6926ac6e1247" class="code"><code>struct Vertex
+{
+  packed_float4 a;
+  packed_float2 b;
+  float         c;
+};</code></pre><p id="228fcbad-749c-4988-8614-9fba4aea0514" class="">Size of Vertex is 28 bytes
+(a is aligned at 4 bytes)</p></div></div><h2 id="cf31cc7c-a74a-4eb1-8937-a3853d866782" class="">Textures</h2><p id="44c99571-b7f0-4f5d-bf70-433e8697ec35" class="">Textures are templated types.</p><p id="ea4dde01-1b1e-4717-a390-004e04995ed5" class="">There are two template arguments:</p><ul id="dcd3c94b-c221-46ab-bb75-d93ce1adbe79" class="bulleted-list"><li>Data type (float, half)</li></ul><ul id="1a1155b7-ac4f-43b8-bf65-d3961cf759ff" class="bulleted-list"><li>Access (read, write). Default is read (optional argument).</li></ul><p id="365cad90-9537-4b0e-891c-fcdbcbb0a0a7" class="">The origin is at the top-left corner of the texture.</p><h2 id="59b3e1b6-1eb7-4e4b-b1dd-f1a1303dc661" class="">Samplers</h2><p id="b8795c93-6af5-4210-9cc7-5898079250b0" class="">Samplers are independent from textures.</p><p id="cdd8c34a-5219-4b73-9af5-5281d3e8fef8" class="">They can be declared in the fragment function or set as render states.</p><h2 id="40cc3ae3-7dc5-4281-bb2d-7e0dd9b578ec" class="">Buffers</h2><p id="06d189da-5fbb-49f8-99d1-c26012fdf0d8" class="">Buffers are declared in an address space:</p><ul id="93245423-3f1e-43f2-b6c1-6d4ecb0d934f" class="bulleted-list"><li>global<ul id="6e398131-f492-4efb-b895-4cce38b4aaa7" class="bulleted-list"><li>Indexed dynamically using <em>vertex_id</em>, <em>instance_id </em>or <em>global_id</em>.</li></ul></li></ul><ul id="000ce1d8-f548-4fe6-b96d-925b9e35d5d5" class="bulleted-list"><li>constant<ul id="392fac5d-2613-4f93-870d-0d6b5d94c257" class="bulleted-list"><li>Multiple instances index the same location (light and material data, skinning matrices...).</li></ul></li></ul><h2 id="cd58f31c-46a7-4097-a9cc-6ce0a0f7f08f" class="">Math</h2><p id="3594ca06-4340-4a04-880a-f4f1a2770647" class="">There are two modes for math operations:</p><ul id="b9a65f75-10e2-4f28-9b93-22d51204e742" class="bulleted-list"><li>fast<ul id="49860f1c-4836-4b90-806c-ca70540d99e1" class="bulleted-list"><li>Operations on NaN is undefined.</li></ul></li></ul><ul id="079b8ad0-dcab-43af-b2fb-5817fc2a5369" class="bulleted-list"><li>precise<ul id="fa955e5e-60e5-442e-85ee-5f3524511645" class="bulleted-list"><li>Higher range.</li></ul><ul id="d871e55e-1ba0-4c47-9df9-150e780d8d3a" class="bulleted-list"><li>May impact performances.</li></ul></li></ul><p id="a0958f22-3e4a-4ae8-a3c0-c2e8d281544c" class="">Fast math is the default but can be disabled with the compiler option <code>-fno-fast-math</code>.</p><p id="beaee795-b9fa-4976-acbc-d412df89b887" class="">It&#x27;s recommended to use fast math by default and call precise math functions manually when needed using the <code>metal::precise</code> namespace.</p><h2 id="703bc831-4ea6-4cb4-ad08-409d9cf435cd" class="">Compilation</h2><p id="327e78ea-6f2a-4308-97c8-0c48f9066ea9" class="">The Metal shading language code is compiled in two stages:</p><ol id="776d8ca1-a40e-4496-9bc0-96a614ff5b8f" class="numbered-list" start="1"><li>Front-end compilation happens at build time in Xcode or on the command-line. Metal files are compiled from high-level source code into intermediate representation (IR) files.</li></ol><ol id="114e6d8d-5a29-4a8b-b1ec-9d60e21fa402" class="numbered-list" start="2"><li>Back-end compilation happens on the target platform at runtime. IR files are compiled into low-level machine code.</li></ol><p id="4040927c-73db-4d91-9305-abc24f6fb5ab" class="">The metal shaders that are compiled at build time by Xcode are stored in a <code>default.metallib</code> file that is included into the application bundle.</p><p id="9a178218-24f1-4aa0-9eeb-69a28eefc049" class="">The <code>MTLDevice.makeDefaultLibrary</code> method looks for shaders inside this file.</p><p id="8de6ecd3-d5b0-4b2f-a324-8d38ca80b0cd" class="">Otherwise, the <code>MTLDevice.newLibraryWithFile:error</code> method will load a shaders that were built from the command-line.</p><pre id="28a7f82e-7e09-4e15-9ef6-f23a859a5c43" class="code"><code>let library = device.makeDefaultLibrary()
+let vertexFunction = library.makeFunction(name: &quot;vertexShader&quot;)
+let fragmentFunction = library makeFunction(name: &quot;fragmentShader&quot;)</code></pre><h1 id="6b110dbf-871c-4e66-8f08-66b078f11d75" class="">Blending</h1><p id="6da2d93b-77be-448f-9140-3598417f0a25" class="">The render pipeline state and the color attachments can be configured to achieve different alpha blending effects.</p><h1 id="8241913b-7626-45a9-b730-6c4f872776e5" class="">Best Practices</h1><h2 id="0169f0f4-601e-417e-81aa-46cba87d5f86" class="">Built time</h2><ul id="2db68d5a-4783-478e-a209-10d7fa947b16" class="bulleted-list"><li>Compile the shaders at build time using Xcode or the command-line.</li></ul><ul id="d9af6a23-607d-4ecc-bb11-666c7ae765aa" class="bulleted-list"><li>Convert the textures into PVR or KTX formats.</li></ul><ul id="3dee4755-7ea0-4796-8580-c063d89bbe69" class="bulleted-list"><li>Convert the models into binary data using the appropriate interleaved vertex layout.</li></ul><h2 id="a47c01c8-2379-4692-9d5f-28610b90a99d" class="">Initialization</h2><ul id="5aab8ecc-b4f1-414a-973e-290765aac6ef" class="bulleted-list"><li>Create a single device and command queue.</li></ul><h2 id="f0892e68-1bb0-467a-90ce-f39c50be0f06" class="">Loading</h2><ul id="7819ae86-1720-45ad-abe7-cfab8f44c3bf" class="bulleted-list"><li>Create the render pipeline states and compute pipeline states.</li></ul><ul id="b6cfc2e5-2572-4773-acc8-e60990ab8cbb" class="bulleted-list"><li>Create the depth stencil states and sampler states.</li></ul><ul id="6f4bb34a-0131-4734-afdc-887fb99be0b6" class="bulleted-list"><li>Create the shader libraries.</li></ul><ul id="a52683d3-6a7c-4f93-90a8-ffa72e4d9e3e" class="bulleted-list"><li>Create the vertex and index buffers.</li></ul><ul id="0841ea15-8163-46cd-a36d-7a66b458609d" class="bulleted-list"><li>Create the texture data.</li></ul><ul id="767db601-57b7-43e4-89b5-62023ee7a725" class="bulleted-list"><li>Create the shader constants buffers.</li></ul><h2 id="6f8d68e6-7a8d-4f43-bd7e-6ab0872e6506" class="">Dynamic Resources</h2><p id="3f0310cd-6641-4407-9d8c-797457672dac" class="">There are three type of dynamic resources that can be updated by the CPU.</p><p id="7dbaa2fc-9894-4452-860f-6ca71f07c1f5" class="">These resources should be created in shared memory to optimize their use by the CPU and GPU.</p><ul id="fda8a778-a2d8-41d8-8461-98707e92681b" class="bulleted-list"><li>Shader constants.</li></ul><ul id="7b6a4e1d-97e0-4a92-a129-70c87c7804b4" class="bulleted-list"><li>Vertex and index buffers for dynamic geometry.</li></ul><ul id="b3b123ad-0792-49f8-b4f9-144c3b5b781f" class="bulleted-list"><li>Dynamic textures.</li></ul><h2 id="258f54f2-0dc0-4148-8850-2fad6d2978a3" class="">Triple Buffering</h2><ul id="783ba075-8c90-4fe8-923f-6991c8494c37" class="bulleted-list"><li>Use triple buffering for shader constants with at most three command buffers in flight.</li></ul><h1 id="29f72ca2-0c21-4f23-a0c8-bee8b78fc5ab" class="">Tutorial</h1><h2 id="e5bdb1f0-18eb-4624-875d-2910628b954e" class="">Overview</h2><p id="4e77210c-2a2a-4c1f-a459-664a0fac377f" class="">In the Metal API, there are different descriptor types that are used to setup the creation of Metal objects. These descriptors can be used to create multiple objects but they are not persistent.</p><p id="3fcba1f9-8784-4fb2-9d25-eb350a0193f8" class="">When using Metal, your app follows a client-server pattern.</p><p id="fae14241-ceee-4491-a510-bf8608a709cb" class="">The app is the client and sends commands to the GPU.</p><p id="8afbc7bc-730f-4214-ad90-af6bab7ccdc3" class="">The GPU is the server and process commands and notify the app when it can process more commands.</p><p id="71e97296-4a96-4e64-b086-f9b4ca6d9373" class="">Commands are encoded into command buffers and they are sent in an ordered command queue.</p><p id="6a672ffe-3602-49ff-821e-1cc1ce4ee9df" class="">For single-threaded apps, you create a single command buffer.</p><ul id="4508b5ab-b767-48ad-ba95-1c43b3b8c098" class="bulleted-list"><li>A Metal app needs a command queue and a pipeline object.</li></ul><ul id="17266378-f287-41fa-987f-c921669883af" class="bulleted-list"><li>The app sends commands to the GPU through a command queue.</li></ul><ul id="e1800988-25ac-4043-9041-377d143a6ccd" class="bulleted-list"><li>The pipeline object tells Metal how to process the commands.</li></ul><h2 id="334d5426-d424-4724-918c-c1bcfd6a29dc" class="">Steps</h2><h3 id="ff107d60-d052-4f50-91bc-20a75bf9ff43" class="">Initialization</h3><ol id="fce5432a-5c04-4ad4-810e-11cb06476be9" class="numbered-list" start="1"><li>Setup a view that supports Metal.</li></ol><ol id="5c6ad6e8-d554-432f-8ffd-bf04d3b8f609" class="numbered-list" start="2"><li>Create a command queue.</li></ol><ol id="a7520157-9492-4db4-b614-452488f712d9" class="numbered-list" start="3"><li>Setup a render pipeline descriptor with custom vertex and fragment shaders.</li></ol><ol id="fb1b4e8e-6bb3-4c9c-8107-ed4481067f41" class="numbered-list" start="4"><li>Prepare custom vertex data in a vertex buffer.</li></ol><ol id="fecd9f32-0e65-4b82-a491-ae41ef42211f" class="numbered-list" start="5"><li>Prepare index data in an index buffer.</li></ol><ol id="c64a0e64-b0d7-4d0f-96de-8e0d237c27c8" class="numbered-list" start="6"><li>Prepare texture data in a texture object.</li></ol><h3 id="dfa2e2ff-6c60-4b8d-9bd1-06d2a28f6ad7" class="">Draw Loop</h3><ol id="f8b81a3a-7fbe-4755-98f8-de6ce56b38dd" class="numbered-list" start="1"><li>Create a command buffer to send commands to the GPU.</li></ol><ol id="9022bdbe-dc00-4726-8a30-e81d3dafda28" class="numbered-list" start="2"><li>Setup a render pass descriptor.</li></ol><ol id="5c9b613e-c9c0-4ad9-bb03-4c43a258805a" class="numbered-list" start="3"><li>Clear the color attachment.</li></ol><ol id="66a82c95-d231-446a-a528-1d70f8d56ed7" class="numbered-list" start="4"><li>Create a command encoder.</li></ol><ol id="1581e68d-62d9-41cc-a5b1-972e2936f341" class="numbered-list" start="5"><li>Generate commands<ol id="86d502c0-3a88-42f7-9cad-9dd7b9201cab" class="numbered-list" start="1"><li>Change render states.</li></ol><ol id="bdccdfa0-6ba8-40c5-897d-42ac487d250c" class="numbered-list" start="2"><li>Associate buffers.</li></ol><ol id="1f61b4bb-0deb-4d7b-9a90-dd3498144600" class="numbered-list" start="3"><li>Draw primitives.</li></ol></li></ol><ol id="ca57bdfd-7b8b-48e9-b57a-5afa714674dd" class="numbered-list" start="6"><li>Complete the command generation.</li></ol><ol id="2c48c97e-2256-45a7-92ab-422200a1d65c" class="numbered-list" start="7"><li>Obtain a drawable from the view to present.</li></ol><ol id="05bdd1a0-d19a-42ff-9ec8-6dd98389f95d" class="numbered-list" start="8"><li>Commit the command buffer.</li></ol><h2 id="7618074e-3a48-4b3c-8aef-e3af271b699a" class="">View</h2><p id="4c3b1394-697c-4ac7-be8e-224d254d7d6a" class="">In macOS and iOS, everything is represented inside a view.</p><p id="55afc573-3f35-46dd-9205-4d594fe9cd46" class="">With <strong>MetalKit</strong>, the <code>MTKView</code> class can be used as the Metal view which simplifies the initialization and management of render targets. The <code>MTKView</code> class is a subclass of:</p><ul id="4c12342b-0675-4600-8db8-011331590754" class="bulleted-list"><li><code>NSView</code> on macOS</li></ul><ul id="9de896c1-13c2-4559-a49d-73ab97effd81" class="bulleted-list"><li><code>UIView</code> on iOS</li></ul><p id="a0dc4f01-5aba-4a3e-8b08-8541e3711c15" class=""><a href="https://developer.apple.com/documentation/metalkit/mtkview">https://developer.apple.com/documentation/metalkit/mtkview</a></p><p id="b65082ea-4d8e-4e07-b87b-ba5403479193" class="">In the app storyboard, we set the custom class name of the view controller to <strong>MTKView</strong>.</p><p id="c17561c6-c4cc-47bf-98ce-c43247d9bb58" class="">The <code>viewDidLoad()</code> function of the view controller is invoked when the view is loaded. We override it to initialize Metal.</p><p id="80cb386a-7bea-467d-adfd-b96a391531bb" class="">First, we use the <code>view</code> property to get an instance of the <code>MTKView</code>.</p><pre id="fb95246c-a267-4fb3-ba5a-610c385a1d5e" class="code"><code>guard let mtkView = self.view as? MTKView else
+{
+  print(&quot;View attached to GameViewController is not an MTKView&quot;)
+  return
+}</code></pre><p id="c0d0db3b-e86e-492e-bbe6-6b97d64b787e" class="">The, we need a Metal device that we can then use to create Metal objects.</p><p id="7e3eabd3-6f5a-49bc-8e3b-c49a6308cbf1" class="">In Metal, a GPU is represented by <code>MTLDevice</code>.</p><p id="5805d1d7-e966-42a4-8f1c-aca91f6d3cff" class=""><a href="https://developer.apple.com/documentation/metal/mtldevice">https://developer.apple.com/documentation/metal/mtldevice</a></p><h3 id="931335cf-4691-4158-b9e7-1faf7fa28d2e" class="">Select the default GPU</h3><p id="80022a5c-cfb5-41ca-9e8b-e8759d60fb05" class="">iOS and tvOS have only one GPU. <code>MTLCreateSystemDefaultDevice()</code> returns a device that supports Metal.</p><p id="e09bdd3c-d5b0-4463-a934-075f73c5f77e" class=""><a href="https://developer.apple.com/documentation/metal/1433401-mtlcreatesystemdefaultdevice">https://developer.apple.com/documentation/metal/1433401-mtlcreatesystemdefaultdevice</a></p><pre id="d301d02b-b1b8-4132-aa0f-a0293ed29279" class="code"><code>guard let defaultDevice = MTLCreateSystemDefaultDevice() else
+{
+  print(&quot;Metal is not supported on this device&quot;)
+  return
+}</code></pre><h3 id="aee3c998-54a5-4c39-abe0-4ad703ced688" class="">Select the GPU device</h3><p id="cca3f0a3-aecc-4f02-bf51-db41d02352ee" class="">On macOS, multiple GPUs can be present and can be enumerated to select the GPU to use with Metal.</p><p id="02769ebd-b627-4dd0-badd-01ab5acb4e5d" class=""><a href="https://developer.apple.com/documentation/metal/choosing_gpus_on_mac">https://developer.apple.com/documentation/metal/choosing_gpus_on_mac</a></p><p id="fb83a717-05a5-4196-94c3-8d08aa69ec46" class="">A list of all the Metal devices in the system is obtained by calling <code>MTLCopyAllDevices()</code>.</p><p id="130f0453-af53-49f9-9f19-dcb66be9c713" class="">However to handle GPU change notifications, it is recommended to call <code>MTLCopyAllDevicesWithObserver(handler:)</code> that lets you specify an observer to receive device notifications during the lifetime of the app.</p><p id="cbecf188-dcb7-4a29-9ca5-27795a59b878" class=""><a href="https://developer.apple.com/documentation/metal/2928189-mtlcopyalldeviceswithobserver">https://developer.apple.com/documentation/metal/2928189-mtlcopyalldeviceswithobserver</a></p><p id="15a1831b-0752-4f97-b8ee-60865ae83bbe" class="">Once we have a valid <code>MTLDevice</code>, we assign it to the <code>device</code> property of the view.</p><p id="95c33349-a2b0-45f0-86ca-2a2f897d8218" class="">Finally, we set the <code>delegate</code> property to a custom class that implements the <code>MTKViewDelegate </code>protocol.</p><p id="2994f49b-1d2e-4577-9a4b-2abf75167cea" class="">We will receive two notifications:</p><ul id="8a93efd5-6cb4-45d2-a8ca-5c529ab7827d" class="bulleted-list"><li><code>mtkView:drawableSizeWillChange</code><ul id="1798a328-303e-4b3c-980b-0df9554200cb" class="bulleted-list"><li>Called when the size of the view will change.</li></ul></li></ul><ul id="909ba931-bfb5-476e-a085-dbf965405ea7" class="bulleted-list"><li><code>drawInMTKView</code><ul id="fd88ade8-4b51-4081-a325-c85590a2b169" class="bulleted-list"><li>Called  when to render into the view.</li></ul></li></ul><p id="7b272cf4-5755-4481-b7c2-c91164f85367" class="">The view setup is completed, and we can now start working with Metal.</p><h2 id="9ac6013e-667b-4bdb-83a0-f889d6b167f2" class="">Initialization</h2><p id="11ca7f57-452f-45fa-9ebc-109e1076d626" class="">The command queue is represented by <code>MTLCommandQueue</code>.</p><p id="8e3c9f44-0fb2-4af1-8406-e2ce7dee302b" class=""><a href="https://developer.apple.com/documentation/metal/mtlcommandqueue">https://developer.apple.com/documentation/metal/mtlcommandqueue</a></p><p id="6cbbceff-2f83-46e5-a580-40d284e01934" class="">To create the command queue, call <code>MTLDevice.makeCommandQueue()</code>.</p><p id="23561cde-fea8-44cf-9273-bebdd4bef6aa" class=""><a href="https://developer.apple.com/documentation/metal/mtldevice/1433388-makecommandqueue">https://developer.apple.com/documentation/metal/mtldevice/1433388-makecommandqueue</a></p><p id="434c3b94-5490-456a-bd73-bbac68240d3e" class="">The command buffer is represented by <code>MTLCommandBuffer</code>.</p><p id="116bfea3-a96d-43b9-b18f-0f90aaa50e1c" class=""><a href="https://developer.apple.com/documentation/metal/mtlcommandbuffer">https://developer.apple.com/documentation/metal/mtlcommandbuffer</a></p><p id="e774f0b7-f618-43b3-a44b-450c400d07e1" class="">To create the command buffer, call <code>MTLCommandQueue.makeCommandQueue()</code>.</p><p id="88d2d43b-303e-4fbf-83ec-243ac39ec765" class=""><a href="https://developer.apple.com/documentation/metal/mtlcommandqueue/1508686-makecommandbuffer">https://developer.apple.com/documentation/metal/mtlcommandqueue/1508686-makecommandbuffer</a></p><p id="d237f262-c88c-4ecb-822b-4e4a141d07b5" class="">There is a maximum number of command buffers waiting to be executed. The method blocks until a buffer becomes available.</p><p id="c05d4618-307e-4d38-96bf-f4ab8910e8bc" class="">After creating a command buffer, you create an encoder object to fill the buffer with commands.</p><p id="79c4c9d0-7dd0-44e7-bd6e-5942671efac5" class="">An encoder object that can encode graphics rendering commands is represented by <code>MTLRenderCommandEncoder</code>.</p><p id="69d0f6bc-1242-4403-8ddb-68f004d0f1a3" class=""><a href="https://developer.apple.com/documentation/metal/mtlrendercommandencoder">https://developer.apple.com/documentation/metal/mtlrendercommandencoder</a></p><p id="0f5e9039-5f7c-47bf-b64b-719fb2b19c38" class="">This is a subclass of <code>MTLCommandEncoder</code>.</p><p id="2c03e253-a6ee-4978-a3ee-c7f93847dfae" class=""><a href="https://developer.apple.com/documentation/metal/mtlcommandencoder">https://developer.apple.com/documentation/metal/mtlcommandencoder</a></p><p id="f35e69bd-6614-4b22-a201-043dcbf67b3e" class="">To create the encoder object, call <code>makeRenderCommandEncoder(descriptor:)</code>.</p><p id="5acb26b9-b24c-4503-b467-4c03f6244f2d" class=""><a href="https://developer.apple.com/documentation/metal/mtlcommandbuffer/1442999-makerendercommandencoder">https://developer.apple.com/documentation/metal/mtlcommandbuffer/1442999-makerendercommandencoder</a></p><p id="66ff5c19-7ec4-48c3-8105-b92379665249" class="">A place need to be reserved for a command buffer on its associated command queue by calling <code>MTLCommandBuffer.enqueue()</code>.</p><p id="ae82c233-1cfd-4b75-8f76-4fcab34261cc" class=""><a href="https://developer.apple.com/documentation/metal/mtlcommandbuffer/1443019-enqueue">https://developer.apple.com/documentation/metal/mtlcommandbuffer/1443019-enqueue</a></p><p id="11111548-08a9-44ca-b265-f4fcc4e4718c" class="">A command buffer can be enqueued only once.</p><p id="ea5b8417-721e-41e1-839e-832ff6673fb4" class="">The command buffers are guaranteed to execute in the order in which they were enqueued.</p><p id="62188a80-3613-4ad8-8876-074043f07ab9" class="">When you are ready to execute the set of encoded commands, you call the <code>MTLCommandBuffer.commit()</code> method to schedule the buffer for execution.</p><p id="cc67e933-e1b9-4b83-9d4d-47b8e838132d" class=""><a href="https://developer.apple.com/documentation/metal/mtlcommandbuffer/1443003-commit">https://developer.apple.com/documentation/metal/mtlcommandbuffer/1443003-commit</a></p><p id="a26bef6b-02ac-4c06-88fe-591167b6f829" class="">The method enqueues the command buffer implicitly if needed.</p><h2 id="ded0447b-7110-4ecb-a7f7-a52a6135cd84" class="">Render Loop</h2><p id="3479d63e-8155-43f5-9cb9-a8ad5d4b60cd" class=""><a href="https://developer.apple.com/documentation/metal/mtlrendercommandencoder">https://developer.apple.com/documentation/metal/mtlrendercommandencoder</a></p><ul id="a987f2e5-f2e4-4e5a-bfd7-c1643ce5665e" class="bulleted-list"><li>Create a render command encoder object</li></ul><ul id="dc1238f6-d157-4a9b-b4be-078d674e8db5" class="bulleted-list"><li>Specify the state of the graphics rendering pipeline</li></ul><ul id="1db47340-ae68-4b9e-a947-65471309c79c" class="bulleted-list"><li>Specify resources for input to and output from the vertex and fragment functions</li></ul><ul id="aaef8b96-5a96-4c84-bccd-a2ec8da65ac8" class="bulleted-list"><li>Specify additional fixed-function states</li></ul><ul id="8b509e9e-b9e9-4180-8605-ed1fe3aaed02" class="bulleted-list"><li>Draw graphics primitives</li></ul><ul id="90d57741-28e6-415a-a9fc-6dd74ffda9db" class="bulleted-list"><li>Terminate the render command encoder</li></ul><h3 id="bfc96c8c-10dd-4baf-9bdc-1bfe8454eee3" class="">Render Pass</h3><p id="bc0c6ed2-2ded-4ac8-bffa-47fe0273e873" class="">In Metal, all the rendering is done inside a render pass represented by <code>MTLRenderPassDescriptor</code>.</p><p id="61ea5351-9466-478e-a788-4399573b13ec" class="">Metal can render objects in a single pass or using multiple pass depending on the effects that we want to obtain. In a single pass scenario, we only use a single render pass object.</p><p id="9f4d0a9a-4b6d-48da-8964-acc7b31a70f2" class=""><strong>MetalKit</strong> can generate a render pass for the current drawable’s texture with <code>MTKView.currentRenderPassDescriptor</code>.</p><h3 id="20d14a49-1bb3-4ea9-ab00-21c78ec14093" class="">Drawable</h3><p id="f66dab37-ada6-4f80-bec2-4bb6fad918a8" class="">There are a limited number of drawables as their take a considerable amount of space.</p><p id="fe9a0024-1ec7-4216-9afc-8d451b2ac4b5" class="">The generation of a render pass and the release of the associated drawable should be done as close as possible.</p><p id="795c1550-c209-4e27-94fe-8b1fdd3c24b0" class="">The current drawable is obtained with <code>MTKView.currentDrawable</code>, and the drawable is released when calling the <code>MTLCommandBuffer.present:drawable</code> function.</p><h3 id="db74f680-c136-431f-b9a6-ffd18878be74" class="">Color attachment</h3><p id="be9b9bdc-23d7-4c60-a28b-8771420d02d4" class="">The <code>colorAttachments</code> property needs to be setup. In Metal there can at most four color attachments (frame buffers).</p><p id="ba269375-28f3-4bb2-a0a5-9423bf0aa359" class="">In a single pass scenario, we only use the first one, and we need to clear it to a default value by setting the <code>clearColor</code> property to a <code>MTLClearColor</code> value by calling <code>MTLClearColorMake</code>.</p><pre id="b7848754-60c7-4146-9200-76edcc8d3fab" class="code"><code>if let commandBuffer = commandQueue.makeCommandBuffer()
+{
+  if let renderPassDescriptor = view.currentRenderPassDescriptor
+  {
+    renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(...)
+     
+    if let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
+    {
+      ...
+      renderEncoder.endEncoding()                
+      if let drawable = view.currentDrawable
+      {
+        commandBuffer.present(drawable)
+      }
+    }
+  }
+            
+  commandBuffer.commit()
+}</code></pre><h2 id="7c4c3230-06c5-4e33-a94b-e51f92c8d238" class="">Synchronization</h2><p id="f7f81595-fd55-45b3-bbef-8fe7fd227fda" class="">The CPU and GPU work asynchronously.</p><p id="2b90da11-eff6-46fe-98eb-7793c4536f4b" class="">A semaphore can be used as the synchronization object.</p><ol id="6246324f-946a-4d7b-a7ce-292ac8a15ec0" class="numbered-list" start="1"><li>The CPU waits for a semaphore to update uniform data.</li></ol><ol id="a8dd4135-5980-476c-91a2-b4c1b76c3721" class="numbered-list" start="2"><li>Metal notifies the CPU when a command buffer has been processed.</li></ol><ol id="f1edd641-1bf4-4fe9-ab75-c2ddbdc8ceeb" class="numbered-list" start="3"><li>The semaphore is reset and the uniform data is updated.</li></ol><p id="6238ec93-86fa-4905-ac9b-2122e5d4d8da" class="">By allocating several uniform buffers and alternating between them, the CPU would not wait for the GPU to complete a frame. A common scenario is to allocate three buffers (triple buffering).</p></div></article></body></html>
