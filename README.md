@@ -1,5 +1,7 @@
 # Codex
 
+https://jdelezenne.github.io/Codex/
+
 The goal of the wiki is to cover a wide range of topics related to game development.
 
 When building a game engine from scratch, there are several valid approaches and there is no perfect way of doing things.
