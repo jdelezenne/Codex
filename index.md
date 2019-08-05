@@ -189,7 +189,7 @@ Best practice on multithreading.
 
 Review of platform-dependent Timing functionalities.
 
-⏰[Time](Runtime/Time.html){:target="_blank"}
+⏰[Time](Game/Time.html){:target="_blank"}
 
 
 Best practices on implementing loading and saving in a game engine.
