@@ -6,19 +6,19 @@ For a given topic, multiple strategies will be covered with their advantages and
 
 The advantage of building a wiki instead of a blog is that the information can be better organized, and improved over time.
 
--📖[References](#-references)
--🏰[History](#-history)
--💻[Hardware](#-hardware)
--🖥[Software](#-software)
-  -⚙️[System](#system)
-  -🌀[C++](#cpp)
-  -🌀[C#](#csharp)
-  -🧱[Build](#build)
--🖥[Core](#-core)
--🧮[Mathematics](#-mathematics)
--🎮[Game Runtime](#-game-runtime)
--🎨[Game Editor](#-game-editor)
--🎓[Tutorials](#-tutorials)
+- 📖[References](#-references)
+- 🏰[History](#-history)
+- 💻[Hardware](#-hardware)
+- 🖥[Software](#-software)
+  - ⚙️[System](#system)
+  - 🌀[C++](#cpp)
+  - 🌀[C#](#csharp)
+  - 🧱[Build](#build)
+- 🖥[Core](#-core)
+- 🧮[Mathematics](#-mathematics)
+- 🎮[Game Runtime](#-game-runtime)
+- 🎨[Game Editor](#-game-editor)
+- 🎓[Tutorials](#-tutorials)
 
 # 📖 References
 
