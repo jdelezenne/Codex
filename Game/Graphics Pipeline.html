@@ -1,0 +1,569 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Graphics Pipeline</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="a88d3b9d-bcdf-443a-9276-9ea5ad374fc2" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🏭</span></div><h1 class="page-title">Graphics Pipeline</h1><table class="properties"><tbody><tr class="property-row property-row-multi_select"><th>Tags</th><td><span class="selected-value">graphics</span></td></tr></tbody></table></header><div class="page-body"><h1 id="2efaba2d-72a0-44ed-87e3-13f8dedb5e1f" class="">Overview</h1><p id="115603c7-18b0-4110-9572-528b0be30378" class="">To produce a scene, the 3D objects need several properties.</p><ul id="830aba6a-c120-4ab3-bc80-304568b7e850" class="bulleted-list"><li>A shape, defined by 3D models (built from rendering primitives such as triangles).</li></ul><ul id="d1359c85-fb9e-4343-b6bb-f1b4985f609e" class="bulleted-list"><li>A transform, defined by a position and orientation in space (and a scale).</li></ul><ul id="a94e6158-e9de-4501-8ce4-c75fbc4677a0" class="bulleted-list"><li>A material, that defines the representation of the object affected by light sources.<ul id="e2048d79-0196-4481-8d12-fcac7fd199a7" class="bulleted-list"><li>From a simple color to a realistic physical description).</li></ul></li></ul><ul id="66ac0242-15f7-4bd6-8236-b55ad98f2387" class="bulleted-list"><li>Lights that affect the object.</li></ul><h1 id="ba34d4b7-33b0-4982-9fe3-36a6f96acf8a" class="">Retained Mode and Immediate Mode</h1><p id="2a2f73fb-db7d-4664-9def-af7840db2d91" class="">A retained-mode API is declarative. The application constructs a scene from graphics primitive.
+Each time a new frame is drawn, the graphics library transforms the scene into a set of drawing commands.</p><p id="b3bc8e06-a709-48fd-842a-5fc845a3a8b0" class="">An immediate-mode API is procedural.
+Each time a new frame is drawn, the application directly issues the drawing commands.</p><p id="3d75da83-c56a-4525-b328-7a1723471a25" class="">Modern graphic APIs are generally immediate.
+Game engines built on top of these APIs are generally retained.</p><h1 id="18cae521-ee24-4037-9167-e2189f6290a4" class="">Hardware</h1><h2 id="fde47103-88e1-4333-97bc-9d3f583a8b36" class="">CPU</h2><p id="bc7ecfc3-3346-4740-8375-c4307b1a355a" class="">A CPU is optimized to handle a variety of data structures.</p><p id="9bed3a9e-91fe-435c-9fc5-a135f50b8f9f" class="">Modern CPUs have multiple cores and SIMD vector processors for parallel processing.</p><p id="5b199f3b-2854-421e-a2d4-1befce496f31" class="">To improve the latency of accessing data from the main memory, CPUs use a hierarchy of local caches.</p><p id="bcae1fd0-9cc2-4511-8fe5-d1fc4bc362cb" class="">CPU use different technique to improve performance such a branch prediction and out-of-order execution.</p><h2 id="4b8baf31-9104-43ef-9c3c-59c1380c3ae4" class="">GPU</h2><p id="ed049235-c7ae-4843-a534-0bbfce6b134f" class="">A GPU is a stream processor that contains a set of processors called shader cores.</p><p id="eb83c6f1-4b13-4fa8-8dcb-db571d66beff" class="">GPUs are optimized for throughput. They are able to process a massive amount of data very quickly in parallel.</p><h3 id="3f252979-b3ab-4df3-a23e-0028c7c3e3c7" class="">Shaders</h3><p id="30bb505d-d301-46a3-805e-ef5312c65688" class="">Vertex programs are executed in threads, which have their own registers.</p><p id="541fee8b-1a5d-4745-bf95-8da25a05a10c" class="">Threads that execute the same shader program are grouped into warps.</p><p id="4bc1c833-13e0-4527-9255-701477bce8c9" class="">Shader programs are executed in lock-step on all processors.</p><p id="b387b9bb-2c1f-4937-8f28-e6f417e7c7aa" class="">When a stall occur in a warp (for example a texture fetch in a pixel shader), the warp is swapped out for a different warp that is also executed on all processors.</p><p id="410b9460-e2d1-41c8-94f3-8dc08f4a18a8" class="">The cost of swapping is very low, and this is the main technique used by GPUs to hide the latency of accessing memory.</p><h1 id="b251ddf8-2e01-4f51-8488-8fd57e715c0b" class="">Buffers</h1><h2 id="1ce0870a-f7b5-4006-af1a-d039930e3624" class="">Frame Buffer</h2><p id="a5feb192-990b-41b1-b69e-c49ee46d01d3" class="">The frame buffer (or color buffer) contains the color data that is presented to the display.</p><h2 id="116a92e1-9cf1-4060-a5e4-2b2bebc047bc" class="">Depth Buffer</h2><p id="d142b461-e31e-4553-b0c6-4b6bf67ff53e" class="">The depth buffer (or z-buffer) contains the depth data for each pixel on the screen.</p><p id="f6fbf72e-d83d-4450-97e1-b8fa76f99311" class="">It has the same size as the frame buffer, but use a different format.</p><p id="e836f31f-d773-4873-8544-4e896a12d66e" class="">The output merger stage of the pipeline evaluate each fragment with its z-value to determine if the fragment is discarded or presented as a pixel on the display.</p><p id="b0d9707a-5d71-4341-a980-10b0f32fded2" class="">This operation is called depth testing.</p><p id="1f2f7176-307d-4593-998f-891e9e789d04" class="">When a pixel is presented to the display, the frame buffer is updated with the color data, and the z-value is written to the depth buffer.</p><p id="ce3c8610-1faa-4831-9393-63f3cefa4c84" class="">Further processing of other fragments use the latest z-value in the depth buffer to perform the depth test operation.</p><p id="0a959ada-5a8f-49f4-9a0f-d540aef9d3a3" class="">This technique allows primitives to be rendered in any order.</p><p id="f96b37e2-86df-4314-8c0a-84b20111f779" class="">However, it does not work with transparent primitives.</p><h2 id="f2331999-89ea-4adb-9645-94e4bfed10f2" class="">Stencil Buffer</h2><p id="7238707c-0ada-4733-86df-b5eb04a48fe1" class="">The stencil buffer usually contains 8-bit data associated with each pixel.</p><p id="28e40280-961f-4078-9eda-b27d2740cfe3" class="">It has the same size as the frame buffer, and is usually stored with the depth buffer.</p><p id="785c1fc5-1ac7-4a38-bae5-e37d6eeae051" class="">The stencil buffer is used to control how pixels are rendered to achieve different effects such as masking.</p><p id="7f0b7e51-3607-4460-bea1-c72abe1d5fd0" class="">This operation is called stencil testing.</p><h2 id="35cb24f0-c3dc-44f9-8310-7b8fcbd8ccdd" class="">Double-Buffering</h2><p id="331882d8-f96b-4bc3-8c65-50f9fcc45c16" class="">To avoid flicking when presenting the frame buffer to the display, applications use a technique known as double-buffering.</p><p id="1e1235a6-52bf-45a2-b463-820b3c97aa1e" class="">When using double-buffering, a front buffer and a back buffer are presented to the display in succession (swap) during a vertical retrace of the display.</p><p id="24b08402-0e94-47b3-a42f-5ed6559875e6" class="">Additional back buffers can be created to create a swap chain.</p><h1 id="d3f5d915-cdf7-4a2a-a3b8-6a4e51bdca13" class="">Rendering Pipeline</h1><p id="09864e42-2939-4664-a42a-615349f42cfb" class="">The main function of the graphics rendering pipeline is to render a 2D image based on 3D objects, a camera, lights, and other graphics elements.</p><p id="10da72a1-3375-4e0b-a539-29e7eb7c0384" class="">The rendering pipeline is composed of several stages.</p><ul id="d3d7f229-10f0-42d0-88bc-8efe84b83e6e" class="bulleted-list"><li>Application</li></ul><ul id="48ab1c69-ef03-4b96-97a8-e7f8dcd077d1" class="bulleted-list"><li>Geometry</li></ul><ul id="65cf72d9-f1ec-4e13-b029-6e885aad47b9" class="bulleted-list"><li>Rasterization</li></ul><ul id="1e074760-f840-4e5a-8163-a67e42af1f56" class="bulleted-list"><li>Pixel</li></ul><h2 id="1809dcb2-4dcc-4440-b5e5-81f03ab1c5d8" class="">Application</h2><p id="0747b771-71fb-4c99-bebc-6cc5b3d5fd1d" class="">Prepare the geometry for the Geometry Processing stage.</p><p id="8202ea6e-f7a3-4630-a401-56e837a16d47" class="">This stage is executed by one ore many CPU cores.</p><p id="aa40e984-91bc-423f-94b8-efe89c8434c8" class="">Some operations can be executed on the GPU using compute programs (GPGPU).</p><h2 id="387075cb-3818-45e3-951e-c320591722d1" class="">Geometry Processing</h2><p id="ce25ceac-ba00-4168-aa46-5e442e831708" class="">Process the rendering primitives (points, lines, triangles).</p><p id="d90d0da3-15c5-4406-a427-5c9bde0a57f4" class="">The stage is divided in other functional stages.</p><h3 id="3cb49a62-fb42-4339-8ab6-29b6a06959df" class="">Vertex Shading</h3><ul id="bff2b015-eb10-427f-99fd-ac2da3a5bc26" class="bulleted-list"><li>This stage is fully programmable.</li></ul><ul id="1e025c0c-0393-44d6-aab3-a09bd33cab25" class="bulleted-list"><li>Perform per-vertex operations.</li></ul><h3 id="9105aab4-5e56-410f-ac6d-faefd82542ae" class="">Projection</h3><ul id="d783e3c1-999c-46f2-8399-2d66e0d56ed8" class="bulleted-list"><li>The input vertices are expressed in model space, which means they are relative the center of the model.</li></ul><ul id="947a2006-ea9d-433b-bada-dc472cbe0b1f" class="bulleted-list"><li>The vertices are converted into view space where the camera is at the center.
+The view space is expressed either as an orthographic or perspective projection.</li></ul><h3 id="59307444-9907-45f0-aa18-873dd0d5d527" class="">Clipping</h3><ul id="405cec1b-f76c-4454-8958-b30b4c2e8362" class="bulleted-list"><li>This stage is fixed and is not programmable.</li></ul><ul id="94e919c9-538f-4c4a-b731-bedb0b992623" class="bulleted-list"><li>The view volume is clipped into a unit cube.</li></ul><ul id="f864617b-6602-4b5a-870f-c07f18d7dc50" class="bulleted-list"><li>The primitives outside the unit cube are discarded.</li></ul><ul id="6af4bd81-a6f6-4880-91a2-2bb358029afe" class="bulleted-list"><li>The primitives inside the unit cube are processed further. </li></ul><ul id="30cdece0-5de8-43bf-8770-bf1577e63308" class="bulleted-list"><li>The primitives that are partially into the view volume are clipped against the unity cube.<ul id="5154e8f1-3f8f-4b45-b78b-c06429088bd3" class="bulleted-list"><li>Vertices outside the unit cube are discarded.</li></ul><ul id="7ed09442-b224-48fd-a498-e525a7b0b314" class="bulleted-list"><li>New vertices are generated (from the intersection with the unit cube).</li></ul></li></ul><ul id="dd7828cb-c61b-4c74-a486-6cca93c4cd47" class="bulleted-list"><li>Screen Mapping<ul id="68d27fe5-ddd4-49b9-a331-be2ca33b89a4" class="bulleted-list"><li>This stage is configurable.</li></ul><ul id="838d2c51-e50a-41f7-b9a6-7f03e3cce02a" class="bulleted-list"><li>The 3D coordinates of the primitives are converted into screen coordinates.</li></ul></li></ul><h3 id="6bca7bc4-d940-453b-acd6-c2dbf7a0d074" class="">Optional Vertex Processing</h3><ul id="c337e1d4-9274-4d6c-84d0-3160d5dd614c" class="bulleted-list"><li>Tesselation<ul id="c6ff2753-9fdd-4d60-ad63-33c0387defb8" class="bulleted-list"><li>Generate new vertices and triangles to process more complex curved shapes expressed as patches.</li></ul><ul id="cfa9fa40-a748-4440-bcfe-9b8cdf937d13" class="bulleted-list"><li>Consists of other stages: hull, tesselator, and domain.</li></ul></li></ul><ul id="230cb07f-a429-47cb-9f56-0403f4d29b7e" class="bulleted-list"><li>Geometry Shading<ul id="43873945-c75a-4817-8fe8-9ed126a097c2" class="bulleted-list"><li>This stage is fully programmable.</li></ul><ul id="a497deea-bed3-465a-a931-f434d461aae8" class="bulleted-list"><li>Generate new vertices and triangles.</li></ul></li></ul><ul id="1704b870-c057-4d97-a2d4-c64540019b0d" class="bulleted-list"><li>Stream Output<ul id="9550dc7c-3765-4550-8775-893f332b67ad" class="bulleted-list"><li>Output processed vertices to the CPU or GPU for further processing.</li></ul><ul id="9e5c257c-16dd-45b9-b70e-29bbd1a7c977" class="bulleted-list"><li>Useful when performing simulations on the GPU (ie. particle simulations).</li></ul></li></ul><h2 id="c2d17642-dd6c-48a3-99b3-6ce8b602a84b" class="">Rasterization</h2><p id="fe98d889-fbdf-4e11-aa9e-d8a4e5e209fb" class="">Conversion of 2D vertices in screen space into colored pixels on the screen.</p><p id="a62e04b1-8ac4-4962-aa0b-291aeae7e16d" class="">This stage is fixed and is not programmable.</p><ul id="0758e971-2c20-4532-9451-68e7465639c2" class="bulleted-list"><li>Triangle Setup<ul id="82dea0dd-e3a1-4dbf-b546-8a9767c08c55" class="bulleted-list"><li>Interpolation of shading data.</li></ul></li></ul><ul id="eb0e3be2-428f-431c-a168-57501e904d91" class="bulleted-list"><li>Triangle Traversal<ul id="3ef6285b-9288-4aa5-8c18-55609b7fce40" class="bulleted-list"><li>Generate fragments (interpolated among the three triangle vertices).</li></ul></li></ul><h2 id="318bc934-da25-43b5-95dd-ae585506fcf2" class="">Pixel Processing</h2><ul id="7acc73e3-aed4-4654-8863-bb873f30f25a" class="bulleted-list"><li>Pixel Shading<ul id="d2649342-8a30-4521-92cf-9377429ba6b4" class="bulleted-list"><li>This stage is fully programmable.</li></ul><ul id="e3e2149e-fa54-47a3-a8d4-2e9cc01496ca" class="bulleted-list"><li>Per-pixel operations are performed such as texturing to produce one or more colors.</li></ul></li></ul><ul id="05d59366-62df-4d4b-8a92-d67ed7633ebc" class="bulleted-list"><li>Merging<ul id="abeb6d79-4dad-4b88-896e-04b9c829e513" class="bulleted-list"><li>This stage is fixed but is configurable.</li></ul><ul id="13c7b9d6-fb4f-4908-b43a-056a43626a3d" class="bulleted-list"><li>The pixels are stored in the color buffer.</li></ul><ul id="eba93598-0258-4798-b065-b1fada9a3e71" class="bulleted-list"><li>The merging stage combines the fragment color with the color currently stored in the color buffer.</li></ul></li></ul><h1 id="9296caea-62d6-4367-b199-18bc4aa2c64c" class="">Draw Calls</h1><p id="9b0f9850-5e84-4796-9658-cedfec67dfd9" class="">An optimized game will have a minimum number of draw calls to render a frame. Typically, there are about 1000 draw calls per frame.</p><p id="6f5e4284-579f-4494-b832-313e76d2a6d2" class="">Each draw call requires a set of render states (shaders, textures, render modes...).</p><p id="d34a3b5f-d21d-4402-966c-73094b157cfe" class="">Changing render states can be expensive for the CPU.</p><ul id="f4f32df1-a439-4b6d-ac8d-4ea4567480f4" class="bulleted-list"><li>validation</li></ul><ul id="b7996de2-66a2-42dd-a8ef-20c0f7403655" class="bulleted-list"><li>translation to hardware commands</li></ul><ul id="7c36f3e5-3629-43ad-938a-7fb474d4143e" class="bulleted-list"><li>shader compilation</li></ul><ul id="3c668137-4060-4091-91d6-6948b9c469a3" class="bulleted-list"><li>sending data to the GPU</li></ul><h1 id="f3e0f824-e1a2-4241-b23f-bac0a4ef3b6e" class="">Frame Time</h1><p id="5eb3c196-a984-48d4-af94-895f54920b0d" class="">Typically, a game targets a frame rate of 30 FPS (33.3ms/frame) or 60 FPS (66.7ms/frame).</p><p id="57d12b17-4679-4fdd-99a6-6cd7e8682b6a" class="">In a balanced timeline, the CPU and GPU utilization is 100% and their workloads are offset so that the GPU works on frame N+1 while the GPU works on frame N.</p><p id="92efab69-b872-400a-b643-f6c688c3c742" class="">In a CPU bound frame, the CPU will take more time than the GPU and the GPU will be idle for some time. Giving more work to the GPU is not a simple solution as it also requires more work for the CPU and the frame rate is already fixed.</p><p id="d04ff925-ab38-42c7-8181-eef5c847ff53" class="">By optimizing the number of draw calls and changes of render states, we can reduce the CPU workload.</p><h1 id="3b8e9b87-dd86-47f6-9f3c-3049e6c94ad5" class="">Camera</h1><h2 id="fd3acd55-3ec7-4ed0-bc64-2c80d5b62601" class="">Perspective Projection</h2><p id="62faea77-8ec2-4fdf-973c-ceec20ea6532" class="">In a perspective projection, objects further away from the camera are smaller than objects closer to the camera. Parallel lines may converge at the horizon.</p><p id="37b327cb-94ed-4c5f-9b5b-fcd0e10a4c82" class="">The view volume of a perspective projection is a truncated pyramid with a rectangular base known as the view frustum.</p><p id="2928fdb5-8ff3-4664-b69f-0fc4e5f36b0c" class="">The following parameters are used to generate the perspective transform of a camera.</p><ul id="272f0cda-f4bc-4d8a-bd2c-21304e9a31e9" class="bulleted-list"><li>Field of view (FOV)</li></ul><ul id="f7287172-62e6-470f-882b-130403a569d4" class="bulleted-list"><li>Aspect ratio</li></ul><ul id="148a0f2d-196d-42d6-a40b-c106111bebce" class="bulleted-list"><li>Near clipping plane (Near Z)</li></ul><ul id="9c4cf9fb-a766-4496-bf46-dfd4a3d41d96" class="bulleted-list"><li>Far clipping plane (Far Z)</li></ul><p id="cbbe15d4-ca88-4525-961a-338481daa5ba" class="">The field of view is the extent of the scene that is seen on the screen at any given moment.</p><p id="cfb64eed-02a7-4193-af3e-22859f28bb83" class="">The aspect ratio is defined by the ratio between the screen width and screen space.</p><p id="94a2e0d3-8ad4-4c8a-94a4-036ec261e89e" class="">The objects closer than the near clipping plane are not rendered.</p><p id="72cbebd5-bee7-4534-acf3-995d2f95956c" class="">The objects further away than the far clipping plane are not rendered.</p><h2 id="4fc2618f-0420-4dc1-83d2-c7b175466e3c" class="">Orthographic Projection</h2><p id="b03a7ce7-47f9-418c-a182-d2f8c2f34fcb" class="">In an orthographic projection (or parallel projection), parallel lines remain parallel after the transformation.</p><p id="d6f95703-b6ec-49e6-aad8-084ade24366d" class="">The view volume of an orthographic projection is a rectangular box.</p><h2 id="6b62012f-f6fd-4fb9-8c76-8a659955a73e" class="">Projection Transformation</h2><p id="67d0b64f-97eb-4649-bd22-566e3d1ddbb9" class="">The projection transformation takes a 4x4 matrix that represent a perspective projection or an orthographic projection, and converts it into a unit cube.</p><p id="1b4611f0-6bc1-4ca3-a81c-71fdbd2a9aef" class="">Transformed vertices are in clip coordinates, which are homogeneous coordinates.</p></div></article></body></html>
