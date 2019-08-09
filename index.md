@@ -174,9 +174,29 @@ Introduction to the Graphics Pipeline and the different stages.
 🏭[Graphics Pipeline](Game/Graphics Pipeline.html){:target="_blank"}
 
 
+Introduction to a Material System.
+
+💎[Material System](Game/Material System.html){:target="_blank"}
+
+
+Gamma correction and linear workspace.
+
+🌈[Gamma](Game/Gamma.html){:target="_blank"}
+
+
+Overview on texture techniques.
+
+🖼[Texture](Game/Texture.html){:target="_blank"}
+
+
 Introduction to Shader programming.
 
-🎨[Shaders](Game/Shader.html){:target="_blank"}
+💡[Shader](Game/Shader.html){:target="_blank"}
+
+
+Overview on Lighting models.
+
+💡[Lighting](Game/Lighting.html){:target="_blank"}
 
 # 🎮 Game Runtime
 
@@ -213,25 +233,6 @@ Review of Object Models for games.
 
 🌍[Object Model](Game/Object Model.html){:target="_blank"}
 
-
-Gamma correction and linear workspace.
-
-🌈[Gamma](Game/Gamma.html){:target="_blank"}
-
-
-Overview on Lighting models.
-
-💡[Lighting](Game/Lighting.html){:target="_blank"}
-
-
-Overview on Textures.
-
-🖼[Texture](Game/Texture.html){:target="_blank"}
-
-
-Overview on Shader programs.
-
-💡[Shader](Game/Shader.html){:target="_blank"}
 
 # 🎨 Game Editor
 
