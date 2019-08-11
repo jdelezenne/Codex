@@ -130,6 +130,12 @@ CMake is one of the most popular open-source cross-platform build toolset, and i
 
 🔨[CMake](Software/CMake.html){:target="_blank"}
 
+## Windows
+
+Introduction to COM. Useful when working with COM libraries such as DirectX and WinRT.
+
+[COM](Software/COM.html){:target="_blank"}
+
 # Core
 
 A review of SIMD on different platforms, and best practices on their usage.

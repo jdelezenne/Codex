@@ -1,0 +1,696 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>COM</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5092f1fb-e0df-4c63-a122-910ff98fddc1" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="COM/microsoft.ico"/></div><h1 class="page-title">COM</h1></header><div class="page-body"><h1 id="d588bb03-1900-4db4-a77c-06723a2a35fb" class="">Overview</h1><p id="9363a314-89a0-4d4a-88ac-554c205381ee" class="">Microsoft&#x27;s <em>Component Object Model</em> (COM) is a binary standard for creating reusable software components.</p><p id="f77e8f89-186a-43e5-b7ec-a11bcaf6e583" class="">It is used in many libraries that are useful in game development:</p><ul id="1c15de26-8554-4485-9d08-50ceceaeead8" class="bulleted-list"><li>Windows Runtime (WinRT)</li></ul><ul id="50be24db-e209-41e2-979b-3215d202a681" class="bulleted-list"><li>Windows Imaging</li></ul><ul id="5725c867-8243-48a2-b991-a3be86fe6d2a" class="bulleted-list"><li>DirectX<ul id="bda95633-6c9f-4ed4-a889-a3946ce683f1" class="bulleted-list"><li>Direct3D</li></ul><ul id="ae1c3d95-c18d-46cb-97b3-b58cd7391afc" class="bulleted-list"><li>Direct2D</li></ul><ul id="3fd96a96-5eb5-4b3f-9808-fb045e94de1c" class="bulleted-list"><li>DirectWrite</li></ul></li></ul><h1 id="3a027d00-43cb-40bb-97a3-ad84ad443970" class="">History</h1><p id="e05c8c73-3ad4-4f72-98de-7d18d9520035" class="">1987 – Dynamic Data Exchange (DDE) is introduced for inter-process communication on Windows 2.0.</p><p id="4c13faf4-bd50-4527-8044-8b3405f9e38b" class="">1991 – Object Linking and Embedding (OLE) is introduced for compound documents. OLE was built on top of DDE and introduced with the release of Word and Excel.</p><p id="592c5f14-2331-4624-b4c3-a8e611204f8b" class="">1993 – COM is introduced as a replacement for DDE for the development of software components. OLE 2.0 was introduced with Windows 3.1 and built on top of COM.</p><p id="15b890ce-d403-42f1-b19c-712300d540e7" class="">1995 – DirectX is introduced as a COM API for multimedia and games.</p><p id="7cc8569a-9ea2-4634-b2d1-c44f2d91971b" class="">1996 – ActiveX is introduced as a COM API for internet applications built on OLE.</p><h1 id="9fb2c275-70ef-4661-a1c3-fc0ad1fdb885" class="">Principles</h1><ul id="5a0a2900-aeec-4ecc-a822-42186ad506c5" class="bulleted-list"><li>Enables inter-process communication in distinct languages.</li></ul><ul id="74a152a3-d681-475c-ab3c-04f1d73eee4b" class="bulleted-list"><li>Provides a stable application binary interface (ABI).</li></ul><ul id="a4f84744-d0ef-4bee-8559-de8d77c4c8f6" class="bulleted-list"><li>Enables well-defined interfaces that are separated from the implementation.</li></ul><ul id="b37cbdeb-c0e5-415d-a51b-aff85056f8eb" class="bulleted-list"><li>Memory management through reference counting.</li></ul><h2 id="3daf2293-4627-4784-b84a-ecab4c4e4a95" class="">Applications</h2><p id="ecd29b37-10c5-4688-b602-22bf5574cdd0" class="">COM maintains a strict separation between interface and implementation.</p><p id="8f8723bf-7017-467a-a987-4cebd643b7ed" class="">COM applications are built using components that are identified by <em>class identifiers</em> (CLSIDs).</p><p id="dc57be56-7fe1-4fc1-92ae-f0ac340d85dd" class="">CLSIDs are Globally Unique Identifiers (GUIDs), which are unique 128-bit number.</p><p id="c11e0790-c7fb-4ae9-970a-09e1c6d12afc" class="">A COM component exposes its functionality through one or more interfaces that are identified by <em>interface identifiers</em> (IIDs), which are also GUIDs.</p><p id="d0368aa6-0d15-402f-91d1-10fb309b4fe6" class="">A COM class is a concrete implementation of one or more interfaces.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c2d1718f-12ac-4c9b-99a8-f0bcfb1810a8"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Two COM objects can implement the same interface, and one object can implement many interfaces.</div></figure><h2 id="a8a0891d-1091-4df0-badd-9509a5b8f4f4" class="">Interfaces</h2><p id="ded7d7ce-72f1-44a9-9e32-2d229a87f577" class="">COM is based on the concept of <em>interfaces</em> that are equivalent to interfaces in C# or Java, or to pure virtual classes in C++.</p><p id="20dbe40e-2a14-4d4e-acbd-fa837453dc3e" class="">To represent COM types, libraries contain COM interfaces that are defined using a language called <em>Interface Definition Language</em> (IDL).</p><p id="536e3a46-4934-455c-b00f-1fb0f3f02021" class="">IDL files define metadata for COM types in a language independent manner.</p><p id="cc620f93-6f3b-441c-a019-c9697d79f47f" class="">IDL files are processed by the IDL compiler, which generates C++ header files and type library (TLB) files.</p><p id="431d812f-bdd2-47cb-9206-e24325f6825c" class="">TLB files contain metadata that can be processed by frameworks such as .NET.</p><p id="c02c6dad-5d97-4bb9-a6d4-855a9f78faaa" class="">Every COM component implement the <code>IUnknown</code> interface, which provides reference counting and type conversion.</p><h1 id="92f70c6f-19b8-4ea3-90d2-09ec4347f7ba" class="">Reference Counting</h1><p id="7756a80e-a07a-43a0-a635-09a22392593b" class="">COM manages memory using <em>reference counting</em>.</p><p id="c11a6dc1-fc15-4717-bf37-d3039f558183" class="">Applications indicate when they are using an object and when they are done, and objects delete themselves when they are no longer needed.</p><p id="9101b926-90e6-4c0e-8f9b-4d46a7c123f7" class="">COM objects maintain an internal count known as <em>reference count</em>.</p><ul id="f0d4fb11-df1e-4cfb-857b-90d5b210dc3c" class="bulleted-list"><li>When the object is first created, its reference count is 1.</li></ul><ul id="52e737ef-ad10-47d7-a0c9-8af8435fa629" class="bulleted-list"><li>When the reference to an object is duplicated, the reference count is incremented by one.</li></ul><ul id="5f454b1f-15cd-4e43-babb-df493c8fe3c2" class="bulleted-list"><li>When a reference is released, the reference count is decremented by one.</li></ul><ul id="992724b1-2e65-465e-bed4-4e190b168df3" class="bulleted-list"><li>When the reference count of the object reaches zero, the object deletes itself.</li></ul><h1 id="cf6f509e-9208-4a65-831b-a6ce037c1743" class="">Threading Model</h1><p id="fac96eed-ed4b-4aed-9647-bb9c5d49590f" class="">In COM, the threading model is handled through the concept of <em>apartments</em>.</p><p id="34285a9a-33ca-4eda-9b63-e62d61f24a1f" class="">COM objects are divided into groups called apartments.</p><ul id="0a5235ed-e67d-4f62-bb43-d220fb421bec" class="bulleted-list"><li>A COM object is owned by a single apartment.</li></ul><ul id="455d00af-40ce-4291-ac1e-8c6f2f8a8133" class="bulleted-list"><li>An apartment can be either single-threaded (STA), or multi-threaded (MTA).</li></ul><h2 id="17bf2663-945c-4b8f-82fd-df93007b5ce2" class="">Single-threaded Apartment</h2><p id="e1c28102-634a-4450-843c-d5d456429f4a" class="">COM automatic synchronize objects across multiple threads (slower).</p><p id="20710070-3f8e-493f-853d-664ad7ab94fb" class="">Each single-threaded apartment must have a message loop.</p><p id="e84f7499-c9ef-4b26-8c2d-58517fedefab" class="">COM creates a hidden window using the Windows class &quot;<em>OleMainThreadWndClass</em>&quot; in each single-threaded apartment.</p><h2 id="56c5890e-b8a9-4960-87ca-1b003886d463" class="">Multi-threaded Apartment</h2><p id="9c8ed303-0f59-4af3-8473-4ebbb98c34f2" class="">COM does not perform any synchronization (faster).</p><p id="178f7dce-56b0-49ef-9c0d-6c98e0be6bd0" class="">The application needs to handle the synchronization.</p><h1 id="04cc9062-7465-45e9-b6e4-e5f7e72c1d70" class="">COM Library</h1><p id="c4a50caf-3de3-4e05-b25c-466b52095e91" class="">An application that uses COM must both initialize and uninitialize the COM library.</p><p id="cb0249e9-31f3-43d3-9b65-af40239458f7" class="">To initialize the COM library, call the <a href="https://docs.microsoft.com/en-us/windows/win32/api/objbase/nf-objbase-coinitialize"><code>CoInitialize</code></a> or <a href="https://docs.microsoft.com/en-us/windows/win32/api/combaseapi/nf-combaseapi-coinitializeex"><code>CoInitializeEx</code></a> function.</p><p id="da763f51-7493-444c-80f0-efa417c4556c" class="">The <a href="https://docs.microsoft.com/en-us/windows/win32/api/objbase/nf-objbase-coinitialize"><code>CoInitialize</code></a> function initialize COM with a single-threaded apartment model.</p><p id="5f745ff0-a351-4449-bd27-fd272843f441" class="">The <a href="https://docs.microsoft.com/en-us/windows/win32/api/combaseapi/nf-combaseapi-coinitializeex"><code>CoInitializeEx</code></a> function provides an additional parameter to specify the apartment model.</p><pre id="0bd9267d-1715-4c95-b90a-fd70c810a939" class="code"><code>HRESULT CoInitializeEx(
+  LPVOID pvReserved,
+  DWORD  dwCoInit
+);</code></pre><ul id="922f1986-f24a-45ea-8316-06c38aafba97" class="bulleted-list"><li><code>pvReserved</code> is always <em>null</em>.</li></ul><ul id="9e2ec7dd-3806-40d2-a6c0-86e1f9893c41" class="bulleted-list"><li><code>dwCoInit</code> is set to a <a href="https://docs.microsoft.com/windows/desktop/api/objbase/ne-objbase-tagcoinit"><code>COINIT</code></a> enumeration value.</li></ul><p id="bcd7f7d6-d780-4708-9c4d-388281d37f13" class="">There are two common values for the <code>dwCoInit</code> parameter.</p><ul id="1bfa7614-6fd7-4311-ac3c-ed9e03caccef" class="bulleted-list"><li><code>COINIT_APARTMENTTHREADED</code> – Single-threaded Apartment (slower).</li></ul><ul id="92b3c2e8-168a-4497-872e-e32b9560f74b" class="bulleted-list"><li><code>COINITBASE_MULTITHREADED</code> – Multi-threaded Apartment (recommended).</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b4d4b98a-eeea-4369-a211-a8eca9ff8bc2"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">On WinRT, you can call <a href="https://docs.microsoft.com/en-us/windows/win32/api/roapi/nf-roapi-initialize"><code>Windows::Foundation::Initialize</code></a> instead which initializes both the Windows Runtime and the COM library.</div></figure><p id="3fe979f3-a2b5-4172-8d1a-fc7e699f5028" class="">During the applications shutdown, COM must be uninitialized by calling the <a href="https://docs.microsoft.com/en-us/windows/desktop/api/combaseapi/nf-combaseapi-couninitialize"><code>CoUninitialize</code></a> function.</p><pre id="d4286a39-9af6-4936-9d58-226497723d3f" class="code"><code>void CoUninitialize();</code></pre><h1 id="08e0a193-73cd-4d8f-8c1a-a70882290d7a" class="">Error Handling</h1><p id="76ef3b49-c28f-4783-8620-e024461864e1" class="">The COM functions that need to indicate success or failure return a value of type <code>HRESULT</code>.</p><p id="bff14a22-b9a5-4399-89e7-04af16d9e4ef" class=""><code>HRESULT</code> is a 32-bit integer in which the high-order bit indicates success (1) or failure (0).</p><p id="33bb1d7b-520f-4aa7-95f1-3021a4c3baeb" class="">To check whether a COM method succeeds, the Windows SDK provides two macros: <code>SUCCEEDED</code> and <code>FAILED</code>.</p><ul id="cadb24c2-0431-47ac-a4ca-1388df7a4cca" class="bulleted-list"><li>The <a href="https://docs.microsoft.com/en-us/windows/win32/api/winerror/nf-winerror-succeeded"><code>SUCCEEDED</code></a> macro returns <code>TRUE</code> if an <code>HRESULT</code> is a success code, and <code>FALSE</code> if it is an error code.</li></ul><ul id="49dedac0-97c9-425e-95bc-7d8dbeb21afb" class="bulleted-list"><li>The <a href="https://docs.microsoft.com/en-us/windows/win32/api/winerror/nf-winerror-failed"><code>FAILED</code></a> macro tests for failure.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4c193057-d5da-4291-bbac-dba3f43a0468"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Using these macros is recommended instead of comparing the result with <code>S_OK</code>, or only a specific error code as there may be multiple success codes and failure codes.</div></figure><h2 id="47bffe01-623d-4c52-867d-1576fd812b28" class="">Code</h2><pre id="3ac1c4b0-a1c0-43db-b0ee-554f232af78d" class="code"><code>HRESULT hr = CoInitializeEx(nullptr, COINITBASE_MULTITHREADED);
+if (FAILED(hr))
+{
+    // Handle the error
+}
+else
+{
+		// Success
+    ...
+
+		CoUninitialize();
+}</code></pre><h1 id="cf682459-0185-4c60-a45f-d84396626cad" class="">COM Objects</h1><p id="8486757e-516b-436a-a543-a86f804366e1" class="">After initializing the COM library, an application can create an instance a COM object that implements a COM interface.</p><p id="30035b9b-be49-4675-9119-42cabd2b2a82" class="">In COM, an object or an interface is identified by a <em>globally unique identifier</em> (GUID) which is a 128-bit number.</p><p id="c8dfdf46-0492-499e-bbb2-be3b45b5dfc7" class="">This unique identifier is known as a <em>class identifier</em> (or CLSID) for classes, and as an interface identifier (or IID) for interfaces.</p><p id="757e8060-37e8-4bcc-b9b7-3a20e1669b3e" class="">To create a COM object, you call the <a href="https://docs.microsoft.com/en-us/windows/win32/api/combaseapi/nf-combaseapi-cocreateinstance"><code>CoCreateInstance</code></a> function with a CLSID and an IID.</p><pre id="16a5b56e-f7c1-4fff-82ed-46670764f1c3" class="code"><code>HRESULT CoCreateInstance(
+  REFCLSID  rclsid,
+  LPUNKNOWN pUnkOuter,
+  DWORD     dwClsContext,
+  REFIID    riid,
+  LPVOID    *ppv
+);</code></pre><ul id="eebdd73d-1d8e-4a72-96d6-e0196a6b79f8" class="bulleted-list"><li><code>rclsid</code> is the CLSID associated with the class to create.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5a88afbf-9e33-41c8-98b2-1419556abd65"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">CLSIDs are symbol definitions in the header files of their corresponding library.</div></figure><ul id="23600d64-48ad-4269-ba39-0288a96640e7" class="bulleted-list"><li><code>pUnkOuter</code> is set to <em>null</em> (see the <a href="https://docs.microsoft.com/windows/desktop/com/aggregation">COM documentation</a> for more information).</li></ul><ul id="052cb4f0-30c0-4bea-965c-b25068bbb127" class="bulleted-list"><li><code>dwClsContext</code> is a flag that indicates whether the object runs in the same process as the application.</li></ul><p id="dd6a7542-ff76-44aa-93b9-082cb8138dfb" class="">COM supports in-process, and out-of-process objects.</p><p id="ddd29797-ffa9-4d6c-b9ff-ef767b5f428c" class="">When using libraries such as DirectX and WinRT, objects are always in-process objects.
+The corresponding flag is <code>CLSCTX_INPROC_SERVER</code>.</p><ul id="a086fddf-8b25-4113-9452-f71f77ebaf15" class="bulleted-list"><li><code>riid</code> is the IID associated with the interface to use.</li></ul><ul id="d3f9712e-374d-4c86-8a69-137e19f5af17" class="bulleted-list"><li><code>ppv</code> receives a pointer to the interface.</li></ul><h2 id="5cab0a73-b2d2-45ed-86b4-bbac20eabc9e" class="">Code</h2><p id="df82b3e7-a9f8-4e98-99df-9bfb84dd996c" class="">This sample code creates a COM object that implements the <code>IWICImagingFactory</code> interface from the Windows Imaging API.</p><ul id="21f6516e-60dd-4088-9650-5c1d32189b84" class="bulleted-list"><li>The CLSID is <code>CLSID_WICImagingFactory2</code>.</li></ul><pre id="33968ff1-4ea3-450d-bef9-eb0660d12b4e" class="code"><code>IWICImagingFactory* wicFactory;
+
+HRESULT hr = CoCreateInstance(
+		CLSID_WICImagingFactory2,
+		nullptr,
+		CLSCTX_INPROC_SERVER,
+    IID_IWICImagingFactory2,
+		reinterpret_cast&lt;void**&gt;(&amp;wicFactory));
+
+if (SUCCEEDED(hr))
+{
+    // Use the object
+    ...
+}</code></pre><h2 id="9fc1d270-0891-490f-afe5-3bd8c2be5f36" class="">Best Practices</h2><h3 id="86fb6490-acdb-4924-b453-f34c98cb4f1a" class="">IID</h3><p id="67624d81-7423-4e35-897b-f6732ccdf983" class="">Sometimes, referencing the IID for an interface can cause linking errors in the GUID is a constant declared with external linkage.</p><p id="ef224e9e-8229-4934-a9fe-4ecca65d2798" class="">To avoid the need to link a static library, you can use <code>__uuidof</code> operator which is a Microsoft language extension.</p><pre id="afd0e2d4-0180-48ea-a660-17148d423b6e" class="code"><code>// Instead of IID_IWICImagingFactory2
+__uuidof(IWICImagingFactory2)</code></pre><h3 id="e244069e-04ff-4751-bd44-0456a437e770" class="">Coercion</h3><p id="e0012017-782f-4951-bae4-624bcb8386d4" class="">The type of <code>ppv</code> is <code>void**</code> and the caller must coerce the address of the pointer to a <code>void**</code> type.</p><p id="51548cc5-992c-41a6-aba2-a25ddaee6e78" class="">It can be done with <code>reinterpret_cast&lt;void**&gt;</code> but it creates the potential for a type mismatch.</p><p id="0fea47a5-8ad6-4659-b096-1776bc1f6961" class="">The <a href="https://docs.microsoft.com/en-us/windows/win32/api/combaseapi/nf-combaseapi-iid_ppv_args"><code>IID_PPV_ARGS</code></a> macro helps to avoid this error.
+The macro automatically inserts the IID for the interface identifier, so it is guaranteed to match the pointer type.</p><p id="77debfdf-8784-4568-8be2-f4dfdd8222f4" class="">The macro is used in place of the last two parameters.</p><pre id="4c49203b-351d-426e-b048-0f459642d522" class="code"><code>IWICImagingFactory* wicFactory;
+
+HRESULT hr = CoCreateInstance(
+		CLSID_WICImagingFactory2,
+		nullptr,
+		CLSCTX_INPROC_SERVER,
+    I<strong>ID_PPV_ARGS(&amp;wicFactory)</strong>);
+
+...</code></pre><h1 id="b3af825e-1241-4acd-8fff-09ba4c80abd0" class="">IUnknown Interface</h1><p id="e8973421-63af-42ff-8fdc-42f193a5b734" class="">Every COM interface must inherit from an interface named <a href="https://docs.microsoft.com/windows/desktop/api/unknwn/nn-unknwn-iunknown"><code>IUnknown</code></a>.</p><p id="f8fcf16b-ed86-4b75-9eef-068255ed3199" class="">This interfaces supports reference counting, and obtaining instances to multiple interfaces from the same object instance.</p><p id="9cdad3d4-8ec7-47fc-a308-7ae6268828f4" class="">The interface contains only three methods:</p><ul id="bd53230f-4ef6-4047-8f9a-cba89c7a8f9a" class="bulleted-list"><li><code><a href="https://docs.microsoft.com/windows/desktop/api/unknwn/nf-unknwn-iunknown-queryinterface(q_)">QueryInterface</a></code> enables a program to query the capabilities of the object.</li></ul><ul id="25cca323-2bcc-41f3-9584-d02b638ecb0d" class="bulleted-list"><li><code><a href="https://docs.microsoft.com/windows/desktop/api/unknwn/nf-unknwn-iunknown-addref">AddRef</a></code> increments the reference count on an object.</li></ul><ul id="ecd1366e-6bf9-4391-82ad-298175e514d8" class="bulleted-list"><li><code><a href="https://docs.microsoft.com/windows/desktop/api/unknwn/nf-unknwn-iunknown-release">Release</a></code> decrements the reference count on an object.</li></ul><pre id="fdbf899d-fb14-4231-9cd3-145b9b076b69" class="code"><code>struct IUnknown
+{    
+    virtual HRESULT STDMETHODCALLTYPE QueryInterface( 
+        REFIID riid,
+        void   **ppvObject) = 0;
+    
+    virtual ULONG STDMETHODCALLTYPE AddRef() = 0;
+    
+    virtual ULONG STDMETHODCALLTYPE Release() = 0;
+};</code></pre><h2 id="74338b9a-7023-4fdc-89ba-fab1a4bfe64f" class="">Interfaces</h2><p id="af3f1314-e552-4fe6-84bf-0a976ac26fc6" class="">In COM, one object can implement many interfaces.</p><p id="8618899c-aeb3-4f8c-ac74-3d45e5a8fa27" class="">However, the ability to cast an object instance to a specific interface is a language-dependent feature.</p><p id="cb27d3a8-93bb-48fd-afe7-af9bbf7056ee" class="">Therefore, COM provides the <code>QueryInterface</code> function to retrieve a specific interface from an object instance using an interface identifier.</p><p id="a9302e3e-5bfc-46f8-9cf4-e1a9c33092a7" class="">The parameters are similar to the <code>CoCreateInstance</code> function.</p><ul id="e9e60eb1-0dc1-4302-9d87-359caa83cce4" class="bulleted-list"><li><code>riid</code> is the IID associated with the interface to use.</li></ul><ul id="19ff7f7f-812e-49b4-ab11-2cbf3fe39188" class="bulleted-list"><li><code>ppvObject</code> receives a pointer to the interface.</li></ul><h2 id="01b8e11a-8d1a-4628-a04c-d98295722bd2" class="">Reference Counting</h2><p id="5c694f81-fd82-4be8-84ba-1ee53ad06f98" class="">The <code>AddRef</code> and <code>Release</code> functions support the referencing counting functionality.</p><p id="1c80bc6f-474f-45d6-ae7a-cef2169f449c" class="">After creating an object instance with <code>CoCreateInstance</code>, the reference count of the object is set to 1.</p><p id="d059daf9-14bf-4ffb-83c9-b64a077ae326" class="">Therefore, you must call <code>Release</code> when you are done using the pointer.</p><h3 id="2bb9c33a-a580-44e5-bad8-1a7d92c566cc" class="">SafeRelease</h3><p id="466a6fd7-f2f6-49d1-8432-b3ed17ab3f12" class="">To release a pointer safely, a helper function can be used to check if the pointer is <em>null</em> before calling <code>Release</code>, and then set the pointer to <em>null</em>.</p><pre id="e9d03498-3322-4543-b71c-f9bb44a5b774" class="code"><code>template &lt;class T&gt;
+void SafeRelease(T** ptr)
+{
+    if (*ptr)
+    {
+        (*ptr)-&gt;Release();
+        *ptr = nullptr;
+    }
+}</code></pre><h3 id="68cd380a-b435-407b-878a-345e37a69191" class="">ComPtr</h3><p id="df343239-3007-4f46-af57-3fbe5bfbbaf5" class="">Instead of calling <code>Release</code> or <code>SafeRelease</code> to release an object, a good practice is to wrap the reference into a smart pointer.</p><p id="906db627-c4e6-440d-9d8b-acaed7745b46" class="">An advantage of using smart pointers is that the references can be stored as members of a owner class without the need to call <code>Release</code> in the destructor of that class.</p><p id="00e37e70-1994-465e-8df2-6c3f24e1bb49" class="">The <a href="https://docs.microsoft.com/en-us/cpp/cppcx/wrl/comptr-class"><code>Microsoft::WRL::ComPtr</code></a> class is a smart pointer implementation for COM objects.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="48290599-e158-43e9-8f78-f15ab67199b6"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The class is part of the Windows Runtime API but it can be used in standard desktop applications as well.</div></figure><h3 id="e3817ca2-f025-41d4-992f-2cd892990081" class="">Exceptions</h3><p id="35be9ce0-2de3-4aa1-b36a-5ee6a9ee5bf7" class="">An alternative way for handling failures is to throw an exception.</p><p id="753caced-dc17-4de6-819c-4817b12e066b" class="">Using <code>ComPtr</code> ensures that the resources are properly released when an exception is thrown.</p><pre id="05760a01-675f-4c5d-8992-327586c6cc6e" class="code"><code>class HrException : public std::runtime_error
+{
+public:
+    HrException(HRESULT hr) :
+				std::runtime_error(HrToString(hr)),
+				_hr(hr)
+		{}
+
+private:
+    const HRESULT _hr;
+};
+
+inline void ThrowIfFailed(HRESULT hr)
+{
+    if (FAILED(hr))
+    {
+        throw HrException(hr);
+    }
+}</code></pre><h2 id="ac1f5d98-d8d0-434d-90d3-94938a4b3a20" class="">Code</h2><p id="2998f903-8f0b-4b42-bbb3-73fd93b4aabf" class="">When calling <code>QueryInterface</code>, the <code>__uuidof</code> operator can be used for the  <code>riid</code> parameter.</p><pre id="4739f4ea-b2db-4757-887b-0b563a1dd57c" class="code"><code>IDXGIDevice* dxgiDevice;
+
+HRESULT hr = device-&gt;QueryInterface(
+    __uuidof(IDXGIDevice),
+    reinterpret_cast&lt;void**&gt;(&amp;dxgiDevice));
+
+if (SUCCEED(hr))
+{
+    // Use the interface
+    ...
+
+		dxgiDevice-&gt;Release();
+}</code></pre><p id="51b6cd8c-0673-4026-a1d4-b0163d50232f" class="">The parameters can also be replaced by the <code>IID_PPV_ARGS</code> macro, and the <code>SafeRelease</code> function can be used without checking for the error code. </p><pre id="56fd84c5-27ee-4c25-9edd-cbfb29f48a45" class="code"><code>IDXGIDevice* dxgiDevice;
+
+HRESULT hr = device-&gt;QueryInterface(<strong>IID_PPV_ARGS(&amp;dxgiDevice)</strong>);
+
+if (SUCCEED(hr))
+{
+    // Use the interface
+    ...
+}
+
+<strong>SafeRelease(&amp;dxgiDevice);</strong></code></pre><p id="d387bcbc-bed5-41f9-8825-222729e9755f" class="">The instance can be stored into a <code>ComPtr</code> smart pointer.</p><pre id="765ac374-848c-46ff-b143-927383e049f5" class="code"><code><strong>Microsoft::WRL::ComPtr&lt;IDXGIDevice&gt; dxgiDevice;
+</strong>
+HRESULT hr = device-&gt;QueryInterface(<strong>IID_PPV_ARGS(&amp;dxgiDevice)</strong>);
+
+if (SUCCEED(hr))
+{
+    // Use the interface
+    ...
+}</code></pre><p id="d6ce034a-3638-4d5f-9062-e3e4d409cc5c" class="">When using exceptions, there is no need to check for the <code>HRESULT</code> directly.
+The <code>ComPtr</code> class ensures that the reference is properly released.</p><pre id="e65a0814-fd36-45d0-a85c-46437af380ac" class="code"><code><strong>Microsoft::WRL::ComPtr&lt;IDXGIDevice&gt; dxgiDevice;
+</strong>
+ThrowIfFailed(
+    device-&gt;QueryInterface(<strong>IID_PPV_ARGS(&amp;dxgiDevice)
+</strong>);
+
+// Use the interface
+...</code></pre><h1 id="56b92d78-8bb7-4894-af5e-1406fd05ac9c" class="">Memory Allocation</h1><p id="db082202-0e4d-4211-a96c-d9c0668540f7" class="">COM is a binary standard and is not specific to a particular programming language.
+Therefore, COM does not use language-specific functionality for memory allocation.</p><p id="be36a3b6-28bc-4398-9efa-c4af04ba1b65" class="">COM define its own memory allocation functions to provide an abstraction layer over the heap allocator.</p><p id="27ec61cf-f2d2-4ea5-bffe-a19b59beebd0" class="">There are two functions:</p><ul id="bc6c7d38-10f7-45c7-bbd2-f1ddc5b9b983" class="bulleted-list"><li><code><a href="https://docs.microsoft.com/windows/desktop/api/combaseapi/nf-combaseapi-cotaskmemalloc">CoTaskMemAlloc</a></code> allocates a block of memory.</li></ul><ul id="aac2761a-24f5-4dd1-81f7-243eb7574536" class="bulleted-list"><li><code><a href="https://docs.microsoft.com/windows/desktop/api/combaseapi/nf-combaseapi-cotaskmemfree">CoTaskMemFree</a></code> frees a block of memory that was allocated with <code>CoTaskMemAlloc</code>.</li></ul><p id="1074fc0e-8bad-4351-bbb2-989a6eee1f5b" class="">Some COM functions allocate memory indirectly and the caller is responsible for calling <code>CoTaskMemFree</code> to free the memory.</p><h2 id="9075a0dc-8855-456f-a2b4-d6d3b0972f4b" class="">Code</h2><p id="dd31c5f3-5693-48ba-b651-99c816b8c39a" class="">For example, the <a href="https://docs.microsoft.com/en-us/windows/win32/api/combaseapi/nf-combaseapi-stringfromiid"><code>StringFromIID</code></a> function returns the string representation of an interface identifier.</p><pre id="6cd6f05f-26db-4b40-91b4-02f5504ae0ce" class="code"><code>HRESULT StringFromIID(
+  REFIID   rclsid,
+  LPOLESTR *lplpsz
+);</code></pre><ul id="4a561ce7-81ce-4556-b0d3-9c785ac78337" class="bulleted-list"><li><code>rclsid</code> is the CLSID of interface identifier to be converted.</li></ul><ul id="793841c9-4859-463b-9ebf-f12d03e075cc" class="bulleted-list"><li><code>lplpsz</code> is a pointer to a variable that receives the resulting string.</li></ul><p id="507823c8-b7d3-429c-a40a-fcb737583d1e" class="">After calling <code>StringFromIID</code>, the variable specified as the <code>lplpsz</code> parameter must be freed by calling <code>CoTaskMemFree</code>.</p><pre id="e9740883-ab1d-404c-a452-f6b85661b23f" class="code"><code>std::wstring ToString(IID const&amp; iid)
+{
+		wchar_t* iidString = nullptr;
+		if (SUCCEEDED(StringFromIID(iid, &amp;iidString)))
+    {
+				std::wstring value(iidString);
+				CoTaskMemFree(iidString);
+				return value;
+		}
+		return L&quot;&quot;;
+}</code></pre><h1 id="567b73f9-c5b9-4b32-b7d5-94d29933356a" class="">Glossary</h1><div id="49d4e74d-4392-4f5d-b003-1c0772c57e21" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th>Word</th><th>Definition</th></tr></thead><tbody><tr id="77a9cd7a-e903-4336-afb4-4ec7e8f18e90"><td class="cell-title"><a href="https://www.notion.so/CLSID-77a9cd7ae9034336afb44ec7e8f18e90">CLSID</a></td><td class="cell-mtIy">Class Identifier</td></tr><tr id="73130e47-f7b1-4006-a9a4-123773fa1908"><td class="cell-title"><a href="https://www.notion.so/coclass-73130e47f7b14006a9a4123773fa1908">coclass</a></td><td class="cell-mtIy">COM Class</td></tr><tr id="9164ef67-1aae-436d-9b90-89ca7ef256e8"><td class="cell-title"><a href="https://www.notion.so/COM-9164ef671aae436d9b9089ca7ef256e8">COM</a></td><td class="cell-mtIy">Component Object Model</td></tr><tr id="6c0cc4f9-9794-44e6-8891-2fce50d30b4f"><td class="cell-title"><a href="https://www.notion.so/GUID-6c0cc4f9979444e688912fce50d30b4f">GUID</a></td><td class="cell-mtIy">Globally Unique Identifier</td></tr><tr id="880a1f99-a760-4a73-945b-6781c3762cfb"><td class="cell-title"><a href="https://www.notion.so/IDL-880a1f99a7604a73945b6781c3762cfb">IDL</a></td><td class="cell-mtIy">Interface Definition Language file</td></tr><tr id="2b4b640b-cc5e-4444-9ce9-e027e73f99bc"><td class="cell-title"><a href="https://www.notion.so/IID-2b4b640bcc5e44449ce9e027e73f99bc">IID</a></td><td class="cell-mtIy">Interface Identifier</td></tr><tr id="6167c2ce-cd8a-4484-9870-200812ba4136"><td class="cell-title"><a href="https://www.notion.so/MIDL-6167c2cecd8a44849870200812ba4136">MIDL</a></td><td class="cell-mtIy">Microsoft Interface Definition Language</td></tr><tr id="419e0fab-ec6e-47f8-abd0-3763e3b3276f"><td class="cell-title"><a href="https://www.notion.so/MTA-419e0fabec6e47f8abd03763e3b3276f">MTA</a></td><td class="cell-mtIy">Multi-Threaded Apartments</td></tr><tr id="66756d29-684a-4a72-9598-37bad4f107a2"><td class="cell-title"><a href="https://www.notion.so/STA-66756d29684a4a72959837bad4f107a2">STA</a></td><td class="cell-mtIy">Single-Threaded Apartments</td></tr><tr id="984c239c-7159-434d-aa9a-9a629b302e31"><td class="cell-title"><a href="https://www.notion.so/TLB-984c239c7159434daa9a9a629b302e31">TLB</a></td><td class="cell-mtIy">Type Library file</td></tr><tr id="0a804c7f-8f0f-4491-805a-22575814609b"><td class="cell-title"><a href="https://www.notion.so/HRESULT-0a804c7f8f0f4491805a22575814609b"> HRESULT</a></td><td class="cell-mtIy">Result Handle</td></tr></tbody></table></div><h1 id="9ccb635c-ea98-48be-8ab8-9ab72249c99a" class="">References</h1><ul id="543d6ab1-d85b-4133-a708-e7b42fda409f" class="bulleted-list"><li><a href="https://docs.microsoft.com/en-us/windows/win32/com/component-object-model--com--portal">Component Object Model (COM)</a>, Microsoft</li></ul><ul id="473def1a-af2b-4189-9ecb-3e3426bbb25e" class="bulleted-list"><li><a href="https://en.wikipedia.org/wiki/Component_Object_Model">Component Object Model</a>, Wikipedia</li></ul></div></article></body></html>
