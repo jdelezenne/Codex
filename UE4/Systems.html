@@ -1,0 +1,581 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Systems</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f79f9907-5056-4c56-b732-fbc9a5032931" class="page sans"><header><h1 class="page-title">Systems</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th>Created</th><td><time>@Aug 15, 2019 5:10 PM</time></td></tr><tr class="property-row property-row-multi_select"><th>Tags</th><td></td></tr></tbody></table></header><div class="page-body"><h1 id="42e80b6f-ec07-4542-b785-76667b09d66e" class="">Console Commands &amp; Variables</h1><p id="1727307a-239a-4f4d-ae99-f760a55c6e3b" class="">A console command is sent to the engine to execute a specific functionality.</p><p id="19e1f8c6-93a2-415b-91ff-8ac663cc0e15" class="">A console variable is a global state in which data is stored and can be modified through the console.</p><p id="b67520b6-cad3-4520-bf12-0709bc4d89c3" class="">The supported types are int, float and string.</p><p id="1cc7f2ee-eb2f-4179-a512-e48b63189f29" class="">The following table shows the corresponding C++ types, and the methods to obtain the value of a console variable.</p><div id="4e91e8dd-b9b8-49b0-9e1c-14330ec343a2" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th>Type</th><th>C++ Type</th><th>Accessor</th></tr></thead><tbody><tr id="6a0af158-90c4-424a-a7ae-7a64ec6ac8bd"><td class="cell-title"><a href="Systems/Untitled Database/int.html">int</a></td><td class="cell-!&#x27;)&#x27;">int32</td><td class="cell-&lt;--F"><code>GetInt</code></td></tr><tr id="d01c97c0-e999-4fd3-b99e-98eae1da3326"><td class="cell-title"><a href="Systems/Untitled Database/float.html">float</a></td><td class="cell-!&#x27;)&#x27;">float</td><td class="cell-&lt;--F"><code>GetFloat</code></td></tr><tr id="10110bb2-a6b7-44ea-9e7d-49621d93b277"><td class="cell-title"><a href="Systems/Untitled Database/string.html">string</a></td><td class="cell-!&#x27;)&#x27;">FString</td><td class="cell-&lt;--F"><code>GetString</code></td></tr></tbody></table></div><h2 id="ea268275-3ad4-43ad-b203-84fc28221608" class="">Create a Console Variable</h2><p id="7f0dff7a-ef3f-433a-8a62-ff5997abf0be" class="">Console variables should be created early when the engine starts, to make sure that auto completion in the editor works.</p><p id="73239331-e690-4851-977a-49197c3efecb" class="">Therefore, the recommended way to declare a console variable is through static variables.</p><p id="364910d6-4d14-4152-8021-7664853a7ee8" class="">A console variable is declared with the <code>TAutoConsoleVariable</code> template type and the template argument represents the data type of the variable.</p><p id="5bddeebd-58a7-4453-9d6e-07a5b9bf303b" class="">A console variable is created with a name, a default value, a description, and <code>EConsoleVariableFlags</code> flags.</p><p id="bd801f3a-0101-403e-a243-34d098162413" class="">The flags are defined in <code>IConsoleManager.h</code>.</p><pre id="be3d35db-4769-498b-9297-56c30b4d1db7" class="code"><code>static TAutoConsoleVariable&lt;int32&gt; CVar(
+    TEXT(&quot;MyVariable&quot;),
+    42,
+    TEXT(&quot;A variable&quot;),
+    ECVF_Cheat);</code></pre><p id="2e1d2830-2c75-4ce3-b337-60d05fb5085b" class="">Consoles variables can also be created by calling the <code>IConsoleManager::RegisterConsoleVariable</code> function.</p><p id="8b3247fe-f933-4e74-a654-5665c3a4cd1c" class="">The global instance of the console manager is accessed using <code>IConsoleManager.Get()</code>.</p><pre id="c200cc04-f2f3-4d74-8cbd-58febe3e117f" class="code"><code>IConsoleManager::Get().RegisterConsoleVariable(
+    TEXT(&quot;MyCVar&quot;),
+    42,
+    TEXT(&quot;A variable&quot;),
+    ECVF_Cheat);</code></pre><h2 id="63e56453-409d-498f-8677-a6ccdd04a2db" class="">Access a Console Variable</h2><p id="899cc31b-8e51-4324-9595-a94a00fab2fd" class="">The most efficient way to access a console variable is perform a look up with <code>IConsoleManager::FindConsoleVariable</code> and store the result in a <em>static</em> variable.</p><p id="b6d79afc-a85f-4606-8b65-5643985693f1" class="">As console variables persist during the lifetime of the project, it is safe.</p><pre id="021794c7-05cb-45b1-b67f-b592f73a1d07" class="code"><code>static const auto MyCVar = IConsoleManager::Get().FindConsoleVariable(TEXT(&quot;MyCVar&quot;)); 
+int32 Value = MyCVar-&gt;GetInt();</code></pre><h2 id="18e7dc29-a286-47b7-a894-73b8ae809f64" class="">Command-Line</h2><p id="d8260b66-2755-4a47-a01a-a3d811802b3b" class="">The value of console variables can be set when starting the editor using the <code>-ExecCmds</code> argument.</p><pre id="f3dfce9d-75c6-4e71-928a-d8bd756cc9bd" class="code"><code>UE4Editor.exe GAMENAME -ExecCmds=&quot;r.MyCvar 42&quot;</code></pre><h1 id="d2d66bba-28b8-40b2-acd9-0f16f4729250" class="">Memory Allocators</h1><h2 id="9d056070-ad65-4b05-a921-360d50aebab2" class="">Allocation Rules</h2><p id="2c3fbf87-a781-4ed8-bb31-b2eb3cf4cdb6" class="">Blocks equal or larger than 16 bytes are 16-byte-aligned.</p><p id="c5841687-d4cf-46ea-85dd-5ca9c468a757" class="">Blocks smaller than 16 bytes are 8-byte aligned.</p><h2 id="cd8e2f9d-656d-4b23-ab2b-d719ff117a8b" class="">Global Allocators</h2><p id="25503fed-cfd3-4377-b4a9-e155a092aeb7" class="">The global allocator is <code>GMalloc</code>. It is a <a href="https://docs.unrealengine.com/en-US/API/Runtime/Core/HAL/FMalloc/index.html"><code>FMalloc</code></a> allocator.</p><p id="279c8eda-58a3-45e9-b57c-27aa80bf47c1" class="">The instance to the global allocator is platform-dependent.</p><p id="f7f60497-daa0-46de-9954-9281558e99a1" class="">It is accessed using <code>FPlatformMemory::BaseAllocator</code>.</p><p id="b514360a-4584-4179-8928-2f0bfb0486c1" class="">On most platforms, it returns the ANSI malloc implementation represented by <code>FMallocAnsi</code>.</p><p id="d8c76bf8-4bdc-4d34-b60a-ee0fab718a20" class=""><code>FMallocAnsi</code> performs aligned allocations using a platform-dependent function such as <code>_aligned_malloc</code> (Microsoft), <code>posix_memalign</code> (Apple, Linux, Web), or <code>memalign</code> (PS4).</p><p id="588985e1-c5ab-4220-bfe0-149a23ff70ad" class="">On platforms that do not provide aligned allocations, the allocation falls back to a regular <code>malloc</code> call with custom padding.</p><p id="62b80f95-2ff4-429f-8f8f-95e9769150d2" class="">On some platforms, the default base allocator can be replaced with a different implementation using specific preprocessor symbols or command-line options.</p><p id="8fbd3a13-0487-4406-944c-f8706858abd7" class="">The other allocators are:</p><ul id="c10baef0-8cca-49b1-8060-7b356c30f14a" class="bulleted-list"><li>Binned, Binned2</li></ul><ul id="e58baaff-7043-45cd-a900-b10ea7aa2b6b" class="bulleted-list"><li>Binned3 (64-bit only)</li></ul><ul id="2bf2f2ab-26f4-4b32-b1f3-09728443cda8" class="bulleted-list"><li>TBB (Windows and macOS)</li></ul><h2 id="96e02f00-adab-41c9-aaf4-d2e17c91e4fc" class="">Containers</h2><p id="3c29e082-be77-4e02-b887-e384437f2a29" class="">There are different allocation policies for containers, represented by allocator traits.</p><p id="de452e82-ebaa-4283-9045-63d79967af90" class="">The base template type for traits is <code>TAllocatorTraits</code>.</p><p id="770e41f8-d3e5-4c65-b510-af97350c0851" class="">It actually derive from the non-template type <code>TAllocatorTraitsBase</code>.</p><ul id="42e3af3b-5963-491e-95cf-e5b87eaa48ad" class="bulleted-list"><li><a href="https://docs.unrealengine.com/en-US/API/Runtime/Core/Containers/FHeapAllocator/index.html"><code>FHeapAllocator</code></a> – Always allocates the elements indirectly.</li></ul><ul id="b9f4ab47-c690-4915-8acb-950408bea3e4" class="bulleted-list"><li><code>TAlignedHeapAllocator</code> – Similar to <code>THeapAllocator</code> but supports aligned allocations with an <code>Alignment</code> parameter.<pre id="86e8af4e-69ff-4225-8704-b626e60ca729" class="code"><code>template&lt;uint32 Alignment&gt;
+TAlignedHeapAllocator&lt; Alignment &gt;</code></pre></li></ul><ul id="45ec3db5-7828-405f-bfaf-cec07c8d65aa" class="bulleted-list"><li><a href="https://docs.unrealengine.com/en-US/API/Runtime/Core/Containers/TInlineAllocator/index.html"><code>TInlineAllocator</code></a> – Allocates up to a specified number of elements in the same allocation as the container, and falls back to a secondary container when the number of inline elements is reached.<pre id="b2a7cf2a-5c67-48ec-84b7-75bbec14400a" class="code"><code>template&lt;uint32 NumInlineElements, typename SecondaryAllocator&gt;
+TInlineAllocator&lt; NumInlineElements, SecondaryAllocator &gt;</code></pre><ul id="987f0cf3-7d50-4bda-b00b-2bd0ded63bf9" class="bulleted-list"><li><code>NumInlineElements</code> is the number of inline elements.</li></ul><ul id="56dbce7f-1eb1-4c78-9cce-f5833a8a7399" class="bulleted-list"><li><code>SecondaryAllocator</code> is the fall back allocator. By default, it is <code>FDefaultAllocator</code>.</li></ul></li></ul><ul id="a03c729b-bf52-488d-9555-c2f7ef4366bd" class="bulleted-list"><li><code>TFixedAllocator</code> – Allocates up to a specified number of elements. There is no secondary storage when the number of inline elements is reached.<pre id="529e2384-dc32-40d8-9ded-71e16b7607a1" class="code"><code>template&lt;uint32 NumInlineElements&gt;
+TFixedAllocator&lt; NumInlineElements &gt;</code></pre></li></ul><ul id="18e60b9d-f828-4269-8a26-908eb60d22f4" class="bulleted-list"><li><code>TSetAllocator</code> – Encapsulates the allocators used by a set. By default, it is a <code>TSparseArrayAllocator</code>.</li></ul><h1 id="d7d78948-d564-4cd4-8cda-4a80dd39cfb0" class="">Low-Level Memory</h1><p id="e37f8496-2e38-4c19-9e50-66dfea0a3250" class="">Memory allocations are tracked by the Low-Level Memory (LLM) Tracker.</p><p id="ea212e86-ab53-421d-9f46-9d405b93b01b" class="">Every memory allocation is assigned a tag value identifying the category to which it belongs.</p><p id="4c98ada6-0f8c-484a-b898-32cbff1cad4b" class="">The tags are applied using tag-scope macros.</p><p id="98cdf927-ad94-4651-96af-814738fba328" class="">LLM is stripped out of Shipping builds.</p><h2 id="9ded0a9d-0588-40d1-9b1b-9f232be6cb01" class="">Usage</h2><p id="881d0c40-6393-4735-a97f-b2c5fc444c0c" class="">To enable LLM, launch the project with the <code>-LLM Enables</code> command-line argument.</p><p id="36fa202d-edd1-416a-8f91-344929a079a5" class="">To continuously writes out all values to a CSV file, use the <code>-LLMCSV</code> argument instead.</p><p id="ef591033-e7da-480e-a12c-4843b92a9f33" class="">There are two trackers represented by the <code>ELLMTracker</code> enumerated type: <code>Default</code> and <code>Platform</code>.</p><p id="6fef5ff3-d08f-49ab-870e-1000d72bb8ff" class="">The <code>Platform</code> tracker is used by the platform-dependent modules such as Windows, macOS, Direct3D, Metal, Vulkan, and so on.</p><p id="6cee6abb-e2f3-48d6-8bd7-50bbbdee4d51" class="">There are two corresponding scope macros:</p><ul id="fff8605a-7d6e-4314-bc61-30b4f13c20d7" class="bulleted-list"><li><code>LLM_SCOPE</code> – Default tracker.</li></ul><ul id="3eda3b47-0518-4228-bd6f-ad557e1e3774" class="bulleted-list"><li><code>LLM_PLATFORM_SCOPE</code> – Platfom tracker.</li></ul><p id="c2a56096-9e55-4663-b3bc-c077c855c35a" class="">The macros are called with the tag to associate with the allocations.</p><p id="b04470cb-cae1-48b7-abb4-601f7dd8ca33" class="">Tags are represented by the <code>ELLMTag</code> enumerated type.</p><h2 id="676f09a6-f733-452f-ae9c-25c34fad050b" class="">Example</h2><p id="b4bbc02b-6fc4-4e80-aecf-f2eb527a5642" class="">In <code>FAssetRegistryModule::StartupModule</code>, the scope macro is used with the <code>AssetRegistry</code> tag.</p><pre id="08064808-9e43-44fb-89ab-da712372e50f" class="code"><code>void FAssetRegistryModule::StartupModule()
+{
+    <strong>LLM_SCOPE</strong>(ELLMTag::AssetRegistry);
+    ...
+}</code></pre><h2 id="7c924c7c-c9ca-449f-8eab-7250243ee4d2" class="">Implementation</h2><p id="468febcc-f1eb-414c-af37-d5a079fa59ae" class="">LLM maintains a map of all allocations indexed by a pointer.</p><p id="590f477c-0860-4d7c-b6c7-5ffeaa7a4065" class="">LLM uses 21 bytes per allocation.</p><div id="0ff0f6ed-7b36-4a0c-a029-b71c978a13f9" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th>Allocation</th><th>Size</th></tr></thead><tbody><tr id="da3703f3-0fe8-4f03-8154-1de05f349e20"><td class="cell-title"><a href="Systems/Untitled Database 1/Pointer.html">Pointer</a></td><td class="cell-q,dg">8 bytes</td></tr><tr id="fa39e016-b379-4929-b2b1-97c3db4caac2"><td class="cell-title"><a href="Systems/Untitled Database 1/Pointer Hash Key.html">Pointer Hash Key</a></td><td class="cell-q,dg">4 bytes</td></tr><tr id="4b216e62-0507-4b16-a976-d49c003b4544"><td class="cell-title"><a href="Systems/Untitled Database 1/Size.html">Size</a></td><td class="cell-q,dg">4 bytes</td></tr><tr id="46e009c6-0095-4e62-8658-1bea0968b146"><td class="cell-title"><a href="Systems/Untitled Database 1/Tag.html">Tag</a></td><td class="cell-q,dg">1 byte</td></tr><tr id="421c40c0-eec8-48c3-9313-8441e1ded092"><td class="cell-title"><a href="Systems/Untitled Database 1/Hash Map Index.html">Hash Map Index</a></td><td class="cell-q,dg">4 bytes</td></tr></tbody></table></div><p id="83f63aef-bdf5-489a-8f29-9a87cb782aa1" class="">The memory used by LLM is managed by the <code>LLMAlloc</code> and <code>LLMFree</code> functions.</p><h2 id="b5d9c38e-f967-4a7c-8af7-23e12186a4bc" class="">Add a New Tag</h2><ol id="bf040c7a-3908-47e3-9df4-9840a201a2d0" class="numbered-list" start="1"><li>Add a value to the <code>ELLMTag</code> enumerated type in <code>LowLevelMemTracker.h</code>.</li></ol><ol id="b6e2f158-41d5-4982-86fd-f5464527e16c" class="numbered-list" start="2"><li>Add a corresponding element to the <code>ELLMTagNames</code> array in <code>LowLevelMemTracker.cpp</code>.</li></ol><ol id="de47d7ef-4735-4af6-8aaa-04e5e47718da" class="numbered-list" start="3"><li>Add tag scopes using the <code>LLM_SCOPE</code> macro.</li></ol></div></article></body></html>

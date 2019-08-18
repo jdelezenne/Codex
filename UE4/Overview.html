@@ -1,0 +1,633 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Overview</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="26e5e04f-5bc1-4069-8c5d-b867532a9634" class="page sans"><header><h1 class="page-title">Overview</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th>Created</th><td><time>@Aug 06, 2019 6:52 PM</time></td></tr><tr class="property-row property-row-multi_select"><th>Tags</th><td></td></tr></tbody></table></header><div class="page-body"><h1 id="7b4a75de-c6f5-4269-99bd-677c079c0338" class="">Project</h1><p id="81ba4b57-03e1-4958-a98b-91743ad935bb" class="">A project is stored in its own directory and a file with the <code>.uproject</code> extension.</p><p id="a93736a4-9f3c-4ebe-8f05-327325965866" class="">Projects have various subfolders:</p><ul id="696e6d36-a0e2-47ad-be1a-8fd56c47ed29" class="bulleted-list"><li><strong>Content</strong> – The project&#x27;s assets (<code>.uasset</code>), and levels (<code>.umap</code>). The files in this folder are displayed in the <em>Content Browser</em>.</li></ul><ul id="08f56d6a-c8fb-4110-bb19-77bc9bb1b9c1" class="bulleted-list"><li><strong>Source</strong> – The C++ files for the project including source files (<code>.cpp</code>) and header files (<code>.h</code>). The folder also contains C# build scripts (<code>.Build.cs</code>, <code>.Target.cs</code>).</li></ul><ul id="1f4846dd-4de9-441d-b101-142ec1ed1026" class="bulleted-list"><li><strong>Binaries</strong> – The binaries built for the project.</li></ul><ul id="0e7966f9-d42c-4b45-8ec5-f523c98c355f" class="bulleted-list"><li><strong>Config</strong> – The configuration files (<code>.ini</code>) for the project.</li></ul><ul id="5bbaf7eb-bb1a-4e62-96b0-3c6b49440089" class="bulleted-list"><li><strong>Intermediate</strong> – The temporary files generated by the toolsets.</li></ul><h2 id="8fded604-c12d-4538-8094-70a08b77f8d4" class="">Engine</h2><p id="b1b748cb-9714-40e7-a657-565781baf654" class="">The Engine folder contains additional subfolders:</p><ul id="e5103508-7d67-4066-98bc-220097cab896" class="bulleted-list"><li><strong>Build</strong> – Build files.</li></ul><ul id="cc6b3649-10bc-4e06-8f7f-0d6b5b2fe981" class="bulleted-list"><li><strong>Documentation</strong> – The documentation for the Engine (markdown and HTML).</li></ul><ul id="8594e7ab-c361-4fd1-8b7f-1809e2490aad" class="bulleted-list"><li><strong>Plugins</strong> – The Engine Plugins.</li></ul><ul id="f82a857b-8c6e-4310-be72-79c13267f0ff" class="bulleted-list"><li><strong>Programs</strong> – Configuration files for the tools.</li></ul><ul id="686965ea-84fd-4884-9478-24349db3ee39" class="bulleted-list"><li><strong>Shaders</strong> – Built-in shaders (<code>.usf</code>).</li></ul><h3 id="f33d1ffb-9635-4702-a288-f995847d941c" class="">Engine Sources</h3><p id="1f16ffae-d43e-4e35-af31-fce3d5854127" class="">The C++ source code for the Engine is divided in different subfolders:</p><ul id="78a74d6d-1a8d-4b4a-acf1-7a8b8787a645" class="bulleted-list"><li><strong>Developer</strong> – Additional Editor source code.</li></ul><ul id="a4ee6163-e636-470f-9a11-4b1d00fc5b27" class="bulleted-list"><li><strong>Editor</strong> – Editor source code.</li></ul><ul id="0eea01e7-1b17-444a-b8a7-07cbc5003b13" class="bulleted-list"><li><strong>Programs</strong> – Tools including the <strong>UnrealHeaderTool</strong> and <strong>UnrealBuildTool</strong>.</li></ul><ul id="4f7b2aa1-b06f-4f3b-8dad-cef5bafc865e" class="bulleted-list"><li><strong>Runtime</strong> – Engine source code.</li></ul><ul id="f414fdd3-c1c7-4b2b-a686-acf3921e7d1e" class="bulleted-list"><li><strong>ThirdParty</strong> – Third-party source code and libraries.</li></ul><ul id="66675458-b2f5-415a-aab1-ee4d4504a09d" class="bulleted-list"><li><strong>UE4Editor.Target.cs</strong> – The Editor build configuration.</li></ul><ul id="90993032-4024-4e2a-b6f3-9b79b992bf09" class="bulleted-list"><li><strong>UE4Game.Target.cs</strong> – The Engine build configuration.</li></ul><h2 id="54843b4b-92e9-43b2-8d59-443d78981cb9" class="">Assets</h2><p id="086569e3-2eef-4876-a6d7-f4a9ea5f3b23" class="">Unreal supports several common file formats that can be imported into a project.</p><div id="a0515bd6-796a-4c57-b8a2-591e2642cf08" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th>Assets</th><th>Formats</th></tr></thead><tbody><tr id="a29a0bdd-0100-4c38-b110-379d1b204b0b"><td class="cell-title"><a href="Overview/Untitled Database/3D.html">3D</a></td><td class="cell-GfFR">.fbx, .obj</td></tr><tr id="3c1c3d3d-6516-49f8-9f6b-1ea3f6ccb9c2"><td class="cell-title"><a href="Overview/Untitled Database/Texture.html">Texture</a></td><td class="cell-GfFR">.png, .jpeg, .bmp ,.tga, .dds, .exr, .psd, .hdr</td></tr><tr id="79e45e5b-c97e-4d4c-99df-c5c6063b7a84"><td class="cell-title"><a href="Overview/Untitled Database/Sound.html">Sound</a></td><td class="cell-GfFR">.wav</td></tr><tr id="4de9cb6f-a721-40d5-9e54-948f212ffd7b"><td class="cell-title"><a href="Overview/Untitled Database/Fonts.html">Fonts</a></td><td class="cell-GfFR">.ttf, .otf</td></tr><tr id="3c9ffb91-35cb-41cc-8972-92297832a5ea"><td class="cell-title"><a href="Overview/Untitled Database/Videos.html">Videos</a></td><td class="cell-GfFR">.mov, .mp4, .wmv</td></tr></tbody></table></div><h1 id="eed364d9-6c03-4579-b214-4ce6069aa6e3" class="">Build System</h1><h2 id="9cbc61b1-57c9-4665-8a0e-8f6ffc90dca4" class="">Configurations</h2><p id="94d36498-3878-4356-99c9-f8cba57c394d" class="">The project configurations are named as <code>[Configuration][Target]</code>.</p><ul id="9ea9904d-a2e6-4ee5-adb2-3541b998ac67" class="bulleted-list"><li>Configuration is required. It is set to: Debug, DebugGame, Development, Shipping, or Test.</li></ul><ul id="b015edcd-d57f-4200-8752-199988661d30" class="bulleted-list"><li>Target is optional. It is set to: Editor, Client, or Server.</li></ul><p id="5f8e5486-960d-4da6-b34c-0a906dd197fd" class="">When the target is not set, it builds a stand-alone executable version of the project (requires cooked content).</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="282b5dd4-5f2f-4a18-9de7-62f710a0cf1d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">To open a project in the Editor, the project must be built in an Editor configuration.</div></figure><p id="1ee132a7-8ee1-48d7-a40e-eae488dd5342" class="">UE4 uses a custom building method.</p><ol id="ccf777ec-7606-4b25-a870-d5a495759566" class="numbered-list" start="1"><li>The <strong>UnrealHeaderTool</strong> (UHT) application is responsible for parsing and code generation.</li></ol><ol id="df0805e1-e83b-4b0f-9903-03e87c054d2c" class="numbered-list" start="2"><li>The <strong>UnrealBuildTool</strong> (UBT) application is responsible for compilation and linking.</li></ol><h2 id="ebf2ab79-3edc-4cd5-a7e7-8fb6d03a00ea" class="">UnrealHeaderTool</h2><p id="e5e8238c-5099-411a-84a0-e182be2741f4" class="">The <strong>UnrealHeaderTool</strong> (UHT) parses the C++ source code of the Engine and Game Project to perform the code generation that supports the Reflection System.</p><p id="5cff7ba7-6531-47b6-8087-2cfd7669ef3f" class="">UHT parses the C++ header files for the metadata macros such as <code>UCLASS</code>, <code>USTRUCT</code>, <code>UPROPERTY</code>...</p><p id="da57e1ce-a88c-4ecc-9268-777282fed7f1" class="">UHT generates the C++ code in  <code>&lt;TypeName&gt;.gen.cpp</code> and <code>&lt;TypeName&gt;.generated.h</code> files.</p><p id="ff0f475c-c47c-422d-8897-7a6503131490" class="">The generated files are located in <code>Intermediate/Build/&lt;Platform&gt;/UE4Editor/Inc/&lt;Project&gt;/</code>.</p><p id="db403216-6626-4fe8-a356-cd53f2040fea" class="">The generated header file must be included last in the header file of the corresponding type.</p><h2 id="2b9ed2f6-ed71-4567-a3e3-fef8ef217659" class=""><strong>UnrealBuildTool</strong></h2><p id="deec2db1-5c2b-467c-855d-5c6723cb8b56" class="">UBT uses the <code>.Build.cs</code> and <code>.Target.cs</code> files to build the Engine Modules and the Game Project.</p><p id="82e63444-bdb1-42d4-ba66-d77e369b1fd7" class="">The <code>.Build.cs</code> files are used for the Engine Modules.</p><p id="37de433e-ba9b-4db9-8e6d-b794dd5f38b7" class="">They contain a class that derives from <code>ModuleRules</code> and provide the module settings in its constructor.</p><pre id="f99543a5-4bfd-422d-b2ff-f269f493a01f" class="code"><code>
+using UnrealBuildTool;
+
+public class &lt;ModuleName&gt; : ModuleRules
+{
+	public &lt;ModuleName&gt;(ReadOnlyTargetRules Target) : base(Target)
+	{
+		PrivateIncludePaths.Add(&quot;&lt;ModuleName&gt;/Private&quot;);
+
+		PublicDependencyModuleNames.AddRange(
+			new string[] {
+				&quot;Core&quot;,
+				&quot;CoreUObject&quot;,
+				&quot;Engine&quot;,
+				&quot;RenderCore&quot;,
+				&quot;RHI&quot;,
+			}
+		);
+
+		PrivateDependencyModuleNames.AddRange(
+			new string[] {
+				&quot;Renderer&quot;,
+			}
+		);
+
+    ...
+	}
+}</code></pre><p id="dd218738-b823-42ad-bb89-c5115411e03c" class="">The <code>.Target.cs</code> files are used for the Engine and the Game Project.</p><p id="0ce78f69-cde9-4be4-8c46-7d49ab5472af" class="">They contain a class that derives from <code>TargetRules</code> and provide the target settings in its constructor.</p><pre id="4b2aacbc-9472-47c0-8e8d-7b5ab82e12c3" class="code"><code>using UnrealBuildTool;
+using System.Collections.Generic;
+
+public class &lt;ProjectName&gt;Target : TargetRules
+{
+	public &lt;ProjectName&gt;Target(TargetInfo Target) : base(Target)
+	{
+		Type = TargetType.Game;
+		ExtraModuleNames.AddRange( new string[] { &quot;&lt;ProjectName&gt;&quot; } );
+
+    ...
+	}
+}</code></pre><p id="dd44f565-05e3-4fc8-909d-820822ce633f" class="">UBT uses the platform-specific toolchain to build the C++ source code (Visual Studio or Xcode).</p><p id="e85f0c63-f6c2-4e0d-a0a7-67a54147fbc3" class="">The Game Project is built as a dynamic library (<code>.dll</code> on Windows, <code>.dylib</code> on macOS) in the <code>Binaries/&lt;Platform&gt;/</code> folder.</p><h1 id="6a2db4c7-4378-4b5b-bc75-b440b12527c0" class="">Terminology</h1><h2 id="9320d259-4797-4ae9-abea-afc5fc7a4264" class="">Core</h2><h3 id="e34ead4d-ee90-42d1-bbb1-2c59e9ae50f5" class="">Object</h3><p id="6526da02-7a7c-4ce3-ab4f-3d65f27a1f08" class="">Objects are instances of classes that inherit from the <code>UObject</code> class.</p><p id="9e046767-5cae-4dad-9cc3-36a09ccf3134" class=""><code>UObject</code> provides engine features such as reflection, serialization, and garbage collection.</p><p id="814f20ec-d505-4a4e-abe7-fe22cae893ba" class="">This is the base class of all objects in the Unreal Engine.</p><p id="d2ab8b4d-5fc7-410d-be14-db6afb0f53a9" class="">The memory of <code>UObject</code> instances is automatically zeroed before their constructors are called.</p><h3 id="61548c7c-ab65-4d39-8ac8-8ac98dc4cb70" class="">Class</h3><p id="9a05faa6-bbd2-46af-aa1e-1f359793c187" class="">The metadata that represent the type information is exposed as <code>UClass</code> instances in Editor builds.</p><h3 id="2f4557b7-593c-4929-9972-e325a23158ee" class="">Actor</h3><p id="514d4206-7649-4b68-bb02-0bd62398da5a" class="">Actors represents objects that exists in a level.</p><p id="a21a0033-9925-4b02-898d-299857d869c9" class=""><code>AActor</code> is a base type that is inherited for specific types of actors.</p><p id="675622d3-dd8d-4ad2-85bb-c71079d13cab" class="">Actors can be updated (ticked) each frame, or at a custom interval to perform any update calculations or actions over time.</p><p id="aed9379b-33b8-4f63-a5ec-a831f6bf65aa" class="">Actors are ticked through the <code>Tick</code> function.</p><p id="bb599d4e-9439-46ec-b809-2d4930ef9905" class="">Actors contain a hierarchy of ActorComponents.</p><h3 id="cae09b68-d6a7-49a0-b8c8-12151427ee8f" class="">ActorComponent</h3><p id="01ece3d5-1256-4f00-86f1-71729d46d982" class=""><code>UActorComponent</code> is the base type for actor components.</p><p id="ad4dae1b-952d-4393-a4f4-e3ba7549fef4" class="">ActorComponents are ticked through the <code>TickComponent</code> function.</p><h3 id="e47aa784-0411-47ad-a880-ece70200c495" class="">SceneComponent</h3><p id="87ad4541-d860-43d5-8171-5c04d1526d23" class=""><code>USceneComponent</code> contains a transform (position, rotation, and scale).</p><p id="1e85d17a-c150-4b34-baf4-05070fbceac3" class="">SceneComponents can be parented to create a scene hierarchy.</p><p id="6eebdf1e-e167-43de-b77f-4cf8701e5677" class="">The transform of an Actor is determined by its <code>RootComponent</code> property, which is a SceneComponent.</p><h3 id="58fcd304-fbaf-4772-816c-308ba5a665a1" class=""><strong>PrimitiveComponent</strong></h3><p id="0d5e06d6-c64d-45c0-8213-a522a9588284" class=""><code>UPrimitiveComponent</code> is the base type to represent visual objects such as a mesh, a terrain, a particle system, or a geometry.</p><h2 id="db6c62fe-ce3d-4e4a-aa5f-0292f77431e2" class="">Gameplay</h2><h3 id="6eeb4f08-a0ef-4e28-bb9b-65b3017766b6" class="">Pawn</h3><p id="d3b15da9-e814-4eb6-b8b5-4e39896baf08" class=""><code>APawn</code> represents a controllable actor in a level.</p><p id="b286b5a3-cc4d-4cf3-a189-de27847da1bf" class="">A Pawn is controlled (possessed) by a player or an AI.</p><h3 id="d361ef91-63d8-41b5-84fc-ad478cd73975" class="">Character</h3><p id="3f34d379-e74a-4bba-97a3-253b6ac1d013" class=""><code>ACharacter</code> represents a Pawn Actor used as a player character.</p><p id="0f81c909-ac24-4089-915c-b8ae03c68936" class="">A Character provides collisions, input bindings, and movement for a controllable character.</p><h3 id="5d206a4d-6b36-47e4-b1e7-b9d1b32edbff" class="">Controller</h3><p id="0343aae9-71d3-4087-bf99-2750820b829a" class="">A <code>AController</code> possesses a Pawn or a Character.</p><p id="2e58563c-cdc1-4a2b-a303-5ddad149ef21" class="">The main controllers are:</p><ul id="58a85169-e3af-4344-a26a-103e94412d6b" class="bulleted-list"><li><code>APlayerController</code> – Controller for the representation of the player in a game.</li></ul><ul id="8a8abae7-e69f-455f-ae6a-5ed7421f26a3" class="bulleted-list"><li><code>AAIController</code> – Controller for a non-player character (NPC) in a game.</li></ul><h3 id="e9fc4c3c-da58-4d9f-99ef-7266b9d3aeb9" class="">PlayerCameraManager</h3><p id="70a72245-a90e-40c9-bce8-123f9256144b" class="">A <code>APlayerCameraManager</code> represents a Camera.</p><h3 id="b5dec44b-2c94-46e4-bb10-f6d6cfce8a7f" class="">Brush</h3><p id="4ab7d103-8c13-41e9-9019-a83100be7d3b" class="">A Brush is Actor that represents level geometries (BSP) and volumes.</p><p id="63dc3adc-0e4d-41d2-b731-433040892392" class="">Brushes are used to prototype levels, and set up gameplay volume for triggers and collisions.</p><h3 id="227329ef-ea8a-4d99-8cb6-289c1ae0ccca" class="">Level</h3><p id="fba82e70-7ef1-483f-a3bb-9a02ad48ac59" class="">A Level is a container for Actors.</p><p id="027ecd2b-a8e3-4b44-bd13-423856930ece" class="">A Level is stored as a <code>.umap</code> file in the <strong>Content</strong> folder.</p><h3 id="42bd29bd-df69-45d5-8830-ac0260d7b9e9" class="">World</h3><p id="362e4fdf-d3fe-484e-b328-a6f72b9ef335" class="">A World contains a list of Levels.</p><p id="945ef7f3-ca9b-457a-abaa-86552b7828ac" class="">Levels can be streamed in and out during gameplay.</p><h2 id="9e8465fb-a656-413b-b7f7-2eeba0e1b5e4" class="">Game Rules</h2><p id="21eb6e9e-fa2e-4f71-9a3d-ea0a27925e9f" class="">A game is made up of a GameMode and GameState.</p><p id="772732f8-525c-4bea-ad34-f5e9d06c17f0" class="">Players joining the game are associated with PlayerControllers.</p><p id="e78e5c80-3ceb-4f44-bd28-7ba34f4b3966" class="">The Game Rules objects are used in multiplayer games.</p><h3 id="646cacad-e0e7-4e06-922a-56bfeef2f9f9" class="">GameMode</h3><p id="72a5e1ad-49c7-4f42-94b1-4dd7ee1e0dfa" class="">The GameMode contains the rules of the game.</p><p id="3075281a-b400-422e-96f7-706a541ad853" class="">GameMode is stored on the server.</p><h3 id="3c99dd55-7adf-46ba-bb0e-fee06b0da26d" class="">GameState</h3><p id="d259531f-63b3-4866-b0e3-6983a2eba8aa" class="">The GameState contains the current state of a play session.</p><p id="b6346ff1-1a0e-4f9f-806c-fc26dc2bb3cb" class="">GameState is stored on the server and every clients.</p><h3 id="16ee0148-7cb8-4e77-b067-0d62e97d120f" class="">PlayerState</h3><p id="9309565e-a799-4c81-9f48-89800b5c81b0" class="">The PlayerState contains the state of the players and bots.</p><h1 id="cb3012be-7519-4613-a168-91aec9921029" class="">Blueprint Function Libraries</h1><p id="cc8303a6-c10d-423c-acf4-77bc128c2a34" class="">Blueprint Function Libraries are a collection of C++ static functions.</p><p id="ec6aee00-a92e-451a-bec0-2958bec8ef27" class="">To create Blueprint Library, create a new C++ class that inherits from <code>UBlueprintFunctionLibrary</code>.</p><p id="978caacc-9325-4156-8e26-085446ecaaf3" class="">The class needs the <code>UCLASS</code> and <code>GENERATED_UCLASS_BODY</code> macros.</p><p id="1502f82b-6dfb-4ef9-9048-e64968f4c5f5" class="">The class should only contain static methods.</p><p id="f20d6b87-12fe-4680-a8bd-8e245b30a518" class="">Functions that are exposed to Blueprint need the <code>UFUNCTION</code> macro with the <code>BlueprintCallable</code> or <code>BlueprintPure</code> specifier.</p><p id="3df9568c-1e39-4c58-b62a-91fbda0d9011" class="">For example, the <code>UMyBlueprintLibrary</code> exposes the <code>MyFunction</code> static function to Blueprint:</p><pre id="7397b4ab-2a0d-43e7-9b3f-06efcb8e476b" class="code"><code>UCLASS()
+class UMyBlueprintLibrary : public UBlueprintFunctionLibrary
+{
+    GENERATED_UCLASS_BODY()
+
+    UFUNCTION(BlueprintCallable, Category=&quot;MyCategory&quot;)
+    static bool MyFunction();
+};</code></pre><h1 id="fa207817-eafe-4096-aa98-404df6431797" class="">Subsystems</h1><p id="a8ab897b-b5dd-4d62-9f92-b88587d08b3f" class="">Subsystems are automatically instanced classes with managed lifetimes.</p><p id="08ce6ec7-e3ec-491a-8ceb-0709d4abbc37" class="">Subsystems are useful when creating plugins.</p><p id="6a37165b-c0d5-4bb4-a228-07eb2c8273fd" class="">There are four subsystems:</p><div id="ddceab04-40ae-43dd-85fa-2fe8ec2a444c" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th>Subsystem</th><th>Type</th><th>Access</th></tr></thead><tbody><tr id="f7fc44de-dee8-4c6a-a4c3-5b3e24867509"><td class="cell-title"><a href="Overview/Untitled Database 1/Engine.html">Engine</a></td><td class="cell-&#x27;,`M">UEngineSubsystem</td><td class="cell-Hjp1">GEngine-&gt;GetEngineSubsystem</td></tr><tr id="138c30ee-6bc0-4acb-8ebd-64f5bd3e8cd3"><td class="cell-title"><a href="Overview/Untitled Database 1/Editor.html">Editor</a></td><td class="cell-&#x27;,`M">UEditorSubsystem</td><td class="cell-Hjp1">GEdito-&gt;GetEditorSubsystem</td></tr><tr id="71b77a7d-212e-4abf-a807-a060ad0b9a95"><td class="cell-title"><a href="Overview/Untitled Database 1/GameInstance.html">GameInstance</a></td><td class="cell-&#x27;,`M">UGameInstanceSubsystem</td><td class="cell-Hjp1">GameInstance-&gt;GetSubsystem</td></tr><tr id="8340bdd8-28c4-48c4-a159-615b9b81aad8"><td class="cell-title"><a href="Overview/Untitled Database 1/LocalPlayer.html">LocalPlayer</a></td><td class="cell-&#x27;,`M">ULocalPlayerSubsystem</td><td class="cell-Hjp1">LocalPlayer-&gt;GetSubsystem</td></tr></tbody></table></div><p id="6e68eb01-e33e-4b49-ac93-9ad3b81791b1" class="">Subsystems are automatically exposed to Blueprints.</p><h1 id="3a236d6d-4697-4e3b-9697-c8b6ce2c3505" class="">Module</h1><p id="fd0df329-61cd-4b9a-9ca8-f704a1473c12" class="">A game is made up of one or more gameplay modules.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fa606404-d339-4e0c-98a8-52a276832e63"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Usually a game contains only one module.
+Additional game modules may improve link times and provide faster code iteration.</div></figure><p id="f2e31373-6022-48d0-8de2-2b80e56cf06d" class="">A module is a container for a set of classes.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1d356bcf-04f0-4a00-8371-520ce8d0110a"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Modules are similar to Packages from UE3.</div></figure><p id="8d716925-2f7e-48e9-9890-6b50ef4b1e53" class="">A module contains the following folders:</p><ul id="b6949e54-6fb1-428b-8abd-1cfcf2a8163c" class="bulleted-list"><li>Public</li></ul><ul id="203cd7bf-cb51-4bfd-b323-60d374ba0f53" class="bulleted-list"><li>Private</li></ul><p id="0ce2f09c-030b-4fe7-b678-464f868f2486" class="">A module must contain:</p><ul id="4ed1010b-1f4e-4e5c-a175-71396339771b" class="bulleted-list"><li>A header file (.h) in the <strong>Public</strong> folder</li></ul><ul id="dce31f99-a7d6-4a3b-a882-e1151e008582" class="bulleted-list"><li>A C++ file (.cpp) in the <strong>Private</strong> folder</li></ul><ul id="13bb81af-11b5-4fb6-b102-902c4250a86b" class="bulleted-list"><li>A build file (*.Build.cs) in the root folder</li></ul><h3 id="298e7ab2-a1a0-40f9-8fb5-4aba474bbea3" class="">Header</h3><p id="05623dca-a621-45ab-b2f9-51347131dfe8" class="">The header file includes <code>Engine.h</code>, <code>EnginePrivate.h</code> and the generated headers.</p><pre id="85b66fd6-ed9b-4acc-b420-a01bef6b363f" class="code"><code>#include &quot;Engine.h&quot;
+#include &quot;EnginePrivate.h&quot;
+#include &quot;&lt;ModuleName&gt;Classes.h&quot;</code></pre><h3 id="ae847f30-6f78-40e3-96a2-669572c6e821" class="">Source</h3><p id="95234ba9-c5a7-4714-ade9-3417a398d331" class="">The source file registers and implements the module.</p><p id="3494af06-5b6d-44be-91af-978da781d21e" class="">The primary module must be registered using <code>IMPLEMENT_PRIMARY_GAME_MODULE</code>.</p><p id="3a585136-816c-4e89-b7f4-fd5605950554" class="">Additional modules use <code>IMPLEMENT_GAME_MODULE</code>.</p><pre id="eb9bf028-e256-485c-bbbe-bc5263a0cb21" class="code"><code>#include &quot;&lt;ModuleName&gt;.h&quot;
+
+IMPLEMENT_PRIMARY_GAME_MODULE( &lt;ModuleName&gt;, &quot;&lt;GameName&gt;&quot; );</code></pre><h3 id="1bb7d073-43c7-4806-8888-9a803059e744" class="">Build</h3><p id="03a73d6e-2b1c-4d78-aa09-7cffba1ec123" class="">The build file defines the public and private dependencies used by the <strong>UnrealBuildTool</strong> to compile the module.</p><pre id="f9df6352-beae-44e6-97dc-277ac6b3e5ec" class="code"><code>using UnrealBuildTool;
+
+public class &lt;ModuleName&gt; : ModuleRules
+{
+    public &lt;ModuleName&gt;( TargetInfo Target )
+    {
+        PublicDependencyModuleNames.AddRange( new string[] { &quot;Core&quot;, &quot;Engine&quot; } );
+        PrivateDependencyModuleNames.AddRange( new string[] { &quot;RenderCore&quot; } );
+    }
+}</code></pre><h3 id="99a32bbf-81c0-49bb-a907-3e2fa2eb992d" class="">INI</h3><p id="54eb6b1d-d2f1-41d1-b8e1-a1c9cac5201a" class="">Every module is registered in the <code>DefaultEngine.ini</code> file.</p><pre id="c2cb3eb9-1617-472b-a9d6-bf59630d6b9b" class="code"><code>[UnrealEd.EditorEngine]
++EditPackages=&lt;ModuleName&gt;
+
+[Launch]
+Module=&lt;ModuleName&gt;
+
+[/Script/Engine.UObjectPackages]
++NativePackages=&lt;ModuleName&gt;</code></pre><h1 id="8e87dd83-b0ea-4d23-a92d-ed92115d8ce5" class="">Plugins</h1><p id="c9ba3d2c-8a85-48aa-8205-75089a0ec686" class="">Plugins are a set of code and data can be enabled or disabled on a per-project basis.</p><p id="d140c37d-f2d2-4bf5-becd-1edc6b702511" class="">Plugins can add or modify Engine and Editor functionality.</p><p id="2776cb02-0fe5-490e-ac3d-1b5822e8c13f" class="">Many subsystems are designed to be extended by Plugins.</p><p id="570de870-cbf1-44fc-8ab0-18a3b34e3363" class="">Plugins are located in the <strong>Plugins</strong> folder either in the Engine folder, or the Project folder.</p><p id="ac15d568-d1ac-47f0-aa53-6933d082ce95" class="">Plugins are identified using Plugin Descriptors which are JSON files with the <code>.uplugin</code> extension.</p><p id="1f835785-22fd-4c3b-a956-bb0324a73e32" class="">The Plugin Descriptors are serialized as <a href="https://api.unrealengine.com/INT/API/Runtime/Projects/FPluginDescriptor/index.html"><code>FPluginDescriptor</code></a> structures.</p><p id="c13dd761-3293-4a2e-993a-fad7e16b590e" class="">The icon for a Plugin is a 128 x 128 PNG file called <code>Icon128.png</code> and stored in the Plugin&#x27;s <code>Resources</code> directory.</p><p id="75693cff-8f68-439d-bd6a-894b958d640d" class="">Plugins can have one or many Modules.
+For example, a runtime and Editor-only module.</p><p id="0d6fd7dd-33c9-4b5f-bc6f-7b82508a0121" class="">Project Modules can depend on other Plugins and Plugins can depend on other Plugins.</p><h2 id="112f0478-6c26-479d-9c0a-c34a55d0a4ec" class="">Structure</h2><ul id="4e8b7bec-c424-4646-bb7f-59b3ce1742d0" class="bulleted-list"><li><code>PluginName.uplugin</code> – Plugin Descriptor</li></ul><ul id="dd8d15f3-a8be-4b1e-92f4-961afec30613" class="bulleted-list"><li><code>Resources/Icon128.png</code> – Icon for the Plugin.</li></ul><ul id="774e56e0-4b0f-4515-ac3e-f32c7becfcf6" class="bulleted-list"><li><code>Source</code> folder – C++ source code for the Plugin.</li></ul><ul id="da54130f-1075-46ac-a131-d613a37b485a" class="bulleted-list"><li><code>Content</code> folder – Assets for the Plugin.</li></ul><ul id="87882755-018a-4082-bc46-7d5a180eeb80" class="bulleted-list"><li><code>Config</code> folder – INI configuration files for the Engine and Editor.</li></ul><ul id="81811551-594d-4934-8765-94600750af95" class="bulleted-list"><li><code>Binaries</code> folder – Binaries for the Plugin.</li></ul><h1 id="1b5fce17-a4d6-4100-ab6c-3e227e5e1433" class="">Code Generation</h1><p id="1cdf3649-630b-447f-99cb-54ddd83fc2ac" class="">The UE4 metadata is represented by types declared in the <code>UE4CodeGen_Private</code> namespace.</p><p id="f7be8e85-08ac-417c-915d-52f7fb87b31e" class="">The generated C++ code declare:</p><ul id="a7678d9f-92ca-425e-a227-1353559539b6" class="bulleted-list"><li>Private move and copy constructors with no implementation to disable moving and copying instances.</li></ul><ul id="8cfa2db6-5897-41f1-a272-02f1b5174069" class="bulleted-list"><li>A default constructor.</li></ul><ul id="a4a260d5-eaa1-4065-8311-fb4eae3ce144" class="bulleted-list"><li>A standard constructor with a single parameter: <code>const FObjectInitializer&amp; ObjectInitializer</code>.</li></ul><ul id="544bd697-f5ca-4e33-a13a-c7013237c672" class="bulleted-list"><li>A private static <code>StaticRegisterNatives&lt;TypeName&gt;</code> function.</li></ul><h1 id="d4f441d0-7588-4b1b-a776-6c48a987aac9" class="">References</h1><ul id="3d20cbfd-bf70-4246-bba3-5c6f95000d23" class="bulleted-list"><li><a href="https://docs.unrealengine.com/en-US/Programming/Development/CodingStandard/index.html">Coding Standard</a></li></ul></div></article></body></html>

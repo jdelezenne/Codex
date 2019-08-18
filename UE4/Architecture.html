@@ -1,0 +1,654 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Architecture</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="eee71a3c-9070-4257-8e7b-37092fbc92d5" class="page sans"><header><h1 class="page-title">Architecture</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th>Created</th><td><time>@Aug 15, 2019 2:45 PM</time></td></tr><tr class="property-row property-row-multi_select"><th>Tags</th><td></td></tr></tbody></table></header><div class="page-body"><h1 id="9f3363f1-ee0d-4f7e-93ee-a6591974f444" class="">Source Code</h1><p id="3ea135bb-0480-4d09-a184-64cda4973d7e" class="">The Unreal types have prefixes to indicate their kind:</p><ul id="15d88c62-ad20-4166-8f80-35f655003e46" class="bulleted-list"><li><strong>U</strong> – Classes that derive from <code>UObject</code>.</li></ul><ul id="e65a1cb5-4654-4726-851d-5f58c666f658" class="bulleted-list"><li><strong>A</strong> – Classes that derive from <code>AActor</code>.</li></ul><ul id="8a214156-41f5-46ba-af46-0483889af866" class="bulleted-list"><li>S – Classes that derive from <code>SWidget</code>.</li></ul><ul id="db482577-b517-4cfa-b8a3-0a2a0df50146" class="bulleted-list"><li><strong>T</strong> – Template classes.</li></ul><ul id="9fd7f029-773f-4824-8168-0f1ab6fab7ad" class="bulleted-list"><li><strong>I</strong> – Interface types.</li></ul><ul id="50afa910-154a-45fd-b69c-e36a6cc5d980" class="bulleted-list"><li><strong>E</strong> – Enumerations.</li></ul><ul id="dba96e67-ee9f-435a-a40f-14d971d7b219" class="bulleted-list"><li><strong>F</strong> – Any other type (mostly POD structures).</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a30941a0-f8f9-434b-8447-ac8c48fc750f"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">The source file and header file for a type do not include the prefix.</div></figure><p id="3f92f0af-fa96-478f-8804-e8e31b0533a4" class="">Some variables also have prefixes:</p><ul id="b459bcc7-e157-46cd-9532-65bc268cfad0" class="bulleted-list"><li><strong>b</strong> – Boolean variable.</li></ul><h2 id="dfd7c8bd-c8b9-4c45-aa05-f2dcb977697f" class="">Containers</h2><p id="88fceeac-55b6-44e2-80b6-b99ba6ff0af2" class="">Unreal containers are templated classes.</p><div id="28eeaa9a-0a3c-4990-8a61-9883be8f766b" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th>Type</th><th>Container</th></tr></thead><tbody><tr id="cf01d0c4-40ee-4a78-b7fc-29cdfcf4799e"><td class="cell-title"><a href="Architecture/Untitled Database/Vector.html">Vector</a></td><td class="cell-T9)I"><code>TArray</code></td></tr><tr id="98dfb78c-d07c-4e01-b50d-6a0d9b85d8aa"><td class="cell-title"><a href="Architecture/Untitled Database/List.html">List</a></td><td class="cell-T9)I"><code>TList</code></td></tr><tr id="7a5db02d-eddc-4e87-b32e-08d9b0becc88"><td class="cell-title"><a href="Architecture/Untitled Database/Map.html">Map</a></td><td class="cell-T9)I"><code>TMap</code></td></tr><tr id="4263f4b7-2b04-41f7-9c5b-71fe7218ec30"><td class="cell-title"><a href="Architecture/Untitled Database/Unordered Map.html">Unordered Map</a></td><td class="cell-T9)I"><code>TMultiMap</code></td></tr><tr id="65aa7022-d92f-49a1-8ce0-e083260bfef6"><td class="cell-title"><a href="Architecture/Untitled Database/Set.html">Set</a></td><td class="cell-T9)I"><code>TSet</code></td></tr></tbody></table></div><p id="896f4b9e-f971-48b4-824d-797565bdb41b" class=""><code>TArray</code> supports the standard allocators (<code>FHeapAllocator</code> and <code>TInlineAllocator</code>).</p><p id="f01e0513-cc0d-41e9-80ed-bd1bc2fc3922" class=""><code>TMap</code>, <code>TMultiMap</code>, and <code>TSet</code> to do not support the standard allocators.
+They support the <code>TSetAllocator</code>, which defines how many hash buckets the container should use.</p><h3 id="2cb366e4-f94a-40cf-b40f-ea6bbb0e7b94" class="">TArray</h3><p id="7958aa92-46dd-4e60-8f5d-86fba19d7029" class=""><code>TArray</code><strong> </strong>is a dynamic array of contiguous values (similar to <code>std::vector</code>). </p><p id="eab0059a-ae66-4751-8356-0afc9a1bfc48" class=""><code>TArray</code> supports garbage collection when declared with the <code>UPROPERTY</code> specifier and contain values derived from <code>UObject</code>.</p><p id="a63e9cf0-b03f-455e-8886-4f2d0aca9936" class=""><code>TArray</code> uses by default, the heap-based allocator.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3952f8ea-d269-45fa-ae3a-4addb503cadc"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">When using a non-default allocator, the <code>UPROPERTY</code> specifier is not supported.</div></figure><p id="4c69dbd6-101a-4776-bc06-36609d4505e6" class="">When a <code>TArray</code> is declared, no memory is allocated.</p><p id="220a342b-8a14-4e04-ab7a-770940dcb16b" class=""><strong>Insertions</strong></p><p id="144db611-2d00-42d4-a2f1-6db780288a41" class="">A <code>TArray</code> can be populated using different methods:</p><ul id="2156fa61-38aa-4776-b254-43e58a526e33" class="bulleted-list"><li>The <code>Init</code> function fills the array with a number of copies of an element.<pre id="08afc1fe-6fb5-4f04-b5f2-c38003f78a31" class="code"><code>TArray&lt;int32&gt; IntArray;
+IntArray.Init(10, 5);</code></pre></li></ul><ul id="bd122feb-612d-4a47-a16a-e9f790eb435b" class="bulleted-list"><li>The <code>Add</code> and <code>Emplace</code> functions create new elements at the end of the array.
+<code>Emplace</code> avoids creating a temporary variable.
+<code>Add</code> should only be used with trivial types.<pre id="fff2d67b-e3b1-4b02-94a8-ced81724d26f" class="code"><code>TArray&lt;FString&gt; StrArr;
+StrArr.Add(TEXT(&quot;Hello&quot;));
+StrArr.Emplace(TEXT(&quot;World&quot;));</code></pre></li></ul><ul id="e868045e-e54e-4b80-b818-71c4a3b2d878" class="bulleted-list"><li>The <code>Append</code> function adds multiple elements from another array or a pointer to a C-style array.<pre id="277e5a01-5d2d-4d9b-b392-7d175d5ae138" class="code"><code>FString Arr[] = { TEXT(&quot;Hello&quot;), TEXT(&quot;World&quot;) };
+TArray&lt;FString&gt; StrArr;
+StrArr.Append(Arr, ARRAY_COUNT(Arr));</code></pre></li></ul><ul id="5916a41f-5503-49d9-99c2-efd6d45b1c51" class="bulleted-list"><li>The <code>Insert</code> method adds a single element at a given index.<pre id="499b2904-2342-4f7d-a737-f5f65da79b5c" class="code"><code>StrArr.Insert(TEXT(&quot; &quot;), 1);</code></pre></li></ul><ul id="703d2954-ea5e-4cbc-90aa-f9230a6f4b8d" class="bulleted-list"><li>The <code>AddUninitialized</code> and <code>InsertUninitialized</code> functions add uninitialized space to the array. They do not call the constructor of the element type.
+They can be used to avoid calling constructors when performing a memory copy.<pre id="c685e680-ce4f-4cb8-831b-55b99cdc7d9e" class="code"><code>int32 Arr[] = { 1, 2, 3, 4 };
+TArray&lt;int32&gt; IntArr;
+IntArr.AddUninitialized(4);
+FMemory::Memcpy(IntArr.GetData(), Arr, 4 * sizeof(int32));</code></pre></li></ul><p id="5a19793b-aa38-45f9-9129-6a4c12483456" class=""><strong>Deletions</strong></p><ul id="43be68f2-76b7-4b28-ba25-ebf2507214ac" class="bulleted-list"><li>The <code>Empty</code> function removes all the elements from the array.</li></ul><ul id="70588936-e91d-4a5e-87b2-d8c2c591ea39" class="bulleted-list"><li>The <code>Remove</code> function removes all the elements that are equal to the specified element by shuffling other elements.</li></ul><ul id="6c38356d-6892-4912-86c7-a9d274e2c625" class="bulleted-list"><li>The <code>RemoveSwap</code> function reduces the overhead of shuffling by swapping.</li></ul><p id="a4a5dec7-6ee1-49cd-88a9-dea0c7d87c26" class=""><strong>Access</strong></p><p id="41f4c5ec-38f0-4156-9568-3ab04e53f879" class="">The elements in the array are accessed using the subscript operator with a zero-based index. The operator can be used to mutate the elements inside the array.</p><p id="cebd4546-7c36-4eb9-ab75-4b5403f0d8be" class="">Arrays can be iterated using the C++ ranged-for loops or the regular index-based loops.</p><ul id="bde38fbd-f25a-4515-9aee-1d25a76a4219" class="bulleted-list"><li>The <code>Num</code> function returns the number of elements in the array.</li></ul><ul id="71692935-efe4-42c8-b70c-d0133abb30fb" class="bulleted-list"><li>The <code>SetNum</code> function resizes the array, and if the array is larger, the new elements are created using their type&#x27;s default constructor.</li></ul><ul id="a4a0d6a8-1594-4b43-9a09-948f40733db4" class="bulleted-list"><li>The <code>GetData</code> function returns a direct pointer to the data in the array.</li></ul><p id="5db47d7f-bf53-4c9b-bf67-a89a23041f3c" class=""><strong>Searching</strong></p><p id="48402770-6c7e-4f63-8c14-525536c5a98f" class="">Arrays can be searched for specific elements with:</p><ul id="59914ee7-f79a-40ad-b8b3-61241ad52fc1" class="bulleted-list"><li>The <code>Contains</code> function checks if the array contains a specific element.</li></ul><ul id="fa9ddb34-e2d8-4954-ae5c-0c7396f49e19" class="bulleted-list"><li>The <code>ContainsByPredicate</code> function checks if the array contains an element that matches a specific predicate.</li></ul><ul id="84e2a3fd-cd47-4f04-81f0-dd948b14df73" class="bulleted-list"><li>The <code>Find</code> and <code>FindLast</code> functions have 2 overloads.<ul id="ba62f891-c0fd-48d0-b8e8-94d4daf0467b" class="bulleted-list"><li>They returns a boolean and the index of the first element found.</li></ul><ul id="51e55fc2-cef4-4aac-825a-26d0e812c5e8" class="bulleted-list"><li>They returns the index of the first element found, or <code>INDEX_NONE</code> if no element was found.</li></ul></li></ul><p id="59c0a4ea-3250-4308-a0b4-f7c745487ad6" class=""><strong>Sorting</strong></p><p id="30d5cd02-d875-433b-90b6-8b77aba935db" class="">Arrays can be sorted with:</p><ul id="f38af276-5657-4d93-ae4e-d0721ab723f2" class="bulleted-list"><li>The <code>Sort</code> function using a <em>quicksort</em>.</li></ul><ul id="c46985a2-2f57-435a-bfa5-736b8df0a63d" class="bulleted-list"><li>The <code>HeapSort</code> function using a <em>heap sort</em>.</li></ul><ul id="b28a2a3c-42b9-43db-a614-c41da78939af" class="bulleted-list"><li>The <code>StableSort</code> function to guarantee the relative order of equivalent elements after sorting.</li></ul><h3 id="c9bde8b8-a876-428b-bf7c-aa4942b762a1" class="">TMap</h3><p id="1d24da6c-9a09-452e-bcfb-77c9f4ac04f0" class=""><code>TMap</code><strong> </strong>is a collection of key-value pairs (similar to <code>std::map</code>).</p><p id="0136a730-c248-4bca-96c3-f8e2069d8054" class=""><code>TMap</code> keys are unique.</p><p id="c4b69615-07d9-4198-9130-20aa8c9ddfcb" class="">When adding a new key-value pair with a key that matches an existing pair, the new pair will replace the old one.</p><p id="be78116a-05ac-48bb-a2f7-fea63f07e20c" class="">The backing data structure of a <code>TMap</code> is a sparse array, which is an array that efficiently supports gaps between its elements.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6a2983a8-d325-4108-90cb-2e7734a6cfa3"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">The elements in a <code>TMap</code> are not guaranteed to be ordered in memory.</div></figure><p id="5ec9f134-1ecc-4de5-b79d-11337493bc3b" class="">To determine if a map contains a specific key, call the <code>Contains</code> function.</p><p id="cb081d36-a9c5-43e0-93af-2ff7c8c6ce53" class="">The values in a map are accessed using the subscript operator with a key. The operator can be used to mutate the elements inside the map.</p><p id="76905734-e585-4a59-9100-e57f58fe7783" class="">The <code>Remove</code> function removes all the elements for the specified key. The function returns he number of elements that were removed.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7155c056-e423-414d-8a0a-5bf3e4aca24e"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Removing elements can leave gaps in the backing data structure.</div></figure><p id="94898c8c-45a9-4434-982d-1de0a5aeef14" class="">A map can be sorted:</p><ul id="0859c3a6-1886-4670-9326-8fa02118f2ca" class="bulleted-list"><li>By keys using the <code>KeySort</code> function.</li></ul><ul id="b4581c5f-6a34-4317-b859-6b52a4b33634" class="bulleted-list"><li>By values using the <code>ValueSort</code> function.</li></ul><h3 id="72559f09-93e9-4d7f-b150-3c68a6dd904c" class="">TMultiMap</h3><p id="b408c319-5bb0-4ef2-9910-1f5ad3b94df0" class=""><code>TMultiMap</code><strong> </strong>is a collection of key-value pairs (similar to <code>std::unordered_map</code>).</p><p id="7e52b649-b4e7-487d-a098-afd4ea4096ee" class=""><code>TMultiMap</code> can store multiple, identical keys.</p><p id="535d1776-151a-488d-a41f-9cd66d1011c0" class="">When adding a new key-value pair with a key that matches an existing pair, the old pair and the new pair will be stored.</p><h3 id="6480c86e-25ed-4643-9664-d626c4008b59" class="">TSet</h3><p id="280dc8e9-926f-4ada-a9e8-7787a939320a" class=""><code>TSet</code><strong> </strong>is a collection of unique values (similar to <code>std::set</code>).</p><h3 id="15563b30-8d7c-421c-8009-8604af273289" class="">Hashes</h3><p id="bd74ea82-7457-4b10-a8df-ff09bd103bf0" class="">The <code>TMap</code>, <code>TMultiMap</code> and <code>TSet</code> types use hash values.</p><ul id="88468dad-5034-4c2e-9bd4-cf3ac3fb43e7" class="bulleted-list"><li>Any type with a <code>GetTypeHash</code> function and <code>operator==</code> can be used as a key.</li></ul><ul id="60db82e6-dff9-48a3-b8a7-cfe92ed7d12c" class="bulleted-list"><li>The hash values are used to uniquely identify value in a <code>TMap</code> and a <code>TSet</code>.</li></ul><p id="59cc9a54-8714-48eb-a24f-9648ccad0181" class="">The hash function takes a const pointer or reference to a type and returns a <code>uint32</code> hash value.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5f249f93-c701-4af6-9a90-a383146ae364"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Two equal objects should always return the same hash code.</div></figure><h2 id="2aef5e29-13f3-41b3-afc6-1a6c2c78d1a0" class="">Numeric Types</h2><div id="64730add-f677-4f5a-bbbc-537bbd37b4a3" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th>Types</th><th>Kind</th></tr></thead><tbody><tr id="f5da4bc0-cf3d-483a-86cb-317ec561e5f7"><td class="cell-title"><a href="Architecture/Untitled Database 1/int8 uint8.html">int8/uint8</a></td><td class="cell-i~ac">8-bit signed/unsigned integer</td></tr><tr id="7fef844d-d7f1-42c3-a9ae-c243c49e8a04"><td class="cell-title"><a href="Architecture/Untitled Database 1/int16 uint16.html">int16/uint16</a></td><td class="cell-i~ac">16-bit signed/unsigned integer</td></tr><tr id="e4491a43-e9d1-4ec4-83bb-153609c553ca"><td class="cell-title"><a href="Architecture/Untitled Database 1/int32 uint32.html">int32/uint32</a></td><td class="cell-i~ac">32-bit signed/unsigned integer</td></tr><tr id="0a271c7e-cc0e-49c2-9154-85ae16193c54"><td class="cell-title"><a href="Architecture/Untitled Database 1/int64 uint64.html">int64/uint64</a></td><td class="cell-i~ac">64-bit signed/unsigned integer</td></tr></tbody></table></div><h2 id="5e81ddab-ce29-495e-96b9-f10041ab5d16" class="">Strings</h2><p id="aa91338b-3021-4355-9b29-4c2c41f70fef" class="">All strings are stored in memory in UTF-16 format (2 bytes codepoint, or UCS-2) as <code>TCHAR</code> characters.</p><p id="215e2656-4728-4247-98f7-640e2dffa2d7" class="">During serialization, <code>TCHAR</code> characters less than 0xff are stored as a series of 8-bit bytes, and otherwise as 2-byte UTF-16 bytes.</p><h3 id="1dae86b3-23c0-453d-a7fa-975977729243" class="">TCHAR</h3><p id="3fd1a79a-0d03-4ab0-ac20-4ddc74443807" class=""><code>TCAHR</code> is an array of characters.</p><p id="83b6bf2c-afa9-41ca-b688-552ed93eae6c" class="">The <code>TEXT</code> macro is used with <code>TCHAR</code> literals.</p><h3 id="cd2b7cd1-b730-4202-8d83-371c4c83925b" class=""><strong>FString</strong></h3><p id="d8cfdff6-2059-49b6-90c8-7f897fc9dac3" class=""><code>FString</code><strong> </strong>is a mutable string (similar to <code>std::string</code>). </p><p id="72f8f237-8bab-4800-bba8-128e0cd30787" class="">To create a new <code>FString</code>, use the <code>TEXT</code> macro:</p><pre id="63696c31-7038-4f0b-9151-71221c3951c3" class="code"><code>FString MyStr = TEXT(&quot;Hello World!&quot;).</code></pre><h3 id="2ffb54f9-520c-433a-8275-0d3275dce884" class=""><strong>FText</strong></h3><p id="66d7fefd-5989-4cfd-af5b-d7cad79b35c9" class=""><code>FText</code> is a string used for localized text.</p><p id="57e29ef8-ce11-4a7c-9c83-2f62dea9fc48" class="">To create an empty <code>FText</code>, call the <code>FText::GetEmpty</code> function, or the default <code>FText</code> constructor.</p><p id="57e73d02-44d8-4ac5-b6e7-85203d857b1e" class="">To create a new <code>FText</code>, use the <code>NSLOCTEXT</code> macro.</p><p id="4450c631-8a9b-434c-bac5-b0f2bee84d1a" class="">The macro requires a namespace, key, and a value for the default language.</p><pre id="10e68191-d79e-4eab-a499-57efefd21032" class="code"><code>FText MyText = NSLOCTEXT(&quot;UI&quot;, &quot;Hello&quot;, &quot;Hello World!&quot;)</code></pre><p id="386cb30d-ca75-4ced-b69b-297035755440" class="">The namespace used for localized text can be defined with the <code>LOCTEXT_NAMESPACE</code> macro.</p><p id="55080261-0f60-422c-837a-102a2eb52cbd" class="">The <code>LOCTEXT</code> macro use the current namespace.</p><pre id="e751350e-6ac8-414d-a443-14e6ef6d1b5a" class="code"><code>#define LOCTEXT_NAMESPACE &quot;UI&quot;
+
+FText MyText = LOCTEXT(&quot;Hello&quot;, &quot;Hello World!&quot;)
+
+#undef LOCTEXT_NAMESPACE</code></pre><h3 id="5408153f-62ca-4af5-a7c4-56b8c365b962" class="">FName</h3><p id="33c9c1be-cbfe-4f19-af82-398296cd02ab" class=""><code>FName</code> is a string used as an identifier.</p><p id="b4d9f9df-cbef-45b9-8854-5455fdb8d063" class=""><code>FName</code> is a reference to an immutable case-insensitive string in a global string table.</p><p id="1b3747b7-3263-4f84-aaad-fe715e86a730" class="">It is stored as an index and is more efficient: smaller storage and fast string comparisons.</p><p id="5432af39-3fa5-4523-854a-214865a6d2f4" class="">To create a new <code>FName</code>, use the <code>TEXT</code> macro.</p><p id="1d62ed2d-7e24-4941-8370-a2298e94e84e" class="">There is no conversion from <code>FText</code> to <code>FName</code>.</p><p id="ddf7c9e0-aba8-435e-9ace-290215b00ac2" class=""><code>FName</code> strings are used in assets names, material parameters, skeletal mesh bones...</p><h2 id="0888ef28-b8bc-473d-9f1c-2d751faf579c" class="">Smart Pointers</h2><h3 id="3f1882d1-9926-45fb-a7e6-cda92c3b123f" class="">Types</h3><ul id="9d3df2cd-3976-42d0-9773-a2affd79b8a2" class="bulleted-list"><li><code>TUniquePtr</code> is a unique pointer.
+It owns the object it references.
+<code>TUniquePtr</code> can transfer ownership to its reference, but cannot share it.
+<code>TUniquePtr</code> are the same size as C++ pointers.</li></ul><ul id="dc1ac8eb-82c0-4151-baf8-245edd67bd7e" class="bulleted-list"><li><code>TSharedPtr</code> is a shared pointer.
+It owns the object it references, and can be set to null.
+<code>TSharedPtr</code> can share its reference.
+<code>TSharedPtr</code> are twice the size as C++ pointers (and a 16-byte reference controller).</li></ul><ul id="1568f31a-66aa-4a9e-ab71-8f13b6a79261" class="bulleted-list"><li><code>TSharedRef</code> is a shared reference.
+It is similar to a <code>TSharedPtr</code> but it always references a non-null object.
+A <code>TSharedRef</code> can be created from a <code>TSharedPtr</code>.</li></ul><ul id="e6771c7b-4fcb-4a4e-899a-7d5301b4b1bc" class="bulleted-list"><li><code>TWeakPtr</code> is a weak pointer.
+It is similar to a <code>TSharedPtr</code> but it does not owns the object it references.
+A weak pointer can become null at any time.
+A <code>TSharedPtr</code> can be created from a <code>TWeakPtr</code> by calling the <code>Pin</code> function.
+Weak pointers can break reference cycles.</li></ul><h3 id="283dfee1-93cd-43bd-9406-a21208d7a5a3" class="">Creation</h3><p id="c29c85e2-a00b-44d5-91c1-76f6d124dab7" class="">Shared pointers can be created with the <code>MakeShared</code> function in a single memory block if the object has a public constructor.</p><p id="0ecad412-7cc4-4c1c-abbe-8cd6c1dbdf17" class="">Otherwise, they can be created with the <code>MakeShareable</code> function, which is less efficient.</p><h3 id="ea74575b-1431-44b2-8e2a-c0b22fe239b8" class="">Thread Safety</h3><p id="eb84b2f7-7ed8-43a1-bead-d776a1bfb2e3" class="">By default, smart pointers are only safe to access on a single thread.</p><p id="1aa6f0f2-038a-49c9-882b-79f6525bfae2" class="">They can optionally be made thread-safe, with the additional <code>ESPMode::ThreadSafe</code> template parameter.</p><p id="a99a2c70-bde6-41d9-a244-3cb2feafa1ff" class="">The thread-safety is implemented with atomic operations and is lockless.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="51b0964b-32b6-4588-80a9-136476c59ebc"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">Smart pointers should not be used with <code>UObject</code> types.</div></figure><h1 id="ccab006a-ece8-4aab-af1e-0d8e927a4310" class="">Assertions</h1><p id="5764b1cd-3b24-4688-aeeb-5469f67f5d18" class="">Assertions are declared in <code>/Engine/Source/Runtime/Core/Public/Misc/AssertionMacros.h</code>.</p><h2 id="65a52194-8765-42a1-9684-f2c7d91e79a2" class="">General Asserts</h2><p id="139a857b-8737-419c-939d-e5fe5a2c6e46" class="">These assertion macros are only compiled in certain build configurations.</p><h3 id="b808ae3f-3684-4bd5-bd0e-b3be164ec812" class="">check</h3><p id="e85592d6-0b38-424c-b52b-a4ee213bf9a3" class="">The <code>check</code> macro executes the expression and, if it results in a false assertion, halts execution.</p><p id="3bd3bfda-a2da-49ec-ba80-0cea67be10b6" class="">The macro is enable when <code>DO_CHECK</code> is defined.</p><h3 id="f884ab8f-f907-4cf3-be6a-5b71e9b99e19" class="">checkf</h3><p id="19a1171d-1eb2-4418-87a7-fdd84e26d960" class="">The <code>checkf</code> macro is identical to the <code>check</code> macro.</p><p id="a98428af-6651-4e20-bbd4-2fd5f83741fd" class="">It has an additional parameter to print a message.</p><h3 id="280f41b2-ecf1-4f7f-a7ad-adda226bc5e9" class="">verify</h3><p id="eeb81fe6-b2e3-42b7-9ec3-02001fc22ee4" class="">The <code>verify</code> macro is similar to the <code>check</code> macro, but it is enabled regardless of <code>DO_CHECK</code>.</p><h3 id="2aaa959b-bade-445d-ab19-54a297ce19f1" class="">verifyf</h3><p id="216efc99-f847-4ad5-8e90-58147c1783fd" class="">The <code>verifyf</code> macro is identical to the <code>verify</code> macro.</p><p id="51433c38-defe-4ec7-a5bc-42a80a149a9d" class="">It has an additional parameter to print a message.</p><h3 id="e0d0f8f6-af5f-4e0e-9822-2d2e6cce9cd3" class="">checkNoEntry</h3><p id="c1502926-2654-4984-bc69-453c1db731d4" class="">The <code>checkNoEntry</code> macro is used to always assert in invalid execution paths.</p><p id="88a3aa9c-a1b5-4484-a958-6e2222c99662" class="">A typical example, is in the <code>default</code> block of a <code>switch</code> block.</p><h2 id="373ba779-9ba7-427f-add2-a69f767ea0ec" class="">Development Asserts</h2><p id="a42b5f3a-ea4b-46ff-80bd-772504633198" class="">These assertion macros are only compiled if <code>DO_GUARD_SLOW</code> is defined.</p><p id="1861539d-3fe8-47ec-a841-bb28a00b9d80" class="">The <code>checkSlow</code>, <code>checkfSlow</code>, and <code>verifySlow</code> macros are identical to the previously mentioned macros.</p><p id="19916519-daff-4807-a0ed-06c72a901339" class="">The other macros create a callstack report and are only enabled when <code>DO_CHECK</code> is defined.</p><p id="8c47502f-ed66-4018-a518-091fc6383d80" class=""><code>ensure</code> – Verify the expression.</p><p id="4344b013-865a-42b4-a234-0716cc54ac7a" class=""><code>ensureMsg</code> – Verify the expression with an additional message.</p><p id="1de3f69a-7e67-4d81-a4ee-1713f9d965cb" class=""><code>ensurefMsg</code> – Verify the expression with an additional formatted message</p><h1 id="f6443e0d-aa28-4717-a595-1af4b0c7f27b" class="">Unreal Reflection System</h1><p id="e17012f2-0936-4986-a4d4-4067666ef098" class=""><code>UStruct</code> and <code>UObject</code> types participate in the Unreal Reflection System.</p><p id="cfed530b-5c9d-45c8-bff2-f907acccf4a6" class="">They have the following functionality:</p><ul id="205a595a-458c-436a-ad66-b92b182f27f4" class="bulleted-list"><li>Reflection of properties and methods.</li></ul><ul id="fa045c37-9718-4977-adc4-04227784e2ed" class="bulleted-list"><li>Serialization of properties.</li></ul><ul id="aa89acda-cfd6-4dd6-a766-d969e1782505" class="bulleted-list"><li>Networking support.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="31bb10e0-5fcd-4459-8447-05c34714efe0"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">The metadata generated by the Reflection System can only be accessed in Editor builds.</div></figure><p id="d7351209-d24b-4ce9-8f45-b270e55cf9c0" class="">Unreal generates a header file called <code>&lt;TypeName&gt;.generated.h</code> where <code>&lt;TypeName&gt;</code> is the type name that is reflected.</p><p id="cadcf0d8-6248-449b-a597-e185b0b0740f" class="">This file must be included as the last included header file.</p><pre id="239fab65-38a6-48ed-9a4a-36f2ca6c54c2" class="code"><code>// Other include files
+// ...
+#include &quot;MyObject.generated.h&quot;
+
+// Type declaration
+// ...</code></pre><h2 id="9b4f876f-970e-4afe-ae2f-8811094e2982" class="">Constructor</h2><p id="e9827514-e196-45cb-96ab-637aa0539cb0" class="">Constructor are generally defined in source files.</p><p id="aa024ec5-1b40-422a-88ee-62b20b38c34b" class="">A constructor can be defined <em>inline</em> in a header file if the type includes the <code>CustomConstructor</code> specifier.</p><h2 id="230ed589-db53-4b91-9414-a2f3ec596655" class="">UInterface</h2><p id="6ad09480-7c87-41ff-a32a-c4cd6ae0f73f" class="">Interfaces are C++ classes that are inherited by other classes to share functionality.</p><p id="0c4c2df4-aca5-4b71-80ed-4be18f6a32a5" class="">They are declared with a <code>I</code> prefix and need the <code>GENERATED_IINTERFACE_BODY()</code> macro as the first statement inside their declaration.</p><p id="c0ff5a5a-5ccf-4080-86d5-197f6b3e7790" class="">Unreal requires another C++ class with an identical name but the <code>U</code> prefix instead.</p><p id="1ae6fdec-1553-45f3-b6fb-138df8a5b3bb" class="">That class must:</p><ul id="dd0f9b23-f1d6-4ad0-9a38-15345da8aa88" class="bulleted-list"><li>Derive from the <code>UInterface</code> class.</li></ul><ul id="50be0af2-653e-4c04-adba-24f63d5ec9c9" class="bulleted-list"><li>Include the <code>UINTERFACE()</code> macro before the declaration.</li></ul><ul id="716cb3ec-214e-4fcc-a10c-e83f4c833e3e" class="bulleted-list"><li>Include the <code>GENERATED_UINTERFACE_BODY()</code> macro as the first statement inside the declaration.</li></ul><pre id="a9271676-b6d5-481f-a344-923f03d69122" class="code"><code><strong>UINTERFACE()
+</strong>class UMyInterface : public UInterface
+{
+<strong>    GENERATED_UINTERFACE_BODY()
+</strong>};
+
+class IMyInterface
+{    
+<strong>    GENERATED_IINTERFACE_BODY()
+</strong>
+public:
+    ...
+};</code></pre><h3 id="1cb63041-9958-4601-b458-37fb5339ef24" class="">Usage</h3><p id="41f5e3e7-a835-4f9b-b9c0-7073a569849c" class="">To check if a class implemented an interface, call the <code>ImplementsInterface</code> method.</p><p id="13be2db7-da8d-4b94-9a0f-4ab8a7598444" class="">The method returns true of the class implemented the specified interface.</p><pre id="0422b995-2d94-47a9-b3b5-a4cbf0cd29ca" class="code"><code>bool bIsImplemented = MyObj-&gt;GetClass()-&gt;ImplementsInterface(UMyInterface::StaticClass());</code></pre><p id="d79d631b-85b1-4a66-ae7c-d1106e922806" class="">To cast an object to a specific interface, use the <code>Cast</code> function.</p><p id="339b56ce-5f2b-42fe-9ffe-61b152c2ca6b" class="">The function returns null if the interface is not implemented by the class.</p><pre id="672c357c-7cf9-4d0d-aa08-2f31783ce59e" class="code"><code>IMyInterface* MyInterface = Cast&lt;IMyInterface&gt;(MyObj);</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1dee2f65-cdbb-4d24-b7fa-3e737c1ceb82"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">Do not cast to the U-prefixed type as this class is not implemented.</div></figure><h2 id="89b9848f-19bb-47ce-abfd-7657824f8f8b" class="">UEnum</h2><p id="62b1c3bd-b144-404d-a739-e6669d0ede7a" class="">C++ enumerations can be marked with the <code>UENUM</code> macro and the <code>BlueprintType</code> specifier to expose them to Blueprint.</p><p id="ef3b8311-c493-40e5-ad3f-1e98f3ae6072" class="">Enumeration values can be marked with the <code>UMETA</code> macro and the <code>DisplayName</code> specifier to provide a display name.</p><h2 id="5f0787ad-9659-417c-be75-96a409295f0b" class="">UStruct</h2><p id="5d1c51bc-64da-42a1-a169-e01394bcce0f" class=""><code>UStruct</code> objects are plain old data types that support the Unreal Reflection System.</p><p id="08ba3bbd-13b5-4ac3-8156-58456d2e4ed5" class="">They are not garbage collected.</p><p id="58cef268-1f74-4d2b-9e22-c24c8a49ea15" class="">Typically, they are declared as <code>struct</code> types.</p><p id="6e812011-b961-4da8-97f9-8d2106273c7b" class=""><code>UStruct</code> types need:</p><ul id="4046c960-873c-4a92-ae8d-25e66303e6b3" class="bulleted-list"><li>The <code>USTRUCT()</code> macro before their declaration.</li></ul><ul id="cde285b8-29b7-4949-970d-c91a4ff9b4e6" class="bulleted-list"><li>The <code>GENERATED_USTRUCT_BODY()</code> macro as the first statement inside their declaration.</li></ul><pre id="3ca29e7d-13b8-4b4b-98ac-366f7a8664d5" class="code"><code><strong>USTRUCT()
+</strong>struct FMyStruct
+{
+<strong>    GENERATED_USTRUCT_BODY()
+</strong>    ...
+};</code></pre><h2 id="63bcc572-c94b-44c5-83ef-d42dfb157b3e" class="">UObject</h2><p id="0a26890e-0478-4a8d-8768-212faa82288c" class="">All the classes that need to be reflected derive from the <code>UObject</code> class.</p><p id="63c7e6c5-c673-4fe5-81c7-a590a51156c4" class="">They support garbage collection.</p><p id="5fd4f6ca-2a80-46eb-80ae-0e30bc0beef9" class="">Classes that derive from <code>UObject</code> need:</p><ul id="5552aedf-c4c3-40b4-b96a-9c7adf8806ab" class="bulleted-list"><li>The <code>UCLASS()</code> macro before their declaration.</li></ul><ul id="bc8ef05b-550d-40c1-8394-9095f702b77c" class="bulleted-list"><li>The <code>GENERATED_BODY()</code> macro as the first statement inside their declaration.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="34592bf5-07d9-421f-b89c-909acb7718d7"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">The <code>GENERATED_BODY</code> macro sets the member access level to <em>public</em>.</div></figure><pre id="bf81a302-c86c-4ed2-99cd-92bdc1ac4a20" class="code"><code><strong>UCLASS()</strong>
+class UMyComponent : public UActorComponent
+{
+    <strong>GENERATED_BODY()</strong>
+    ...
+};</code></pre><p id="a18b4079-7c7e-4b0b-af49-9aa2e663dbd4" class="">In overridden methods, the <code>Super</code> typedef can be used instead of the base class name.</p><pre id="4b912ff9-9274-4e76-a5e4-a8e1b960b60e" class="code"><code>void UMyComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+    <strong>Super</strong>::TickComponent(DeltaTime, TickType, ThisTickFunction);
+}</code></pre><p id="624ac046-ed66-40a7-8c41-93044f27ef69" class=""><code>UObject</code> instances are automatically zeroes before their constructor is called.</p><p id="b755d3d4-b202-4417-a745-60f2516a9982" class="">Properties can be initialized in their declaration or in the default constructor.</p><p id="c85c88a8-c57e-4431-8424-a579392a7b11" class="">A constructor overload needs a <code>FObjectInitializer</code> structure which can be used to modify the initialization of base types.</p><h3 id="251946f9-18ae-4f14-9128-856a42e70ac7" class="">Class</h3><p id="52cfa255-8406-486f-8273-da04495dffa6" class="">Each class that derives from <code>UObject</code> has a singleton <code>UClass</code> that contains all of the metadata about the type.</p><p id="81bb29f5-96c1-4a8e-8bf8-a2ea56921cca" class="">The <code>UClass</code> instance contains the <em>Class Default Object</em> (CDO) which is an object initialized by the <code>UObject</code> constructor and used as the <em>template object</em>. The properties of the CDO are copied to every new instance of the corresponding <code>UObject</code>.</p><p id="609bc477-ba5a-476a-b9bf-2e30fce4f647" class="">The <code>UClass</code> is accessible through the <code>GetClass</code> function.</p><p id="101b8dac-061b-45be-baf9-1e518d068a14" class="">A reference to a <code>UClass</code> can be exposed as a <code>UProperty</code>, but without type safety.</p><pre id="ba803cc8-aa16-4094-ad8e-2e7f15a41ad7" class="code"><code>UPROPERTY(EditDefaultsOnly)
+UClass* MyType;</code></pre><p id="c5e3d4e2-6553-4dc2-8d6e-b386a1076f98" class="">For type safety, a reference to a <code>TSubclassOf</code> can be exposed as a <code>UProperty</code> instead.</p><pre id="fe9c1575-8061-42f1-9f52-b7025e10007d" class="code"><code>UPROPERTY(EditDefaultsOnly)
+TSubclassOf&lt;UMyType&gt; MyType;</code></pre><p id="6ed725d8-e170-4934-b05f-7c2cabc271d3" class="">Assigning a <code>UClass</code> to a <code>TSubclassOf</code> performs a runtime check.</p><p id="e8d0af44-a162-478b-ab95-84d9e07997f2" class="">Assigning a <code>TSubclassOf</code> to another <code>TSubclassOf</code> performs a compile-time check.</p><h3 id="3da43fd2-e1b3-4020-855b-c88b551806de" class="">Instances</h3><p id="efa66c0b-9d4a-427c-a3c3-febbe40aa6f7" class="">To create an instance of a <code>UObject</code> class, call the <code>NewObject</code> function with the type of the object as the template argument.</p><pre id="bbe12950-c270-4844-a231-79887116923f" class="code"><code>UMyObject* MyObj = NewObject&lt;UMyObject&gt;();</code></pre><h3 id="2382f9b3-7cc4-4ccb-acb2-67dca55ed965" class="">Destroy</h3><p id="bcd13f9e-c60e-4b54-9e04-b4fb3a586892" class="">To destroy an instance of a <code>UObject</code> class, call the <code>Destroy</code> method.</p><pre id="5935b9fd-199d-4d74-acad-1eafb1a24ecf" class="code"><code>MyObj-&gt;Destroy();</code></pre><h3 id="f974f161-6643-420c-93bc-05b31941777e" class="">Cast</h3><p id="8b742f78-ffa3-4c39-b9f1-c288a70be361" class="">To cast an instance of an object to a more specific type, call the <code>Cast</code> function.</p><pre id="010b205c-d887-495d-9a6e-b7544b2d9975" class="code"><code>UPrimitiveComponent* Primitive = MyActor-&gt;GetComponentByClass(UPrimitiveComponent::StaticClass());
+USphereComponent* SphereCollider = Cast&lt;USphereComponent&gt;(Primitive);
+if (SphereCollider != nullptr)
+{
+    ...
+}</code></pre><h2 id="aa79aab7-e9ea-4934-a5a8-6dd537a2a68c" class="">AActor</h2><p id="157a5263-3e65-43f0-bc07-4e418f02c829" class="">All objects that can be placed into a level derive from the <code>AActor</code> class.</p><p id="1d332ac5-b5ce-4043-995e-b74d20004105" class=""><code>AActor</code> classes provide the following functionality:</p><ul id="38fef859-6f9c-4025-8f42-d4740f0d4aa4" class="bulleted-list"><li>Instantiation in a level (at design-time or run-time).</li></ul><ul id="e36ad75b-77d9-4c18-a390-bc0b57834fb5" class="bulleted-list"><li>Network replication.</li></ul><ul id="e5486d4b-ae20-40dc-92e9-43d025c07182" class="bulleted-list"><li>Contain components.</li></ul><p id="f01a96bc-bc50-4762-889a-467176e6a343" class=""><code>AActor</code> contains a hierarchy of <code>UActorComponent</code> components.</p><p id="172c07a4-f993-422f-839b-ba5bdd3c56f3" class="">The root component is the <code>RootComponent</code> member.</p><p id="a08978c8-f5cf-4d71-b57e-6f6dc99a248f" class="">It is a <code>USceneComponent</code> component that contains other components.</p><p id="df6c1b70-3f35-4357-992a-271a7dd1a620" class="">The <code>USceneComponent</code>  component provides a transform for the <code>AActor</code> (translation, rotation, and scale).</p><h3 id="7aa16831-9068-4eb0-9539-3c2d4a4ed62e" class="">Events</h3><p id="d0f5393f-5f69-4730-96f6-ad4eb6ff1e23" class="">Actors supports different type of events.</p><ul id="7d0643e8-a7b5-4a56-99b4-7858b1c29b97" class="bulleted-list"><li><code>BeginPlay</code> – Called when the level starts ticking.</li></ul><ul id="e856619b-e116-4997-8881-6135e5275dbf" class="bulleted-list"><li><code>Tick</code> – Called once per frame.</li></ul><ul id="816428b4-52e6-4251-85eb-baec00c0a461" class="bulleted-list"><li><code>EndPlay</code> – Called when the actor is being removed from a level.</li></ul><h3 id="3726b993-9ac8-4c97-b0d4-f833db17e75a" class="">Spawn</h3><p id="8ef444b2-f1e3-42b5-8cf3-9bd79bc4e8df" class="">Creating an instance of an actor in a level is known as <em>spawning</em>.</p><p id="c2bf5a8e-2546-48df-aa12-532bb92dd524" class="">Actors are spawns:</p><ul id="f1e5eb24-b1c4-4eca-9d2c-5981ba0b7715" class="bulleted-list"><li>When a level is loaded through <code>LoadMap</code>.</li></ul><ul id="7d5be9dc-d15e-48c7-a191-53a8f75230c5" class="bulleted-list"><li>When a level is streamed through <code>AddToWorld</code>.</li></ul><ul id="ec41bf1d-3ede-4289-b1ea-7453d753e122" class="bulleted-list"><li>During Play in Editor through <code>PostDuplicate</code>.</li></ul><ul id="76695c4f-b817-4c7c-87c5-b5b3c9c5ebdc" class="bulleted-list"><li>Explicitly through <code>UWorld::SpawnActor</code>.</li></ul><p id="62370765-e16c-475b-b4e7-9c1e30c3b644" class="">To spawn an actor, call the <a href="http://api.unrealengine.com/INT/API/Runtime/Engine/Engine/UWorld/SpawnActor/4/"><code>UWorld::SpawnActor</code></a> method with the type of the actor.</p><p id="c28aa183-e909-4b57-9ae3-172085f5037f" class="">There are different overloads, using either a <code>UClass</code> parameter or a template argument.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b7ebc521-2ebd-4b60-afba-8c8678b57e7a"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">When using a <code>UClass</code> parameter, the type must be derived from <code>AActor</code>; and the return value should be cast to the corresponding derived type.</div></figure><p id="c0d11b48-5721-4b97-84ce-192e23f8026d" class="">There are several optional parameters depending on the method overload:</p><ul id="83a16d3e-6ce4-4d95-97e4-75612f1f264d" class="bulleted-list"><li>A name for the actor.</li></ul><ul id="aa817fad-2028-46cd-8db7-36d2fb4c3298" class="bulleted-list"><li>A location and rotation in the world.</li></ul><ul id="8fbd24a5-6881-40a9-823e-a9ab1dfbf215" class="bulleted-list"><li>A template actor to provide default property values.</li></ul><p id="aa1d59e8-e597-4e0b-b1d8-a2556b29ca5b" class="">For example, the most simple template method overload:</p><pre id="fdb4b5eb-4846-4cbc-a2c3-f88e48d51c9f" class="code"><code>template&lt;class T&gt;
+T * SpawnActor()</code></pre><pre id="93483c13-e5be-4a6f-999a-b84231098407" class="code"><code>AMyActor* MyActor = World-&gt;SpawnActor&lt;AMyActor&gt;();</code></pre><p id="44b510ca-31ca-4944-a1f6-9ea5c0357837" class="">When an actor is spawn:</p><ul id="a9a8dd55-6005-4730-9fee-c904126ec490" class="bulleted-list"><li><code>OnActorSpawned</code> is broadcast on <code>UWorld</code>.</li></ul><ul id="70dcee4d-97ce-499e-94b0-990fdf51b1ab" class="bulleted-list"><li><code>BeginPlay</code> is called on the actor.</li></ul><h3 id="fe615c68-6064-45f7-a17f-65eb766616a5" class="">Destroy</h3><p id="23636fe4-ec43-4ab1-a238-cef9ee02afa6" class="">Actors are destroyed:</p><ul id="0b23ea56-0f6b-4223-a302-9cc7d748a041" class="bulleted-list"><li>When a level is unloaded.</li></ul><ul id="bcab39fc-9b7c-4b1c-8ac5-81a1fe3f6069" class="bulleted-list"><li>When Play in Editor is ended.</li></ul><ul id="6e6739d4-2d5f-4263-99bc-0ff47b9ad084" class="bulleted-list"><li>The actor&#x27;s lifetime has expired.</li></ul><ul id="5260eb4a-0ca0-4352-801c-b887f33c7ae4" class="bulleted-list"><li>Explicitly through <code>Destroy</code>.</li></ul><p id="fcd6e191-70aa-4971-82e5-76f767f2e76c" class="">To explicitly destroy an instance of an actor, call the <code>Destroy</code> method.</p><pre id="132784ef-ac32-4b0f-90c4-ade48db66359" class="code"><code>MyActor-&gt;Destroy();</code></pre><p id="eff07a45-2cba-4c99-9a53-370c47d70bd1" class="">The lifespan of an actor can be set with <code>SetLifeSpan</code>.</p><p id="429785ce-5087-4b0e-b64d-f6386a1503a0" class="">When the lifespan expires the object is destroyed.</p><pre id="3de839a0-4fa7-481b-aac2-160972c9e8f5" class="code"><code>virtual void SetLifeSpan
+(
+    float InLifespan
+)</code></pre><p id="e7453da3-404f-4b43-b7aa-9ca0b229d90f" class="">When an actor is destroyed:</p><ul id="5c21fb81-8438-4c90-846e-f4712be350cc" class="bulleted-list"><li><code>EndPlay</code> is called on the actor.</li></ul><ul id="dbfd08e8-6486-40f1-b434-80aea5ae7c54" class="bulleted-list"><li>The actor is removed from the level and marked as <em>pending kill</em> (<code>RF_PendingKill</code>).</li></ul><ul id="e2e2e38b-c506-46ce-bbbe-450a7431fef9" class="bulleted-list"><li>The actor is cleaned up during the next garbage collection.</li></ul><p id="503efb72-412e-4aa3-affe-5638f8ff3b76" class="">To check if an actor is <em>pending kill</em>, store its reference as a <code>FWeakObjectPtr&lt;AActor&gt;</code>, instead of checking explicitly for the <code>RF_PendingKill</code> flag.</p><h2 id="5f98e9b5-7e69-421c-a1d0-ba927000a8ae" class="">AActorComponent</h2><p id="f80235d5-634d-4df5-8c34-10fd4fe1184a" class="">ActorComponents are registered to the Engine to be ticked.</p><p id="e5bdf8ac-851c-4fea-9aee-47ec47b74656" class="">Components created when an Actor is spawned are registered and unregistered automatically.</p><p id="fddfa4bb-3339-4cba-98f5-a514042f49a1" class="">ActorComponents can be explicitly registered with the <code>RegisterComponent</code> function and unregistered with the <code>UnregisterComponent</code> function.</p><h3 id="e79a69a5-f64e-4c39-8819-3646621b944d" class="">Destroy</h3><p id="63de9ea1-9361-4e79-acd8-52451c80f3a9" class="">ActorComponents are destroyed:</p><ul id="62205404-3b9c-44fe-8fba-09c0b5774ac1" class="bulleted-list"><li>When the actor is destroyed.</li></ul><ul id="7e6e6b79-c85c-46dd-bf45-2d5e0e458296" class="bulleted-list"><li>Explicitly by calling the <code>UActorComponent::DestroyComponent</code> function.</li></ul><h1 id="06ad5acb-de3f-44d8-9e64-51c79d574339" class="">Garbage Collection</h1><p id="7775b0b3-4585-4594-98c6-882d7fea4eb8" class="">The garbage collector manages a graph of objects that is regularly analyzed.</p><p id="22a18b55-5715-467a-9f57-5709dac27b95" class="">The <em>root set</em> represents the objects at the root of the graph.</p><p id="e7fcb088-3756-4da2-a77c-557965a53915" class="">References stored as <code>UProperty</code> are retained (directly or indirectly through a <code>TArray</code> container).</p><p id="a552da91-97bb-486d-8f49-f376281579d5" class="">References to objects that have been marked as <em>Pending Kill</em> by the garbage system are automatically set to <em>null </em>(<code>UProperty</code> or <code>TWeakObjectPtr</code>).</p><h2 id="fc8ddf00-05fd-4779-84ab-e845ddd73009" class="">Clusters</h2><p id="de11ebed-642d-48a9-b2a9-2c76b67753a7" class="">The garbage collector builds clusters of objects that are all destroyed together.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a03092af-81f9-47e3-a580-728e039bdb2d"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Combining objects into clusters and releasing the memory at once is more efficient than releasing objects individually.</div></figure><h2 id="bf16fde9-7998-4f53-8519-75cf0442d533" class="">Cluster merging</h2><p id="d70084e8-3db7-440e-af41-91881a0a18fe" class="">Cluster merging is disabled by default, except for StaticMeshActors.</p><p id="7b5d1a29-fdc5-4476-98b0-c627750a571f" class="">When cluster merging is enabled, the clusters of the object being loaded and the referenced object are combined.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="37562926-a16d-4c3f-8c9e-0d682d301b27"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">In open-world games, many clusters may merge together and form large clusters of objects that are kept in memory.</div></figure><h2 id="f1e89358-fc9a-4172-826b-af573908b5ff" class="">Collection</h2><p id="9690b71f-8c09-4cd6-a91b-c8bf5ce6e206" class="">When an object is destroyed during the garbage collection, the following functions are called.</p><ol id="a7131081-1c26-42d4-a93f-f81a763c68b6" class="numbered-list" start="1"><li><code>BeginDestroy</code> – The object should free up memory and handle multithreaded resources.</li></ol><ol id="ce3ba414-236b-4655-8b14-6787695a36a5" class="numbered-list" start="2"><li><code>IsReadyForFinishDestroy</code> – Determine whether the object is ready to be deallocated. By returning <em>false</em>, the destruction can be deferred to the next garbage collection.</li></ol><ol id="9d5c200b-f9a1-4e92-b8b6-2d6f983ae12c" class="numbered-list" start="3"><li><code>FinishDestroy</code> – Last call before the memory is freed.</li></ol><h1 id="35d604f5-ffb2-41d3-aaa9-5193a10eaaec" class="">Serialization</h1><p id="397c51be-703e-45fb-a33e-aaac44caaf0a" class="">The serialization of UObject types is performed in the <code>UObject::Serialize</code> function.</p><p id="cde4e87b-b560-47c2-96a0-1358a2adb8bb" class="">The function can be override to implement a custom behavior.</p><h1 id="b8f1cbf4-30ce-4e82-a85f-fdbd5d202f7a" class="">Macros</h1><h2 id="1195cde7-5f63-4756-a510-013b625d172e" class="">USTRUCT</h2><p id="50cb288d-125b-4467-a96c-22e9285a4807" class=""><code>USTRUCT</code> exposes a C++ struct.</p><p id="ea3c1aad-5b4e-4479-bd24-e0a784d4a52a" class="">A <code>USTRUCT</code> can contain <code>UPROPERTY</code> and <code>UFUNCTION</code> members.</p><h3 id="3e38865f-0b83-4522-8573-835b3b037f11" class="">Specifiers</h3><ul id="9271cbbc-7544-4475-b8ef-9e7db4fb08ea" class="bulleted-list"><li><code>BlueprintType</code> – Exposes the struct as a type that can be used in Blueprint.</li></ul><h2 id="69547f16-e564-4aca-9c92-e58c4b3d1711" class="">UINTERFACE</h2><p id="968678d4-95a0-400d-a945-3e342956a28d" class=""><code>UINTERFACE</code> exposes a C++ interface.</p><p id="227c0130-6e30-4aa2-9e36-3887e6bb4dfb" class="">A <code>UINTERFACE</code> do not contain any member.</p><p id="074ad2c8-609d-4731-894e-46c00e153cd1" class="">The corresponding C++ interface can contain <code>UPROPERTY</code> and <code>UFUNCTION</code> members.</p><h3 id="fa78f6b2-127e-4a4b-ac6d-4bdcfa14c0e2" class="">Specifiers</h3><ul id="82d3c3c1-9736-4442-ab2f-d51ed3b994d7" class="bulleted-list"><li><code>BlueprintType</code> – Exposes the interface as a type that can be used in Blueprint.</li></ul><ul id="9f50d2c5-8c1a-4364-aab9-a017299e5c56" class="bulleted-list"><li><code>MinimalAPI</code> – Only the type information is exported for use by other modules.</li></ul><ul id="4ecd133a-c4f7-4b4a-acf8-27f613b2bfcc" class="bulleted-list"><li><code>Blueprintable</code> – Exposes the interface to be implemented in Blueprint.</li></ul><p id="8a3397f3-bdde-447b-b69c-f3af42a536db" class="">A <code>Blueprintable</code> interface provides functions to be implemented in Blueprint with the <code>BlueprintNativeEvent</code> or <code>BlueprintImplementableEvent</code> specifiers.</p><h2 id="cf76317b-832f-472e-a3c8-e37deeab5536" class="">UCLASS</h2><p id="cdd6d40f-ea7c-489b-be48-48a406a6edbc" class=""><code>UCLASS</code> exposes a C++ class that derive from <code>UObject</code>.</p><p id="197553eb-0e81-4ce5-b087-ac235d5c1f3d" class="">A <code>UCLASS</code> can contain <code>UPROPERTY</code> and <code>UFUNCTION</code> members.</p><h3 id="e4c27894-5390-41b2-8ca0-64adb917df06" class="">Specifiers</h3><p id="9204ab50-a5ce-4d40-8685-e83164e19545" class="">The specifiers are inherited from the base types.</p><p id="889f7829-2a9a-40be-b4e8-03affd5f3003" class="">Some specifiers can be explicitly negated in derived types.</p><p id="7c41c405-0b7f-4790-9d00-4ef6abe45fde" class="">Default specifiers (implicit unless negated by another specified):</p><ul id="0f1c5e8c-e529-4975-bc91-cb0d65f03cf5" class="bulleted-list"><li><code>NotBlueprintable</code> – Do not expose the class as a base class for Blueprints.</li></ul><p id="b7d9c4ca-7379-40ec-836f-dd2b523caaad" class="">Other specifiers:</p><ul id="217766b9-7d95-4fce-b85c-5f605d772805" class="bulleted-list"><li><code>Abstract</code> – Declare an abstract base class. Cannot be instantiated in a level.</li></ul><ul id="8b24880e-86f0-4c4d-a4a6-f951563678bd" class="bulleted-list"><li><code>Blueprintable</code> – Exposes the class as a base class in Blueprint.</li></ul><ul id="4d52dd79-cc0f-4744-a2ad-f647ddec1a45" class="bulleted-list"><li><code>BlueprintType</code> – Exposes the class as a type that can be used in Blueprint.</li></ul><ul id="cede3c29-7a90-40fc-ba4f-555103c183b6" class="bulleted-list"><li><code>CustomConstructor</code> – Prevents the automatic generation of the constructor declaration.</li></ul><ul id="b82dfa48-dd0e-48a3-9168-5a6d3adb3528" class="bulleted-list"><li><code>MinimalAPI</code> – Only the type information is exported for use by other modules.</li></ul><ul id="22ddf92f-f385-44a3-b418-b08a10e5bb25" class="bulleted-list"><li><code>Placeable</code>/<code>NotPlaceable</code> – Whether the class can be created in the Editor (level, Blueprint, UI scene).
+The flag is propagated to child classes.</li></ul><ul id="f5573ff2-8ab9-4e91-93e2-0a7a9fec206b" class="bulleted-list"><li><code>Transient</code>/<code>NonTransient</code> – The class is non-persistent and is not serialized.
+The flag is propagated to child classes.</li></ul><p id="adb41c50-7130-4af9-8c5e-25fedc47f0f9" class="">Internal specifiers (used by Epic Games):</p><ul id="11a1691a-8670-4204-888c-253f27481d93" class="bulleted-list"><li><code>Intrinsic</code> – Indicates that the class do not contain generated code from the UnrealHeaderTool.</li></ul><ul id="9ea677d0-ee57-4cec-815a-7a44f8a762eb" class="bulleted-list"><li><code>NoExport</code> – Indicates that the class is not included in the generated C++ header file.</li></ul><h2 id="cd133233-b74d-41ba-b518-0ab21acade6e" class="">UPROPERTY</h2><p id="1a18233a-e6cf-41ab-9181-9befb7d65ce7" class=""><code>UPROPERTY</code> exposes a C++ member field.</p><h3 id="32b92252-1edf-4b59-a787-899a36856387" class="">Transient</h3><p id="4d962d41-aa65-4de5-9239-118c636e5df3" class="">The <code>Transient</code> specifier indicates that the property is not saved during serialization.</p><h3 id="5e80ebe6-0395-4b6e-b65b-7c84deab7176" class="">BlueprintReadOnly</h3><p id="0c4dac9e-5e7e-40e1-bef4-e5e97816c1dd" class="">The <code>BlueprintReadOnly</code> specifier exposes the property to Blueprint as a read-only property.</p><h3 id="e07e18d2-68c6-406b-a09d-61395ce454af" class="">EditAnywhere</h3><p id="18809501-1fb2-43b5-b1ec-79efacbd25ba" class="">The <code>EditAnywhere</code> specifier allows the property to be edited in every editor.</p><h3 id="059bc978-33b6-4bfe-9ab0-2c40f951ff24" class="">EditFixedSize</h3><p id="f8990fe5-ee04-4b27-a0dd-574cb31a454f" class="">The <code>EditFixedSize</code> specified must be used on dynamic arrays, to prevent their size to be edited.</p><h2 id="c5660882-15f1-41d5-9c25-fcfb0666b82b" class="">UFUNCTION</h2><p id="53190e36-f4d3-44a5-9da5-c922650045c6" class=""><code>UFUNCTION</code> exposes a C++ member method.</p><h3 id="aec62680-e05d-4920-a330-b2a5e37e0fce" class="">BlueprintCallable</h3><p id="4ebdd2ed-1622-45b5-b9bb-1c2bf06cfee7" class="">The <code>BlueprintCallable</code> specifier exposes the function to Blueprint.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2a41a3ab-6221-4dcf-898d-1a0abc449a6b"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%"><code>Category</code> is required to ensure that the function appears in the context menu of the Blueprint Editor.</div></figure><h3 id="7824386f-5603-42d7-8f59-69913f42fad2" class="">BlueprintImplementableEvent</h3><p id="017da1c5-4a0c-4371-bb4b-67d93a725161" class="">The <code>BlueprintImplementableEvent</code> specifier exposes a Blueprint function to  C++.</p><p id="02d5dd2c-f626-4f51-95a9-9e98bc2668a8" class="">Unreal generates a C++ function implementation that calls Blueprint (thunk function).</p><h3 id="934e3ffd-cc13-4466-9639-a8ec875c5a37" class="">BlueprintNativeEvent</h3><p id="46c1ca4c-5c0f-4849-9c63-bec9634856cf" class="">The <code>BlueprintNativeEvent</code> specifier allows a C++ function to be overridden as a Blueprint function.</p><p id="5631356c-f43f-4cf9-8999-b348ec8f6150" class="">Unreal also generates a C++ function implementation that calls Blueprint.</p><p id="34318dcc-9bed-4094-92f3-1e93ab62f52c" class="">The base implementation is named <code>&lt;function&gt;_Implementation</code> where <code>&lt;function&gt;</code> is the function name.</p><p id="be51715b-b781-43d3-beae-58b91aab61ce" class="">You must declare and implement the base implementation.</p><p id="10e4a7cf-ee9d-4d4f-86af-0573f04927bf" class="">It will only be called when Blueprint does not override the function.</p><pre id="95947aa5-fa8c-4c2e-9347-6f19ff5f38b5" class="code"><code>// AMyActor.h
+UCLASS()
+class AMyActor : public AActor
+{
+    GENERATED_BODY()
+
+public:
+    UFUNCTION(BlueprintNativeEvent, Category=&quot;MyCategory&quot;)
+    void MyFunction();
+
+    void MyFunction_Implementation();
+    ...
+};
+
+// AMyActor.cpp
+void AMyActor::MyFunction_Implementation()
+{
+    ...
+}</code></pre><h1 id="75a34684-af4e-4100-89b5-6255f24e4193" class="">Ticking</h1><p id="08131d98-af87-453a-aec0-844a40fc9cc3" class="">Actors and components are ticked:</p><ul id="a58d8672-701c-47c6-bf13-e9698116a63f" class="bulleted-list"><li>Once per frame</li></ul><ul id="f765102b-2607-4629-a2d6-5eb91809a384" class="bulleted-list"><li>Or at a specified ticking interval</li></ul><p id="46d31769-ee5e-4762-8caf-67d4c144c86d" class="">During its tick, an Actor ticks all of its Components unless they are in a different group.</p><p id="1016ea23-f98c-4afc-926d-2c04b96d6b68" class="">Actor are ticked through the <code>Tick</code> function.</p><p id="b05024a6-46ca-4849-8f87-d2732514eea3" class="">Component are ticked through the <code>TickComponent</code> function.</p><p id="59d35619-d837-4ccd-8a49-ac356014cdce" class="">The Actor&#x27;s tick settings are in the <code>PrimaryActorTick</code> member.</p><p id="c092ca97-08bc-41a9-b9d3-6e91844e6955" class="">The Component&#x27;s tick settings are in the <code>PrimaryComponentTick</code> member.</p><p id="1ebfeadc-8cb7-4a09-a94d-6e549746bf70" class="">By default, Actors update and Components do not update.</p><p id="72a07913-00c6-4a80-afd3-96bf397c7726" class="">Actors and Components ticking can be enabled or disabled using the <code>bCanEverTick</code> property.</p><h1 id="da9b9346-55da-4b86-ac33-01258f56c9f8" class="">Delegates</h1><p id="6e1c1965-dc6c-4c3b-ab0b-819fb26f49e9" class="">Multi-cast delegate functions cannot use return values.</p><p id="7ccd4cee-5eb4-4ad2-8bef-3b28e4badfbd" class="">Multiple function delegates are attached and executed all at once by calling the <code>Broadcast</code> function.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e20a70fb-5649-4b17-a702-ac7e6884c157"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">The execution order of the delegate functions when calling <code>Broadcast</code> is undefined.</div></figure><h3 id="be242d4a-0245-43b0-8474-18118596aa87" class="">Property Specifiers</h3><ul id="70aedbf1-c16d-4d29-be05-5524ea5fb7a0" class="bulleted-list"><li><code>BlueprintCallable</code> – can be called in Blueprint.</li></ul><ul id="e2fdc84f-5f41-4082-b76e-e5dedeb761c7" class="bulleted-list"><li><code>BlueprintAssignable</code> – can be assigned in Blueprint.</li></ul><h1 id="e75748c0-7882-4986-b057-d16980c5f59c" class="">Events</h1><p id="55da58d1-e4cf-404f-b99f-a1e93ee7aacb" class="">Events are similar to multi-cast delegates.</p><p id="c0685f40-88fc-4988-82f5-a7548399539b" class="">They do not have a return value.</p><p id="4ceebf01-b359-4630-b715-08e99f316879" class="">They are defined inside classes.</p><p id="294e6376-9c60-4aa8-b7a5-28d0f48516ee" class="">The class that owns an event is the only type able to call the <code>Broadcast</code> function.</p><p id="d0dcd4f6-3159-4e58-acbe-72166f909c27" class="">Accessors for events are prefixed with <code>On</code>.</p><h1 id="75a98d5f-fc74-425e-a59a-7f394f54f489" class="">Timers</h1><p id="f2a11c5a-b611-4af4-89c0-18ccb3eac421" class="">Timers are managed in a global Timer Manager.</p><p id="da4bf41d-4712-4c37-94ee-df9448ebb5b8" class="">A time manager is represented by the <code>FTimerManager</code> class.</p><p id="420120cc-6578-4481-9f6c-c8024c8d51c9" class="">The global Timer Manager is accessed using the <code>UGameInstance::GetTimerManager</code> function.</p><p id="8a129cde-603c-43da-93f3-ca409e812bd2" class="">There is a Timer Manager on each Game Instance object, and on each World.</p><p id="61385f87-538d-4c95-984a-33f33c002613" class="">The timers are managed through Time Handlers.</p><p id="58dfbbb8-afdf-467c-98c8-6cff3c92737e" class="">A timer handle is represented by the <code>FTimerHandle</code> class.</p><p id="213b397a-cf7a-44c6-b27f-91e46e8dce46" class="">Timer handles are to resume and pause a timer, or change the current time.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="abfa52dc-6e33-43ba-942b-b693e8904b8c"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">Time Managers and Timers are not thread-safe.</div></figure></div></article></body></html>
