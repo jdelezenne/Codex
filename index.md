@@ -221,11 +221,6 @@ Overview of platform-independant and platform-spefic features for the low-level 
 🖥[Platforms](Runtime/Platforms.html){:target="_blank"}
 
 
-Best practice on multithreading.
-
-🔀[Multithreading](Core/Multithreading.html){:target="_blank"}
-
-
 Review of platform-dependent Timing functionalities.
 
 ⏰[Time](Game/Time.html){:target="_blank"}
