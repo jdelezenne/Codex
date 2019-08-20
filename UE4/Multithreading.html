@@ -1,0 +1,647 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Multithreading</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="91b7f85b-880e-4241-85e9-1e2f9271cfb9" class="page sans"><header><h1 class="page-title">Multithreading</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th>Created</th><td><time>@Aug 19, 2019 8:48 PM</time></td></tr><tr class="property-row property-row-multi_select"><th>Tags</th><td></td></tr></tbody></table></header><div class="page-body"><h1 id="6d38ffdc-00ff-4af2-bed5-c0c290055b43" class="">Overview</h1><p id="0b042e62-8d0b-4baf-bafe-390e932802c9" class="">In the Unreal Engine, the main thread is known as the <em>Game Thread</em>.</p><p id="8366744b-4acd-4d79-9d50-e6733d468f79" class="">There are multiple ways to do multithreading work in the Unreal Engine.</p><ul id="e54e7af9-1fe1-4bc4-955e-cc65b5edeab9" class="bulleted-list"><li>Async Tasks</li></ul><ul id="88f10e8d-f282-4423-b556-a8725d8b515f" class="bulleted-list"><li>Runnable Threads</li></ul><ul id="05660dd2-b813-4d04-aae0-bce346d15eba" class="bulleted-list"><li>Queued Thread Pools</li></ul><h1 id="526ab88a-9959-47d3-9139-fed59a52a768" class="">Platforms</h1><p id="f3029f3e-adbe-47f1-9278-96d0411fafaa" class="">To determine if the target supports multithreading, call the <code>FPlatformProcess::SupportsMultithreading</code> function.</p><p id="53f2c717-5100-413d-a101-dcf9fb0529d2" class="">The HTML5 platform is single-thread when compiled without support for Emscripten pthreads (POSIX Threads).</p><p id="a8483322-cf4c-4868-b3b1-6a1c3280cd2f" class="">Other platforms can be compiled with a single-threaded model (<code>DEFAULT_NO_THREADING</code> symbol).</p><p id="4049a010-10cb-4cf7-bdcf-170ea502d6a9" class="">Additionally, single-threaded can be enforced with the &quot;<code>-nothreading</code>&quot; mode set in the command-line.</p><h1 id="7fc8a833-6f91-47d9-8e5c-93b01442331d" class="">Queued Thread Pools</h1><p id="76186fa7-ed39-4b3d-9ff5-22231a087696" class="">Queued thread pools are represented by the <a href="https://docs.unrealengine.com/en-US/API/Runtime/Core/Misc/FQueuedThreadPool/index.html"><code>FQueuedThreadPool</code></a> interface.</p><p id="a5fe1437-cf21-489a-9bbf-ff0e1be68367" class="">It used as a callback by <code>FQueuedThreads</code> to queue asynchronous work for callers using background threads.</p><p id="f4a04842-5fe4-4f1d-a1a1-4ac3b1812f32" class="">There is a global thread pool for shared async operations called <code>GThreadPool</code>.</p><h2 id="1b7291f5-58d0-4f00-b157-aa1bef84c77b" class="">API</h2><p id="c76ce18c-e2da-4d4e-af0e-32f756a47d26" class="">To create a queue thread pool, call the <code>Create</code> function.</p><pre id="759e81f3-e3c6-484f-b1d4-045bbbe4ed25" class="code"><code>bool Create(
+    uint32 InNumQueuedThreads,
+    uint32 StackSize,
+    EThreadPriority ThreadPriority
+);</code></pre><ul id="95f283aa-b55d-4094-802b-e19d232172d2" class="bulleted-list"><li><code>InNumQueuedThreads</code> – The number of threads to use in the pool.</li></ul><ul id="e4c65bc8-a525-4d09-9ad0-3a7e52af5071" class="bulleted-list"><li><code>StackSize</code> – The size of stack, in bytes used by the threads in the pool (default is 32k).</li></ul><ul id="a954306c-dc4c-4399-aaf8-749eb9089c01" class="bulleted-list"><li><code>ThreadPriority</code> – The priority of the threads in the pool (default is <code>TPri_Normal</code>).</li></ul><p id="efefd6d6-7910-45be-a5d3-f35b5dc3b794" class="">To destroy a queue thread pool, call the <code>Destroy</code> function.</p><p id="3c3d6f86-50e5-48b1-a863-738155221629" class="">The function releases all the threads in the pool.</p><pre id="3a8840c3-61b8-46f9-b578-23a33f9a8d35" class="code"><code>void Destroy();</code></pre><p id="bd56d473-300b-49ed-9c30-8852ff8bbb32" class="">To add a thread to the pool, call the <code>AddQueuedWork</code> function with a <code>IQueuedWork</code> object.</p><pre id="89fd8c37-0857-422b-8076-fd5db2d738dd" class="code"><code>void AddQueuedWork( IQueuedWork* InQueuedWork );</code></pre><p id="1a606f5d-325a-4aeb-a1a6-15677a70d6f1" class="">To remove a thread from the pool, call the <code>RetractQueuedWork</code> function with a <code>IQueuedWork</code> object.</p><pre id="c1d2e611-cbac-4398-bd68-9d6d9ad1c599" class="code"><code>bool RetractQueuedWork( IQueuedWork* InQueuedWork );</code></pre><h2 id="82aaea8e-1f4a-43fd-927d-c6f7fe64a08f" class="">Internals</h2><p id="fe96a41e-4c3c-4fcc-bdbc-62b8ab3d3a63" class="">If the client supports multithreading (<code>FPlatformProcess::SupportsMultithreading</code>), the <code>GThreadPool</code> global thread pool is created in <code>FEngineLoop::PreInit</code>.</p><p id="b3586123-678a-45ea-a384-f413db458133" class="">The pool is allocated with the <code>FQueuedThreadPool::Allocate</code> function.</p><pre id="70ab694c-71e7-44fc-b17f-65d45e70f310" class="code"><code>GThreadPool = FQueuedThreadPool::Allocate();</code></pre><p id="4a361d96-3bba-4e15-9e70-4f5f8ed4e640" class="">Then created with the <code>FQueuedThreadPool::Create</code> function.</p><ul id="a2e53158-3fd4-4640-bd31-a15d6ba0e312" class="bulleted-list"><li>The number of threads is determined by <code>FPlatformMisc::NumberOfWorkerThreadsToSpawn</code>.<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="cc9bfd50-f39e-4658-85dd-81aebbca4d55"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Dedicated servers have only one thread in the pool.</div></figure></li></ul><ul id="c0ad0aff-6226-4fc9-bfd2-247175a26bb4" class="bulleted-list"><li>The stack is 128k.</li></ul><ul id="e59dab1d-5c08-4332-ad40-88edb34bf1cc" class="bulleted-list"><li>The priority of the treads is <code>TPri_Lowest</code>.</li></ul><pre id="2496ca31-858c-4523-8a65-a8fb6c4bc0e7" class="code"><code>int32 NumThreadsInThreadPool = FPlatformMisc::NumberOfWorkerThreadsToSpawn();
+
+GBackgroundPriorityThreadPool-&gt;Create(NumThreadsInThreadPool, 128 * 1024, TPri_Lowest);</code></pre><p id="ce84d57f-84c8-473b-8885-a2d71648a070" class=""><code>GThreadPool</code> is released in <code>FEngineLoop::AppPreExit</code>.</p><pre id="857eb607-cd7a-4ab1-8b4b-1c55078c18a6" class="code"><code>if (GThreadPool != nullptr)
+{
+	  GThreadPool-&gt;Destroy();
+}</code></pre><h2 id="52bdfc6e-cf75-4b8c-aa33-bc8c21f2b207" class="">Usage</h2><ul id="b5cda142-7367-4d0a-bbc3-60d69ec38040" class="bulleted-list"><li>The global thread pool <code>GThreadPool</code>.</li></ul><ul id="7867bdec-53c5-4fb4-ad08-fbfce2321ecb" class="bulleted-list"><li>The sound file loading pool <code>FileLoadingThreadPool</code>.</li></ul><ul id="8822912a-bdc3-4e9a-a497-16e21d35f260" class="bulleted-list"><li>The distance field atlas builder <code>FDistanceFieldAsyncQueue</code> (Editor only).</li></ul><p id="0d73a8ce-76a0-4cf8-a7bc-1140737813cc" class=""><code>GThreadPool</code> is used to:</p><ul id="82ab7db2-9129-4915-bdd4-111f353dd8e3" class="bulleted-list"><li>Version control operations (Editor only).</li></ul><ul id="d0c23156-e785-4f67-b8f8-57241f5eaab4" class="bulleted-list"><li>The encoding of the shadow map textures.</li></ul><ul id="1e4f6750-2aa8-42ab-857f-797071f57c89" class="bulleted-list"><li>Audio decompression.</li></ul><ul id="1fcbcf8e-c5c0-4c85-8c7c-96db8e65e1a9" class="bulleted-list"><li>Texture streaming.</li></ul><h1 id="09b91131-e3b9-4593-bf7e-c195d77ccefe" class="">Runnable Threads</h1><h2 id="eaddeb98-9c74-45c8-999f-d847bb0a9e93" class="">Runnable Objects</h2><p id="d0e3a190-708a-4dd9-b687-f95816b06f32" class="">Runnable objects are represented by the <a href="https://docs.unrealengine.com/en-US/API/Runtime/Core/HAL/FRunnable/index.html"><code>FRunnable</code></a> interface.</p><p id="51790053-5d6e-4fa9-a371-47952d5688ce" class="">A runnable object is executed on an arbitrary thread.</p><p id="2cd3f73a-36c2-4f43-b7d6-de093115a241" class="">A runnable object is implemented by overriding the following functions:</p><ol id="c5c403bc-d050-4bea-8398-d2961614f82f" class="numbered-list" start="1"><li><code>Init</code> – Initializes the thread.</li></ol><ol id="042f88a2-805d-4ec9-970c-5b96cdc4d21e" class="numbered-list" start="2"><li><code>Run</code> – The threaded work is performed.</li></ol><ol id="a521a088-0146-455c-9d1b-6ef41e2da765" class="numbered-list" start="3"><li><code>Stop</code> – Requests to terminate the thread early.</li></ol><ol id="c9003fa4-fb54-4102-a1d5-81649fc236b8" class="numbered-list" start="4"><li><code>Exit</code> – Cleans up the thread.</li></ol><h2 id="d2997f65-26ca-47e0-a37e-4d1f7eb86b60" class="">Threads</h2><p id="06d49ad3-6cab-4c70-9a59-2947a6e49c94" class="">Runnable threads are represented by the <a href="https://docs.unrealengine.com/en-US/API/Runtime/Core/HAL/FRunnableThread/index.html"><code>FRunnableThread</code></a> interface.</p><p id="1fcbc2d3-06e1-4b09-9c42-eee572945817" class="">To create a runnable thread, call the <code>Create</code> function.</p><p id="8db488fa-04d3-4bd3-9572-2fd65363f158" class="">You can specify the runnable, the stack size and thread priority.</p><pre id="da6f63dc-005e-4104-a3f6-a4ef63955ddd" class="code"><code>static FRunnableThread * Create
+(
+    class FRunnable * InRunnable,
+    const TCHAR * ThreadName,
+    uint32 InStackSize,
+    EThreadPriority InThreadPri,
+    uint64 InThreadAffinityMask
+)</code></pre><h2 id="e81b27a4-3d90-40ba-98ba-a5d346a983f6" class="">Example</h2><p id="a1d626e1-2070-49ca-b7ea-a678532edde8" class="">Declare a custom runnable type.</p><pre id="9f98542a-a4da-4438-8e4b-f9f8b0fa04c2" class="code"><code>class FMyRunnable : public FRunnable
+{
+public:
+    virtual bool Init() override;
+    virtual uint32 Run() override;
+    virtual void Stop() override;
+    virtual void Exit() override;
+};</code></pre><p id="14c0fa2c-b8dd-4c93-b75a-abed12d42a83" class="">Implement the <code>FRunnable</code> functions.</p><pre id="615b9985-3482-4be1-a22b-2c19bd1c7100" class="code"><code>bool FMyRunnable::Init()
+{
+    ...
+}
+
+uint32 FMyRunnable::Run()
+{
+    ...
+}
+
+void FMyRunnable::Stop()
+{
+    ...
+}
+
+void FMyRunnable::Exit()
+{
+    ...
+}</code></pre><p id="683bd7d5-8ea8-43a7-b34b-dede718aa915" class="">Declare variables to store the runnable object and runnable thread.</p><pre id="8baf845b-656a-44bf-8f32-5c25295e2460" class="code"><code>FMyRunnable* MyRunnable = nullptr;
+FRunnableThread* MyThread = nullptr;</code></pre><p id="4653a3a0-b6a3-4852-af23-c25a1bfb9bdd" class="">Create the runnable.</p><pre id="572a6e28-f4d3-4002-8c3d-ec0abbb003b4" class="code"><code>if (FPlatformProcess::SupportsMultithreading())
+{
+		MyRunnable = new FMyRunnable();
+		MyThread = FRunnableThread::Create(FMyRunnable, TEXT(&quot;My Thread&quot;));
+}</code></pre><h2 id="04ac9190-4ebd-4164-b864-7de6d92650e5" class="">Usages</h2><ul id="b319aed9-fac1-4ddb-a8a9-11b60ae20a14" class="bulleted-list"><li>Thread Heartbeat, to check for hangs (<code>FThreadHeartBeat</code>).</li></ul><ul id="b4cbe0d2-522a-4cd0-938a-c6332a1d7cfc" class="bulleted-list"><li>Audio thread (<code>FAudioThread</code>).</li></ul><ul id="ef72a0eb-bbf8-470f-8c17-d86101d3f439" class="bulleted-list"><li>TCP Listener (<code>FTcpListener</code>).</li></ul><ul id="17fac637-047a-4b2b-8351-c615f4332b58" class="bulleted-list"><li>UDP Socket Sender and Receiver (<code>FUdpSocketSender</code>, <code>FUdpSocketReceiver</code>).</li></ul><h1 id="872e4f2a-b665-4fa7-b87f-8cdabe2fe70e" class="">Async Tasks</h1><p id="1f1f648d-9130-417c-9fad-b69d39932c10" class="">Async tasks are the most common usage of multithreading.</p><p id="bf76d696-eabf-48d3-a987-c3735ca6ed2d" class="">There are two types of async tasks: <a href="https://docs.unrealengine.com/en-US/API/Runtime/Core/Async/FAsyncTask/index.html"><code>FAsyncTask</code></a> and <a href="https://docs.unrealengine.com/en-US/API/Runtime/Core/Async/FAutoDeleteAsyncTask/index.html"><code>FAutoDeleteAsyncTask</code></a>.</p><p id="bf2ec47c-e7d3-4ca1-9343-925d8c4c2f9c" class="">The only difference is that <code>FAutoDeleteAsyncTask</code> can delete itself automatically when the task is complete.</p><h2 id="08eb9791-0b45-46df-9004-4f9b7d62859b" class="">Create</h2><p id="541d9714-379f-4d06-b684-5456420cc277" class="">To create a new async task, declare a new class that derive from <code>FNonAbandonableTask</code>.</p><p id="46df1f3a-07d4-46a0-9d98-2249ad30f50e" class="">This class performs the threaded work.</p><p id="55e2e958-5668-4c24-940e-b987ada4ce4b" class="">Declare this class as a <em>friend class</em> of <code>FAsyncTask</code> using the type of the class as the template argument.</p><p id="ee48c06d-68cd-402f-b64b-333034e6579e" class="">Define the <code>DoWork</code> function that will be called when the task is running.</p><p id="3cc36e9b-70b5-4189-9e01-38be235db977" class="">Define the <code>GetStatId</code> method.</p><h2 id="625d73ac-7090-43c9-9c20-af9e99f63c90" class="">Run</h2><p id="a1632036-db5d-478e-9f9c-d769c3947f56" class="">To start an async task:</p><ul id="970d5dee-b883-4da7-9222-8a80252c71a0" class="bulleted-list"><li>Call the <code>StartBackgroundTask</code> function to queue the task in the background thread pool.<pre id="9c3a3943-cbe5-4a63-97a5-748f69ba6a1d" class="code"><code>void StartBackgroundTask(FQueuedThreadPool * InQueuedPool);</code></pre></li></ul><ul id="64654608-65cb-4b4b-8928-6c992aee25e1" class="bulleted-list"><li>Or call the <code>StartSynchronousTask</code> function to run the task on the current thread.<pre id="e5913e00-8914-4e2e-bb8c-272fcec52b2e" class="code"><code>void StartSynchronousTask();</code></pre></li></ul><h2 id="eb8f98b5-3bc2-47a2-9044-a0e5849f0ed8" class="">Example</h2><h3 id="7bf6aee9-03e3-45f4-a71a-43245042b5b9" class="">Async Task</h3><ol id="e1ea809b-36a8-4066-bd80-21261665c0c4" class="numbered-list" start="1"><li>Declare a custom task class that derive from <code>FNonAbandonableTask</code>.</li></ol><ol id="b9c4a260-5910-4c09-a7a6-dff4a7b341b6" class="numbered-list" start="2"><li>Declare the class as a friend class of <code>FAsyncTask</code>.</li></ol><ol id="a2847bc9-39d4-4ffc-ab52-28af3fda7142" class="numbered-list" start="3"><li>Implement the <code>DoWork</code> function to perform the threaded work.</li></ol><ol id="82e62727-40bd-4a38-95b8-7d4bb9d7874a" class="numbered-list" start="4"><li>Include the <code>GetStatId</code> inline function.<pre id="6aedacae-4d97-4da9-824e-cfc8b731f17e" class="code"><code>class FMyTask : public FNonAbandonableTask
+{
+    friend class FAsyncTask&lt;FMyTask&gt;;
+
+protected:
+    void DoWork()
+    {
+        ...
+    }
+
+    FORCEINLINE TStatId GetStatId() const
+    {
+        RETURN_QUICK_DECLARE_CYCLE_STAT(FMyTask, STATGROUP_ThreadPoolAsyncTasks);
+    }
+};</code></pre></li></ol><ol id="9c3415ad-3104-46a7-bdc8-4b8dd6d8d466" class="numbered-list" start="5"><li>Declare the task as a member of the owner type.<pre id="583722f5-42ec-4143-b6ea-944f95203538" class="code"><code>FAsyncTask&lt;FMyTask&gt; * MyTask;</code></pre></li></ol><ol id="0c91677f-68c8-496c-bd7a-03bd8326bfcf" class="numbered-list" start="6"><li>Create and run the task.<ol id="b170fc60-23ae-4974-b6d7-3b878d7e1487" class="numbered-list" start="1"><li>Create an instance of <code>FAsyncTask</code> for the task.</li></ol><ol id="7f8f8bea-e8c3-4f03-a52c-4472c471e8c9" class="numbered-list" start="2"><li>Start the task by calling the <code>StartBackgroundTask</code> function.</li></ol><pre id="ca4109b7-5811-416d-b6b2-d6d0e0e0c8b0" class="code"><code>MyTask = new FAsyncTask&lt;FMyTask&gt;();
+
+MyTask-&gt;StartBackgroundTask();</code></pre></li></ol><ol id="80a47ead-ba8a-49e2-9257-ce80f05f702f" class="numbered-list" start="7"><li>When the owner type is destroyed, clean up the task.<ol id="b3c7334b-9fd0-43a7-8ef4-3bc1fa79e5dc" class="numbered-list" start="1"><li>Try to cancel the task by calling the <code>Cancel</code> function.</li></ol><ol id="658a0a4f-c885-4246-aec7-079d7e061c97" class="numbered-list" start="2"><li>If it fails, call the <code>EnsureCompletion</code> function to wait until the task is complete.</li></ol><ol id="7e74de21-e15d-4479-9d33-0878938da315" class="numbered-list" start="3"><li>Delete the task.</li></ol><pre id="66313062-06c2-456f-bd17-6e9dbd8cf0cf" class="code"><code>if (MyTask &amp;&amp; !MyTask-&gt;Cancel())
+{
+	  MyTask-&gt;EnsureCompletion();
+}
+
+delete MyTask;
+MyTask = nllptr;</code></pre></li></ol><h3 id="0fe57cde-23a4-4c7b-9669-6726cabd4a05" class="">Auto Delete Async Task</h3><ol id="cb653a1a-379d-4208-b901-8172f9282915" class="numbered-list" start="1"><li>Declare a custom task class as a friend class of <code>FAutoDeleteAsyncTask</code>.<pre id="c9911199-43d2-4dc7-8752-b2d4e29f3a84" class="code"><code>class FMyTask : public FNonAbandonableTask
+{
+    friend class FAutoDeleteAsyncTask&lt;FMyTask&gt;;
+
+protected:
+    void DoWork()
+    {
+        ...
+    }
+
+    FORCEINLINE TStatId GetStatId() const
+    {
+        RETURN_QUICK_DECLARE_CYCLE_STAT(FMyTask, STATGROUP_ThreadPoolAsyncTasks);
+    }
+};</code></pre></li></ol><ol id="34c25577-688c-4fd1-adeb-d65a84400ced" class="numbered-list" start="2"><li>Create an instance of <code>FAutoDeleteAsyncTask</code> for the task.</li></ol><ol id="74773aa9-f755-4111-ba39-e5940643644b" class="numbered-list" start="3"><li>Start the task by calling the <code>StartBackgroundTask</code> function.</li></ol><pre id="343c3b84-48a6-4bf9-87b5-7ade9fad6cd4" class="code"><code>(new FAutoDeleteAsyncTask&lt;FMyTask&gt;())-&gt;StartBackgroundTask();</code></pre><h1 id="9e5ad444-366f-40e9-9624-61f686421a03" class="">Sleep</h1><p id="c0f1092e-1a4e-4a1d-bfbc-15ba630b2acd" class="">The <code>FGenericPlatformProcess::Sleep</code> function sleeps the current thread for a specific number of seconds. The function uses Stats (<code>FThreadIdleStats</code>).</p><p id="cc6f184a-165a-49bd-8a80-526d073c85c4" class="">0.0 seconds releases the current time slice to let other threads get some attention.</p><p id="26b82277-c2ee-4cde-822e-b47213367e1b" class="">The <code>FGenericPlatformProcess::SleepNoStats</code> performs the same functionality without Stats.</p><h2 id="905c556c-7490-4cfc-b950-0c2464fd2f29" class="">Implementation</h2><p id="09667a8c-a538-4b44-ba87-9501e7960c16" class="">Sleep is implemented with the <code>usleep</code> function.</p><p id="3c424eaf-6a5c-4569-8c93-02a33ced6301" class="">On Windows, sleep is implemented using the <code>Sleep</code> function with a value in milliseconds.</p><h1 id="b9ecc266-3c16-4928-84e7-72a01d8e6a44" class="">Best Practices</h1><ul id="bb91d7b7-6dec-405d-8e75-061ac498bec1" class="bulleted-list"><li>Do not modify <code>UObjects</code> in other threads (without synchronization).</li></ul><ul id="bf45039d-85d5-44be-b39a-649541daa8c7" class="bulleted-list"><li>Do not use <code>TimerManager</code> in other threads.</li></ul><ul id="e66468e0-c069-4670-8b71-570266f2f21e" class="bulleted-list"><li>Do not use Draw Debug Helpers functions in other threads.</li></ul></div></article></body></html>
