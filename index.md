@@ -303,4 +303,4 @@ Review of different ways to perform multithreaded work: Async Tasks, Runnable, T
 
 Review of different ways to load assets on demand and asynchronously at runtime.
 
-[Asset Streaming](UE4/Asset Streaming.html){:target="_blank"}
+[Assets Streaming](UE4/Assets Streaming.html){:target="_blank"}
