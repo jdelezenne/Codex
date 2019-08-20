@@ -299,3 +299,8 @@ Review of some systems: Memory, LLM, Console and CVars.
 Review of different ways to perform multithreaded work: Async Tasks, Runnable, Tasks Pool.
 
 [Multithreading](UE4/Multithreading.html){:target="_blank"}
+
+
+Review of different ways to load assets on demand and asynchronously at runtime.
+
+[Asset Streaming](UE4/Asset Streaming.html){:target="_blank"}
