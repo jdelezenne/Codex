@@ -304,3 +304,8 @@ Review of different ways to perform multithreaded work: Async Tasks, Runnable, T
 Review of different ways to load assets on demand and asynchronously at runtime.
 
 [Assets Streaming](UE4/Assets Streaming.html){:target="_blank"}
+
+
+Usage of delegates and lambas.
+
+[Delegates and Lambas](UE4/Delegates and Lambas.html){:target="_blank"}
